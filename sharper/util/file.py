@@ -8,7 +8,7 @@
 import errno
 from random import randint
 from time import time
-from luhu_sharper.util import string
+from sharper.util import string
 
 __authors__ = ['"linnchord gao" <linnchord@gmail.com>']
 

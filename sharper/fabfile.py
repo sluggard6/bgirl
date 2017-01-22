@@ -7,7 +7,7 @@ p1 = 'admin@122.226.44.71'
 foxconn = ['admin@210.83.232.53']
 env.passwords = {test_server: 'luhu#2014!'}
 base_root = '/usr/hiwifi/lib'
-proj_name = 'luhu_sharper'
+proj_name = 'sharper'
 bj = 'admin@120.132.69.41'
 
 
@@ -58,7 +58,7 @@ def deploy_sharper(root, branch):
     if not exists(root):
         parent = root.rstrip(proj_name)
         with cd(parent):
-            run('git clone git@gitcafe.com:hiwifiio/luhu-sharper.git --depth 1 luhu_sharper')
+            run('git clone git@gitcafe.com:hiwifiio/luhu-sharper.git --depth 1 sharper')
 
             with cd(root):
                 run('git checkout %s' % branch)

@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import time
 from luhu_biz.lib.http_utils import doPost
-from luhu_sharper.flaskapp.helper import get_client_ip
+from sharper.flaskapp.helper import get_client_ip
 
 platform_api_url = 'http://platformapi.hi-wifi.cn/v1/srv'
 app_id = 'python'

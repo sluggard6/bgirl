@@ -9,8 +9,8 @@ from flask import flash
 from flask_sqlalchemy import SQLAlchemy, Model, declarative_base
 
 from werkzeug.utils import cached_property
-from luhu_sharper.util import transfer
-from luhu_sharper.util.string import to_camel_case
+from sharper.util import transfer
+from sharper.util.string import to_camel_case
 
 
 __authors__ = ['"linnchord gao" <linnchord@gmail.com>']
@@ -247,7 +247,7 @@ def init_base(cls):
     # 保持原db.Model语义
     # copy from flask.ext.sqlalchemy
     # db.Model = SQLAlchemy.make_declarative_base
-    import flask.ext.sqlalchemy as sqla
+    import flask_sqlalchemy as sqla
 
     base = declarative_base(cls=cls, name='Model', metaclass=sqla._BoundDeclarativeMeta)
 

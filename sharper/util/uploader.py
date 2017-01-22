@@ -10,13 +10,13 @@
 
 """
 import os
-import luhu_sharper
-from luhu_sharper.util import file, imgtool
+import sharper
+from sharper.util import file, imgtool
 from flask import current_app
-from luhu_sharper.lib.error import UploadFailedError
-from luhu_sharper.lib.error import UploadTypeError
-from luhu_sharper.util.file import allowed_file_ext, get_file_fix, gen_random_dir, gen_random_filename, mkdirs
-from luhu_sharper.util.imgtool import zoom, square
+from sharper.lib.error import UploadFailedError
+from sharper.lib.error import UploadTypeError
+from sharper.util.file import allowed_file_ext, get_file_fix, gen_random_dir, gen_random_filename, mkdirs
+from sharper.util.imgtool import zoom, square
 
 
 def do(file, seed, media_type, config=None):

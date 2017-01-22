@@ -9,10 +9,10 @@
 import base64
 from datetime import datetime
 import urllib
-from luhu_sharper.flaskapp.orm.display_enum import DisplayEnum
+from sharper.flaskapp.orm.display_enum import DisplayEnum
 
-from luhu_sharper.util.string import md5, random_number
-from luhu_sharper.util.sms_util import send_sms
+from sharper.util.string import md5, random_number
+from sharper.util.sms_util import send_sms
 
 
 def gen_reg_vcode(default_length=4):

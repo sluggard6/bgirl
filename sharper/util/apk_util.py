@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import os
 from xml.dom import minidom
-from luhu_sharper.lib.axmlparser import axmlprinter
+from sharper.lib.axmlparser import axmlprinter
 
 __author__ = [
     '"liubo" <liubo@hi-wifi.cn>'

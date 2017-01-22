@@ -9,7 +9,7 @@ __author__ = [
     '"linnchord" <linnchord@gmail.com>'
 ]
 
-from luhu_sharper.flaskapp.kvdb import kvdb
+from sharper.flaskapp.kvdb import kvdb
 
 URL_CACHE_TIME = 7 * 24 * 60 * 60  #上传url缓存时间
 URL_CACHE_EXPIRE_PRE_TIME = 60 * 60  #上传url提前过期时间量

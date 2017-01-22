@@ -75,7 +75,7 @@ class RecaptchaView(View):
 
         mstream = StringIO.StringIO()
 
-        from luhu_sharper.util import vcode
+        from sharper.util import vcode
         img, code = vcode.create_validate_code()
         session['recaptcha_code'] = code
         img.save(mstream, "GIF")

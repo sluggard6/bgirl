@@ -7,9 +7,9 @@ import pickle
 from sqlalchemy.orm.exc import NoResultFound
 
 from ..kvdb import kvdb
-from luhu_sharper.lib.error import AppError
-from luhu_sharper.util import helper
-from luhu_sharper.lib.validator import is_numeric
+from sharper.lib.error import AppError
+from sharper.util import helper
+from sharper.lib.validator import is_numeric
 
 
 __authors__ = ['"linnchord gao" <linnchord@gmail.com>']
@@ -101,7 +101,7 @@ class KvdbMixin(object):
 
     def clear_primary_kvdb(self):
         """清除主键对象缓存"""
-        from luhu_sharper.lib.error import AppError
+        from sharper.lib.error import AppError
 
         pk_value = getattr(self, 'pk_value', None)
         if not pk_value: raise AppError(u'Get None of PrimaryKey value when find in KvdbMixin with OrmBase!')

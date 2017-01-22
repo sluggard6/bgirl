@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from kafka import SimpleProducer, KafkaClient
 from kafka.common import LeaderNotAvailableError
-from luhu_sharper.flaskapp.orm.display_enum import DisplayEnum
+from sharper.flaskapp.orm.display_enum import DisplayEnum
 from flask import current_app
 
 class Kafka:

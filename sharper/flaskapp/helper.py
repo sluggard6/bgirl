@@ -9,8 +9,7 @@ import os
 from random import randint
 import traceback
 import urllib2
-from luhu_sharper.util.app_util import ua_parse
-from luhu_sharper.util.string import random_number
+from sharper.util.string import random_number
 from flask import get_flashed_messages, request, jsonify, current_app, logging, session
 import sys
 from ..lib.error import ErrorCode, AppError

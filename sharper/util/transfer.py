@@ -169,7 +169,7 @@ def dbrow2obj(row, cls):
 
 
 def dbrow2dict_obj(row):
-    from luhu_sharper.lib.dict_proxy import DictProxyObject
+    from sharper.lib.dict_proxy import DictProxyObject
 
     obj = DictProxyObject()
     if row:

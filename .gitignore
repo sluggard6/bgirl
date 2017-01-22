@@ -1,12 +1,16 @@
 #python
 
-.pyc
+*.pyc
 
 #eclipse
 .project
 .classpath
 .settings
 .externalToolBuilders
+.pydevproject
+
+#idea
+.idea
 
 #OS
 .DS_Store

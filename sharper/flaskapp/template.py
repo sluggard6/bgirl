@@ -8,8 +8,8 @@ from datetime import datetime, date
 from flask import current_app
 from urllib import quote, quote_plus
 import re
-from luhu_sharper.flaskapp.kvdb import kvdb
-from luhu_sharper.util import string
+from sharper.flaskapp.kvdb import kvdb
+from sharper.util import string
 from ..util.string import html_filter
 from .logger import logger
 from ..util.transfer import strftime
@@ -58,7 +58,7 @@ def static(filepath, add_timer=True):
     STATIC_HTTP_REF = current_app.config.get('STATIC_HTTP_REF', '')
 
     if STATIC_HTTP_REF:
-        from luhu_sharper.flaskapp.helper import get_https_url
+        from sharper.flaskapp.helper import get_https_url
 
         if request.scheme == 'https':
             STATIC_HTTP_REF = get_https_url(STATIC_HTTP_REF)
