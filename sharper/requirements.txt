@@ -1,0 +1,17 @@
+Flask
+Flask-Assets
+Flask-SQLAlchemy
+Flask-Cache
+Flask-Script
+Flask-WTF
+Pillow
+hiredis
+redis
+pyqqweibo
+python-dateutil
+requests
+simplejson
+Fabric
+BeautifulSoup
+blinker
+lunardate
