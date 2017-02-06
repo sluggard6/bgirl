@@ -4,7 +4,8 @@ import {
   View,
   Text,
   ListView,
-  StyleSheet
+  StyleSheet,
+  Navigator
 } from 'react-native'
 
 import ViewPic from '../component/view_pic'
@@ -71,6 +72,7 @@ export default class Main extends Component {
       </View>
     );
   }
+
 
   render() {
     return (

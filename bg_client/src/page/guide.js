@@ -13,14 +13,15 @@ import {
 import Util from './utils';
 import Main from './main'
 
-let image1 = require('../image/guide_1.jpg');
-let image2 = require('../image/guide_2.jpg');
-let image3 = require('../image/guide_3.jpg');
+let image1 = require('../images/guide_1.jpg');
+let image2 = require('../images/guide_2.jpg');
+let image3 = require('../images/guide_3.jpg');
 
 
 export default class Guide extends Component {
 
   _onPressButton() {
+
     this.props.navigator.push({
 			component: Main
 		})

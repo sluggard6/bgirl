@@ -11,14 +11,13 @@ export default class ViewPic extends Component {
 
   constructor(props) {
     super(props);
-    console.log(this.props.data);
   }
 
   render(){
     return (
       <View style={styles.container}>
         <Image
-          source={require('../image/min.jpg')}
+          source={require('../images/min.jpg')}
         />
         <Text>{this.props.data.title}</Text>
         <Text>{this.props.data.date}</Text>
