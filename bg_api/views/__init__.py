@@ -1,18 +1,19 @@
 # -*- coding:utf-8 -*-
 from default import DefaultView, error_handler
-
+from user import UserView
 
 __author__ = [
-    '"liubo" <liubo@51domi.com>'
+    "sluggrd"
 ]
 
 
 def register_views(app):
     from default import DefaultView, error_handler
 
-    app.error_handler_spec[None][500] = error_handler
-    app.error_handler_spec[None][404] = error_handler
-    app.error_handler_spec[None][401] = error_handler
-    app.error_handler_spec[None][403] = error_handler
+    app.errorhandler(404)(error_handler)
+    app.errorhandler(500)(error_handler)
+    app.errorhandler(401)(error_handler)
+    app.errorhandler(403)(error_handler)
 
     app.register_blueprint(DefaultView)
+    app.register_blueprint(UserView, url_prefix='/user')
