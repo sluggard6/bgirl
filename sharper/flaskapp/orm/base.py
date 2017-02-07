@@ -37,8 +37,6 @@ class OrmBase(Model):
 
     def insert(self):
         self._before_insert()
-        self.try_to_add_ip()
-        self.try_to_add_device_info()
         db.session.add(self)
         db.session.flush()
         self._after_insert()
@@ -301,10 +299,9 @@ def transaction(f):
             db.session.commit()
             return ret
         except Exception as e:
-            print e
             db.session.rollback()
             import traceback
-            #traceback.print_exc()
+            traceback.print_exc()
             raise e
         finally:
             db.engine.execute("set autocommit=1")

@@ -1,13 +1,14 @@
 # -*- coding:utf-8 -*-
 import sys
 
-from werkzeug.contrib.profiler import ProfilerMiddleware
+from lib.decorator import do_switch_ret
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 import logging
 import os
-from flask import Flask, request, g
+from flask import Flask, g
 
 
 app = Flask(__name__)
@@ -55,6 +56,7 @@ def init_app(app):
     from sharper.flaskapp.orm.base import db
     from sharper.flaskapp.kvdb import kvdb
     from sharper.flaskapp.redis_session import RedisSessionInterface
+    from sharper.flaskapp.login import init_login
     from lib.logger_client import init_logger_client, init_pay_logger_client
 
     kvdb.init_app(app)
@@ -64,6 +66,7 @@ def init_app(app):
     init_logger_client(app)
     init_pay_logger_client(app)
     app.session_interface = RedisSessionInterface(kvdb.session)
+    init_login(app)
 
     from lib.template import init_template
 
@@ -81,7 +84,7 @@ init_app(app)
 
 @app.before_request
 def init_request():
-    pass
+    do_switch_ret()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8290, use_reloader=True)

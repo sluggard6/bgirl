@@ -12,7 +12,6 @@
 import re
 
 from .error import ParaValidateFailError
-from luhu_biz.orm.sysconfig import SysConfig
 from ..util.helper import get_dict_val
 
 

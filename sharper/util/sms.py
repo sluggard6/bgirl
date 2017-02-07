@@ -45,6 +45,26 @@ class SmsSender(DisplayEnum):
 
 _DEFAULT_TIMEOUT_ = 5  # seconds
 
+class MeiLianSender(SmsSender):
+    def send(self, phone, c):
+        apikey = "add1c1dffbe23016abb3356a3866aae5"
+        url = 'http://m.5c.com.cn/api/send/index.php'
+        user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
+        encode = 'UTF-8'
+        username = 'filter'  # 用户名
+        password_md5 = '1ADBB3178591FD5BB0C248518F39BF6D'  # 32位MD5密码加密，不区分大小写
+        values = {'username': username,
+                  'password_md5': password_md5,
+                  'apikey': apikey,
+                  'mobile': phone,
+                  'content': c,
+                  'encode': encode}
+        headers = {'User-Agent': user_agent}
+        data = urllib.parse.urlencode(values)
+        req = urllib.request.Request(url + '?' + data)
+        response = urllib.request.urlopen(req)
+        the_page = response.read()
+
 
 class ShuMiSmsSender(SmsSender):
     def send(self, phone, c):

@@ -41,7 +41,7 @@ class Production:
 
 	# redis-server
 	REDIS_HOST = '10.66.106.110'
-	REDIS_PASSWORD = 'crs-oflkfu3i:iHoVmt8gYTTaxD2k'
+	# REDIS_PASSWORD = 'crs-oflkfu3i:iHoVmt8gYTTaxD2k'
 	REDIS_PORT = 6379
 
 	# session config
