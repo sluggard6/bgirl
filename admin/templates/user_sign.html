@@ -1,0 +1,148 @@
+~extends 'layout/default.html'
+
+{% block container %}
+    <style>
+    .added_dates button{
+        margin-left: 10px;
+    }
+    .added_dates div{
+        margin-top: 10px;
+    }
+    .added_date{
+        margin-left: 10px;
+    }
+    </style>
+    <form class="form-horizontal" id="task_form" method="POST">
+
+        <div class="control-group added_dates">
+            
+                <div>
+                已选日期:
+                
+                </div>
+                
+                {%for date in add_date%}
+                <div><span class="added_date">{{date}}</span><button type="button" onclick="deldate(this)" class="btn btn-primary">删除</button></div>
+                {%endfor%}
+            
+            
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="add_date">
+                <label for="add_date">添加跳过的签到日期</label>
+            </label>
+            <div class="controls">
+                <span id="add_date_picker" class="input-append date">
+                    <input id="add_date" type="text" value="" placeholder="" name="add_date">
+                    <span class="add-on">
+                    <i class="icon-calendar" data-date-icon="icon-calendar" data-time-icon="icon-time"> </i>
+                    </span>
+                </span>
+                  
+                    <button type="button" onclick="adddate()" class="btn btn-primary">添加</button>
+                
+            </div>
+        </div>
+        
+
+        {% for score in sign_score %} 
+        <div class="control-group">
+            <label class="control-label" for="sign_score">
+                <label for="sign_score">第{{loop.index}}天签到分数</label>
+            </label>
+            <div class="controls">
+                <div id="add_date_picker" class="input-append date">
+                    <input id="sign_score" type="text" value="{{score}}" placeholder="" name="sign_score">
+                    
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        
+
+        
+
+        <div class="form-actions">
+            <button type="button" onclick="submitSign()" class="btn btn-primary">保存</button>
+        </div>
+        
+    </form>
+    ~include 'inc/datetimepicker.html'
+    ~include 'inc/uploadify.html'
+
+    
+    <script>
+        
+        
+        $(document).ready(function () {
+            
+           
+            $('#add_date_picker').datetimepicker({
+                language: 'zh-CN',
+                format: 'YYYY-MM-DD'
+            });
+        });
+
+
+        
+        function adddate(){
+            added = false
+            $(".added_date").each(function (){
+                
+                if ($(this).html()==$("#add_date").val()){
+                    added = true
+                    return false;
+                }
+                
+
+            })
+            if (added) {
+                    $.showMessage("不能重复添加日期", 'warn');
+                    return false;
+            };
+            $(".added_dates").append('<div><span class="added_date">'+$("#add_date").val()+'</span><button type="button" onclick="deldate(this)" class="btn btn-primary">删除</button></div>')
+
+        }
+        function deldate(bt){
+            $(bt).parent().remove()
+        }
+
+        function submitSign(){
+            add_date="";
+            $(".added_date").each(function (){
+                add_date+=$(this).html()+";"
+
+            })
+
+            sign_score=""
+            valid=true
+            $("[name=sign_score]").each(function (){
+                if ($(this).val()=="" || isNaN($(this).val())){
+                    valid = false
+                    
+                    return false;
+                }
+                sign_score+=$(this).val()+";"
+
+            });
+            if (!valid) {
+                $.showMessage("签到分数必须为数字且不能为空", 'warn');
+                return false;
+            };
+            
+            
+            value = '{"sign_score":"'+sign_score.substring(0,sign_score.length-1)+'","add_date":"' +add_date.substring(0,add_date.length-1)+'"}'
+            $.ajax({ 
+                url: "/user_sign", 
+                type: "POST",
+                data:{"value":value},
+                success: function(msg){
+                    
+                    $.showMessage("签到配置修改成功", 'ok');
+
+            }});
+        }
+        
+    </script>
+{% endblock %}

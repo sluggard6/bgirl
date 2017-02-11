@@ -1,0 +1,21 @@
+{% extends "layout/default.html" %}
+{% from "macros.html" import render_field %}
+{% block container %}
+	<h2 class="page-header">
+		编辑用户信息
+	</h2>
+	<div class="span9">
+		<form class="doc-form form-horizontal" method="post">
+			{{ form.csrf_token }}
+			{{ render_field(form.user_name, dict(required=True)) }}
+			{{ render_field(form.password) }}
+			{{ render_field(form.description) }}
+			{{ render_field(form.status) }}
+			<div class="form-group">
+				<div class="col-lg-10 col-lg-offset-2">
+					<button type="submit" class="btn btn-primary">保存</button>
+				</div>
+			</div>
+		</form>
+	</div>
+{% endblock %}

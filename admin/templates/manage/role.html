@@ -1,0 +1,46 @@
+{% extends "layout/default.html" %}
+{% block container %}
+	<h3 class="page-header">
+		新增、编辑角色，角色权限管理
+		<div style="float:right;">
+			<a href="/manage/role/new" class="btn btn-primary btn-sm">新增角色</a>
+		</div>
+	</h3>
+	<table class="table table-striped">
+		<thead class="thead-default">
+		<tr>
+			<th>id</th>
+			<th>角色名</th>
+			<th>描述</th>
+			<th>包含权限</th>
+			<th>状态</th>
+			<th>操作</th>
+		</tr>
+		<tbody>
+		~for r in role_list
+		<tr>
+			<td>{{ r.id }}</td>
+			<td>{{ r.name }}</td>
+			<td>{{ r.description or '' }}</td>
+			<td>{{ r.permission_count }}</td>
+			<td><input type="checkbox" id="{{ r.id }}" {% if r.status %}
+					   checked="checked" {% endif %} ></td>
+			<td>
+				<div class="btn-group btn-group-xs">
+					~if r.name != 'admin'
+					<a class="btn btn-primary" href="/manage/role/{{ r.id }}/edit">编辑</a>
+					~endif
+					<a class="btn btn-primary" href="/manage/role/{{ r.id }}/permissions">权限管理</a>
+					~if r.name != 'admin'
+					<a class="btn btn-danger" href="/manage/role/{{ r.id }}/del"
+					   onclick="return confirm('移除该角色将导致关联该角色的用户失去角色关联权限，你确定要移除吗？')">删除</a>
+					~endif
+				</div>
+			</td>
+		</tr>
+		~endfor
+		</tbody>
+		</thead>
+	</table>
+
+{% endblock %}

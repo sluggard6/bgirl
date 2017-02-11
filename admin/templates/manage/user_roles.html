@@ -1,0 +1,47 @@
+{% extends "layout/default.html" %}
+{% block container %}
+	<h2 class="page-header">
+		管理用户<{{ cuser.user_name }}>角色信息
+	</h2>
+    <form action="" method="post">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>角色名</th>
+            <th>描述</th>
+            <th>包含权限</th>
+            <th>状态</th>
+        </tr>
+        <tbody>
+        ~for r in role_list
+        <tr>
+            <td>{{ r.id }}</td>
+            <td>{{ r.name }}</td>
+            <td>{{ r.description or '' }}</td>
+            <td>{{ r.permission_count }}</td>
+            <td>
+            {% if (not g.is_admin) and r.name=="admin"%}
+                {% if r.id in cuser_roles %}
+                    <input type="hidden" name="role_selected" value="{{ r.id }}">
+                    <input type="checkbox" name="admin_s" value="{{ r.id }}" checked="checked" disabled="disabled">
+                {% else %}
+                    <input type="checkbox" name="admin_s" value="{{ r.id }}"  disabled="disabled">
+                {% endif %}
+            {% else %}
+                    <input type="checkbox" name="role_selected" value="{{ r.id }}"
+                           {% if r.id in cuser_roles %} checked="checked"{% endif %}>
+
+            {% endif %}
+            </td>
+        </tr>
+        ~endfor
+        </tbody>
+        </thead>
+    </table>
+    <div class="clearfix"></div>
+    <button type="submit" class="btn btn-small pull-right btn-primary">
+        <i class="icon-ok icon-white"></i> 确认
+    </button>
+    </form>
+{% endblock %}

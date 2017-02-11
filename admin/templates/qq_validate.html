@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Color Admin | Login Page</title>
+<meta property="qc:admins" content="10602620451663526526015716163670272534551617527" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<!-- ================== BEGIN BASE CSS STYLE ================== -->
+<!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">-->
+<link href="http://xm.hi-wifi.cn:9001/static/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css?v=73cc4beff310fb53497a63b8a3bd088e" rel="stylesheet" />
+<link href="http://xm.hi-wifi.cn:9001/static/assets/plugins/bootstrap/css/bootstrap.min.css?v=eedf9ee80c2faa4e1b9ab9017cdfcb88" rel="stylesheet" />
+<link href="http://xm.hi-wifi.cn:9001/static/assets/plugins/font-awesome/css/font-awesome.min.css?v=04425bbdc6243fc6e54bf8984fe50330" rel="stylesheet" />
+<link href="http://xm.hi-wifi.cn:9001/static/assets/css/animate.min.css?v=62a654af05696d79d7b53559ac99182d" rel="stylesheet" />
+<link href="http://xm.hi-wifi.cn:9001/static/assets/css/style.min.css?v=7d2ca3bc0305a2d7fb95a23836452f39" rel="stylesheet" />
+<link href="http://xm.hi-wifi.cn:9001/static/assets/css/style-responsive.min.css?v=4cd8f992473c413306c1e4f4e87ce20b" rel="stylesheet" />
+<link href="http://xm.hi-wifi.cn:9001/static/assets/css/theme/default.css?v=29b905756d0f7e6e70b8e12699af1c44" rel="stylesheet" id="theme" />
+<!-- ================== END BASE CSS STYLE ================== -->
+<!-- ================== BEGIN BASE JS ================== -->
+<script src="http://xm.hi-wifi.cn:9001/static/assets/plugins/pace/pace.min.js?v=0131660a2d02706fa5075e150fa59803"></script>
+<!-- ================== END BASE JS ================== -->
+</head>
+<body class="pace-top">
+<!-- begin #page-loader -->
+<div id="page-loader" class="fade in"><span class="spinner"></span></div>
+<!-- end #page-loader -->
+<div class="login-cover">
+<div class="login-cover-image"><img src="http://xm.hi-wifi.cn:9001/static/assets/img/login-bg/bg-5.jpg?v=b2128383cb25223d7eba35249b94ed2a" data-id="login-cover-image" alt="" /></div>
+<div class="login-cover-bg"></div>
+</div>
+<!-- begin #page-container -->
+<div id="page-container" class="fade">
+<!-- begin login -->
+<div class="login login-v2" data-pageload-addclass="animated fadeIn">
+<!-- begin brand -->
+<div class="login-header">
+<div class="brand">
+<span class="logo"></span> 项目进度管理
+<small>项目进度管理后台登录</small>
+</div>
+<div class="icon">
+<i class="fa fa-sign-in"></i>
+</div>
+</div>
+<!-- end brand -->
+<div class="login-content">
+<form action="" method="POST" class="margin-bottom-0">
+
+
+<div class="form-group qqlogin">
+<a href="https://graph.qq.com/oauth2.0/authorize?response_type=token&client_id=101210286&redirect_uri=http://admin.server.hi-wifi.cn/project-manager/user/qq-login-callback&scope=" target＝_blank><img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_5.png"></a>
+</div>
+</form>
+</div>
+</div>
+<!-- end login -->
+</div>
+<!-- end page container -->
+<!-- ================== BEGIN BASE JS ================== -->
+<script src="http://xm.hi-wifi.cn:9001/static/assets/plugins/jquery/jquery-1.9.1.min.js?v=397754ba49e9e0cf4e7c190da78dda05"></script>
+<script src="http://xm.hi-wifi.cn:9001/static/assets/plugins/jquery/jquery-migrate-1.1.0.min.js?v=dc0102c151c491b8a0f65a520e26e083"></script>
+<script src="http://xm.hi-wifi.cn:9001/static/assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js?v=12a65fcb49c314e8dbbcf8d090d26b8a"></script>
+<script src="http://xm.hi-wifi.cn:9001/static/assets/plugins/bootstrap/js/bootstrap.min.js?v=8c237312864d2e4c4f03544cd4f9b195"></script>
+<!--[if lt IE 9]>
+<script src="http://xm.hi-wifi.cn:9001/static/assets/crossbrowserjs/html5shiv.js?v=262bb88879efaaf75c74154fe0308952"></script>
+<script src="http://xm.hi-wifi.cn:9001/static/assets/crossbrowserjs/respond.min.js?v=b5528bb46e574714a4d62f964a801ff4"></script>
+<script src="http://xm.hi-wifi.cn:9001/static/assets/crossbrowserjs/excanvas.min.js?v=3682670784157eca627a91ae04f925b8"></script>
+<![endif]-->
+<script src="http://xm.hi-wifi.cn:9001/static/assets/plugins/slimscroll/jquery.slimscroll.min.js?v=88ce6e3f393cb228f60039bbf1e456d2"></script>
+<script src="http://xm.hi-wifi.cn:9001/static/assets/plugins/jquery-cookie/jquery.cookie.js?v=4a9fad297b4542775269cc7f3f4228ba"></script>
+<!-- ================== END BASE JS ================== -->
+<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+<script src="http://xm.hi-wifi.cn:9001/static/assets/js/login-v2.demo.min.js?v=95dc933bf07243140753b038289717ee"></script>
+<script src="http://xm.hi-wifi.cn:9001/static/assets/js/apps.min.js?v=6dd8b75a33fe5194e2a86f52ed229779"></script>
+<!-- ================== END PAGE LEVEL JS ================== -->
+<script>
+$(document).ready(function() {
+App.init();
+LoginV2.init();
+});
+</script>
+</body>
+</html>
+

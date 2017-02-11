@@ -1,0 +1,33 @@
+{% extends "layout/default.html" %}
+{% block title %}主页 {% endblock %}
+{% block container %}
+	<h3 class="page-header">
+		最近操作记录
+	</h3>
+	~if logs
+	<table class="table table-striped">
+		<thead class="thead-default">
+		<tr>
+			<th>操作</th>
+			<th>key1</th>
+			<th>key2</th>
+			<th>key3</th>
+			<th>ip</th>
+			<th>操作时间</th>
+		</tr>
+		</thead>
+		<tbody>
+		~for l in logs
+		<tr>
+			<td>{{ l.action }}</td>
+			<td>{{ l.key1 or '' }}</td>
+			<td>{{ l.key2 or '' }}</td>
+			<td>{{ l.key3 or '' }}</td>
+			<td>{{ l.ip }}</td>
+			<td>{{ l.create_time }}</td>
+		</tr>
+		~endfor
+		</tbody>
+	</table>
+	~endif
+{% endblock %}

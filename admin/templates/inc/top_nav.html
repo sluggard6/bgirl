@@ -1,0 +1,115 @@
+
+<div class="navbar-header">
+	<a class="navbar-brand" href="/" title="昧昧后台管理系统">昧昧后台管理系统</a>
+	<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	</button>
+</div>
+<div class="navbar-collapse collapse" id="navbar-main">
+	<ul class="nav navbar-nav">
+		~for tp in g.top_permissions
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ tp.name }} <b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				~for p in g.me.sub_permissions(tp.id)
+
+				~if g.me.sub_permissions(p.id)
+				~if p.path
+
+				<li class="dropdown-submenu"><a tabindex="-1" href="
+
+						{{ p.path }}{% if p.path and '?' in p.path %}&{% else %}?{% endif %}sid={{ session.sid }}">{{ p.name }}</a>
+					~else
+
+				<li class="dropdown-submenu"><a tabindex="-1" href="#">{{ p.name }}</a>
+					~endif
+
+					<ul class="dropdown-menu">
+						~for sp in g.me.sub_permissions(p.id)
+						<li><a href="
+
+								{{ sp.path }}{% if sp.path and '?' in sp.path %}&{% else %}?{% endif %}sid={{ session.sid }}">{{ sp.name }}</a>
+						</li>
+						~endfor
+					</ul>
+
+
+				</li>
+				~else
+				<li><a tabindex="-1" href="
+
+						{{ p.path }}{% if p.path and '?' in p.path %}&{% else %}?{% endif %}sid={{ session.sid }}">{{ p.name }}</a>
+				</li>
+				~endif
+
+
+				~endfor
+			</ul>
+		</li>
+		~endfor
+	</ul>
+
+	{#  <ul class="nav navbar-nav">
+        ~for tp in g.top_permissions
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ tp.name }} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                ~for p in g.sub_permissions[tp.id]
+                ~if p.path
+
+                <li><a tabindex="-1" href="{{ p.path }}?sid={{ session.sid }}">{{ p.name }}</a></li>
+                ~else
+                {% if loop.index>1 %}
+                    <li class="divider"></li>
+                {% endif %}
+                ~endif
+                ~endfor
+            </ul>
+        </li>
+        ~endfor
+    </ul>#}
+
+	<ul class="nav navbar-nav navbar-right">
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ g.me.user_name }}<span class="caret"></span></a>
+			<ul class="dropdown-menu" role="menu">
+				<li><a href="javascript:logout('{{ g.me.user_name }}');">注销</a></li>
+				<li><a href="/modify_password">修改密码</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div style="display:none;"><input id="logout_name" value="{{ g.me.user_name }}"></div>
+
+<script>
+	$('.dropdown-submenu > a').submenupicker();
+	function logout(admin_uname) {
+		$.ajax({
+			type: 'POST',
+			url: '/can_logout',
+			data: {
+				'uname': admin_uname
+			},
+			async: false,
+			dataType: 'json',
+			success: function (data) {
+				if (data.success) {
+					popUp(admin_uname);
+				} else {
+					doLogout();
+				}
+			}
+		});
+	}
+
+	function popUp(adminUser) {
+		$('#logout_modal').modal('show');
+	}
+
+	function doLogout() {
+		window.location.href = '/logout';
+	}
+</script>

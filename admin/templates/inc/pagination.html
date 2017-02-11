@@ -1,0 +1,30 @@
+<style>
+    li.disabled {
+        color: red !important;
+        font-size: 15px !important;;
+    }
+</style>
+<div class="demo demo1" style="text-align: center;">
+    <div id="pagination"></div>
+</div>
+<script type="text/javascript" src="/static/js/lib/bootpag/bootpag.js"></script>
+<script type="text/javascript">
+    {% if g.total_count %}
+        $(document).ready(function () {
+            var totalPage = 1;
+            var totalRecords = {{ g.total_count }};
+            var pageSize = {{ g.page_size }};
+            if (totalRecords > pageSize) {
+                totalPage = Math.ceil(totalRecords / pageSize);
+            }
+            $('#pagination').bootpag({
+                total: totalPage,
+                page: {{g.current_page or 1}},
+                maxVisible: 10
+            }).on("page", function (event, num) {
+                var url = LuhuAdmin.replaceOrAddUrlParam(window.location.href, "page", num);
+                window.location.href = url;
+            });
+        });
+    {% endif %}
+</script>

@@ -1,0 +1,18 @@
+{#<link href="{{ static('/static/bootstrap/css/bootstrap.yeti.css') }}" rel="stylesheet"/>#}
+<link type="text/css" href="/static/bootstrap-3.3.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="{{ static('/static/css/reset.css') }}" rel="stylesheet"/>
+<link type="text/css" href="/static/css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet"/>
+<link type="text/css" href="/static/js/lib/morris/morris.css" rel="stylesheet"/>
+<link href="/static/css/bootstrap-submenu.min.css"rel="stylesheet">
+<script src="/static/js/lib/jquery.1.8.3.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/js/lib/morris/morris.min.js"></script>
+<script src="http://cdn.staticfile.org/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
+<script src="/static/js/bootstrap-submenu.js"></script>
+<script src="/static/js/lib/layer/layer.js"></script>
+{% assets filters="jsmin", output="assets/all-lib.js", "js/lib/json2.js","js/lib/raphael/raphael.2.1.0.min.js","js/lib/jquery.url.js", "js/lib/hogan.js",  "js/lib/underscore.js", "js/lib/domi.js", "js/lib/jquery.cookie.min.js", "js/app/giftpi.js", "js/luhu_admin.js", "js/hiwifi_ui.js" -%}
+    <script type="text/javascript" src="{{ config['STATIC_HTTP_REF'] }}{{ ASSET_URL }}"></script>
+{% endassets -%}
+<!--[if lt IE 9]>
+<script src="/static/js/lib/html5shiv.js"></script>
+<![endif]-->

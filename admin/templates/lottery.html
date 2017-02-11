@@ -1,0 +1,178 @@
+{% extends "layout/default.html" %}
+{% block title %} 抽奖 {% endblock %}
+{% block  head_js_css %}
+    <style type="text/css">
+
+        #Result {
+            border: 3px solid #40AA53;
+            margin: 0 auto;
+            text-align: center;
+            width: 400px;
+            padding: 50px 0;
+            background: #efe;
+        }
+
+        #ResultNum {
+            font-size: 25pt;
+            font-family: Verdana
+        }
+
+        #Button {
+            margin: 50px 0 0 0;
+        }
+
+        #Button input {
+            font-size: 40px;
+            padding: 0 50px;
+        }
+
+    </style>
+
+{% endblock %}
+{% block container %}
+
+
+    <script type='text/javascript'>
+
+        var g_Interval = 10;
+
+
+        var g_Timer;
+        var running = false;
+        var currentIndex = null;
+        var lotteryResult = new Array();
+
+        function beginRndNum(trigger) {
+            if (running) {
+                running = false;
+                clearTimeout(g_Timer);
+                $('#start_btn').val("开始");
+                $('#ResultNum').css('color', 'red');
+                var phone = userPhones[currentIndex]['phone'];
+                var name = userPhones[currentIndex]['name'];
+                lotteryResult.push({'name': name, 'phone': phone});
+                addAwardUser(phone, name);
+                if (currentIndex == userPhones.length - 1) {
+                    userPhones = userPhones.slice(0, currentIndex);
+                } else {
+                    userPhones = userPhones.slice(0, currentIndex).concat(userPhones.slice(currentIndex + 1));
+                }
+            } else {
+                running = true;
+                $('#ResultNum').css('color', 'black');
+                $('#start_btn').val("停止");
+                beginTimer();
+            }
+        }
+
+        function showArrays(arr) {
+            var str = "";
+            for (var i in arr) {
+                str += arr[i]['name'];
+            }
+            alert(str);
+        }
+        function updateRndNum() {
+            var index = Math.floor(Math.random() * userPhones.length);
+            $('#ResultNum').html(userPhones[index]['name'] + ' ' + userPhones[index]['phone']);
+            currentIndex = index;
+        }
+
+
+        function beginTimer() {
+            g_Timer = setTimeout(beat, g_Interval);
+        }
+        function beat() {
+            g_Timer = setTimeout(beat, g_Interval);
+
+            updateRndNum();
+
+        }
+        //-->
+
+    </script>
+    <section id="step1" class="step">
+        <form class="form-horizontal" method="POST">
+
+
+            <div class="form-group">
+                <label class="control-label" for="users"><label for="users">抽奖名单</label></label>
+
+                <div class="col-lg-10">
+                    <textarea id="users" name="users" placeholder="一行一个 姓名 手机号码 例如: 李白 18686868866"
+                              style="width: 700px;height: 200px;"></textarea>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="button" onclick="saveUsers()" class="btn btn-primary">下一步</button>
+                </div>
+            </div>
+        </form>
+    </section>
+    <section id="step2" class="step" style="display: none;">
+
+
+        <div id="Result">
+
+            <span id="ResultNum">0</span>
+
+        </div>
+
+        <div id="Button" style="margin: 0 auto; margin-top: 30px; width: 76px;">
+
+            <button id="start_btn" style="margin: 0 auto;" class="btn btn-primary btn-large"
+                    onclick='beginRndNum(this)'>开始
+            </button>
+
+        </div>
+        <div class="result" style="margin: 0 auto; margin-top: 40px; width: 600px;">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>手机号码</th>
+                </tr>
+                </thead>
+                <tbody id="award_body">
+                </tbody>
+            </table>
+        </div>
+    </section>
+{% endblock %}
+
+{% block pageTail %}
+    {% raw %}
+    <script id="phone_tr" type="text/template">
+        <tr>
+            <td>{{ name }}</td>
+            <td>{{ phone }}</td>
+        </tr>
+    </script>
+    {% endraw %}
+    <script type="text/javascript">
+        var userPhones = new Array();
+        var awardTemplate = Hogan.compile($('#phone_tr').html());
+        function addAwardUser(phone, name) {
+            $('#award_body').append(awardTemplate.render({'phone': phone, 'name': name}));
+        }
+        function saveUsers() {
+            var nameAndPhones = $('#users').val();
+            if ($.isBlankStr(nameAndPhones)) {
+                alert("aaa");
+                $.showMessage("请输入抽奖数据", "warn");
+                return;
+            }
+            var rows = nameAndPhones.split("\n");
+            for (var index in rows) {
+                var row = rows[index];
+                row = row.replace("　", " ");
+                var data = row.split(" ");
+                userPhones.push({'name': data[0], 'phone': data[1]});
+            }
+            $('#step2').show();
+            $('#step1').hide();
+        }
+    </script>
+{% endblock %}

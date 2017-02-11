@@ -1,0 +1,58 @@
+{% raw %}
+<script id="template_option" type="text/template">
+    <option value="{{c.id}}">{{c.name}}</option>
+</script>
+{% endraw %}
+<script type="text/javascript">
+    var categoryJson = {{category_json|safe}};
+    var optionTemplate = Hogan.compile($('#template_option').html());
+
+    var CategoryRender = function (firstCategorySelector, secondCategorySelector, brandSelector) {
+        var obj = {
+            $_first: $(firstCategorySelector),
+            $_second: $(secondCategorySelector),
+            $_brand: $(brandSelector),
+            init: function () {
+                obj.$_first.append(optionTemplate.render({'c': {"name": "类目", "id": null}}))
+                for (var p in categoryJson) {
+                    var option = optionTemplate.render({'c': categoryJson[p]});
+                    obj.$_first.append(option);
+                }
+                obj.$_first.bind('change', function () {
+                    obj.renderSecondCategory();
+                    obj.renderBrand();
+                });
+            },
+            renderSecondCategory: function () {
+                obj.$_second.find('option').remove();
+                var category = obj.$_first.val();
+                if (category in categoryJson) {
+                    var subCategories = categoryJson[category]['sub'];
+                    for (var p in subCategories) {
+                        var option = optionTemplate.render({'c': subCategories[p]});
+                        obj.$_second.append(option);
+                    }
+                }
+            },
+            renderBrand: function () {
+                obj.$_brand.find('option').remove();
+                var category = obj.$_first.val();
+                if (category in categoryJson) {
+                    var brands = categoryJson[category]['brand'];
+                    for (var p in brands) {
+                        var option = optionTemplate.render({'c': brands[p]});
+                        obj.$_brand.append(option);
+                    }
+                }
+            },
+            updateCategory: function (firstCategory, secondCategory) {
+                obj.$_first.val(firstCategory);
+                obj.renderSecondCategory();
+                obj.$_second.val(secondCategory);
+            }
+        }
+        obj.init();
+        return obj;
+    }
+
+</script>

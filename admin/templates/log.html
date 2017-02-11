@@ -1,0 +1,34 @@
+{% extends "layout/default.html" %}
+{% block title %}主页 {% endblock %}
+{% block container %}
+
+    <p>点击顶部菜单进入管理功能界面</p>
+    ~if logs
+    <div style="margin-top: 40px;"></div>
+    <h6>最近操作日志</h6>
+    <table class="table table-hover" style="width: 70%;">
+        <thead>
+        <tr>
+            <th>操作</th>
+            <th>key1</th>
+            <th>key2</th>
+            <th>key3</th>
+            <th>ip</th>
+            <th>操作时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        ~for l in logs
+        <tr>
+            <td>{{ l.action }}</td>
+            <td>{{ l.key1 or '' }}</td>
+            <td>{{ l.key2 or '' }}</td>
+            <td>{{ l.key3 or '' }}</td>
+            <td>{{ l.ip }}</td>
+            <td>{{ l.create_time }}</td>
+        </tr>
+        ~endfor
+        </tbody>
+    </table>
+    ~endif
+{% endblock %}

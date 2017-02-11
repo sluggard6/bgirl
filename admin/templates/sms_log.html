@@ -1,0 +1,51 @@
+{% extends "layout/default.html" %}
+{% block container %}
+    <div class="well">
+    <span class="title">电话号码</span>
+    <input type="text" style="padding:0;margin-left:30px;" name="search_phone" id="search_phone"/>
+
+    <a href="javascript:void(0);" class="btn" onclick="titleSearch()">搜索</a>
+
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>发送时间</th>
+            <th>手机号码</th>
+            <th>发送渠道</th>
+            <th>内容</th>
+            <th>返回内容</th>
+        </tr>
+        </thead>
+        <tbody>
+        ~for log in logs
+        <tr id="{{ log.id }}">
+            <td>{{ log.id }}</td>
+            <td>{{ log.create_time }}</td>
+            <td>{{ log.key1 or '' }}</td>
+            <td>{{ sender.get_display_cn(log.key3) if log.key3 else '数米' }}</td>
+            <td>{{ log.data }}</td>
+            <td>{{ log.key2 }}</td>
+        </tr>
+        ~endfor
+        </tbody>
+    </table>
+    ~include 'inc/pagination.html'
+    <script>
+    function titleSearch() {
+
+            var phone = $('#search_phone').val();
+            if (phone==""){
+                return false
+            }else{
+                var url = LuhuAdmin.replaceOrAddUrlParam(location.href, "phone", phone);
+                LuhuAdmin.loadUrl(url);
+            }
+
+        }
+    </script>
+{% endblock %}
+{% block pageTail %}
+{% endblock %}

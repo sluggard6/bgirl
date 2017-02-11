@@ -1,0 +1,26 @@
+~extends 'layout/base.html'
+{% block body %}
+
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			{% include 'inc/top_nav.html' %}
+		</div>
+
+	</div>
+	<div class="container" id="ct1019">
+		{% block container %}{% endblock %}
+
+	</div>
+	<footer>
+		<div class="container">
+			<small class="pull-left text-muted copyright">
+				© 2017-2020 vogor.cn
+			</small>
+		</div>
+	</footer>
+	<script type="text/javascript">
+		var topnav = $('.navbar');
+		var container = $("#ct1019");
+		container.css('padding-top', topnav.height() + 20);
+	</script>
+{% endblock %}

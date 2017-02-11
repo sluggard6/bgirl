@@ -1,0 +1,197 @@
+<script>
+/*tinyMCE.init({
+
+      width : "840",
+      height : "440",
+      theme:"advanced",
+      language:"zh_CN",
+      mode : "exact",
+    elements : "content"
+   });*/
+  //CKEDITOR.replace('content',{extraPlugins : 'myAddImage'});
+
+
+
+  CKEDITOR.on('dialogDefinition', function( ev ){
+        var dialogName = ev.data.name;
+        var dialogDefinition = ev.data.definition;
+        if ( dialogName == 'image' ){
+             /*dialogDefinition.addContents({
+
+                id: 'page1',
+
+                label: 'Page1',
+
+
+
+                elements:[{
+                            type: 'html',
+                            html: '<div id="photo_container" class="product_tab" style="width:auto;">' +
+                                    '<input type="file" id="ck_uploader" name="uploader"/><div class="photo_pre" style="float:left;padding: 3px;border: 2px dashed #ccc;width: 200px;margin: 12px 5px;">' +
+                                    '<img id="ck_pre_img" class="pre_img" style="width: 200px;word-wrap: break-word;white-space: nowrap;" src="" uri=""/></div></div>',
+                            onLoad :function(){
+                                   var thisDialog = this.getDialog();
+                                    var txtUrlObj = thisDialog.getContentElement('info', 'txtUrl');
+                                    var txtUrlId = txtUrlObj.getInputElement().$.id;
+                                    var urlObj = document.getElementById(txtUrlId);
+                                 LuhuAdmin.upload("#ck_uploader", "image", function (data) {
+                                    var thumb = data.thumb;
+                                    var content = $('#ck_pre_img').attr("src", thumb);
+
+                                    urlObj.value = thumb;
+                                 });
+                            }
+                        }]
+
+                });*/
+             //var testTab = dialogDefinition.getContents( 'page1' );
+
+            /*dialogDefinition.onShow = function () {
+			// This code will open the Advanced tab.
+                for (i in this){
+                alert(i+this[i])
+            }
+            //this.showPage('page1');
+			//this.selectPage('Upload');
+		};*/
+            //var infoTab = dialogDefinition.getContents( 'info' );
+            var uploadTab = dialogDefinition.getContents( 'Upload' );
+
+            dialog = dialogDefinition.dialog;
+            uploadTab.elements=[{
+                type : 'button',
+               label: '上传'
+
+
+
+
+
+
+            }]
+            elem = uploadTab.elements;
+            len =elem.length;
+
+
+
+
+            /*infoTab.add({
+                type : 'button',
+                id : 'upload_image',
+                align : 'center',
+                label : '上传',
+                onClick: function(){
+                     var thisDialog = this.getDialog();
+                    var txtUrlObj = thisDialog.getContentElement('info', 'txtUrl');
+                    var txtUrlId = txtUrlObj.getInputElement().$.id;
+                    addUploadImage(txtUrlId);
+
+                }
+
+
+
+
+
+
+            }, 'browse');*/
+
+            /* uploadTab.add({
+                type : 'button',
+                id : 'upload_image',
+                align : 'center',
+                label : '上传',
+                onClick: function(){
+                    //CKEDITOR.tools.callFunction("1","fgfg");
+                    var thisDialog = this.getDialog();
+                    var txtUrlObj = thisDialog.getContentElement('info', 'txtUrl');
+                    var txtUrlId = txtUrlObj.getInputElement().$.id;
+                    var urlObj = document.getElementById(txtUrlId);
+
+                    var FormUrlId = thisDialog.getElement('Upload');
+                    form = FormUrlId.getElementsByTag("button");
+                    alert(form.$.id)
+                    for (i in form){
+                            alert(i+form[i])
+                        }
+                    alert(FormUrlId)
+                    urlObj.value = "111111";
+                    thisDialog.selectPage('info');
+                    return false;
+                    alert(txtUrlId)
+                    addUploadImage(txtUrlId);
+
+                }
+
+            }, 'browse');*/
+
+
+         uploadTab.add({
+                    type: 'html',
+                    id:'ck_upload_html',
+                    html: '<div id="photo_container" class="product_tab" style="width:auto;">' +
+                            '<input type="file" id="ck_uploader" name="uploader"/><div class="photo_pre" style="float:left;padding: 3px;border: 2px dashed #ccc;width: 200px;margin: 12px 5px;">' +
+                            '<img id="ck_pre_img" class="pre_img" style="width: 200px;word-wrap: break-word;white-space: nowrap;" src="" uri=""/></div></div>',
+                    onLoad :function(){
+                           var thisDialog = this.getDialog();
+                            var txtUrlObj = thisDialog.getContentElement('info', 'txtUrl');
+                            var txtUrlId = txtUrlObj.getInputElement().$.id;
+                            var urlObj = document.getElementById(txtUrlId);
+                         LuhuAdmin.upload("#ck_uploader", "image", function (data) {
+                            var thumb = data.thumb;
+                            var content = $('#ck_pre_img').attr("src", thumb);
+
+                            urlObj.value = thumb;
+                         });
+                    }
+                }, 'browse');
+
+
+
+        }
+      /* list =[]
+            for (var i=0;i<len;i++){
+
+                //elem[i].hide();
+                list.push(elem[i].id)
+                //uploadTab.remove(elem[i].id)
+            }
+
+       */
+      /*for (i in list){
+                uploadTab.remove(list[i])
+          uploadTab.elements.push({
+                    type: 'html',
+                    html: '<div id="photo_container" class="product_tab" style="width:auto;">' +
+                            '<input type="file" id="ck_uploader" name="uploader"/><div class="photo_pre" style="float:left;padding: 3px;border: 2px dashed #ccc;width: 200px;margin: 12px 5px;">' +
+                            '<img id="ck_pre_img" class="pre_img" style="width: 200px;word-wrap: break-word;white-space: nowrap;" src="" uri=""/></div></div>',
+                    onLoad :function(){
+                           var thisDialog = this.getDialog();
+                            var txtUrlObj = thisDialog.getContentElement('info', 'txtUrl');
+                            var txtUrlId = txtUrlObj.getInputElement().$.id;
+                            var urlObj = document.getElementById(txtUrlId);
+                         LuhuAdmin.upload("#ck_uploader", "image", function (data) {
+                            var thumb = data.thumb;
+                            var content = $('#ck_pre_img').attr("src", thumb);
+
+                            urlObj.value = thumb;
+                         });
+                    }
+                });
+            }*/
+
+
+
+
+
+    });
+
+
+  function addUploadImage(theURLElementId){
+
+    var uploadUrl = "/news/ckupload";
+    var imgUrl = window.showModalDialog(uploadUrl);
+
+    var urlObj = document.getElementById(theURLElementId);
+    urlObj.value = imgUrl?imgUrl:"";
+    urlObj.fireEvent("onchange");
+  }
+</script>

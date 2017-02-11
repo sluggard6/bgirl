@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<title>{% block title %}{{ g.title }}{% endblock %} 昧昧管理平台</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{% include 'inc/lib.header.html' %}
+	{% block head_js_css %}{% endblock %}
+	<script type="text/javascript">
+		app = {{g.c|tojson}};
+	</script>
+</head>
+
+<body>
+{% block body %}{% endblock %}
+{% block pageTail %}{% endblock %}
+{% include 'inc/js.msg.html' %}
+</body>
+</html>

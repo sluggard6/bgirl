@@ -1,0 +1,16 @@
+{% extends "layout/default.html" %}
+{% from "macros.html" import render_field %}
+{% block container %}
+    <div class="span9">
+        <form class="doc-form form-horizontal" method="post">
+            {{ form.csrf_token }}
+            <legend>{{ act }}角色</legend>
+            {{ render_field(form.name, dict(required=True)) }}
+            {{ render_field(form.description) }}
+            {{ render_field(form.status) }}
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="submit" class="btn btn-primary">确认</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

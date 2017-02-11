@@ -1,0 +1,46 @@
+{% extends "layout/default.html" %}
+{% block container %}
+	<h3 class="page-header">
+		新增、编辑管理权限
+		<div style="float:right;">
+			<a href="/manage/permission/new" class="btn btn-primary btn-sm">新增权限</a>
+		</div>
+	</h3>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead class="thead-default">
+			<tr>
+				<th>id</th>
+				<th>父id</th>
+				<th>权限名</th>
+				<th>key</th>
+				<th>操作路径</th>
+				<th>描述</th>
+				<th>状态</th>
+				<th>操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			~for p in permission_list
+			<tr>
+				<td>{{ p.id }}</td>
+				<td>{{ p.parent_id }}</td>
+				<td>{{ p.name }}</td>
+				<td>{{ p.key or '' }}</td>
+				<td>{{ p.path or '' }}</td>
+				<td>{{ p.description or '' }}</td>
+				<td width="50px"><input type="checkbox" id="{{ p.id }}" {% if p.status %}
+										checked="checked" {% endif %} ></td>
+				<td width="130px">
+					<div class="btn-group btn-group-xs">
+						<a class="btn btn-primary" href="/manage/permission/{{ p.id }}/edit">编辑</a>
+						<a class="btn btn-danger" href="/manage/permission/{{ p.id }}/del"
+						   onclick="return confirm('操作将删除此权限，不可恢复，你确定要删除吗？')">删除</a>
+					</div>
+				</td>
+			</tr>
+			~endfor
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

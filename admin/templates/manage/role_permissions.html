@@ -1,0 +1,43 @@
+{% extends "layout/default.html" %}
+{% from "macros.html" import render_field %}
+{% block container %}
+    <div class="well">
+        <span class="title">关联角色 <{{ role.name }}> 的权限</span>
+        <a class="pull-right btn btn-mini" href="/sys/role">返回</a>
+    </div>
+    <form action="" method="post">
+    <table class="table table-striped">
+        <thead class="thead-default">
+        <tr>
+            <th>id</th>
+            <th>父id</th>
+            <th>权限名</th>
+            <th>key</th>
+            <th>操作路径</th>
+            <th>描述</th>
+            <th>操作</th>
+        </tr>
+        <tbody>
+        ~for p in permission_list
+        <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.parent_id }}</td>
+            <td>{{ p.name }}</td>
+            <td>{{ p.key or '' }}</td>
+            <td>{{ p.path or '' }}</td>
+            <td>{{ p.description or '' }}</td>
+            <td>
+                <input type="checkbox" name="permission_selected" value="{{ p.id }}"
+                       {%- if p.id in role_permissions %} checked="checked"{% endif %}>
+            </td>
+        </tr>
+        ~endfor
+        </tbody>
+        </thead>
+    </table>
+    <div class="clearfix"></div>
+    <button type="submit" class="btn btn-small pull-right btn-primary">
+        <i class="icon-ok icon-white"></i> 确认
+    </button>
+    </form>
+{% endblock %}

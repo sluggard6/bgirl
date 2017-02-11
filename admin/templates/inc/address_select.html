@@ -1,0 +1,45 @@
+{% raw %}
+<script id="template_option" type="text/template">
+    <option value="{{val}}">{{val}}</option>
+</script>
+{% endraw %}
+<script type="text/javascript" src="http://m.giftpi.com/static/js/lib/area.js"></script>
+<script type="text/javascript">
+    var option_template = Hogan.compile($('#template_option').html());
+    $(document).ready(function () {
+        render_provinces();
+        $('#province').change(render_cities);
+        $('#city').change(render_counties);
+    });
+
+    function render_provinces() {
+        var $province = $('#province');
+        for (var p in area_list) {
+            var option = option_template.render({'val': p});
+            $province.append(option);
+        }
+        render_cities();
+    }
+    function render_cities() {
+        $('#city option').remove();
+        var province = $('#province').val();
+        var $city = $('#city');
+        for (var p in area_list[province]) {
+            var option = option_template.render({'val': p});
+            $city.append(option);
+        }
+        render_counties();
+    }
+
+    function render_counties() {
+        $('#county option').remove();
+        var province = $('#province').val();
+        var city = $('#city').val();
+        var $county = $('#county');
+        for (var p in area_list[province][city]) {
+            var option = option_template.render({'val': area_list[province][city][p]});
+            $county.append(option);
+        }
+    }
+
+</script>

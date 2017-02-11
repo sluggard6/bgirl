@@ -1,0 +1,55 @@
+{% extends "layout/default.html" %}
+{% block container %}
+	<h3 class="page-header">
+		新增、编辑管理用户，用户角色管理
+		<div style="float:right;">
+			<a href="/manage/user/new" class="btn btn-primary btn-sm">新增用户</a>
+		</div>
+	</h3>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead class="thead-default">
+			<tr>
+				<th>id</th>
+				<th>用户名</th>
+				<th>描述</th>
+				<th>创建时间</th>
+				<th>状态</th>
+				<th>操作</th>
+			</tr>
+			<tbody>
+			~for u in user_list
+			<tr>
+				<td>{{ u.id }}</td>
+				<td>{{ u.user_name }}</td>
+				<td>{{ u.description or '' }}</td>
+				<td>{{ u.create_time }}</td>
+				<td>
+					<div class="btn-group btn-group-xs" role="group">
+						<button type="button"
+								class="{% if u.status %}btn btn-success{% else %}btn btn-default{% endif %}"
+								onclick=""
+								id="user_{{ u.id }}_enable">
+							启用
+						</button>
+						<button type="button"
+								class="{% if u.status %}btn btn-default{% else %}btn btn-danger{% endif %}"
+								onclick=""
+								id="user_{{ u.id }}_disable">
+							禁用
+						</button>
+					</div>
+				</td>
+				<td>
+					<div class="btn-group btn-group-xs">
+						<a class="btn btn-primary" href="/manage/user/{{ u.id }}/edit">编辑</a>
+						<a class="btn btn-primary" href="/manage/user/{{ u.id }}/roles">角色管理</a>
+					</div>
+				</td>
+			</tr>
+			~endfor
+			</tbody>
+			</thead>
+		</table>
+	</div>
+{% endblock %}

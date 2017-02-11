@@ -1,0 +1,112 @@
+<div class="form-group">
+    <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+
+    <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+    </div>
+</div>
+
+{% macro render_field(field, tip, kargs={}) %}
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="{{ field.name }}">{{ field.label }}</label>
+
+        <div class="col-lg-10">
+            {{ field(placeholder=tip,class='form-control',**kwargs)|safe }}
+            {% if 'required' in kargs %} * {% endif %}
+            {% if field.errors %}
+                <span class="help-inline">
+            {% for error in field.errors %}
+                {{ error }}
+            {% endfor %}
+        </span>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}
+{% macro render_datetime_field(field, tip, format='YYYY-MM-DD hh:mm:ss', kargs={}) %}
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="{{ field.name }}">{{ field.label }}</label>
+
+        <div class="col-lg-10">
+
+            <div id="{{ field.name }}_picker" class="input-group date">
+                {{ field(placeholder=tip,class='form-control',**kwargs)|safe }}
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+{% macro render_textarea(field, tip, kargs={}) %}
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="{{ field.name }}">{{ field.label }}</label>
+
+        <div class="col-lg-10">
+            {{ field(style='width: 700px;height: 200px;',placeholder=tip,**kwargs)|safe }}
+            {% if 'required' in kargs %} * {% endif %}
+            {% if field.errors %}
+                <span class="help-inline">
+            {% for error in field.errors %}
+                {{ error }}
+            {% endfor %}
+        </span>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro render_head(title) %}
+    <title>{{ title }}</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js" type="text/javascript"></script>
+{% endmacro %}
+
+{% macro render_checkbox_field(field,tip, kargs={}) %}
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="{{ field.name }}">
+            <span>{{ field.label }}</span>
+        </label>
+        <div class="col-lg-10">
+            {{ field(**kwargs)|safe }}
+        </div>
+    </div>
+{% endmacro %}
+{% macro render_checkbox_fields(fields,name, kargs={}) %}
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="{{ name }}">
+            <span>{{ name }}</span>
+        </label>
+  		{% for field in fields %}
+        <div class="col-lg-10">
+            {{ field(**kwargs)|safe }}
+        </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+
+{% macro render_hidden_field(field) %}
+    <input type="hidden" name="{{ field.name }}" id="{{ field.name }}" value="{{ field.data or '' }}">
+{% endmacro %}
+
+{% macro render_json_field(field) %}
+    <input type="hidden" name="{{ field.name }}" id="{{ field.name }}" value="{{ field.data or '' }}">
+
+    <div class="form-group json_field_div"  f-name="{{ field.name }}">
+    <label></label>
+    <label class="col-lg-2 control-label"> {{ field.name }}</label>
+    <div class="col-lg-10">
+        {% for i in field.json_list %}
+        <div class="form-group">
+            <label class="col-lg-2 control-label" for="{{ i[0] }}">{{ i[1] }}</label>
+            <div class="col-lg-10">
+                {% if field.json_list_data %}
+                <input class="form-control json_field_input"  coerce="{{ i[2] }}" f-name="{{ i[0] }}" placeholder="" type="text" value="{{ field.json_list_data[i[0]] }}">
+                {% else %}
+                <input class="form-control json_field_input"  coerce="{{ i[2] }}" f-name="{{ i[0] }}" placeholder="" type="text" value="">
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+{% endmacro %}

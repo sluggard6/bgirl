@@ -1,0 +1,58 @@
+~extends 'layout/default.html'
+
+{% block container %}
+    <style>
+    .added_dates button{
+        margin-left: 10px;
+    }
+    .added_dates div{
+        margin-top: 10px;
+    }
+    .added_date{
+        margin-left: 10px;
+    }
+    </style>
+    <form class="form-horizontal" id="task_form" method="POST">
+
+        <div class="control-group added_dates">
+                <div>
+                刷新时间:
+                </div>
+                <input id="refresh_time" name="refresh_time" value="{{ refresh_time }}">
+
+        </div>
+
+        <div class="form-actions">
+            <button type="button" onclick="submitSign()" class="btn btn-primary">保存</button>
+        </div>
+
+    </form>
+
+    <script>
+
+        function submitSign(){
+            var re = new RegExp('^[0-9]*[1-9][0-9]*$');
+            var value = $('#refresh_time').val();
+            if(!re.test(value)){
+                $.showMessage("更新时间必须为正整数", 'warn');
+                return false;
+            }
+            value = parseInt(value);
+            if(value>86400){
+                $.showMessage("更新时间不能超过86400", 'warn');
+                return false;
+            }
+
+            $.ajax({
+                url: "/ad_refresh",
+                type: "POST",
+                data:{"refresh_time":value},
+                success: function(msg){
+
+                    $.showMessage("签到配置修改成功", 'ok');
+
+            }});
+        }
+
+    </script>
+{% endblock %}

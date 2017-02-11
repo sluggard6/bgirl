@@ -1,0 +1,64 @@
+{% macro render_field(field, kargs={}) %}
+    <div id="field_{{ field.name }}"
+         class="control-group
+                {%- if field.errors %} error{% endif -%}
+                {%- if field.flags.display=='none' %} hidden{% endif %}">
+      {{ field.label(class="control-label") }}
+      <div class="col-lg-10">
+          {% if field.flags.disabled %}
+          {{ field(disabled='disabled', title=field.description, **kargs)|safe }}
+          {% else %}
+          {{ field(title=field.description, placeholder=kargs.get('holder', field.description), **kargs)|safe }}
+          {% endif %}
+          {% if 'required' in kargs %} * {% endif %}
+          {% if field.errors %}
+              <span class="help-inline">
+              {% for error in field.errors %}
+                  {{ error }}
+              {% endfor %}
+              </span>
+          {% endif %}
+      </div>
+    </div>
+{% endmacro %}
+
+{% macro render_field_text(field, kargs={}) %}
+    <div id="field_{{ field.name }}" class="form-group">
+      {{ field.label(class="control-label", style="padding-top: 0;") }}
+      <div class="col-lg-10">
+        {{ field.data }} {{ field(style="display:none") }}
+      </div>
+    </div>
+{% endmacro %}
+
+
+{% macro render_pager(pagination) %}
+  <div class="pagination pull-right">
+  <ul>
+    {% if pagination.has_prev %}
+    <li><a href="{{ url_for_page(pagination.page-1, pagination) }}">前页</a></li>
+    {% else %}
+    <li class="disabled"><a href="#">前页</a></li>
+    {% endif %}
+
+    {% for page in pagination.iter_pages() %}
+    {% if page%}
+      {% if page != pagination.page %}
+      <li><a href="{{ url_for_page(page, pagination) }}">{{ page }}</a></li>
+      {% else %}
+      <li class="active"><a href="#"><strong>{{ page }}</strong></a></li>
+      {% endif %}
+    {% else%}
+      <li><span class="ellipsis">…</span></li>
+    {% endif %}
+    {% endfor %}
+
+    {% if pagination.has_next %}
+    <li><a href="{{ url_for_page(pagination.page+1, pagination) }}">下页</a></li>
+    {% else%}
+    <li class="disabled"><a href="#">下页</a></li>
+    {% endif%}
+  </ul>
+  </div>
+{% endmacro %}
+
