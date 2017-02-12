@@ -29,6 +29,12 @@ def gen_random_dir(seed=None):
     return tmp[0:2] + '/' + tmp[2:5] + '/' + tmp[5:8] + '/'
 
 
+def gen_date_dir(seed=None):
+    from datetime import date
+    today = date.today()
+    return str(today).replace('-', '/')
+
+
 def gen_random_filename(filename, seed=None):
     seed = str(seed) if seed else str(time()) + str(randint(10000000, 99999999)) + filename
     return string.md5(seed, 16) + get_file_ext(filename)
@@ -63,6 +69,7 @@ def write_file(_file, text, model='w'):
     if isinstance(_file, file):
         _file.write(text)
 
+
 def get_file_fix(path, fix):
     ar = os.path.splitext(path)
-    return ar[0]+'.'+fix+ar[1]
+    return ar[0] + '.' + fix + ar[1]

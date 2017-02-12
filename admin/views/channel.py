@@ -2,8 +2,8 @@
 
 from flask import (g, render_template, Blueprint, flash, request, redirect, url_for)
 from sqlalchemy.exc import IntegrityError
-from bg_biz.orm.channel import Channel,Group
-from form.channel import ChannelForm,GroupForm
+from bg_biz.orm.pic import Channel, Group, Pic
+from form.channel import ChannelForm, GroupForm
 from form import obj2form, form2obj
 from sharper.flaskapp.orm.base import db
 from bg_biz.orm.admin import AdminLog, AdminAction
@@ -110,6 +110,8 @@ def group_edit():
 
     if id:
         group = Group.get(id)
+        g.thumb =group.thumb
+        g.photo_and_thumbs = group.pics
         act = u'编辑'
         if request.method == 'GET':
             obj2form(group, form)
@@ -127,6 +129,18 @@ def group_edit():
                 try:
                     group.id = None
                     group.insert()
+                    if form.images.data:
+                        images = form.images.data.split(';')
+                        img_list = []
+                        for img in images:
+                            pic = Pic()
+                            pic.title = group.name
+                            pic.max = img;
+                            pic.normal = img;
+                            pic.min = img
+                            pic.insert()
+                            img_list.append(pic.id)
+                        group.update_pics(img_list);
                     AdminLog.write("新组添加", g.me.id, ip=request.remote_addr, key1=group.id,
                                    key2=group.name)
                     flash(u'创建组成功', 'ok')
@@ -137,9 +151,24 @@ def group_edit():
                     form.user_name.errors = [u'组名重复！']
             else:
                 try:
+
+                    group.thumb = form.thumb.data
                     group.status = 1 if form.status.data else 0
                     group.description = form.description.data
+
                     group.update()
+                    img_list = []
+                    if form.images.data:
+                        images = form.images.data.split(';')
+                        for img in images:
+                            pic = Pic()
+                            pic.title = group.name
+                            pic.max = img;
+                            pic.normal = img;
+                            pic.min = img
+                            pic.insert()
+                            img_list.append(pic.id)
+                    group.update_pics(img_list);
                     AdminLog.write("修改组", g.me.id, ip=request.remote_addr, key1=group.id,
                                    key2=group.name)
 

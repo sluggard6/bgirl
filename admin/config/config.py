@@ -77,7 +77,7 @@ class Production:
 			'allowed_ext': ['.apk'],
 		},
 		'image': {
-			'upload_folder': '/var/www/upload/image/',
+			'upload_folder': '/Users/john/git/image/',
 			'allowed_ext': ['.jpeg', '.jpg', '.png', '.bmp', '.gif'],
 		},
 		'file': {
@@ -127,7 +127,7 @@ class Production:
 
 	}
 
-	DOWNLOAD_HOST = "http://static.hi-wifi.cn"
+	DOWNLOAD_HOST = "http://127.0.0.1:8270"
 	MONTH_FEE_SCORE = 5000
 	DAILY_CONTINUE_SCORE = 30
 	DAILY_SCORE = 10
@@ -184,7 +184,7 @@ class Release(Production):
 	PERMISSION_LIMIT = "no"
 
 	API_HOST = 'http://test.api.hi-wifi.cn'
-	DOWNLOAD_HOST = "http://test.static.hi-wifi.cn"
+	DOWNLOAD_HOST = "http://127.0.0.1:8270"
 	MOBILE_HOST = 'http://test.m.hi-wifi.cn'
 
 

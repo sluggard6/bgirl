@@ -1,21 +1,94 @@
 {% extends "layout/default.html" %}
 {% from "macros.html" import render_field,render_hidden_field %}
 {% block container %}
-	<h2 class="page-header">
-		{{act}}组信息
-	</h2>
-	<div class="span9">
-		<form class="doc-form form-horizontal" method="post">
-			{{ form.csrf_token }}
-			{{ render_hidden_field(form.id) }}
-			{{ render_field(form.name, dict(required=True)) }}
-			{{ render_field(form.description) }}
-			{{ render_field(form.status) }}
-			<div class="form-group">
-				<div class="col-lg-10 col-lg-offset-2">
-					<button type="submit" class="btn btn-primary">保存</button>
-				</div>
-			</div>
-		</form>
-	</div>
+<h2 class="page-header">
+    {{act}}专辑信息
+</h2>
+<div class="span9">
+    <form id="product_form" class="doc-form form-horizontal" method="post">
+        {{ form.csrf_token }}
+        {{ render_hidden_field(form.id) }}
+
+        {{ render_hidden_field(form.thumb) }}
+        {{ render_field(form.name, dict(required=True)) }}
+        <div class="form-group">
+            <label class="col-lg-2 control-label" for="thumb_img"><label for="thumb_img">封面</label></label>
+
+            <div class="col-lg-10">
+                <img id="thumb_img" style="width: 128px; height:128px;" src="{{ g.thumb }}">
+                <input type="file" id="detail_uploader" name="detail_uploader"/>
+            </div>
+        </div>
+        {{ render_field(form.description) }}
+        <div class="form-group">
+            <label class="col-lg-2 control-label" for="apk_icon_img"><label for="apk_icon_img">图片</label></label>
+
+            <div class="col-lg-10">
+                <div id="photo_container" class="product_tab" style="width:auto;">
+                    <ul id="sort">
+
+                        ~for pic in g.photo_and_thumbs
+                        <div class="photo_pre"
+                             style="float:left;padding: 3px;border: 2px dashed #ccc;width: 200px;margin: 12px 5px;">
+                            <span class="btn btn-default pull-right btn-nav" onclick="deleteImage(event);">删除</span>
+                            <img class="pre_img" style="width: 200px;word-wrap: break-word;white-space: nowrap;"
+                                 src="{{ pic.d_max }}" uri="{{ pic.max }}"/>
+                        </div>
+                        ~endfor
+                    </ul>
+                </div>
+                <br/>
+                <input type="file" id="image_uploader" name="image_uploader"/>
+            </div>
+        </div>
+        {{ render_hidden_field(form.images) }}
+        {{ render_field(form.status) }}
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="button" onclick="submitProduct()" class="btn btn-primary" id="submit_button">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% raw %}
+<script id="template_photo" type="text/template">
+    <div class="photo_pre"
+         style="float:left;padding: 3px;border: 2px dashed #ccc;width: 200px;margin: 12px auto;">
+        <span class="btn btn-default pull-right btn-nav" onclick="deleteImage(event);">删除</span>
+        <img class="pre_img" style="width: 200px;word-wrap: break-word;white-space: nowrap;"
+             src="{{ url }}" uri="{{ uri }}"/>
+    </div>
+</script>
+{% endraw %}
+<script type="text/javascript" src="/static/js/lib/uploadify/swfobject.js"></script>
+<script type="text/javascript" src="/static/js/lib/uploadify/jquery.uploadify.v2.1.4.min.js"></script>
+<script>
+    var photoTemplate = Hogan.compile($('#template_photo').html());
+    LuhuAdmin.upload("#image_uploader", "image", function (data) {
+        var thumb = data.thumb;
+        var uri = data.uri;
+        var content = photoTemplate.render({"url": thumb, "uri": uri});
+        $('#sort').append(content);
+    });
+    function deleteImage(e) {
+        var $target = get_target_element(e);
+        $target.parent().remove();
+    }
+    LuhuAdmin.upload("#detail_uploader", "image", function (data) {
+        var link = data.thumb;
+        var uri = data.uri
+        $('#thumb_img').attr("src", link);
+        $('#thumb').val(uri);
+    });
+
+    function submitProduct() {
+        var images = new Array();
+        $('#photo_container .photo_pre img').each(function () {
+            images.push($(this).attr('uri'));
+        })
+        $('#images').val(images.join(";"));
+        $("#submit_button").attr("disabled", "disabled");
+        $('#product_form').submit();
+    }
+</script>
 {% endblock %}

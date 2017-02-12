@@ -15,7 +15,7 @@ from sharper.util import file, imgtool
 from flask import current_app
 from sharper.lib.error import UploadFailedError
 from sharper.lib.error import UploadTypeError
-from sharper.util.file import allowed_file_ext, get_file_fix, gen_random_dir, gen_random_filename, mkdirs
+from sharper.util.file import allowed_file_ext, get_file_fix, gen_random_dir,gen_date_dir, gen_random_filename, mkdirs
 from sharper.util.imgtool import zoom, square
 
 
@@ -84,7 +84,7 @@ def gen_random_path(media_type, file_name, seed=None):
     根据类型生成随机文件路径，自动创建目录路径
     """
     save_dir = current_app.config['UPLOAD_HANDLER'][media_type]['upload_folder']
-    random_dir = gen_random_dir(seed)
+    random_dir = gen_date_dir(seed)
     random_filename = gen_random_filename(file_name, seed)
     abs_dir = os.path.join(save_dir, random_dir)
     mkdirs(abs_dir)

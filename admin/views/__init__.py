@@ -18,10 +18,13 @@ def register_views(app):
     from views.manage import ManageView
     from views.default import DefaultView
     from views.channel import ChannelView
+    from views.api import ApiView
+
     app.register_blueprint(AuthView)
     app.register_blueprint(DefaultView)
     app.register_blueprint(ManageView, url_prefix='/manage')
     app.register_blueprint(ChannelView, url_prefix='/channel')
+    app.register_blueprint(ApiView,url_prefix='/api')
     RQDashboard(app, url_prefix='/rq')
 
     app.error_handler_spec[None][500] = error_handler

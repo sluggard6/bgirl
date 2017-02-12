@@ -28,6 +28,9 @@ class GroupForm(Form):
     description = TextField(u'描述', [
         optional()]
                             )
+    thumb = HiddenField(u"封面")
+
+    images = HiddenField(u"images")
     status = BooleanField(u'状态')
 
 
@@ -40,6 +43,7 @@ class ChannelForm(Form):
         special_chars
     ]
                      )
+    thumb = HiddenField(u"封面")
     description = TextField(u'描述', [
         Length(min=0, max=50, message=u'描述不能超过50字符。')]
                             )
