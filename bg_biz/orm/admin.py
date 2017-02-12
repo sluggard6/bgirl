@@ -14,7 +14,7 @@ from sharper.flaskapp.orm.base import BaseModel, db
 from sharper.lib.error import AppError
 from sharper.util import helper, string
 
-__authors__ = ['"linnchord gao" <linnchord@gmail.com>']
+__authors__ = ['John Chan']
 
 metadata = BaseModel.metadata
 

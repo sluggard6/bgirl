@@ -8,7 +8,7 @@ from bg_biz.orm.admin import AdminUser, AdminRole, AdminPermission, AdminAction,
 from sharper.flaskapp.orm.base import db
 
 __authors__ = [
-	'"linnchord gao" <linnchord@gmail.com>'
+	'John Chan'
 ]
 
 ManageView = Blueprint('sys_manage', __name__)

@@ -1,0 +1,53 @@
+{% extends "layout/default.html" %}
+{% block container %}
+	<h3 class="page-header">
+		新增、编辑频道
+		<div style="float:right;">
+			<a href="/channel/edit" class="btn btn-primary btn-sm">新增频道</a>
+		</div>
+	</h3>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead class="thead-default">
+			<tr>
+				<th>id</th>
+				<th>用户名</th>
+				<th>描述</th>
+				<th>状态</th>
+				<th>操作</th>
+			</tr>
+			<tbody>
+			~for u in channels
+			<tr>
+				<td>{{ u.id }}</td>
+				<td>{{ u.name }}</td>
+				<td>{{ u.description or '' }}</td>
+				<td>
+					<div class="btn-group btn-group-xs" role="group">
+						<button type="button"
+								class="{% if u.status %}btn btn-success{% else %}btn btn-default{% endif %}"
+								onclick=""
+								id="user_{{ u.id }}_enable">
+							启用
+						</button>
+						<button type="button"
+								class="{% if u.status %}btn btn-default{% else %}btn btn-danger{% endif %}"
+								onclick=""
+								id="user_{{ u.id }}_disable">
+							禁用
+						</button>
+					</div>
+				</td>
+				<td>
+					<div class="btn-group btn-group-xs">
+						<a class="btn btn-primary" href="/channel/edit?id={{u.id}}">编辑</a>
+						<a class="btn btn-primary" href="/channel/group/{{u.id}}">组管理</a>
+					</div>
+				</td>
+			</tr>
+			~endfor
+			</tbody>
+			</thead>
+		</table>
+	</div>
+{% endblock %}
