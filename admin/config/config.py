@@ -127,7 +127,7 @@ class Production:
 
 	}
 
-	DOWNLOAD_HOST = "http://127.0.0.1:8270"
+	DOWNLOAD_HOST = "admin.vogor.cn"
 	MONTH_FEE_SCORE = 5000
 	DAILY_CONTINUE_SCORE = 30
 	DAILY_SCORE = 10

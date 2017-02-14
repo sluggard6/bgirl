@@ -108,6 +108,10 @@ class Group(BaseModel):
                 dict(group_id=self.id, pic_id=rid) for rid in pic_id_list
                 ])
 
+    @property
+    def thumb_http(self):
+        return get_download_url(self.thumb)
+
 
 class Pic(BaseModel, KvdbMixin):
     __tablename__ = 'pic'
