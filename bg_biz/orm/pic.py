@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 from sharper.flaskapp.kvdb import kvdb
 from sharper.flaskapp.orm.base import BaseModel, db
+from sharper.flaskapp.orm.display_enum import DisplayEnum
 from sharper.flaskapp.orm.kvdb_mixin import KvdbMixin
 from sqlalchemy import Column, INTEGER, VARCHAR, DATETIME, Table, ForeignKey
 
@@ -34,6 +35,15 @@ class Channel(BaseModel):
 
     __table_args__ = {}
 
+    class Status(DisplayEnum):
+        AVAILABLE = 1
+        DISABLE = 0
+
+        __display_cn__ = {
+            AVAILABLE: u'有效',
+            DISABLE: u'无效'
+        }
+
     id = Column(u'id', INTEGER(), primary_key=True, nullable=False, autoincrement=True)
     name = Column(u'name', VARCHAR(length=50), nullable=False)
     description = Column(u'description', VARCHAR(length=200))
@@ -61,6 +71,15 @@ class Group(BaseModel):
     __tablename__ = 'group'
 
     __table_args__ = {}
+
+    class Status(DisplayEnum):
+        AVAILABLE = 1
+        DISABLE = 0
+
+        __display_cn__ = {
+            AVAILABLE: u'有效',
+            DISABLE: u'无效'
+        }
 
     id = Column(u'id', INTEGER(), primary_key=True, nullable=False, autoincrement=True)
     name = Column(u'name', VARCHAR(length=25), nullable=False)
