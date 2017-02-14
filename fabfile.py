@@ -94,7 +94,7 @@ def deploy(project, branch, need_reload=True):
     with cd(full_path):
         deploy_path = '%s/%s' % (base, proj_name);
         if exists(deploy_path):
-            run('rm %s/%s' % (base, proj_name))
+            run('rm -rf %s/%s' % (base, proj_name))
         run('cp -rf %s %s' % (proj_name, base))
     if need_reload:
         touchload()

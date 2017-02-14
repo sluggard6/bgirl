@@ -110,7 +110,7 @@ class Group(BaseModel):
 
     @property
     def thumb_http(self):
-        return get_download_url(self.thumb)
+        return get_download_url('image',self.thumb)
 
 
 class Pic(BaseModel, KvdbMixin):
@@ -128,12 +128,12 @@ class Pic(BaseModel, KvdbMixin):
 
     @property
     def d_normal(self):
-        return get_download_url(self.normal)
+        return get_download_url('image',self.normal)
 
     @property
     def d_min(self):
-        return get_download_url(self.min)
+        return get_download_url('image',self.min)
 
     @property
     def d_max(self):
-        return get_download_url(self.max)
+        return get_download_url('image',self.max)
