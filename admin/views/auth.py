@@ -92,10 +92,6 @@ def index():
                     return redirect('/logout')
 
     form = LoginForm()
-    print form.user_name.data
-    print form.password.data
-    print form.return_url.data
-    print form.csrf_enabled,form.csrf_token.data
     #if return_url:
     #    form.return_url.data = return_url
     if request.method == 'POST':
