@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 from default import DefaultView, error_handler
 from user import UserView
+from views.pic import PicView
 
 __author__ = [
     "sluggrd"
@@ -17,3 +18,4 @@ def register_views(app):
 
     app.register_blueprint(DefaultView)
     app.register_blueprint(UserView, url_prefix='/user')
+    app.register_blueprint(PicView, url_prefix='/pic')

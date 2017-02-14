@@ -10,7 +10,7 @@ import {
   Navigator
 } from 'react-native';
 
-import Util from './utils';
+import Global from '../utils/global';
 import Main from './main'
 
 let image1 = require('../images/guide_1.jpg');
@@ -49,12 +49,12 @@ export default class Guide extends Component {
 
 var styles = StyleSheet.create({
   contentContainer: {
-    width: Util.size.width*3,
-    height: Util.size.height,
+    width: Global.size.width*3,
+    height: Global.size.height,
   },
   backgroundImage: {
-    width: Util.size.width,
-    height: Util.size.height,
+    width: Global.size.width,
+    height: Global.size.height,
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",

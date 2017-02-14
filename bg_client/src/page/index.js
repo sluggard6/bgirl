@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -13,13 +15,16 @@ import {
 import Guide from './guide';
 import TabBarView from './tab_bar_view'
 import Main from './main';
-
+import Http from '../utils/http'
+import Global from '../utils/global'
 
 const defaultRoute = {
   component: Guide
 };
 
 const buildVersion = '0.1.0'
+
+const PROFILE_URL = Global.default_host +  "/profile"
 
 class Index extends Component {
   constructor(props) {
@@ -32,6 +37,14 @@ class Index extends Component {
 
   componentDidMount() {
     this.loadVersion();
+    this.loadProfile();
+  }
+
+  loadProfile() {
+    Http.httpGet(PROFILE_URL,function(responseData){
+      profile = responseData.profile
+      Global.host = "http://" + profile.host + ":" + profile.port
+    })
   }
 
 

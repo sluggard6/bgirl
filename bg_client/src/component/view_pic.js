@@ -1,3 +1,5 @@
+// @flow
+
 import React, {Component} from 'react';
 
 import {
@@ -7,20 +9,24 @@ import {
   Text
 } from 'react-native'
 
+import Global from '../utils/global';
+
 export default class ViewPic extends Component {
 
   constructor(props) {
     super(props);
+    pic = props.pic;
   }
 
   render(){
     return (
       <View style={styles.container}>
         <Image
-          source={require('../images/min.jpg')}
+          style={styles.image}
+          source={{uri: pic.max}}
         />
-        <Text>{this.props.data.title}</Text>
-        <Text>{this.props.data.date}</Text>
+        <Text>{pic.title}</Text>
+        <Text>{pic.date}</Text>
       </View>
     );
   }
@@ -29,10 +35,12 @@ export default class ViewPic extends Component {
 var styles = StyleSheet.create({
 
   container: {
-    flex: 1,
     flexDirection: "column",
     justifyContent: 'space-around',
     alignItems: 'center',
-    padding: 5,
+  },
+  image: {
+    width: (Global.size.width-45)/2,
+    height: (Global.size.width-45)/3*2,
   }
 })

@@ -9,17 +9,10 @@ import {
 } from 'react-native'
 
 import ViewPic from '../component/view_pic'
+import Global from '../utils/global'
 
-var pic_data = [
-	{title:'第一张', date:'2017-01-03', path:{max:'../image/max.jpg',normal:'../image/normal.jpg',min:'../image/min.jpg'}},
-	{title:'第二张', date:'2017-01-03', path:{max:'../image/max.jpg',normal:'../image/normal.jpg',min:'../image/min.jpg'}},
-	{title:'第三张', date:'2017-01-03', path:{max:'../image/max.jpg',normal:'../image/normal.jpg',min:'../image/min.jpg'}},
-	{title:'第四张', date:'2017-01-03', path:{max:'../image/max.jpg',normal:'../image/normal.jpg',min:'../image/min.jpg'}},
-	{title:'第五张', date:'2017-01-03', path:{max:'../image/max.jpg',normal:'../image/normal.jpg',min:'../image/min.jpg'}},
-	{title:'第六张', date:'2017-01-03', path:{max:'../image/max.jpg',normal:'../image/normal.jpg',min:'../image/min.jpg'}},
-	{title:'第七张', date:'2017-01-03', path:{max:'../image/max.jpg',normal:'../image/normal.jpg',min:'../image/min.jpg'}},
-	{title:'第八张', date:'2017-01-03', path:{max:'../image/max.jpg',normal:'../image/normal.jpg',min:'../image/min.jpg'}}
-]
+const PIC_URL = "/pic/list?ids=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18"
+// const PIC_URL = "http://192.168.161.35:8290/pic/list?ids=1,2"
 
 let temp = [];
 
@@ -27,14 +20,34 @@ export default class Main extends Component {
 
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(this.buildDataSource(pic_data))
+      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      loaded: false
     };
+    this.fetchData = this.fetchData.bind(this);
+  }
+
+  fetchData() {
+    url = Global.host?Global.host:Global.default_host + PIC_URL
+    fetch(url, {
+      credentials: "seid"
+    }).then((response) => response.json())
+      .then((responseData) => {
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows(this.buildDataSource(responseData.pics)),
+          loaded: true,
+        });
+      }).catch((err) => {
+        console.log(err);
+    });
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount");
+    this.fetchData();
   }
 
   buildDataSource(data) {
-
     if(data instanceof Array){
       if(temp.length > 0) {
         data = temp.concat(data);
@@ -64,17 +77,29 @@ export default class Main extends Component {
     return(
       <View style={styles.container}>
         <ViewPic
-          data={rowData[0]}
+          pic={rowData[0]}
         />
         <ViewPic
-          data={rowData[1]}
+          pic={rowData[1]}
         />
       </View>
     );
   }
 
+  renderLoadingView() {
+    return (
+      <View style={styles.container}>
+        <Text>
+          正在加载电影数据……
+        </Text>
+      </View>
+    );
+  }
 
   render() {
+    if (!this.state.loaded) {
+      return this.renderLoadingView();
+    }
     return (
       <View style={{flex: 1, paddingTop: 22}}>
         <ListView
