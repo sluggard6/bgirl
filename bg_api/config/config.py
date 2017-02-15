@@ -134,46 +134,40 @@ class Production:
 class Release(Production):
 	# LOG_DEBUG = True
 	# DEBUG = True
-	DOMAIN = '180.153.152.60:8091'
+	DOMAIN = 'test.api.vogor.cn'
 
 	HTTP_DOMAIN = 'http://' + DOMAIN
 	STATIC_HTTP_REF = ''
 
-	SQLALCHEMY_DATABASE_URI = 'mysql://luhu:lu@hu#2014@test-db-01/luhu'
-	SQLALCHEMY_BINDS = {
-		'data': SQLALCHEMY_DATABASE_URI,
-		'apas': 'mysql://luhu:lu@hu#2014@@test-db-01/apas',
-		'slaveapas': 'mysql://luhu:lu@hu#2014@@1test-db-01/apas',
-		'market': 'mysql://luhu:lu@hu#2014@@test-db-01/market',
-		'auth': 'mysql://auth:authtest@20151023@test-db-01/auth'
-	}
+	SQLALCHEMY_DATABASE_URI = 'mysql://admin:admin$bgirl#2016!@10.9.98.127:3306/bgirl?charset=utf8'
+
 	# SQLALCHEMY_POOL_TIMEOUT = 180
 	SQLALCHEMY_POOL_RECYCLE = 180
 
 	USER_MAILBIND_URL = HTTP_DOMAIN + '/auth/email/%(vcode)s'
-	SESSION_COOKIE_DOMAIN = ".hi-wifi.cn"
-	REDIS_HOST = 'test-redis-01'
-	REDIS_JOB_HOST = 'test-redis-01'
+	SESSION_COOKIE_DOMAIN = ".vogor.cn"
+	REDIS_HOST = '10.9.98.127'
+	REDIS_JOB_HOST = '10.9.98.127'
 	REDIS_PORT = '6379'
-	REDIS_PASSWORD = 'crs-oj7t4z7i:hiwifi@2016'
+	# REDIS_PASSWORD = 'crs-oj7t4z7i:hiwifi@2016'
 	# assets设置
 	ASSETS_DEBUG = True
 
-	APP_LOG_FILE = '/var/log/hiwifi/luhu_api/luhu_api_release.log'
+	APP_LOG_FILE = '/var/log/bgirl/bg_api/bg_api_release.log'
 
 	LIB_DIR = '/usr/bgirl/lib/release'
 
 	SUPPORT_HTTPS = False
 
-	PAYMENT_NOTIFY_URL = "http://180.153.152.60:8091/pay/notify/iapppay"
+	# PAYMENT_NOTIFY_URL = "http://180.153.152.60:8091/pay/notify/iapppay"
 
 	PAYMENT_WARES_ID = u'1'
 
-	AUTH_API = "http://as.hi-wifi.cn"
-
-	API_HOST = 'http://test.api.hi-wifi.cn'
-	DOWNLOAD_HOST = "http://test.rs.hi-wifi.cn"
-	MOBILE_HOST = 'http://test.m.hi-wifi.cn'
+	# AUTH_API = "http://as.hi-wifi.cn"
+    #
+    # API_HOST = 'http://test.api.hi-wifi.cn'
+	DOWNLOAD_HOST = "http://test.rs.vogor.cn"
+	# MOBILE_HOST = 'http://test.m.hi-wifi.cn'
 
 
 

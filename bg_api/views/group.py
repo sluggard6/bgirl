@@ -23,15 +23,11 @@ def group():
 @GroupView.route('/list/<int:channel_id>', methods=['POST', 'GET'])
 def group_by_channel(channel_id):
     channel = Channel.get(channel_id)
-    channel_group = [g.id for g in channel.group if g.status]
-    # group_list = Group.query.filter_by(status=Group.Status.AVAILABLE).order_by(Group.id.asc()).all()
-    ret = []
-    for group in channel_group:
-        ret.append(orm_obj2dict(group))
-    return g.ret_success_func(groups=ret)
+    groups = [orm_obj2dict(gu) for gu in channel.group]
+    return g.ret_success_func(groups=groups)
 
-@GroupView.route('<int:group_id>', methods=['POST', 'GET'])
+@GroupView.route('/<int:group_id>', methods=['POST', 'GET'])
 def pic_by_group_id(group_id):
     group = Group.get(group_id)
     pics = [pic_build(pic) for pic in group.pics]
-    return g.ret_success_func(pics=pics)
+    return g.ret_success_func(pics=pics, group=orm_obj2dict(group))

@@ -13,8 +13,9 @@ PicView = Blueprint('pic', __name__)
 @PicView.route('/list', methods=['POST', 'GET'])
 def list():
     data = request.args or request.form
+    print request.cookies.__str__()
     _ids = data.get('ids')
-    pics = Pic.query.filter(Pic.id.in_(_ids)).all()
+    pics = Pic.query.filter(Pic.id.in_(_ids.split(','))).all()
     ret = []
     for pic in pics:
         ret.append(pic_build(pic))
