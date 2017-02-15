@@ -1,9 +1,8 @@
 # -*- coding:utf-8 -*-
 """系统功能视图"""
 import flask
-import helper
 
-from flask import Blueprint, g, request
+from flask import Blueprint, g, request, current_app
 
 from sharper.flaskapp.helper import json_error, json_ok, render_json_warn, render_json_error
 from sharper.lib.error import AuthFailedError, AppError
@@ -29,3 +28,9 @@ def default():
 	return g.ret_success_func(flask='flask ' + flask.__version__)
 
 
+@DefaultView.route('/profile', methods=['GET'])
+def profile():
+	ret = dict()
+	ret['host'] = current_app.config.get("SESSION_COOKIE_DOMAIN");
+	ret['port'] = current_app.config.get("PORT");
+	return g.ret_success_func(profile=ret)
