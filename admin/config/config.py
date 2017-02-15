@@ -22,11 +22,11 @@
 class Production:
 	SQLALCHEMY_POOL_RECYCLE = 15
 	DEBUG = False
-	DOMAIN = '127.0.0.1'
+	DOMAIN = 'admin.vogor.cn'
 	HTTP_DOMAIN = 'https://' + DOMAIN
 	STATIC_HTTP_REF = ''
-	HIWIFI_HTTP_DOMAIN = 'https://hi-wifi.cn'
-	SQLALCHEMY_DATABASE_URI = 'mysql://root:admin1234@127.0.0.1:3306/bgirl'
+	HIWIFI_HTTP_DOMAIN = 'https://vogor.cn'
+	SQLALCHEMY_DATABASE_URI = 'mysql://admin:admin$bgirl#2016!@127.0.0.1:3306/bgirl'
 	SQLALCHEMY_BINDS = {
 		'data': 'mysql://root:admin1234@127.0.0.1:3306/bgirl'
 	}
@@ -54,15 +54,15 @@ class Production:
 	MAIL_SERVER = 'smtp.exmail.qq.com'
 	# MAIL_USERNAME = 'webmaster@hi-wifi.cn'
 	# MAIL_PASSWORD = 'luhu#2014!'
-	MAIL_USERNAME = 'caoyonghui@hi-wifi.cn'
-	MAIL_PASSWORD = 'Cao2014'
-	MAIL_DEFAULT_SENDER = '乐无限 <caoyonghui@hi-wifi.cn>'
+	MAIL_USERNAME = 'chenfazhun@vogor.cn'
+	MAIL_PASSWORD = '123456'
+	MAIL_DEFAULT_SENDER = '昧昧 <chenfazhun@vogor.cn>'
 	MAX_CONTENT_LENGTH = 500 * 1024 * 1024
 	# 系统测试账号
 	SYS_TEST_ACCOUNT = [10000000900, 10000001000]
 
-	APP_LOG_FILE = '/Users/john/git/meimei/luhu_admin.log'
-	LUHU_LIB_DIR = '/usr/hiwifi/lib'
+	APP_LOG_FILE = '/var/log/bgirl/luhu_admin.log'
+	LUHU_LIB_DIR = '/usr/bgirl/lib'
 	CLIENT_AGENT_MARK = 'com.domi.giftpi'
 
 	ASSETS_DEBUG = False
@@ -77,7 +77,7 @@ class Production:
 			'allowed_ext': ['.apk'],
 		},
 		'image': {
-			'upload_folder': '/Users/john/git/image/',
+			'upload_folder': '/var/www/upload/image/',
 			'allowed_ext': ['.jpeg', '.jpg', '.png', '.bmp', '.gif'],
 		},
 		'file': {
@@ -127,7 +127,7 @@ class Production:
 
 	}
 
-	DOWNLOAD_HOST = "http://127.0.0.1:8270"
+	DOWNLOAD_HOST = "http://rs.vogor.cn"
 	MONTH_FEE_SCORE = 5000
 	DAILY_CONTINUE_SCORE = 30
 	DAILY_SCORE = 10
@@ -143,49 +143,36 @@ class Production:
 class Release(Production):
 	LOG_DEBUG = True
 	# DEBUG = True
-	DOMAIN = 'test.admin.server.hi-wifi.cn/'
+	DOMAIN = 'test.admin.vogor.cn/'
 
 	HTTP_DOMAIN = 'http://' + DOMAIN
 	STATIC_HTTP_REF = ''
 
-	SQLALCHEMY_DATABASE_URI = 'mysql://luhu:lu@hu#2014@test-db-01/luhu'
+	SQLALCHEMY_DATABASE_URI = 'mysql://admin:admin$bgirl#2016!@127.0.0.1:3306/bgirl'
 	SQLALCHEMY_BINDS = {
-		'data': 'mysql://luhu:lu@hu#2014@test-db-01/luhu',
-		'slave': 'mysql://luhu:lu@hu#2014@test-db-01/luhu',
-		'card': 'mysql://luhu:lu@hu#2014@test-db-01/payment',
-		'apas': 'mysql://luhu:lu@hu#2014@test-db-01/apas',
-		'project': 'mysql://luhu:lu@hu#2014@test-db-01/area',
-		'market': 'mysql://luhu:lu@hu#2014@test-db-01/market',
-		'foxconn': 'mysql://hiwifi:H*SjJ)qS3bF@10.135.80.40/luhu',
-		'auth': 'mysql://auth:authtest@20151023@test-db-01/auth',
-		'sms': 'mysql://sms:smstest@20160504@test-db-01/sms',
-		'game': 'mysql://game:nkBpBOtDmvegJhqD@db-data:3306/game',
-		'KTLOG': 'mysql://browser:s@de5&dE@180.150.177.130:10031/KTLOG',
-		'video': 'mysql://video:videotest@201612@test-db-01/video',
-		'guian': 'mysql://root:uK92Awqh1ULVAHcz@210.83.232.55:3306/luhu'
 	}
 	USER_MAILBIND_URL = HTTP_DOMAIN + '/auth/email/%(vcode)s'
 	SESSION_COOKIE_DOMAIN = None
-	REDIS_URL = 'redis://123.206.15.218:6379/0'
-	REDIS_HOST = '123.206.15.218'
-	REDIS_JOB_HOST = '123.206.15.218'
+	REDIS_URL = 'redis://127.0.0.1:6379/0'
+	REDIS_HOST = '127.0.0.1'
+	REDIS_JOB_HOST = '127.0.0.1'
 	REDIS_PORT = 6379
-	REDIS_PASSWORD = 'crs-oj7t4z7i:hiwifi@2016'
+	REDIS_PASSWORD = ''
 	# assets设置
 	ASSETS_DEBUG = True
 
-	APP_LOG_FILE = '/var/log/hiwifi/luhu_admin/luhu_admin_release.log'
+	APP_LOG_FILE = '/var/log/bgirl/luhu_admin_release.log'
 
-	LUHU_LIB_DIR = '/usr/hiwifi/lib/release'
+	LUHU_LIB_DIR = '/usr/bgirl/lib/release'
 
 	SUPPORT_HTTPS = False
 
-	AUTH_API = "http://as.hi-wifi.cn"
+	AUTH_API = "http://as.vogor.cn"
 	PERMISSION_LIMIT = "no"
 
-	API_HOST = 'http://test.api.hi-wifi.cn'
-	DOWNLOAD_HOST = "http://127.0.0.1:8270"
-	MOBILE_HOST = 'http://test.m.hi-wifi.cn'
+	API_HOST = 'http://test.api.vogor.cn'
+	DOWNLOAD_HOST = "http://rs.vogor.cn/"
+	MOBILE_HOST = 'http://test.m.vogor.cn'
 
 
 class Development(Release):
