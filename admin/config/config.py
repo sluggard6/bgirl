@@ -127,7 +127,7 @@ class Production:
 
 	}
 
-	DOWNLOAD_HOST = "admin.vogor.cn"
+	DOWNLOAD_HOST = "http://rs.vogor.cn"
 	MONTH_FEE_SCORE = 5000
 	DAILY_CONTINUE_SCORE = 30
 	DAILY_SCORE = 10
@@ -171,7 +171,7 @@ class Release(Production):
 	PERMISSION_LIMIT = "no"
 
 	API_HOST = 'http://test.api.vogor.cn'
-	DOWNLOAD_HOST = "http://test.admin.vogor.cn/"
+	DOWNLOAD_HOST = "http://rs.vogor.cn/"
 	MOBILE_HOST = 'http://test.m.vogor.cn'
 
 
