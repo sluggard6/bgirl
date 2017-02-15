@@ -49,7 +49,7 @@ class Production:
 	SECRET_KEY = '\x19\xb4\xaaA\xec\xd43z]\xce\x1cW\xbe\x980\xceJ\xb7\xaf\x14OR\xb2\xca'
 	PERMANENT_SESSION_LIFETIME = 17280
 
-	SESSION_COOKIE_DOMAIN = '.hi-wifi.cn'
+	SESSION_COOKIE_DOMAIN = '.vogor.cn'
 	REDIS_JOB_HOST = '10.141.63.241'
 	REDIS_JOB_PORT = 6379
 	REDIS_JOB_PASSWORD = ''
