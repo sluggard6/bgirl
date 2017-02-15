@@ -109,9 +109,9 @@ class Production:
 	DAILY_CONTINUE_SCORE = 30
 	DAILY_SCORE = 10
 	DOWNLOAD_HOST = "http://rs.hi-wifi.cn"
-	APP_LOG_CLIENT_FILE = "/var/log/hiwifi/luhu_api_client.log"
-	APP_LOG_CLIENT_PAY_FILE = "/var/log/hiwifi/luhu_api_pay.log"
-	PAYMENT_NOTIFY_URL = "http://api.hi-wifi.cn/pay/notify/iapppay"
+	# APP_LOG_CLIENT_FILE = "/var/log/hiwifi/luhu_api_client.log"
+	# APP_LOG_CLIENT_PAY_FILE = "/var/log/bgirl/bg_api_pay.log"
+	# PAYMENT_NOTIFY_URL = "http://api.hi-wifi.cn/pay/notify/iapppay"
 	PAYMENT_WARES_ID = u'1'
 
 	AUTH_API = "http://auth.hi-wifi.cn"
