@@ -31,6 +31,6 @@ def default():
 @DefaultView.route('/profile', methods=['GET'])
 def profile():
 	ret = dict()
-	ret['host'] = current_app.config.get("SESSION_COOKIE_DOMAIN");
+	ret['host'] = current_app.config.get("HTTP_DOMAIN");
 	ret['port'] = current_app.config.get("PORT");
 	return g.ret_success_func(profile=ret)
