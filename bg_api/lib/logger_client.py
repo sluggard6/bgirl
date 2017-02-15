@@ -21,7 +21,7 @@ def init_logger_client(app):
 
 
 def init_pay_logger_client(app):
-    file_name = app.config.get('APP_LOG_CLIENT_PAY_FILE', '/var/log/hiwifi/pay.log')
+    file_name = app.config.get('APP_LOG_CLIENT_PAY_FILE', '/var/log/bgirl/pay.log')
 
     logger_pay.setLevel(logging.INFO)
 

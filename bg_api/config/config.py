@@ -109,9 +109,6 @@ class Production:
 	DAILY_CONTINUE_SCORE = 30
 	DAILY_SCORE = 10
 	DOWNLOAD_HOST = "http://rs.hi-wifi.cn"
-	# APP_LOG_CLIENT_FILE = "/var/log/hiwifi/luhu_api_client.log"
-	# APP_LOG_CLIENT_PAY_FILE = "/var/log/bgirl/bg_api_pay.log"
-	# PAYMENT_NOTIFY_URL = "http://api.hi-wifi.cn/pay/notify/iapppay"
 	PAYMENT_WARES_ID = u'1'
 
 	AUTH_API = "http://auth.hi-wifi.cn"
@@ -159,15 +156,10 @@ class Release(Production):
 
 	SUPPORT_HTTPS = False
 
-	# PAYMENT_NOTIFY_URL = "http://180.153.152.60:8091/pay/notify/iapppay"
 
 	PAYMENT_WARES_ID = u'1'
 
-	# AUTH_API = "http://as.hi-wifi.cn"
-    #
-    # API_HOST = 'http://test.api.hi-wifi.cn'
 	DOWNLOAD_HOST = "http://test.rs.vogor.cn"
-	# MOBILE_HOST = 'http://test.m.hi-wifi.cn'
 
 
 
