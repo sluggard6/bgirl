@@ -1,8 +1,6 @@
 # -*- coding:utf-8 -*-
 import sys
 
-from lib.decorator import do_switch_ret
-
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -84,6 +82,7 @@ init_app(app)
 
 @app.before_request
 def init_request():
+    from lib.decorator import do_switch_ret
     do_switch_ret()
 
 if __name__ == '__main__':
