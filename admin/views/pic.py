@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from flask import Blueprint, render_template
 from bg_biz.orm.pic import Pic
 
 __authors__ = [
