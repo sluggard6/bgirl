@@ -5,18 +5,11 @@ test_server = 'admin@106.75.97.108'
 server = ''
 env.passwords = {test_server: 'bg@2016#girl'}
 base_root = '/var/www/bgirl'
-proj_name = 'bg_api'
+proj_name = 'admin'
 base_code = '/data/code'
 base_project = 'bgirl'
 remote_code = "git@git.coding.net:sluggard/bgirl.git"
 full_path = "%s/%s" % (base_code, base_project)
-
-@hosts(test_server)
-def deploy_admin_release():
-    deploy({
-        'local': 'admin',
-        'base': '/var/www/bgirl'
-    }, "release")
 
 @hosts(test_server)
 def deploy_release():
