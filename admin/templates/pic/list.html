@@ -1,0 +1,16 @@
+{% extends "layout/default.html" %}
+{% block container %}
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead class="thead-default">
+			<tr>
+				<th>id</th>
+			</tr>
+			<tbody>
+				~for p in p
+				<image src="{{p.min}}"/>
+				~endfor
+			</tbody>
+		</table>
+	</div>
+{% endblock %}
