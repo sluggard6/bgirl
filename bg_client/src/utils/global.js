@@ -1,11 +1,12 @@
 import React from 'react';
 import Dimensions from 'Dimensions';
 
-const Util = {
+const Global = {
   size: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height
   },
+  default_host : "http://test.api.vogor.cn/"
 };
 
-export default Util;
+export default Global;
