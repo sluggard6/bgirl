@@ -21,6 +21,7 @@ var LuhuAdmin = {
             'fileExt': '*',
             'sizeLimit': sizelimt,
             'onComplete': function (event, ID, fileObj, response, data) {
+            	console.log("is on complete");
                 json = jQuery.parseJSON(response);
                 if (json.success) {
                     success_callback(json);
@@ -30,6 +31,7 @@ var LuhuAdmin = {
                 }
             }
         }, options);
+        console.log(setting);
         $(selector).uploadify(setting);
     },
     uploadQbox: function (selector, success_callback, options) {
