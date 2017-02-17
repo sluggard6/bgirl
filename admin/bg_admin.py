@@ -65,7 +65,7 @@ def init_app(app):
     mail.init_app(app)
     
     
-    print kvdb.host
+    
     app.session_interface = RedisSessionJsonInterface(kvdb.session)
 
     from lib.template import init_template
@@ -94,7 +94,6 @@ def init_request():
 
     g.is_login = False
     g.download_host = current_app.config['DOWNLOAD_HOST']
-    print request.path
     if request.path not in ("/login", "/logout", "/", "/recaptcha") and not request.path.startswith(
             "/project-manager") and not request.path.startswith("/static") and not request.path.startswith(
             "/api/upload"):
@@ -102,7 +101,6 @@ def init_request():
         from bg_biz.orm.admin import AdminUser
 
         user_id = session.get('user_id') or 0
-        print user_id
         if user_id:
             g.me = AdminUser.get(user_id)
             if not g.me or not g.me.status:
@@ -114,7 +112,6 @@ def init_request():
             from views.auth import AUTO_LOGIN_COOKIE_NAME
 
             token = request.cookies.get(AUTO_LOGIN_COOKIE_NAME)
-            print 'token:',token
             if token:
                 user_id, hs = token.split('_')
                 g.me = AdminUser.get(int(user_id))
