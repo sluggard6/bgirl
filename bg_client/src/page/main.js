@@ -43,7 +43,6 @@ export default class Main extends Component {
   }
 
   componentDidMount() {
-    console.log("componentDidMount");
     this.fetchData();
   }
 

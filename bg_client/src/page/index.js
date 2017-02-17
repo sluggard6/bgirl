@@ -43,7 +43,7 @@ class Index extends Component {
   loadProfile() {
     Http.httpGet(PROFILE_URL,function(responseData){
       profile = responseData.profile
-      Global.host = "http://" + profile.host + ":" + profile.port
+      Global.host = profile.host
     })
   }
 
@@ -58,7 +58,6 @@ class Index extends Component {
 
   _renderScene(route, navigator) {
     let Component = route.component;
-    console.log(Component);
     return (
       <Component {...route.params} navigator={navigator} />
     );

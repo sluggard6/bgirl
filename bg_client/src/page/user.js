@@ -28,7 +28,6 @@ export default class User extends Component {
     this.state = {
       dataSource: ds.cloneWithRows(user_info_menu),
     };
-    console.log("Global.host : " + Global.host)
   }
 
   _renderRow(menu) {
