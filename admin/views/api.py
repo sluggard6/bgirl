@@ -24,7 +24,7 @@ ApiView = Blueprint('api', __name__)
 def upload(media_type="photo"):
     f = request.files['file_uploader']
     data = request.form
-
+    print data
     package = None
     if media_type == "apk":
         key = upload_local(f, media_type)
