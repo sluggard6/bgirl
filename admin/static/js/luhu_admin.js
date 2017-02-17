@@ -9,9 +9,6 @@
 var LuhuAdmin = {
     upload: function (selector, media_type, success_callback, options) {
         var sizelimt=5120000000
-//        if(media_type=='image'){
-//            sizelimt = 5000000
-//        }
         var setting = $.extend({
             'uploader': '/static/js/lib/uploadify/uploadify.swf',
             'script': '/api/upload/' + media_type,
