@@ -1,3 +1,3 @@
 # -*- coding:utf-8 -*-
-from flask.ext.assets import Environment
+from flask_assets import Environment
 assets = Environment()

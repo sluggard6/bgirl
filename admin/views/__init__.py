@@ -1,9 +1,10 @@
 # -*- coding:utf-8 -*-
 from flask import request
-from rq_dashboard import RQDashboard
 
 from sharper.flaskapp.helper import render_json_warn, render_json_error
 from sharper.lib.error import AppError
+
+import rq_dashboard
 
 __author__ = [
     '"liubo" <liubo@51domi.com>'
@@ -27,12 +28,13 @@ def register_views(app):
     app.register_blueprint(ChannelView, url_prefix='/channel')
     app.register_blueprint(ApiView, url_prefix='/api')
     app.register_blueprint(PicView, url_prefix='/pic')
-    RQDashboard(app, url_prefix='/rq')
+    app.register_blueprint(rq_dashboard.blueprint, url_prefix="/rq")
 
-    app.error_handler_spec[None][500] = error_handler
-    app.error_handler_spec[None][404] = error_handler
-    app.error_handler_spec[None][401] = error_handler
-    app.error_handler_spec[None][403] = error_handler
+    app.errorhandler(404)(error_handler)
+    app.errorhandler(500)(error_handler)
+    app.errorhandler(401)(error_handler)
+    app.errorhandler(403)(error_handler)
+
 
 
 def error_handler(e):

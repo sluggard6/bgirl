@@ -63,7 +63,9 @@ def init_app(app):
     db.app = app
     assets.init_app(app)
     mail.init_app(app)
-
+    
+    
+    print kvdb.host
     app.session_interface = RedisSessionJsonInterface(kvdb.session)
 
     from lib.template import init_template

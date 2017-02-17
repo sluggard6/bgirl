@@ -33,7 +33,7 @@ class Production:
 	SQLALCHEMY_TRACK_MODIFICATIONS = True
 	# redis-server
 	REDIS_HOST = '127.0.0.1'
-	REDIS_PASSWORD = ''
+# 	REDIS_PASSWORD = ''
 	REDIS_PORT = 6379
 	REDIS_DB = 0  # rq redis配置
 	# session config
@@ -42,7 +42,7 @@ class Production:
 	PERMANENT_SESSION_LIFETIME = 1800
 
 	SESSION_COOKIE_DOMAIN = DOMAIN
-	REDIS_URL = 'redis://127.0.0.1:6379/0'
+# 	REDIS_URL = 'redis://127.0.0.1:6379/0'
 	REDIS_JOB_HOST = '127.0.0.1'
 	REDIS_JOB_PORT = 6379
 	REDIS_JOB_PASSWORD = ''
@@ -149,15 +149,14 @@ class Release(Production):
 	STATIC_HTTP_REF = ''
 
 	SQLALCHEMY_DATABASE_URI = 'mysql://admin:admin$bgirl#2016!@127.0.0.1:3306/bgirl'
-	SQLALCHEMY_BINDS = {
-	}
+
 	USER_MAILBIND_URL = HTTP_DOMAIN + '/auth/email/%(vcode)s'
 	SESSION_COOKIE_DOMAIN = None
-	REDIS_URL = 'redis://127.0.0.1:6379/0'
+# 	REDIS_URL = 'redis://127.0.0.1:6379/0'
 	REDIS_HOST = '127.0.0.1'
 	REDIS_JOB_HOST = '127.0.0.1'
-	REDIS_PORT = 6379
-	REDIS_PASSWORD = ''
+	REDIS_PORT = '6379'
+# 	REDIS_PASSWORD = ''
 	# assets设置
 	ASSETS_DEBUG = True
 
