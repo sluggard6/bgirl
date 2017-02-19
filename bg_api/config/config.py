@@ -108,7 +108,7 @@ class Production:
 	MONTH_FEE_SCORE = 5000
 	DAILY_CONTINUE_SCORE = 30
 	DAILY_SCORE = 10
-	DOWNLOAD_HOST = "http://rs.hi-wifi.cn"
+	DOWNLOAD_HOST = "http://rs.hi-wifi.cn/"
 	PAYMENT_WARES_ID = u'1'
 
 	AUTH_API = "http://auth.hi-wifi.cn"
@@ -159,7 +159,7 @@ class Release(Production):
 
 	PAYMENT_WARES_ID = u'1'
 
-	DOWNLOAD_HOST = "http://test.rs.vogor.cn"
+	DOWNLOAD_HOST = "http://rs.vogor.cn/"
 
 
 
