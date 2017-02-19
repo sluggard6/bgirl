@@ -10,8 +10,10 @@ import {
 
 import ViewPic from '../component/view_pic'
 import Global from '../utils/global'
+import Http from '../utils/http'
+import TopBar from '../component/top_bar'
 
-const PIC_URL = "/pic/list?ids=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18"
+const PIC_URL = "/pic/list?ids=50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67"
 // const PIC_URL = "http://192.168.161.35:8290/pic/list?ids=1,2"
 
 let temp = [];
@@ -27,19 +29,17 @@ export default class Main extends Component {
     this.fetchData = this.fetchData.bind(this);
   }
 
+  _updateDataSource(responseData){
+    const data = this.buildDataSource(responseData.pics);
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(data),
+      loaded: true,
+    });
+  }
+
   fetchData() {
     url = Global.host?Global.host:Global.default_host + PIC_URL
-    fetch(url, {
-      credentials: "seid"
-    }).then((response) => response.json())
-      .then((responseData) => {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(this.buildDataSource(responseData.pics)),
-          loaded: true,
-        });
-      }).catch((err) => {
-        console.log(err);
-    });
+    Http.httpGet(url,this._updateDataSource.bind(this))
   }
 
   componentDidMount() {
@@ -74,7 +74,7 @@ export default class Main extends Component {
 
   _renderRow(rowData,sectionID, rowID) {
     return(
-      <View style={styles.container}>
+      <View style={styles.list_container}>
         <ViewPic
           pic={rowData[0]}
         />
@@ -89,7 +89,7 @@ export default class Main extends Component {
     return (
       <View style={styles.container}>
         <Text>
-          正在加载电影数据……
+          正在加载数据……
         </Text>
       </View>
     );
@@ -100,7 +100,8 @@ export default class Main extends Component {
       return this.renderLoadingView();
     }
     return (
-      <View style={{flex: 1, paddingTop: 22}}>
+      <View style={styles.container}>
+        <TopBar/>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this._renderRow.bind(this)}
@@ -114,11 +115,19 @@ var styles = StyleSheet.create({
 
   container: {
     flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    flexWrap: 'nowrap',
+    alignItems: 'center',
+  },
+
+  list_container: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
     flexWrap: 'nowrap',
     alignItems: 'center',
-    padding: 5,
+    width: Global.size.width
   },
 
 });

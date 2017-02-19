@@ -16,8 +16,11 @@ export default class ViewChannel extends Component {
   }
   render(){
     return (
-      <Image source={require('../images/min.jpg')}>
-        <Text>{this.props.data.title}</Text>
+      <Image source={{uri:"http://rs.vogor.cn/image/2017/02/19/9b23d5427b6086e8.jpg"}} style={styles.container}>
+        <View style={styles.text_container}>
+          <Text style={styles.text_name}>{this.props.data.name}</Text>
+          <Text style={styles.text_des}>{this.props.data.description}</Text>
+        </View>
       </Image>
     );
   }
@@ -26,10 +29,28 @@ export default class ViewChannel extends Component {
 var styles = StyleSheet.create({
 
   container: {
-    flex: 1,
     flexDirection: "column",
-    justifyContent: 'space-around',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    height: 316,
+    borderWidth: 1,
+    borderColor: "white",
+    marginBottom:20,
+  },
+
+  text_container: {
+    flexDirection: "column",
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    padding: 5,
+  },
+
+  text_name: {
+    alignItems: 'flex-end',
+    fontSize: 30,
+  },
+
+  text_des: {
+    alignItems: 'flex-end',
+    fontSize: 18,
   }
 })

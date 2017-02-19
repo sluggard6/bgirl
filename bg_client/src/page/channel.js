@@ -12,6 +12,7 @@ import {
 import ViewChannel from '../component/view_channel'
 import Http from '../utils/http'
 import Global from '../utils/global'
+import TopBar from '../component/top_bar'
 
 const CHANNEL_URL = '/channel/list'
 
@@ -50,11 +51,12 @@ export default class Channel extends Component {
   }
 
   render(){
-    // console.log("***********************************")
     if(this.state.loaded){
       return (
-        <View style={{flex: 1, paddingTop: 22}}>
+        <View style={styles.container}>
+          <TopBar/>
           <ListView
+            style={styles.channel_list}
             dataSource={this.state.dataSource}
             renderRow={this._renderRow.bind(this)}
           />
@@ -62,7 +64,7 @@ export default class Channel extends Component {
       );
     }else{
       return (
-        <View style={styles.container}>
+        <View style={styles.loading}>
           <Text>
             Loading data...
           </Text>
@@ -74,11 +76,23 @@ export default class Channel extends Component {
 }
 
 var styles = StyleSheet.create({
-  container: {
+  loading: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#333740",
+  },
+
+  channel_list: {
+    width: Global.size.width,
+  }
 });

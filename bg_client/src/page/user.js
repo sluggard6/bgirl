@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import Global from '../utils/global'
+import TopBar from '../component/top_bar'
 
 var user_info_menu = [
   {text:'我的下载', actionType:'innerView', actionPath:'downloaded'},
@@ -41,6 +42,7 @@ export default class User extends Component {
   render(){
     return (
       <View style={styles.container}>
+        <TopBar/>
         <View style={styles.userinfo}>
           <Text style={{fontSize: 25}}>Nick</Text>
         </View>
@@ -63,14 +65,13 @@ var styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    alignItems: 'stretch',
-    padding: 5,
+    alignItems: 'center',
   },
   userinfo: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20
+    margin: 20,
   },
   balance: {
     flexDirection: 'row',
@@ -79,6 +80,7 @@ var styles = StyleSheet.create({
     padding: 10,
     margin: 2,
     borderWidth: 1,
+    width: Global.size.width-10
   },
   menu: {
     flexDirection: 'row',
@@ -87,8 +89,10 @@ var styles = StyleSheet.create({
     padding: 10,
     margin: 2,
     borderWidth: 1,
+    width: Global.size.width-10
   },
   list_view: {
     flexDirection: 'row',
+    width: Global.size.width
   }
 });
