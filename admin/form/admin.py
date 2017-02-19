@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-from flask.ext.wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import validators, PasswordField
 
 __author__ = [
@@ -7,7 +7,7 @@ __author__ = [
 ]
 
 
-class ModifyPasswordForm(Form):
+class ModifyPasswordForm(FlaskForm):
     old_password = PasswordField(u'老密码', [
         validators.Required(message=u'老密码不能为空')]
     )

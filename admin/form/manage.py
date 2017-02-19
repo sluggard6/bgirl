@@ -4,7 +4,7 @@ from sharper.lib import validator
 from sharper.util import helper, string
 from flask import flash
 
-from flask.ext.wtf import Form, validators
+from flask_wtf import FlaskForm, validators
 from wtforms import TextField, PasswordField, BooleanField, ValidationError
 from wtforms.validators import *
 from wtforms import TextField, PasswordField, BooleanField, validators, ValidationError
@@ -17,7 +17,7 @@ def special_chars(form, field):
             raise ValidationError(u'只允许中英文、数字和下划线，不能输入特殊字符！')
 
 
-class AdminUserForm(Form):
+class AdminUserForm(FlaskForm):
     user_name = TextField(u'用户名', [
         optional(),
         Length(min=2, max=16, message=u'用户必须为2～16字符。'),
@@ -34,7 +34,7 @@ class AdminUserForm(Form):
     status = BooleanField(u'生效')
 
 
-class AdminRoleForm(Form):
+class AdminRoleForm(FlaskForm):
     name = TextField(u'角色名', [
         optional(),
         Length(min=2, max=16, message=u'角色必须为2～16字符。'),
@@ -47,7 +47,7 @@ class AdminRoleForm(Form):
     status = BooleanField(u'生效')
 
 
-class AdminPermissionForm(Form):
+class AdminPermissionForm(FlaskForm):
     id = TextField(u'id', [
         Regexp(r'^[0-9]{3,9}$', message=u'id格式错误')
     ]
