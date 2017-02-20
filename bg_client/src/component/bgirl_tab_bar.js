@@ -34,7 +34,6 @@ export default class BgirlTabBar extends Component {
   renderTabOption(tab, i) {
     const color = this.props.activeTab == i? "white" : "black"; // 判断i是否是当前选中的tab，设置不同的颜色
     // const css = this.props.activeTab == i? "sytles.active_tab" : "sytles.tab";
-    console.log(this.props.tabActiveIconNames[i])
     if(this.props.activeTab == i){
       return (
         <TouchableOpacity onPress={()=>this.props.goToPage(i)} style={styles.active_tab} key={i}>
@@ -58,7 +57,6 @@ export default class BgirlTabBar extends Component {
         </TouchableOpacity>
       );
     }
-
   }
 
   render() {

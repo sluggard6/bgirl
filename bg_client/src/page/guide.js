@@ -11,7 +11,8 @@ import {
 } from 'react-native';
 
 import Global from '../utils/global';
-import Main from './main'
+// import Main from './main'
+import TabBarView from './tab_bar_view';
 
 let image1 = require('../images/guide_1.jpg');
 let image2 = require('../images/guide_2.jpg');
@@ -23,7 +24,7 @@ export default class Guide extends Component {
   _onPressButton() {
 
     this.props.navigator.push({
-			component: Main
+			component: TabBarView
 		})
   }
 

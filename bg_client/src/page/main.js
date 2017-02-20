@@ -38,7 +38,7 @@ export default class Main extends Component {
   }
 
   fetchData() {
-    url = Global.host?Global.host:Global.default_host + PIC_URL
+    url = Global.default_host + PIC_URL
     Http.httpGet(url,this._updateDataSource.bind(this))
   }
 
