@@ -4,7 +4,7 @@ import React from 'react';
 export default class Http {
 
   static httpGet(url, callback, self, error){
-    console.log("httpGet running url : " + url)
+    // console.log("httpGet running url : " + url)
     fetch(url, {
       method: "GET",
       credentials: "seid"

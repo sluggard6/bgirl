@@ -34,11 +34,12 @@ export default class BgirlTabBar extends Component {
   renderTabOption(tab, i) {
     const color = this.props.activeTab == i? "white" : "black"; // 判断i是否是当前选中的tab，设置不同的颜色
     // const css = this.props.activeTab == i? "sytles.active_tab" : "sytles.tab";
+    console.log(this.props.tabActiveIconNames[i])
     if(this.props.activeTab == i){
       return (
         <TouchableOpacity onPress={()=>this.props.goToPage(i)} style={styles.active_tab} key={i}>
           <View style={styles.tabItem}>
-            <Image source={{uri: this.props.tabActiveIconNames[i]}} style={styles.image}/>
+            <Image source={this.props.tabActiveIconNames[i]} style={styles.image}/>
             <Text style={{color: color}}>
               {this.props.tabNames[i]}
             </Text>
@@ -49,7 +50,7 @@ export default class BgirlTabBar extends Component {
       return (
         <TouchableOpacity onPress={()=>this.props.goToPage(i)} style={styles.tab} key={i}>
           <View style={styles.tabItem}>
-            <Image source={{uri: this.props.tabIconNames[i]}} style={styles.image}/>
+            <Image source={this.props.tabIconNames[i]} style={styles.image}/>
             <Text style={{color: color}}>
               {this.props.tabNames[i]}
             </Text>
@@ -80,19 +81,22 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
+    padding: 6
 	},
 
   active_tab: {
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-    backgroundColor: '#ff4563'
+    backgroundColor: '#ff4563',
+    padding: 6
 	},
 
   image: {
     height: 64,
     width: 44,
-    resizeMode: "center"
+    resizeMode: "contain",
+    borderColor: "black"
   },
 
 	tabItem: {

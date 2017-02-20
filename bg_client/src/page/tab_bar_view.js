@@ -12,8 +12,8 @@ export default class TabBarView extends Component {
 
 		this.state = {
 			tabNames: ['美选', '频道', '我的'],
-			tabIconNames: ['../images/b_main.png', '../images/b_channel.png', '../images/b_user.png'],
-      tabActiveIconNames: ['../images/w_main.png', '../images/w_channel.png', '../images/w_user.png']
+			tabIconNames: [require('../images/b_main.png'), require('../images/b_channel.png'), require('../images/b_user.png')],
+      tabActiveIconNames: [require('../images/w_main.png'), require('../images/w_channel.png'), require('../images/w_user.png')]
 		};
 	}
 
