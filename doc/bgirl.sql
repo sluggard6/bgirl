@@ -192,6 +192,50 @@ CREATE TABLE `charge` (
   KEY `idx_charge_pay_by` (`pay_by`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
+--
+-- Table structure for table `page_module`
+--
+DROP TABLE IF EXISTS `page_module`;
+CREATE TABLE `page_module` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `page` varchar(20) NOT NULL COMMENT '页面名称',
+  `category` varchar(20) NOT NULL DEFAULT 1 COMMENT '类型',
+  `text` varchar(50) NULL COMMENT '标题文本',
+  `icon` varchar(200) NULL COMMENT '标题图标',
+  `des` varchar(500) NULL COMMENT '媒体简介',
+  `style` text NULL COMMENT '样式扩展',
+  `extend` text NULL COMMENT '扩展内容',
+  `rank` int NOT NULL DEFAULT 0 COMMENT '排序字段',
+  `status` tinyint NOT NULL DEFAULT 0 COMMENT '状态，0-可用，1-不可用',
+  `createtime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modifytime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新时间',
+  `createby` varchar(50) NULL COMMENT '创建者',
+  `modifyby` varchar(50) NULL COMMENT '最后更新者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `module_group`
+--
+DROP TABLE IF EXISTS `module_group`;
+CREATE TABLE `module_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL COMMENT '图集id',
+  `pic1` int(11) NULL COMMENT '预览图片id1',
+  `pic2` int(11) NULL COMMENT '预览图片id2',
+  `pic3` int(11) NULL COMMENT '预览图片id3',
+  `pic4` int(11) NULL COMMENT '预览图片id4',
+  `pic5` int(11) NULL COMMENT '预览图片id5',
+  `status` tinyint NOT NULL DEFAULT 0 COMMENT '状态，0-可用，1-不可用',
+  `createtime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `modifytime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新时间',
+  `createby` varchar(50) NULL COMMENT '创建者',
+  `modifyby` varchar(50) NULL COMMENT '最后更新者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

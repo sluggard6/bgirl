@@ -7,6 +7,8 @@ import {
   StyleSheet
 } from 'react-native';
 
+import Global from '../utils/global';
+
 export default class BgirlTabBar extends Component {
 
   constructor(props) {
@@ -72,14 +74,14 @@ export default class BgirlTabBar extends Component {
 const styles = StyleSheet.create({
 	tabs: {
 		flexDirection: 'row',
-		height: 96,
+		height: 140/Global.pr,
 	},
 
 	tab: {
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-    padding: 6
+    padding: 6/Global.pr
 	},
 
   active_tab: {
@@ -87,12 +89,12 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
     backgroundColor: '#ff4563',
-    padding: 6
+    padding: 6/Global.pr
 	},
 
   image: {
-    height: 64,
-    width: 44,
+    height: 64/Global.pr,
+    width: 44/Global.pr,
     resizeMode: "contain",
     borderColor: "black"
   },
@@ -100,6 +102,5 @@ const styles = StyleSheet.create({
 	tabItem: {
 		flexDirection: 'column',
 		alignItems: 'center',
-    height: 96,
 	},
 });

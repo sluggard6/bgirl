@@ -9,6 +9,8 @@ import {
   Text
 } from 'react-native';
 
+import Global from '../utils/global';
+
 export default class ViewChannel extends Component {
 
   constructor(props) {
@@ -32,7 +34,7 @@ var styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: 'center',
     alignItems: 'stretch',
-    height: 316,
+    height: 400/Global.pr,
     borderWidth: 1,
     borderColor: "white",
     marginBottom:20,

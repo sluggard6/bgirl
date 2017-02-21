@@ -5,6 +5,8 @@ import {
     Image,
 } from 'react-native';
 
+import Global from '../utils/global';
+
 export default class TopBar extends Component {
 
   render(){
@@ -21,7 +23,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     resizeMode: 'contain',
-    height: 60,
+    height: 200/Global.pr,
   },
 
 });
