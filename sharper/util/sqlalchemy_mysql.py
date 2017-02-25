@@ -4,11 +4,11 @@ __author__ = [
     '"liubo" <liubo@51domi.com>'
 ]
 
-tables = ["pic"]
+tables = ["page_content"]
 
-HOST = "106.75.66.135"
+HOST = "106.75.97.108"
 USER = "admin"
-PASSWORD = "admin$mfwifi#2016!"
+PASSWORD = "admin$bgirl#2016!"
 DB = "bgirl"
 
 

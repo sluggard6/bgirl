@@ -3,7 +3,8 @@ from default import DefaultView, error_handler
 from user import UserView
 from pic import PicView
 from group import GroupView
-from views.channel import ChannelView
+from channel import ChannelView
+from page import PageView
 
 __author__ = [
     "sluggrd"
@@ -23,3 +24,4 @@ def register_views(app):
     app.register_blueprint(PicView, url_prefix='/pic')
     app.register_blueprint(GroupView, url_prefix='/group')
     app.register_blueprint(ChannelView, url_prefix='/channel')
+    app.register_blueprint(PageView, url_prefix='/page')

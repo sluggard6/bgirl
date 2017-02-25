@@ -217,17 +217,16 @@ CREATE TABLE `page_module` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Table structure for table `module_group`
+-- Table structure for table `page_content`
 --
-DROP TABLE IF EXISTS `module_group`;
-CREATE TABLE `module_group` (
+DROP TABLE IF EXISTS `page_content`;
+CREATE TABLE `page_content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `module_id` int(11) NOT NULL COMMENT '页面组件id',
+  `category` int NOT NULL COMMENT '类型',
+  `pic_id` int(11) NOT NULL COMMENT '图片id',
   `group_id` int(11) NOT NULL COMMENT '图集id',
-  `pic1` int(11) NULL COMMENT '预览图片id1',
-  `pic2` int(11) NULL COMMENT '预览图片id2',
-  `pic3` int(11) NULL COMMENT '预览图片id3',
-  `pic4` int(11) NULL COMMENT '预览图片id4',
-  `pic5` int(11) NULL COMMENT '预览图片id5',
+  `des` VARCHAR(50) NULL COMMENT '说明文字',
   `status` tinyint NOT NULL DEFAULT 0 COMMENT '状态，0-可用，1-不可用',
   `createtime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `modifytime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新时间',
