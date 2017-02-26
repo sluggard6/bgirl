@@ -5,12 +5,17 @@
 			<thead class="thead-default">
 			<tr>
 				<th>id</th>
+				<th>预览</th>
+				<th>操作</th>
+				
 			</tr>
 			</thead>
 			<tbody>
 				~for p in pics
 				<tr>
+					<th>{{p.id}}</th>
 					<th><image src="{{p.d_min}}"/></th>
+					<th>删除</th>
 				</tr>
 				~endfor
 			</tbody>
