@@ -7,6 +7,8 @@ from sqlalchemy import Column, INTEGER, VARCHAR, DATETIME, Table, ForeignKey
 
 from datetime import datetime
 
+from pic import Pic
+
 
 class PageModule(BaseModel):
     __tablename__ = 'page_module'
@@ -89,3 +91,7 @@ class PageContent(BaseModel):
     modifytime = Column(u'modifytime', DATETIME(), nullable=False,default=datetime.now())
     createby = Column(u'createby', VARCHAR(length=50), nullable=True)
     modifyby = Column(u'modifyby', VARCHAR(length=50), nullable=True)
+
+    @property
+    def pic(self):
+        return Pic.get(self.pic_id)

@@ -21,9 +21,9 @@ export default class TheTwo extends Component {
   render(){
     return (
       <View style={styles.list_container}>
-        <Image source={uri:{this.props.data[0].pic.min}} style={styles.image}/>
-        <Image source={uri:{this.props.data[1].pic.min}} style={styles.image}/>
-        <Image source={uri:{this.props.data[2].pic.min}} style={styles.image}/>
+        <Image source={{uri:this.props.data[0].pic.min}} style={styles.image}/>
+        <Image source={{uri:this.props.data[1].pic.min}} style={styles.image}/>
+        <Image source={{uri:this.props.data[2].pic.min}} style={styles.image}/>
       </View>
     );
   }

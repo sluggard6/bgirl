@@ -86,6 +86,7 @@ var styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexWrap: 'nowrap',
     alignItems: 'center',
+    backgroundColor: '#DFE0E1'
   },
 
   list_container: {
