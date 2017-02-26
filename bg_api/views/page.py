@@ -30,11 +30,27 @@ def page(page):
                 "category": "the_two",
                 "items": [
                     {
-                        "pic": "",
+                        "pic": {
+                            "create_time": "2017-02-17 11:35:45",
+                            "id": 45,
+                            "max": "http://rs.vogor.cn/image/2017/02/17/1908bf2a109063e8.jpg",
+                            "min": "http://rs.vogor.cn/image/2017/02/17/1908bf2a109063e8.jpg",
+                            "modify_time": "2017-02-17 11:35:45",
+                            "normal": "http://rs.vogor.cn/image/2017/02/17/1908bf2a109063e8.jpg",
+                            "title": "111"
+                        },
                         "group_id": "1"
                     },
                     {
-                        "pic": "",
+                        "pic": {
+                            "create_time": "2017-02-17 11:35:45",
+                            "id": 45,
+                            "max": "http://rs.vogor.cn/image/2017/02/17/1908bf2a109063e8.jpg",
+                            "min": "http://rs.vogor.cn/image/2017/02/17/1908bf2a109063e8.jpg",
+                            "modify_time": "2017-02-17 11:35:45",
+                            "normal": "http://rs.vogor.cn/image/2017/02/17/1908bf2a109063e8.jpg",
+                            "title": "111"
+                        },
                         "group_id": "1"
                     }
                 ]

@@ -159,7 +159,7 @@ class Release(Production):
 
 	PAYMENT_WARES_ID = u'1'
 
-	DOWNLOAD_HOST = "http://rs.vogor.cn/"
+	DOWNLOAD_HOST = "http://test.rs.vogor.cn/"
 
 
 
