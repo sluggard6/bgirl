@@ -48,7 +48,7 @@ var styles = StyleSheet.create({
     paddingRight: 10,
     height: 60,
     borderWidth: 1,
-    opacity:0.7,
+    opacity:0.5,
     backgroundColor:'#AEAEAF',
     borderColor: "black"
   },

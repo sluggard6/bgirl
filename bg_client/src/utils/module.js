@@ -5,7 +5,8 @@ import {
 
 
 import Banner from '../component/banner'
-import ViewPic from '../component/view_pic'
+import TheTwo from '../component/the_two'
+import TheThree from '../component/the_three'
 
 export default class Module extends Component {
   constructor(props) {
@@ -24,7 +25,14 @@ export default class Module extends Component {
 
       case "the_two":{
         return (
-          <ViewPic data={module.items} />
+          <TheTwo data={module.items} />
+        );
+        break;
+      }
+
+      case "the_three":{
+        return (
+          <TheThree data={module.items} />
         );
         break;
       }

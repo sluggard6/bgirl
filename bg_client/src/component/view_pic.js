@@ -40,7 +40,7 @@ var styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: (Global.size.width-45)/2,
-    height: (Global.size.width-45)/3*2,
+    width: (Global.size.width-20)/2,
+    height: (Global.size.width-20)/3*2,
   }
 })
