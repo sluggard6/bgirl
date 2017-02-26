@@ -170,7 +170,7 @@ class Release(Production):
 	PERMISSION_LIMIT = "no"
 
 	API_HOST = 'http://test.api.vogor.cn'
-	DOWNLOAD_HOST = "http://rs.vogor.cn/"
+	DOWNLOAD_HOST = "http://test.rs.vogor.cn/"
 	MOBILE_HOST = 'http://test.m.vogor.cn'
 
 
