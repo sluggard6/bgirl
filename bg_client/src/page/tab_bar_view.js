@@ -9,7 +9,6 @@ import BgirlTabBar from '../component/bgirl_tab_bar'
 export default class TabBarView extends Component {
   constructor(props) {
 		super(props);
-
 		this.state = {
 			tabNames: ['美选', '频道', '我的'],
 			tabIconNames: [require('../images/b_main.png'), require('../images/b_channel.png'), require('../images/b_user.png')],
@@ -26,9 +25,9 @@ export default class TabBarView extends Component {
           tabActiveIconNames={this.state.tabActiveIconNames}
         />}
         tabBarPosition="bottom">
-        <Main tabLabel="Main"/>
-        <Channel tabLabel="频道"/>
-        <User tabLabel="User"/>
+        <Main tabLabel="Main" navigator={this.props.navigator}/>
+        <Channel tabLabel="频道" navigator={this.props.navigator}/>
+        <User tabLabel="User" navigator={this.props.navigator}/>
       </ScrollableTabView>
     );
   }

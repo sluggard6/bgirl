@@ -12,9 +12,8 @@ import ViewPic from '../component/view_pic'
 import Global from '../utils/global'
 import Http from '../utils/http'
 import TopBar from '../component/top_bar'
-import Module from '../utils/module'
 
-const PIC_URL = "/page/index"
+const PIC_URL = "/pic/list?ids=50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67"
 // const PIC_URL = "http://192.168.161.35:8290/pic/list?ids=1,2"
 
 let temp = [];
@@ -30,20 +29,60 @@ export default class Main extends Component {
     this.fetchData = this.fetchData.bind(this);
   }
 
-  _updateData(responseData){
+  _updateDataSource(responseData){
+    const data = this.buildDataSource(responseData.pics);
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(responseData.page.modules),
+      dataSource: this.state.dataSource.cloneWithRows(data),
       loaded: true,
     });
   }
 
   fetchData() {
     url = Global.default_host + PIC_URL
-    Http.httpGet(url,this._updateData.bind(this))
+    Http.httpGet(url,this._updateDataSource.bind(this))
   }
 
   componentDidMount() {
     this.fetchData();
+  }
+
+  buildDataSource(data) {
+    if(data instanceof Array){
+      if(temp.length > 0) {
+        data = temp.concat(data);
+        temp = [];
+      }
+      if(data.lenth % 2 == 1) {
+        temp[0] = data.pop();
+      }
+      let dataSource = new Array();
+      let ta = [];
+      for(let i=0;i<data.length;i++) {
+        if(ta.push(data[i])==2){
+          dataSource.push(ta);
+          ta = [];
+        }
+      }
+      return dataSource;
+    }else{
+      throw {
+        msg: "错误的参数，data必须是数组",
+        value: data
+      }
+    }
+  }
+
+  _renderRow(rowData,sectionID, rowID) {
+    return(
+      <View style={styles.list_container}>
+        <ViewPic
+          pic={rowData[0]}
+        />
+        <ViewPic
+          pic={rowData[1]}
+        />
+      </View>
+    );
   }
 
   renderLoadingView() {
@@ -53,12 +92,6 @@ export default class Main extends Component {
           正在加载数据……
         </Text>
       </View>
-    );
-  }
-
-  _renderRow(rowData,sectionID, rowID) {
-    return(
-      <Module module={rowData} navigator={this.props.navigator}/>
     );
   }
 
@@ -86,7 +119,6 @@ var styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexWrap: 'nowrap',
     alignItems: 'center',
-    backgroundColor: '#DFE0E1'
   },
 
   list_container: {

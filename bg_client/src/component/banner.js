@@ -6,24 +6,34 @@ import {
   StyleSheet,
   View,
   Image,
-  Text
+  Text,
+  TouchableOpacity
 } from 'react-native';
 
 import Global from '../utils/global'
+import FullViewTab from '../page/full_view_tab'
 
 export default class Banner extends Component {
 
   constructor(props) {
     super(props);
-    console.log(this.props.data)
   }
+
+  _onPressButton() {
+    this.props.navigator.push({
+			component: FullViewTab
+		})
+  }
+
   render(){
     return (
-      <Image source={{uri:"http://rs.vogor.cn/image/2017/02/19/9b23d5427b6086e8.jpg"}} style={styles.container}>
-        <View style={styles.text_container}>
-          <Text style={styles.text_name}>{this.props.data[0].des}</Text>
-        </View>
-      </Image>
+      <TouchableOpacity onPress={this._onPressButton.bind(this)} style={styles.click_area}>
+        <Image source={{uri:"http://rs.vogor.cn/image/2017/02/19/9b23d5427b6086e8.jpg"}} style={styles.container}>
+          <View style={styles.text_container}>
+            <Text style={styles.text_name}>{this.props.data[0].des}</Text>
+          </View>
+        </Image>
+      </TouchableOpacity>
     );
   }
 }
@@ -41,13 +51,19 @@ var styles = StyleSheet.create({
     marginBottom:10,
   },
 
+  click_area: {
+    height: 255,
+    width: Global.size.width,
+    borderWidth: 1,
+    borderColor: "black",
+  },
+
   text_container: {
     flexDirection: "row",
     justifyContent: 'flex-end',
     alignItems: 'center',
     paddingRight: 10,
     height: 60,
-    borderWidth: 1,
     opacity:0.5,
     backgroundColor:'#AEAEAF',
     borderColor: "black"

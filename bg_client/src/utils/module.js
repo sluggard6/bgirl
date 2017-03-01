@@ -18,7 +18,7 @@ export default class Module extends Component {
     switch(module.category) {
       case "banner":{
         return (
-          <Banner data={module.items} />
+          <Banner data={module.items} navigator={this.props.navigator} />
         );
         break;
       }

@@ -3,8 +3,8 @@ import React from 'react';
 
 export default class Http {
 
-  static httpGet(url, callback, self, error){
-    // console.log("httpGet running url : " + url)
+  static async httpGet(url, callback, self, error){
+    // console.log(url+"*******************");
     fetch(url, {
       method: "GET",
       credentials: "seid"

@@ -16,7 +16,6 @@ export default class TheTwo extends Component {
 
   constructor(props) {
     super(props);
-    console.log(this.props.data)
   }
   render(){
     return (
@@ -45,6 +44,7 @@ var styles = StyleSheet.create({
     justifyContent: 'space-around',
     flexWrap: 'nowrap',
     alignItems: 'center',
+    marginBottom: 1,
     width: Global.size.width
   },
 
