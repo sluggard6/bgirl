@@ -1,0 +1,96 @@
+# -*- coding:utf-8 -*-
+"""
+
+    config/config.py
+    ~~~~~~~~~~~~~~
+
+    系统配置
+
+    定义开发机本地配置
+
+    * 同目录下创建local.py
+    * local.py中
+
+        from config import Development
+        class Local(Development):
+            DEBUG=True
+            ...
+
+"""
+
+from config import Development
+
+
+class Local(Development):
+    DEBUG = True
+    #LUHU_LIB_DIR = '/home/cyh/work/pyweb/'
+    TEST_HOST = '106.75.97.108'
+    
+    APP_LOG_FILE = '/Users/frank/log/bgirl/bg_admin.log'
+    WORKER_LOG_FILE = '/Users/frank/log/bgirl/rq_worker.log'
+    REDIS_HOST = TEST_HOST
+    REDIS_JOB_HOST = TEST_HOST
+#     REDIS_URL = 'redis://123.206.15.218:6379/0'
+#     REDIS_PASSWORD = 'crs-oj7t4z7i:hiwifi@2016'
+
+    SQLALCHEMY_DATABASE_URI = 'mysql://admin:admin$bgirl#2016!@%s:3306/bgirl' % TEST_HOST
+
+    
+    SESSION_COOKIE_DOMAIN = "127.0.0.1"
+    
+    
+    UPLOAD_HANDLER = {
+        'apk': {
+            'upload_folder': '/Users/frank/var/www/upload/apk/',
+            'allowed_ext': ['.apk'],
+        },
+        'image': {
+            'upload_folder': '/Users/frank/var/www/upload/image/',
+            'allowed_ext': ['.jpeg', '.jpg', '.png', '.bmp', '.gif'],
+        },
+        'file': {
+            'upload_folder': '/Users/frank/var/www/upload/file/',
+            'allowed_ext': ['.txt'],
+        },
+        'photo': {
+            'upload_folder': '/Users/frank/var/www/upload/photo/',
+            'allowed_ext': ['.jpg', '.jpeg', '.png'],
+            'handlers': {
+                'origin': {
+                    'method': 'zoom',  # zoom按比例缩放
+                    'long': 1280,  # 最大边1280
+                },
+                'standard': {
+                    'method': 'zoom',
+                    'short': 500,  # 最小边500
+                    'ext': 'standard'
+                },
+                'thumb': {
+                    'method': 'square',  # 正方形剪切
+                    'side': 160,  # 边长160
+                    'ext': 'thumb'
+                }
+            }
+        },
+        'avatar': {
+            'upload_folder': '/Users/frank/var/www/upload/avatar/',
+            'allowed_ext': ['.jpg', '.jpeg', '.png'],
+            'handlers': {
+                'origin': {
+                    'method': 'square',
+                    'side': 200
+                }
+            }
+        },
+        'qrcode': {
+            'upload_folder': '/Users/frank/var/www/upload/qrcode/',
+            'allowed_ext': ['.jpg', '.jpeg', '.png'],
+            'handlers': {
+                'origin': {
+                    'method': 'square',
+                    'side': 200
+                }
+            }
+        },
+
+    }

@@ -1,0 +1,44 @@
+# -*- coding:utf-8 -*-
+from .config import Development
+
+__author__ = [
+ '"liubo" <liubo@51domi.com>'
+]
+
+
+class Local(Development):
+     DEBUG = True
+     TEST_HOST = '106.75.97.108'
+     # SQLALCHEMY_DATABASE_URI = 'mysql://root:domi@127.0.0.1/luhu'
+     SQLALCHEMY_DATABASE_URI = 'mysql://admin:admin$bgirl#2016!@%s:3306/bgirl?charset=utf8' % TEST_HOST
+
+     # SQLALCHEMY_ECHO = True
+     #      SQLALCHEMY_BINDS = {
+     #         'mishi': SQLALCHEMY_DATABASE_URI,
+     #         'apas': SQLALCHEMY_DATABASE_URI,
+     #         'slave': SQLALCHEMY_DATABASE_URI,
+     #      }
+     REDIS_URL = 'redis://%s:6379/0' % TEST_HOST
+     REDIS_HOST = TEST_HOST
+     REDIS_JOB_HOST = TEST_HOST
+     REDIS_PASSWORD = ''
+     # REDIS_KVDB = {'common': 7, 'session': 8, 'job': 9}
+     # REDIS_HOST = 'domi'
+     # REDIS_PASSWORD = 'domi@as21^njY~as3-43jtw#cnBHzs__'
+     # SESSION_COOKIE_DOMAIN = "test.api.vogor.cn"
+     SESSION_COOKIE_DOMAIN = "127.0.0.1"
+     PORT = 8290
+     DOMAIN = "%s:%s" % (SESSION_COOKIE_DOMAIN, PORT)
+     HTTP_DOMAIN = 'http://' + DOMAIN
+     PAY_DOMAIN = HTTP_DOMAIN
+     SQLALCHEMY_ECHO = True
+     # DEBUG_TB_INTERCEPT_REDIRECTS = False
+     LUHU_LIB_DIR = '/home/ubuntu/PycharmProjects'
+     DOWNLOAD_HOST = "http://test.rs.vogor.cn"
+     
+     APP_LOG_CLIENT_FILE = '/Users/frank/log/bgirl/bg_api_client.log'
+     
+     APP_LOG_FILE = '/Users/frank/log/bgirl/bgirl_dev.log'
+     
+     
+     APP_LOG_CLIENT_PAY_FILE = '/Users/frank/log/bgirl/bg_api_pay.log'
