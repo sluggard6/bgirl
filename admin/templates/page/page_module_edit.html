@@ -1,0 +1,55 @@
+{% extends "layout/default.html" %}
+{% block container %}
+~ from "macros.html" import render_field,render_textarea,render_hidden_field,render_checkbox_field
+<form class="form-horizontal" id="news_form" method="POST">
+    {{ form.csrf_token }}
+    {{ render_field(form.page) }}
+    {{ render_field(form.text)}}
+    {{ render_field(form.des) }}
+    {{ render_field(form.category) }}
+    {{ render_field(form.rank) }}
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="apk_icon_img"><label for="apk_icon_img">标题icon图标</label></label>
+
+        <div class="col-lg-10">
+            <img id="title_icon_img" style="width: 128px; height:128px;" src="{{ g.apk_icon_http }}">
+            <input type="file" id="icon_uploader" name="icon_uploader"/>
+        </div>
+    </div>
+    {{ render_hidden_field(form.icon) }}
+    {{render_textarea(form.style)}}
+    {{render_textarea(form.extend)}}
+    {{ render_field(form.status) }}
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="collect"><label for="collect"></label></label>
+        <div class="col-lg-10">
+            <input type="submit" value="提交" id="submit">
+            <a href=""></a>
+        </div>
+
+    </div>
+</form>
+<link href="/static/js/lib/uploadify-v3.2.1/uploadify.css" rel="stylesheet">
+<script type="text/javascript" src="/static/js/lib/uploadify-v3.2.1/jquery.uploadify.min.js"></script>
+{% raw %}
+<script id="template_photo" type="text/template">
+    <div class="photo_pre"
+         style="float:left;padding: 3px;border: 2px dashed #ccc;width: 200px;margin: 12px auto;">
+        <span class="btn btn-default pull-right btn-nav" onclick="deleteImage(event);">删除</span>
+        <img class="pre_img" style="width: 200px;word-wrap: break-word;white-space: nowrap;"
+             src="{{ url }}" uri="{{ uri }}"/>
+    </div>
+</script>
+{% endraw %}
+<script>
+    var photoTemplate = Hogan.compile($('#template_photo').html());
+    LuhuAdmin.upload("#icon_uploader", "image", function (data) {
+        var link = data.thumb;
+        var uri = data.uri;
+        $('#title_icon_img').attr("src", link);
+        $('#title_icon').val(uri);
+    });
+
+
+</script>
+{% endblock %}

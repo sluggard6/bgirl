@@ -1,0 +1,149 @@
+{% extends "layout/default.html" %}
+{% block container %}
+    <form method="GET" action="/page/content/0">
+    <div class="well">
+        <span class="title">新增、编辑页面资源。</span>
+        <select class="form-control inline_select" onchange="changePage()" id="page" name="page">
+            ~for page, display_cn in g.pages
+            <option value="{{ page }}"
+            ~if g.current_page==page
+            selected
+            ~endif
+            >{{ display_cn }}</option>
+            ~endfor
+        </select>
+        <select class="form-control inline_select" onchange="changeModule()" id="module" name="module_id">
+            ~for id, desc in g.modules
+            <option value="{{ id }}"
+            ~if g.current_module_id|int==id
+            selected
+            ~endif
+            >{{ desc }}</option>
+            ~endfor
+        </select>
+        <input type="submit" value="新增"/>
+{#        <a href="/page/content/0" class="btn btn-default pull-right btn-nav">新增</a>#}
+    </div>
+    </form>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>标题</th>
+            <th>类型</th>
+            <th>名称</th>
+            <th>rank</th>
+            <th>状态</th>
+            <th rowspan="3">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        ~for cs in cs
+        <tr name="{{ cs.title }}" id="{{ cs.id }}">
+            <td>{{ cs.title }}</td>
+            <td>{{ cs.category_cn }}</td>
+            <td>{{ cs.descs }}</td>
+            <td>{{ cs.rank }}</td>
+            <td>{{ cs.status_cn }}</td>
+            <td><a href="/page/content/{{ cs.id }}">编辑</a></td>
+            <td>
+                ~if cs.status == 1
+                <a href="javascript:void(0);" onclick="showSuspendModal({{ cs.id }})">删除</a>
+                ~elif area.status == 0
+                <a href="javascript:void(0);" onclick="showActiveModal({{ cs.id }})">恢复</a>
+                ~endif
+            </td>
+        </tr>
+        ~endfor
+        </tbody>
+    </table>
+    ~include 'inc/pagination.html'
+    <div class="modal fade" id="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="javascript:void(0);" onclick="javascript:$('#modal').modal('hide')" class="close">×</a>
+
+                    <h3>删除内容</h3>
+                </div>
+                <div class="modal-body">
+                    <span id="suspend_tips"></span>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="javascript:$('#modal').modal('hide')" class="btn primary">取消</button>
+                    <button onclick="suspend();$('#modal').modal('hide')"
+                            class="btn danger">确定
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="active_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="javascript:void(0);" onclick="javascript:$('#active_modal').modal('hide')"
+                       class="close">×</a>
+
+                    <h3>恢复自定义区域</h3>
+                </div>
+                <div class="modal-body">
+                    <span id="active_tips"></span>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="javascript:$('#active_modal').modal('hide')" class="btn primary">取消</button>
+                    <button onclick="active();$('#active_modal').modal('hide')"
+                            class="btn danger">确定
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var areaId = null;
+        var pendingStatus = 0;
+        var activeStatus = 1;
+        function showSuspendModal(id) {
+            areaId = id;
+            $('#suspend_tips').html("删除 “" + $('#' + id).attr('name') + "” ?");
+            $('#modal').modal('show');
+        }
+        function showActiveModal(id) {
+            areaId = id;
+            $('#active_tips').html("恢复 “" + $('#' + id).attr('name') + "” ?");
+            $('#active_modal').modal('show');
+        }
+        var updateContentStatusUrl = "/api/page/content/status";
+        function suspend() {
+            changeAreaStatus(areaId, pendingStatus);
+        }
+        function active() {
+            changeAreaStatus(areaId, activeStatus);
+        }
+        function changeAreaStatus(dailyTaskId, status) {
+            LuhuAdmin.post(updateContentStatusUrl, data = "content_id=" + dailyTaskId + "&status=" + status, function () {
+                $.showMessage("操作成功", "ok");
+                reload();
+            });
+        }
+        function changeStatus() {
+            var status = $('#status').val();
+            var url = LuhuAdmin.replaceOrAddUrlParam(location.href, "status", status);
+            LuhuAdmin.loadUrl(url);
+        }
+    </script>
+{% endblock %}
+{% block pageTail %}
+    <script type="text/javascript">
+        function changePage() {
+            var page = $('#page').val();
+            var url = LuhuAdmin.replaceOrAddUrlParam(location.href, "page", page);
+            url = LuhuAdmin.removeUrlParam(url, "module_id");
+            LuhuAdmin.loadUrl(url);
+        }
+        function changeModule() {
+            var module_id = $('#module').val();
+            var url = LuhuAdmin.replaceOrAddUrlParam(location.href, "module_id", module_id);
+            LuhuAdmin.loadUrl(url);
+        }
+    </script>
+{% endblock %}

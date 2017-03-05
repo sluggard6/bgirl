@@ -1,0 +1,77 @@
+{% extends "base/base.json" %}
+{% block body %}
+    "result":{
+        "type":"root",
+        "subitems":[
+            ~for m in ms
+            ~if m.has_title
+            {
+                "id":{{m.id}},
+                "type":"title_bar",
+                "title":"{{ m.title }}",
+                "icon":"{{ m.title_icon_http }}"
+                ~if m.has_title_more
+                ,
+                "itemaction":{
+                    "type":"{{ m.title_more_type }}",
+                    "uri":"{{ m.title_more_uri }}",
+                    "params":"{{ m.title_more_params }}"
+                }
+                ~endif
+            },
+            ~endif
+            {
+                "id":{{m.id}},
+                "type":"{{ m.category }}"
+                ~if m.is_always_top
+                ,
+                "isalwaystop":true
+                ~endif
+                ~if m.heightratio
+                ,
+                "heightratio":{{ m.heightratio }}
+                ~endif
+                ~if mc[m.id]
+                ,
+                "dataitems":[
+                    ~for c in mc[m.id]
+                    {
+                        "id":"{{ c.id }}",
+                        ~if c.style
+                        {{ c.style }},
+                        ~endif
+                        ~if c.title
+                        "title":"{{ c.title_desplay }}",
+                        ~endif
+                        ~if c.category==3
+                        "video":"{{ c.url }}",
+                        "status":"notautoplay",
+                        ~else
+                        "icon":"{{ c.image_http }}",
+                        ~endif
+                        ~if c.classify
+                        "classify":"{{ c.classify }}",
+                        ~else
+                        "classify":"",
+                        ~endif
+                        "description":"{{ c.desc_desplay }}",
+                        "itemaction":{
+                            "type":"{{ c.resource_action_type }}",
+                            "uri":"{{ c.resource_action_uri }}",
+                            "params":"{{ c.resource_action_params }}"
+                        }
+                    }
+                    ~if loop.index!=loop.length
+                    ,
+                    ~endif
+                    ~endfor
+                ]
+                ~endif
+            }
+            ~if loop.index!=loop.length
+            ,
+            ~endif
+            ~endfor
+        ]
+    },
+{% endblock %}

@@ -1,0 +1,192 @@
+~extends 'layout/default.html'
+{% block container %}
+<div class="well">
+	<select class="form-control inline_select" name="page">
+		<option value="{{ g.page }}" selected="selected">{{ g.page_cn
+			}}</option>
+	</select> <select class="form-control inline_select" name="module_id">
+		<option value="{{ g.module_id }}" selected="selected">{{
+			g.module.desc }}</option>
+	</select>
+</div>
+~ from "macros.html" import render_field,render_textarea,render_hidden_field
+<form class="form-horizontal" id="content_form" method="POST">
+	{# {{ render_field(form.page) }}#}
+	{# {{ render_field(form.module_id) }}#}
+    {{ render_hidden_field(form.module_id) }}
+    {{ render_field(form.title) }}
+    {{ render_field(form.category, onchange="categoryChange()") }}
+    {# {{ render_field(form.display) }}#}
+	{# {{ render_field(form.rank) }}#}
+	{# {{ render_field(form.brief) }}#}
+	{{ render_field(form.url) }}
+	{# {{ render_field(form.promotion_id) }}#}
+	{{ render_hidden_field(form.image) }}
+    {{ render_field(form.resource_id, onchange="resourceChange()") }}
+	<div class="form-group">
+		<label class="col-lg-2 control-label" for="resource_id"><label
+			for="resource_id">资源标题</label></label>
+		<div class="col-lg-10">
+			<input class="form-control" id="resource_title" name="resource_title"
+				placeholder="" type="text" value="">
+		</div>
+	</div>
+	{{ render_textarea(form.desc) }} {{ render_field(form.style) }}
+	<div class="col-lg-10 col-lg-offset-2">
+		<a href="/page/content?module_id={{ g.module_id }}"
+			class="btn btn-primary">返回</a>
+		<button type="button" onclick="submitForm()" class="btn btn-primary">保存</button>
+	</div>
+	<div id="photo_container" class="product_tab" style="width: auto;">
+		<input type="file" id="uploader" name="uploader" />
+
+		<div class="photo_pre"
+			style="float: left; padding: 3px; border: 2px dashed #ccc; width: 200px; margin: 12px 5px;">
+			<img id="pre_img" class="pre_img"
+				style="width: 200px; word-wrap: break-word; white-space: nowrap;"
+				src="{{ g.photo }}" uri="{{ form.image.data }}" />
+		</div>
+	</div>
+</form>
+~include 'inc/uploadify.html'
+<script>
+	LuhuAdmin.upload("#uploader", "image", function(data) {
+		var thumb = data.thumb;
+		var uri = data.uri
+		var content = $('#pre_img').attr("src", thumb);
+		$('#image').val(uri);
+	});
+	function submitForm() {
+		$('#content_form').submit();
+	}
+</script>
+<script type="text/javascript">
+	function categoryChange() {
+		var category = $('#category').val();
+		$('#resource_id').attr('value', '');
+		$('#resource_title').attr('value', '');
+		/*  $('#resource_id option').remove()
+		 //如果是其他类型,无需输入resource_id
+		 if(parseInt(category) == 100) {
+		     $('#resource_id').html("<option value='-1'>其他</option>");
+		     return;
+		 }
+		 $.ajax({
+		     type: 'GET',
+		     url: "/page/resource_type/"+category,
+		     success: function (ret) {
+		         console.log(ret);
+		         $('#resource_id').html(ret);
+		     },
+		     error: function (resp) {
+		         $.showMessage("操作失败，请稍后再试。", "warning");
+		     }
+		 }); */
+	}
+	function resourceChange() {
+		var resource_id = $('#resource_id').attr('value');
+		console.log(resource_id);
+		$.ajax({
+			type : 'GET',
+			url : "/page/resource/" + resource_id,
+			success : function(ret) {
+				$('#resource_title').attr('value', ret.resource.desc);
+				$('#category option').each(function() {
+					if ($(this).val() == ret.resource.type) {
+						$(this).attr('selected', 'selected')
+					} else {
+						$(this).remove('selected')
+					}
+				});
+			},
+			error : function(resp) {
+				$.showMessage("操作失败，请稍后再试。", "warning");
+			}
+		})
+	}
+	$(function() {
+        function formatDisplayName(val) {
+            return val.typeName + " " + val.title + " - " + val.version + " - " + val.modifyTime;
+        }
+
+        $("#resource_title").autocomplete({
+            source: function (request, response) {
+                $.get("/new/resource", {
+                    name: request.term,
+                    sid: "{{ session.sid }}"
+                }, function (data) {
+                    var values = data.values;
+                    var choices = [];
+                    for (var i = 0; i < values.length; i++) {
+                        var val = values[i];
+                        if (val.status == 1) {
+                            choices.push({
+                                label: formatDisplayName(val),
+                                id: val.id
+                            });
+                        }else{
+                        	console.log(val.typeName + " " + val.title + " - " + val.version + " - " + val.modifyTime + " - " + val.status)
+                        }
+                    }
+                    response(choices);
+                });
+            },
+            select: function (event, ui) {
+                $("#resource_id").val(ui.item.id);
+            },
+            minLength: 2
+
+        });
+
+        $.get("/new/resource/" + $("#resource_id").val(), {
+            sid: "{{ session.sid }}"
+        }, function (data) {
+            var values = data.values;
+            if (values.length > 0) {
+                $("#resource_title").val(formatDisplayName(values[0]));
+            }
+        })
+    });
+
+    function sourceChange(){
+
+        	var source_id = $('#source_id').attr('value');
+            var category = $('#category').val();
+        	console.log(resource_id);
+        	$.ajax({
+        		type:'GET',
+        		url:"/page/resource/"+source_id+"/"+category,
+        		success:function(ret){
+        			$('#resource_title').attr('value',ret.resource.desc);
+        			$('#category option').each(function(){
+        				if($(this).val() == ret.resource.type){
+        					$(this).attr('selected','selected')
+        				}else{
+        					$(this).remove('selected')
+        				}
+        			});
+                    $('#resource_id').attr('value',ret.resource.id);
+        		},
+        		error:function(resp){
+        			$.showMessage("操作失败，请稍后再试。", "warning");
+        		}
+        	})
+        }
+
+
+       
+
+
+
+
+    </script>
+
+{% endblock %}
+
+
+
+
+
+
+
+

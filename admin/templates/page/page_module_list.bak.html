@@ -1,0 +1,130 @@
+{% extends "layout/default.html" %}
+{% block head_js_css %}
+<link href="/static/portal/css/main.css" rel="stylesheet" type="text/css"/>
+
+<link href="/static/portal/css/jquery-fallr-1.3.css" rel="stylesheet" type="text/css"/>
+
+<script type="text/javascript" src="/static/portal/js/jquery-1.7.1.min.js"></script>
+
+<script type="text/javascript" src="/static/portal/js/ui/ui.core.min.js"></script>
+
+<script type="text/javascript" src="/static/portal/js/ui/ui.sortable.min.js"></script>
+
+<script type="text/javascript" src="/static/portal/js/jquery-fallr-1.3.pack.js"></script>
+
+<script type="text/javascript" src="/static/portal/js/jquery.easing.1.3.js"></script>
+
+<script type="text/javascript" src="/static/portal/js/Jh.js"></script>
+<script>
+    $(document).ready(function () {
+
+        var DATA = {
+
+            'appL': {
+
+                'avatar': '头像信息',
+
+                'comment': '留言簿',
+
+                'doing': '最新动态',
+
+            },
+
+            'appM': {
+
+                'blog': 'blog',
+
+                'profile': '个人资料',
+
+                'spaceinfo': '空间介绍',
+
+                'friends': '我的好友'
+
+            },
+
+            'appR': {
+
+                'gallery': '我的相册',
+
+                'visitors': '最近访客',
+
+                'thread': '我的话题'
+
+            }
+
+        }
+
+        Jh.fn.init(DATA);
+
+        Jh.Portal.init(DATA);
+
+    });
+
+
+</script>
+
+{% endblock %}
+{% block container %}
+<div class="well">
+    <span class="title">新增、编辑页面模块。</span>
+    <select class="form-control inline_select" onchange="changePage()" id="page">
+        ~for page,page_cn in g.pages
+        <option value="{{ page }}"
+                ~if g.current_page==page
+                selected
+                ~endif
+        >{{ page_cn }}
+        </option>
+        ~endfor
+    </select>
+    <a href="/page/module/0?page={{ g.current_page }}" class="btn btn-default pull-right btn-nav">新增</a>
+    <a href="/promotion/sort" class="btn btn-default pull-right btn-nav">排序</a>
+</div>
+<table class="table table-striped">
+    <thead>
+    <th>显示</th>
+    <th>id</th>
+    <th>标题</th>
+    <th>描述</th>
+    <th>类型</th>
+    <th>状态</th>
+    <th colspan="4">操作</th>
+    </thead>
+    <tbody>
+    ~for pm in page_modules
+    <tr>
+        <td><img src="http://test.rs.vogor.cn/image/2017/02/19/30a52bd243d618b9.jpg" width="414px;"/></td>
+        <td>{{ pm.id }}</td>
+        <td>
+            ~if pm.text
+            {{ pm.text }}
+            ~else
+            -
+            ~endif
+        </td>
+        <td>
+            ~if pm.des
+            {{ pm.des }}
+            ~else
+            -
+            ~endif
+        </td>
+        <td>{{ pm.category }}</td>
+        <td>{{ pm.status }}</td>
+        <td><a href="/page/module/{{ pm.id }}">编辑</a></td>
+        <td><a href="/page/module/up?id={{ pm.id }}&page={{ g.current_page }}">上升</a></td>
+        <td><a href="/page/module/down?id={{ pm.id }}&page={{ g.current_page }}">下降</a></td>
+        <td><a href="/page/module/del/{{ pm.id }}?page={{ g.current_page }}">删除</a></td>
+    </tr>
+    ~endfor
+    </tbody>
+</table>
+<div id="jh_body"></div>
+<script type="text/javascript">
+    function changePage() {
+        var page = $('#page').val();
+        var url = LuhuAdmin.replaceOrAddUrlParam(location.href, "page", page);
+        LuhuAdmin.loadUrl(url);
+    }
+</script>
+{% endblock %}
