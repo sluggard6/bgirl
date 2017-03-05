@@ -15,8 +15,9 @@
             <label class="col-lg-2 control-label" for="thumb_img"><label for="thumb_img">封面</label></label>
 
             <div class="col-lg-10">
+                <input type="file" id="detail_uploader" name="detail_uploader"/><br>
                 <img id="thumb_img" style="width: 128px; height:128px;" src="{{ g.thumb }}">
-                <input type="file" id="detail_uploader" name="detail_uploader"/>
+
             </div>
         </div>
         {{ render_field(form.description) }}
@@ -24,6 +25,7 @@
             <label class="col-lg-2 control-label" for="apk_icon_img"><label for="apk_icon_img">图片</label></label>
 
             <div class="col-lg-10">
+                <input type="file" id="image_uploader" name="image_uploader"/><br/>
                 <div id="photo_container" class="product_tab" style="width:auto;">
                     <ul id="sort">
 
@@ -37,8 +39,8 @@
                         ~endfor
                     </ul>
                 </div>
-                <br/>
-                <input type="file" id="image_uploader" name="image_uploader"/>
+
+
             </div>
         </div>
         {{ render_hidden_field(form.images) }}
@@ -60,8 +62,9 @@
     </div>
 </script>
 {% endraw %}
-<script type="text/javascript" src="/static/js/lib/uploadify/swfobject.js"></script>
-<script type="text/javascript" src="/static/js/lib/uploadify/jquery.uploadify.v2.1.4.min.js"></script>
+<!--<script type="text/javascript" src="/static/js/lib/uploadify-v3.1/swfobject.js"></script>-->
+<link href="/static/js/lib/uploadify-v3.2.1/uploadify.css"rel="stylesheet">
+<script type="text/javascript" src="/static/js/lib/uploadify-v3.2.1/jquery.uploadify.min.js"></script>
 <script>
     var photoTemplate = Hogan.compile($('#template_photo').html());
     LuhuAdmin.upload("#image_uploader", "image", function (data) {
