@@ -6,7 +6,8 @@ import {
   StyleSheet,
   View,
   Image,
-  Text
+  Text,
+  TouchableOpacity
 } from 'react-native';
 
 import Global from '../utils/global'
@@ -20,9 +21,15 @@ export default class TheTwo extends Component {
   render(){
     return (
       <View style={styles.list_container}>
-        <Image source={{uri:this.props.data[0].pic.min}} style={styles.image}/>
-        <Image source={{uri:this.props.data[1].pic.min}} style={styles.image}/>
-        <Image source={{uri:this.props.data[2].pic.min}} style={styles.image}/>
+        <TouchableOpacity onPress={this.props.onPress}>
+          <Image source={{uri:this.props.data[0].pic.min}} style={styles.image}/>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.props.onPress}>
+          <Image source={{uri:this.props.data[1].pic.min}} style={styles.image}/>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.props.onPress}>
+          <Image source={{uri:this.props.data[2].pic.min}} style={styles.image}/>
+        </TouchableOpacity>
       </View>
     );
   }

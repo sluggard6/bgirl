@@ -27,8 +27,8 @@ export default class Banner extends Component {
 
   render(){
     return (
-      <TouchableOpacity onPress={this._onPressButton.bind(this)} style={styles.click_area}>
-        <Image source={{uri:"http://rs.vogor.cn/image/2017/02/19/9b23d5427b6086e8.jpg"}} style={styles.container}>
+      <TouchableOpacity onPress={this.props.onPress}>
+        <Image source={{uri:"http://test.rs.vogor.cn/image/2017/02/19/9b23d5427b6086e8.jpg"}} style={styles.container}>
           <View style={styles.text_container}>
             <Text style={styles.text_name}>{this.props.data[0].des}</Text>
           </View>
@@ -49,13 +49,6 @@ var styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "white",
     marginBottom:10,
-  },
-
-  click_area: {
-    height: 255,
-    width: Global.size.width,
-    borderWidth: 1,
-    borderColor: "black",
   },
 
   text_container: {

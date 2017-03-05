@@ -3,13 +3,16 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
+  Platform,
   Navigator,
   View,
   AsyncStorage,
   Text,
   StyleSheet,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  ToastAndroid,
+  BackAndroid
 } from 'react-native';
 
 import Guide from './guide';
@@ -27,6 +30,7 @@ const buildVersion = '0.1.0'
 const PROFILE_URL = Global.default_host +  "/profile"
 
 class Index extends Component {
+
   constructor(props) {
     super(props);   //这一句不能省略，照抄即可
     this.state = {
@@ -35,8 +39,36 @@ class Index extends Component {
     this.loadVersion = this.loadVersion.bind(this)
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.loadVersion();
+    if (Platform.OS === 'android') {
+      BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
+    }
+  }
+
+  componentWillUnmount() {
+    if (Platform.OS === 'android') {
+      BackAndroid.removeEventListener('hardwareBackPress', this.onBackAndroid);
+    }
+  }
+
+  onBackAndroid = () => {
+    const nav = this.refs.navigator;
+    const routers = nav.getCurrentRoutes();
+    if (routers.length > 1) {
+      nav.pop();
+      return true;
+    }
+    if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
+      //最近2秒内按过back键，可以退出应用。
+      return false;
+    }
+    this.lastBackPressed = Date.now();
+    ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
+    return true;
+  };
+
+  componentDidMount() {
     this.loadProfile();
   }
 
@@ -89,6 +121,7 @@ class Index extends Component {
       <Navigator
         initialRoute={defaultRoute}
         renderScene={this._renderScene}
+        ref='navigator'
       />
     );
   }

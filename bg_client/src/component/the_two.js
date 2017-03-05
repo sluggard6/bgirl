@@ -6,11 +6,13 @@ import {
   StyleSheet,
   View,
   Image,
-  Text
+  Text,
+  TouchableOpacity
 } from 'react-native';
 
 import Global from '../utils/global'
 import ViewPic from './view_pic'
+import FullViewTab from '../page/full_view_tab'
 
 export default class TheTwo extends Component {
 
@@ -20,8 +22,12 @@ export default class TheTwo extends Component {
   render(){
     return (
       <View style={styles.list_container}>
-        <ViewPic pic={this.props.data[0].pic} />
-        <ViewPic pic={this.props.data[1].pic} />
+        <TouchableOpacity onPress={this.props.onPress}>
+          <ViewPic pic={this.props.data[0].pic} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.props.onPress}>
+          <ViewPic pic={this.props.data[1].pic} />
+        </TouchableOpacity>
       </View>
     );
   }

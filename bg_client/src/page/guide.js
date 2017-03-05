@@ -23,7 +23,7 @@ export default class Guide extends Component {
 
   _onPressButton() {
 
-    this.props.navigator.push({
+    this.props.navigator.resetTo({
 			component: TabBarView
 		})
   }
