@@ -79,7 +79,7 @@
     }
     LuhuAdmin.upload("#detail_uploader", "image", function (data) {
         var link = data.thumb;
-        var uri = data.uri
+        var uri = data.uri;
         $('#thumb_img').attr("src", link);
         $('#thumb').val(uri);
     });

@@ -8,7 +8,7 @@
 
 var LuhuAdmin = {
     upload: function (selector, media_type, success_callback, options) {
-        var sizelimt=5120000000
+        var sizelimt = 5120000000
         var setting = $.extend({
             'swf': '/static/js/lib/uploadify-v3.2.1/uploadify.swf',
             'uploader': '/api/upload/' + media_type,
@@ -20,15 +20,26 @@ var LuhuAdmin = {
             'fileDataName': 'file_uploader',
             'fileExt': '*',
             'sizeLimit': sizelimt,
-            'onComplete': function (event, ID, fileObj, response, data) {
-            	console.log("is on complete");
-                var json = jQuery.parseJSON(response);
+            'onUploadSuccess': function (file, data, response) {
+                // alert('id: ' + file.id
+                //     + ' - 索引: ' + file.index
+                //     + ' - 文件名: ' + file.name
+                //     + ' - 文件大小: ' + file.size
+                //     + ' - 类型: ' + file.type
+                //     + ' - 创建日期: ' + file.creationdate
+                //     + ' - 修改日期: ' + file.modificationdate
+                //     + ' - 文件状态: ' + file.filestatus
+                //     + ' - 服务器端消息: ' + data
+                //     + ' - 是否上传成功: ' + response);
+                var json = jQuery.parseJSON(data);
                 if (json.success) {
                     success_callback(json);
                 }
-                else {
-                    $.showMessage(json.errorMsg, 'warning');
-                }
+            },
+            'onUploadError': function (file, errorCode, erorMsg, errorString) {
+                $.showMessage('错误码: ' + errorCode
+                    + ' - 错误信息: ' + erorMsg
+                    + ' - 错误信息详细: ' + errorString, 'warning');
             }
         }, options);
         console.log(setting);

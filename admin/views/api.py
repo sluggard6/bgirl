@@ -22,20 +22,22 @@ ApiView = Blueprint('api', __name__)
 
 @ApiView.route("/upload/<string:media_type>", methods=['POST'])
 def upload(media_type="photo"):
-    f = request.files['file_uploader']
     data = request.form
+    print data
+    f = request.files['Filedata']
+
     print data
     package = None
     if media_type == "apk":
         key = upload_local(f, media_type)
-        apk_path = "%s%s" % (current_app.config['UPLOAD_HANDLER'][media_type]['upload_folder'], key)
+        apk_path = "%s%s" % (current_app.config['UPLOAD_HANDLER'][media_type]['Filedata'], key)
         ret = get_local_apk_info(apk_path)
         package = ret.get('package_name')
     else:
         _seed = str(time.time())
         print '---------',_seed
         key = uploader.do(
-            request.files['file_uploader'],
+            request.files['Filedata'],
             _seed,
             media_type,
             current_app.config['UPLOAD_HANDLER']
