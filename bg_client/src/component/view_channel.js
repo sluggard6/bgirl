@@ -18,7 +18,7 @@ export default class ViewChannel extends Component {
   }
   render(){
     return (
-      <Image source={{uri:"http://rs.vogor.cn/image/2017/02/19/9b23d5427b6086e8.jpg"}} style={styles.container}>
+      <Image source={{uri:"http://test.rs.vogor.cn/image/2017/02/19/9b23d5427b6086e8.jpg"}} style={styles.container}>
         <View style={styles.text_container}>
           <Text style={styles.text_name}>{this.props.data.name}</Text>
           <Text style={styles.text_des}>{this.props.data.description}</Text>
