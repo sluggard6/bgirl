@@ -10,19 +10,19 @@ var LuhuAdmin = {
     upload: function (selector, media_type, success_callback, options) {
         var sizelimt=5120000000
         var setting = $.extend({
-            'uploader': '/static/js/lib/uploadify/uploadify.swf',
-            'script': '/api/upload/' + media_type,
-            'cancelImg': '/static/js/lib/uploadify/cancel.png',
+            'swf': '/static/js/lib/uploadify-v3.2.1/uploadify.swf',
+            'uploader': '/api/upload/' + media_type,
+            'cancelImg': '/static/js/lib/uploadify-v3.2.1/uploadify-cancel.png',
             'auto': true,
             'width': 123,
             'height': 30,
-            'buttonText': 'upload',
+            'buttonText': '选择图片',
             'fileDataName': 'file_uploader',
             'fileExt': '*',
             'sizeLimit': sizelimt,
             'onComplete': function (event, ID, fileObj, response, data) {
             	console.log("is on complete");
-                json = jQuery.parseJSON(response);
+                var json = jQuery.parseJSON(response);
                 if (json.success) {
                     success_callback(json);
                 }
@@ -37,18 +37,18 @@ var LuhuAdmin = {
     uploadQbox: function (selector, success_callback, options) {
 
         var setting = $.extend({
-            'uploader': '/static/js/lib/uploadify/uploadify.swf',
-            'script': '/api/upload',
-            'cancelImg': '/static/js/lib/uploadify/cancel.png',
+            'swf': '/static/js/lib/uploadify-v3.2.1/uploadify.swf',
+            'uploader': '/api/upload',
+            'cancelImg': '/static/js/lib/uploadify-v3.2.1/uploadify-cancel.png',
             'auto': true,
             'width': 123,
             'height': 30,
-            'buttonText': 'upload',
+            'buttonText': '选择图片',
             'fileDataName': 'file_uploader',
             'fileExt': '*',
             'sizeLimit': 5120000000,
             'onComplete': function (event, ID, fileObj, response, data) {
-                json = jQuery.parseJSON(response);
+                var json = jQuery.parseJSON(response);
                 if (json.success) {
                     success_callback(json);
                 }
@@ -122,18 +122,18 @@ var LuhuAdmin = {
     },
     upload_sys: function (selector, script, success_callback, options) {
         var setting = $.extend({
-            'uploader': '/static/js/lib/uploadify/uploadify.swf',
-            'script': script,
-            'cancelImg': '/static/js/lib/uploadify/cancel.png',
+            'swf': '/static/js/lib/uploadify-v3.2.1/uploadify.swf',
+            'uploader': script,
+            'cancelImg': '/static/js/lib/uploadify-v3.2.1/uploadifyy-cancel.png',
             'auto': true,
             'width': 123,
             'height': 30,
-            'buttonText': 'upload',
+            'buttonText': '选择图片',
             'fileDataName': 'file_uploader',
             'fileExt': '*',
             'sizeLimit': 5120000000,
             'onComplete': function (event, ID, fileObj, response, data) {
-                json = jQuery.parseJSON(response);
+                var json = jQuery.parseJSON(response);
                 if (json.success) {
                     success_callback(json);
                 }
