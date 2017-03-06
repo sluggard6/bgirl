@@ -9,18 +9,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import RegisterVcode from './register_vcode'
-
-export default class Login extends Component{
-
-  forgetPassword(){
-  }
-
-  register(){
-    this.props.navigator.push({
-      component: RegisterVcode
-    })
-  }
+export default class RegisterVcode extends Component{
 
   render(){
     return (
@@ -41,18 +30,6 @@ export default class Login extends Component{
           password={true} />
         <View style={styles.loginButton}>
           <Text style={{color: '#fff'}} >Login</Text>
-        </View>
-        <View style={{flex:1,flexDirection:'row',alignItems: 'flex-end',justifyContent: 'space-between',bottom:20}}>
-          <TouchableOpacity onPress={this.forgetPassword.bind(this)}>
-            <Text style={styles.viewUnlogin}>
-                 无法登录?
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.register.bind(this)}>
-            <Text style={styles.viewRegister}>
-                 新用户
-            </Text>
-          </TouchableOpacity>
         </View>
       </View>
     )
@@ -117,6 +94,8 @@ var styles = StyleSheet.create({
     fontSize:12,
     color:'#63B8FF',
     marginRight:10,
+    alignItems:'flex-end',
+    flex:1,
     flexDirection:'row',
     textAlign:'right',
   }

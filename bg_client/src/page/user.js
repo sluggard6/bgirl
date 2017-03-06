@@ -7,11 +7,13 @@ import {
   Text,
   ListView,
   StyleSheet,
-  Navigator
+  Navigator,
+  TouchableOpacity
 } from 'react-native';
 
 import Global from '../utils/global'
 import TopBar from '../component/top_bar'
+import Login from './login'
 
 var user_info_menu = [
   {text:'我的下载', actionType:'innerView', actionPath:'downloaded'},
@@ -39,13 +41,21 @@ export default class User extends Component {
     );
   }
 
+  loginPage() {
+    this.props.navigator.push({
+      component: Login
+    })
+  }
+
   render(){
     return (
       <View style={styles.container}>
         <TopBar/>
-        <View style={styles.userinfo}>
-          <Text style={{fontSize: 25}}>Nick</Text>
-        </View>
+        <TouchableOpacity onPress={this.loginPage.bind(this)}>
+          <View style={styles.userinfo}>
+            <Text style={{fontSize: 25}}>Nick</Text>
+          </View>
+        </TouchableOpacity>
         <View style={styles.balance}>
           <Text style={{color: 'red'}}>VIP</Text>
           <Text>1000</Text>
