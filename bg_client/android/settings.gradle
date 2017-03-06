@@ -1,5 +1,7 @@
 rootProject.name = 'bg_client'
 
+include ':app'
+
 include ':app', ':react-native-device-info'
 include ':app', ':react-native-vector-icons'
 
