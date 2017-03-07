@@ -181,3 +181,72 @@ class UserVcode(BaseModel):
 	@property
 	def category_cn(self):
 		return self.Category.get_display_cn(self.category)
+   
+class UserVcode(BaseModel):
+    
+    __tablename__ = 'user_vcode'
+
+    __table_args__ = {}
+
+    class Status(DisplayEnum):
+        INIT = 0
+        VERIFIED = 1
+        __display_cn__ = {
+            INIT: u'未验证',
+            VERIFIED: u'已验证'
+        }
+
+    class Category(DisplayEnum):
+        REGISTER = 1
+        FORGET_PASS = 2
+        CHANGE_PHONE_OLD = 3
+        CHANGE_PHONE_NEW = 4
+        CHECK_WEIXIN = 5
+        UNICOM_BOOK = 6
+        LOGIN = 7
+        BUDUI_LOGIN = 8
+
+        __display_cn__ = {
+            REGISTER: u'注册',
+            FORGET_PASS: u'忘记密码',
+            CHANGE_PHONE_OLD: u'更换手机（旧）',
+            CHANGE_PHONE_NEW: u'更换手机（新）',
+            CHECK_WEIXIN: u'微信绑定',
+            UNICOM_BOOK: u'联通用户预约',
+            LOGIN: u'登录',
+            BUDUI_LOGIN: u'部队项目登陆'
+        }
+
+    class App(DisplayEnum):
+        PORTAL = 'portal'
+        ANDROID = 'Android'
+        IOS = 'iOS'
+
+        __display_cn__ = {
+            PORTAL: u'portal',
+            ANDROID: u'Android',
+            IOS: u'iOS'
+        }
+
+    # column definitions
+
+    id = Column(u'id', INTEGER(), primary_key=True, nullable=False, autoincrement=True)
+    phone = Column(u'phone', VARCHAR(length=32), default=None)
+    vcode = Column(u'vcode', VARCHAR(length=32), default=None)
+    mac = Column(u'mac', VARCHAR(length=32), default=None)
+    status = Column(u'status', Integer(), default=Status.INIT)
+    app = Column(u'app', VARCHAR(length=32), default=None)
+    category = Column(u'category', Integer(), default=Category.REGISTER)
+    times = Column(u'times', Integer(), default=1)
+    verify_time = Column(u'verify_time', DATETIME(), nullable=True)
+    ip = Column(u'ip', VARCHAR(length=32), nullable=True)
+    create_time = Column(u'create_time', DATETIME(), nullable=False, default=datetime.now)
+    modify_time = Column(u'modify_time', TIMESTAMP(), nullable=False, default=datetime.now)
+
+    @property
+    def status_cn(self):
+        return self.Status.get_display_cn(self.status)
+
+    @property
+    def category_cn(self):
+        return self.Category.get_display_cn(self.category)
