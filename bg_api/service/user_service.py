@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
-from bg_biz.orm.user import User
+from datetime import datetime, timedelta
+from bg_biz.orm.user import User, UserVcode
 from sharper.flaskapp.orm.base import transaction
 from sharper.lib.error import AppError
 
@@ -12,13 +13,13 @@ class UserService:
     @transaction
     def register(cls, phone, password):
         if User.query.filter_by(phone=phone).first():
-            return AppError(msg=u'该手机号码已经被注册')
+            return AppError(msg=u'璇ユ墜鏈哄彿鐮佸凡缁忚娉ㄥ唽')
         u = User.register(phone, password)
         return u
 
 def validate_vcode(phone, code, category):
     """
-    验证码验证
+    楠岃瘉鐮侀獙璇�
     """
     record = UserVcode.query.filter_by(phone=phone).filter_by(vcode=code).filter_by(category=category).first()
     limit_time = datetime.now() - timedelta(minutes=60)
