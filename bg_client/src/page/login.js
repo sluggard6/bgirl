@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import RegisterVcode from './register_vcode'
+import Global from '../utils/global';
 
 export default class Login extends Component{
 
@@ -25,9 +26,38 @@ export default class Login extends Component{
   render(){
     return (
       <View style={styles.loginContainer}>
-        <Image
-          style={styles.logoImage}
-          source={require('../images/logo.png')} />
+        <View style={styles.topBar}>
+          <Text sytle={{color: '#fff', fontSize: 40, borderWidth: 1, borderColor:"#fff"}}>登录</Text>
+        </View>
+        <View style={styles.oauthContainer}>
+          <TouchableOpacity>
+            <View sytle={styles.oauthBean}>
+              <Image source={require('../images/sina.png')} style={styles.oauthImage}/>
+              <View style={{alignItems:'center'}}>
+                <Text style={styles.oauthText}>微博登录</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <View sytle={styles.oauthBean}>
+              <Image source={require('../images/QQ.png')} style={styles.oauthImage}/>
+              <View style={{alignItems:'center'}}>
+                <Text style={styles.oauthText}>QQ登录</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <View sytle={styles.oauthBean}>
+              <Image source={require('../images/weixin.png')} style={styles.oauthImage}/>
+              <View style={{alignItems:'center'}}>
+                <Text style={styles.oauthText}>微信登录</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={{alignItems:'center', padding: 20}}>
+          <Text>------------   合作方账号登录   ------------</Text>
+        </View>
         <TextInput
           underlineColorAndroid="transparent"
           style={styles.accountInput}
@@ -40,7 +70,7 @@ export default class Login extends Component{
           placeholder='密码'
           password={true} />
         <View style={styles.loginButton}>
-          <Text style={{color: '#fff'}} >Login</Text>
+          <Text style={{color: '#fff'}} >自动登录</Text>
         </View>
         <View style={{flex:1,flexDirection:'row',alignItems: 'flex-end',justifyContent: 'space-between',bottom:20}}>
           <TouchableOpacity onPress={this.forgetPassword.bind(this)}>
@@ -62,9 +92,48 @@ export default class Login extends Component{
 var styles = StyleSheet.create({
   loginContainer: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: '#f4f4f4',
-    paddingLeft:10,
-    paddingRight:10,
+    // paddingLeft:10,
+    // paddingRight:10,
+  },
+
+  topBar: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 200/Global.pr,
+    width: Global.size.width,
+    backgroundColor: '#313840'
+  },
+
+  topBarText: {
+    alignItems: 'center',
+    color: '#fff',
+  },
+
+  oauthContainer: {
+    height: 80,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: 25,
+  },
+
+  oauthBean: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  oauthImage: {
+    height: 30,
+    resizeMode: Image.resizeMode.contain
+  },
+
+  oauthText: {
+    paddingTop: 5,
+    alignItems: 'center',
+    fontSize: 16,
   },
 
   logoImage:{
@@ -76,31 +145,32 @@ var styles = StyleSheet.create({
   },
 
   accountInput:{
-    backgroundColor: '#fff',
+    backgroundColor: '#DFE0E1',
     marginTop: 20,
     height: 40,
     paddingLeft: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 20,
     fontSize: 16,
-    borderWidth: 1,
     borderRadius: 5,
-    borderColor: 'lightblue',
   },
 
   passowrdInput:{
-    backgroundColor: '#fff',
+    backgroundColor: '#DFE0E1',
     height: 40,
     paddingLeft: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 20,
     fontSize: 16,
-    borderWidth: 1,
     borderRadius: 5,
-    borderColor: 'lightblue',
   },
 
   loginButton:{
-    marginTop: 15,
-    marginLeft: 10,
-    marginRight: 10,
-    backgroundColor: '#63B8FF',
+    marginLeft: 20,
+    marginRight: 20,
+    backgroundColor: '#FC4A68',
     height: 35,
     borderRadius: 5,
     justifyContent: 'center',
