@@ -6,13 +6,14 @@ from flask_login import login_required
 from flask_login import login_user
 from service.user_service import UserService, validate_vcode
 from sharper.flaskapp.orm.base import transaction
-from sharper.lib.validator import paras_dict_validate
+from sharper.lib.validator import paras_dict_validate, is_mobile
 from sharper.util.transfer import dict2vars
 
 from flask import Blueprint, request, g, session
+from flask.json import jsonify
 
 __author__ = [
-    'wufang'
+    'sluggard'
 ]
 
 UserView = Blueprint('user', __name__)
@@ -79,4 +80,16 @@ def register():
     login_user(user)
     return g.ret_success_func(seid=session.sid)
 
-
+@UserView.route('/checkPhone', methods=['GET', 'POST'])
+def checkPhone():
+    data = request.args or request.form
+    phonenum = data.get("phone", None)
+    if not phonenum:
+        return jsonify(success=False, message=u'未指定验证手机号码')
+    if not is_mobile(phonenum):
+        return jsonify(success=False, message=u"请输入正确的手机号码")
+    user = User.query.filter("phone='18916208830'").first()
+    user = User.get_by_phone(phonenum)
+    if user:
+        return jsonify(success=False, message=u"该手机号码已经被注册",msgcode=1)
+    return jsonify(success=True, message=u"可以注册的手机号码")

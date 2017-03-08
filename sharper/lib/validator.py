@@ -146,8 +146,8 @@ def is_email(_str):
     return check_regx(_str.lower(), r'^([a-z\d\._-]+)@([\da-z\._-]+)\.([a-z]{2,6})$')
 
 def is_mobile(_str):
-    return check_regx(_str, r'^((\+86)|(86))?1[0-9]{10}$') or (str(_str) in SysConfig.get_config('test_phones').replace('"', '').replace("[", '').replace("]", "").replace(' ', '').replace('\r\n','').split(','))
-
+#     return check_regx(_str, r'^((\+86)|(86))?1[0-9]{10}$') or (str(_str) in SysConfig.get_config('test_phones').replace('"', '').replace("[", '').replace("]", "").replace(' ', '').replace('\r\n','').split(','))
+    return check_regx(_str, r'^((\+86)|(86))?1[0-9]{10}$')
 
 def is_mobile_or_email(_str):
     return check_regx(_str, r'(^((\+86)|(86))?1[0-9]{10}$)|(^([a-z\d\._-]+)@([\da-z\._-]+)\.([a-z]{2,6})$)')

@@ -6,6 +6,7 @@ from flask import Blueprint, g, request, current_app
 
 from sharper.flaskapp.helper import json_error, json_ok, render_json_warn, render_json_error
 from sharper.lib.error import AuthFailedError, AppError
+from sharper.lib.validator import is_mobile
 
 DefaultView = Blueprint('default', __name__)
 
@@ -50,7 +51,6 @@ def send_register_vcode():
     print 'check_result', check_result
     if not check_result:
         return jsonify(success=False, message=u'图片验证码错误')
-    area = AuthService.check_ap_mac(session.get("gw_id"))
     user = User.get_by_phone(phonenum)
     # user = User.query.filter_by(phone=phonenum).first()
     # print user

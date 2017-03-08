@@ -6,10 +6,11 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  ToastAndroid
 } from 'react-native';
 
-import RegisterVcode from './register_vcode'
+import RegisterPhone from './register_phone'
 import Global from '../utils/global';
 
 export default class Login extends Component{
@@ -19,18 +20,22 @@ export default class Login extends Component{
 
   register(){
     this.props.navigator.push({
-      component: RegisterVcode
+      component: RegisterPhone
     })
+  }
+
+  unSupport() {
+    ToastAndroid.show('敬请期待', ToastAndroid.SHORT);
   }
 
   render(){
     return (
       <View style={styles.loginContainer}>
         <View style={styles.topBar}>
-          <Text sytle={{color: '#fff', fontSize: 40, borderWidth: 1, borderColor:"#fff"}}>登录</Text>
+          <Text style={{color: '#fff', fontSize: 20}}>登   录</Text>
         </View>
         <View style={styles.oauthContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.unSupport}>
             <View sytle={styles.oauthBean}>
               <Image source={require('../images/sina.png')} style={styles.oauthImage}/>
               <View style={{alignItems:'center'}}>
@@ -38,7 +43,7 @@ export default class Login extends Component{
               </View>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.unSupport}>
             <View sytle={styles.oauthBean}>
               <Image source={require('../images/QQ.png')} style={styles.oauthImage}/>
               <View style={{alignItems:'center'}}>
@@ -46,7 +51,7 @@ export default class Login extends Component{
               </View>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.unSupport}>
             <View sytle={styles.oauthBean}>
               <Image source={require('../images/weixin.png')} style={styles.oauthImage}/>
               <View style={{alignItems:'center'}}>
@@ -55,24 +60,32 @@ export default class Login extends Component{
             </View>
           </TouchableOpacity>
         </View>
-        <View style={{alignItems:'center', padding: 20}}>
+        <View style={{alignItems:'center', padding: 20, marginBottom: 20}}>
           <Text>------------   合作方账号登录   ------------</Text>
         </View>
-        <TextInput
-          underlineColorAndroid="transparent"
-          style={styles.accountInput}
-          placeholder='手机号码' />
-          <View style={{height:1,backgroundColor:'#f4f4f4'}} />
-        <TextInput
-          underlineColorAndroid="transparent"
-          secureTextEntry={true}
-          style={styles.passowrdInput}
-          placeholder='密码'
-          password={true} />
-        <View style={styles.loginButton}>
-          <Text style={{color: '#fff'}} >自动登录</Text>
+        <View style={styles.inputContainer}>
+          <Image source={require('../images/shouji.png')} style={styles.inputLogo}/>
+          <TextInput
+            underlineColorAndroid="transparent"
+            style={styles.input}
+            placeholder='手机号码' />
+            <View style={{height:1,backgroundColor:'#f4f4f4'}} />
         </View>
-        <View style={{flex:1,flexDirection:'row',alignItems: 'flex-end',justifyContent: 'space-between',bottom:20}}>
+        <View style={styles.inputContainer}>
+          <Image source={require('../images/mima.png')} style={styles.inputLogo}/>
+          <TextInput
+            underlineColorAndroid="transparent"
+            secureTextEntry={true}
+            style={styles.input}
+            placeholder='密码'
+            password={true} />
+        </View>
+        <TouchableOpacity>
+          <View style={styles.loginButton}>
+            <Text style={{color: '#fff'}} >自动登录</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={{flexDirection:'row',justifyContent: 'space-around', marginTop: 20}}>
           <TouchableOpacity onPress={this.forgetPassword.bind(this)}>
             <Text style={styles.viewUnlogin}>
                  无法登录?
@@ -80,7 +93,7 @@ export default class Login extends Component{
           </TouchableOpacity>
           <TouchableOpacity onPress={this.register.bind(this)}>
             <Text style={styles.viewRegister}>
-                 新用户
+                 注册账号
             </Text>
           </TouchableOpacity>
         </View>
@@ -94,8 +107,6 @@ var styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#f4f4f4',
-    // paddingLeft:10,
-    // paddingRight:10,
   },
 
   topBar: {
@@ -136,7 +147,7 @@ var styles = StyleSheet.create({
     fontSize: 16,
   },
 
-  logoImage:{
+  logoImage: {
     borderRadius: 35,
     height: 90,
     width: 90,
@@ -144,25 +155,28 @@ var styles = StyleSheet.create({
     alignSelf: 'center',
   },
 
-  accountInput:{
-    backgroundColor: '#DFE0E1',
-    marginTop: 20,
-    height: 40,
-    paddingLeft: 20,
-    marginLeft: 20,
-    marginRight: 20,
-    marginBottom: 20,
-    fontSize: 16,
-    borderRadius: 5,
+  inputLogo: {
+    height: 30,
+    marginLeft: 10,
+    resizeMode: Image.resizeMode.contain
   },
 
-  passowrdInput:{
-    backgroundColor: '#DFE0E1',
-    height: 40,
-    paddingLeft: 20,
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginLeft: 20,
     marginRight: 20,
     marginBottom: 20,
+    backgroundColor: '#DFE0E1',
+    borderRadius: 5,
+    height:40
+  },
+
+  input:{
+    backgroundColor: '#DFE0E1',
+    height: 40,
+    width: Global.size.width - 80,
+    paddingLeft: 10,
     fontSize: 16,
     borderRadius: 5,
   },
@@ -179,13 +193,11 @@ var styles = StyleSheet.create({
 
   viewUnlogin:{
     fontSize:12,
-    color:'#63B8FF',
     marginLeft:10,
   },
 
   viewRegister:{
     fontSize:12,
-    color:'#63B8FF',
     marginRight:10,
     flexDirection:'row',
     textAlign:'right',
