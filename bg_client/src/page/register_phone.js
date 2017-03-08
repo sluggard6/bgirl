@@ -6,11 +6,13 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  ToastAndroid
 } from 'react-native';
 
 import Global from '../utils/global';
 import Http from '../utils/http'
+import Register from './register'
 
 const CHECK_PHONE = "/user/checkPhone"
 
@@ -20,21 +22,42 @@ export default class RegisterPhone extends Component{
     super(props);
     this.state = {
       loading: false,
+      checked: true,
       phone: ""
     };
     this.checkPhone = this.checkPhone.bind(this);
   }
 
   goRegister() {
+    if(!this.state.checked) {
+      ToastAndroid.show("请先阅读并同意《用户服务条款》", ToastAndroid.SHORT)
+      return
+    }
     url = Global.default_host + CHECK_PHONE + "?phone=" + this.state.phone
     Http.httpGet(url,this.checkPhone.bind(this))
   }
 
-  checkPhone(responseData) {
-    console.log(responseData)
+  checkPhone(res) {
+    if(res.success == true) {
+      this.props.navigator.push({
+        component: Register,
+        params: {
+          phone: this.state.phone
+        }
+      })
+    }else{
+      ToastAndroid.show(res.message, ToastAndroid.SHORT)
+    }
+  }
+
+  checkRule() {
+    this.setState({
+      checked: !this.state.checked
+    })
   }
 
   render(){
+    const checked = this.state.checked ? require('../images/xuanzhong.png') : require('../images/weixuan.png');
     return (
       <View style={styles.loginContainer}>
         <View style={styles.topBar}>
@@ -51,6 +74,13 @@ export default class RegisterPhone extends Component{
             placeholder='手机号码' />
             <View style={{height:1,backgroundColor:'#f4f4f4'}} />
         </View>
+        <TouchableOpacity onPress={this.checkRule.bind(this)}>
+          <View style={{flexDirection: 'row', width:Global.size.width - 40,justifyContent: 'center', alignItems: 'center', margin: 20}}>
+            <Image source={checked} style={styles.checkedImage}/>
+            <Text>我已阅读并同意</Text>
+            <Text style={{color: 'red'}}>《用户服务条款》</Text>
+          </View>
+        </TouchableOpacity>
         <TouchableOpacity onPress={this.goRegister.bind(this)}>
           <View style={styles.loginButton}>
             <Text style={{color: '#fff'}} >自动登录</Text>
@@ -94,13 +124,13 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 20,
     marginRight: 20,
-    marginBottom: 20,
+    marginTop: 20,
     backgroundColor: '#DFE0E1',
     borderRadius: 5,
     height:40
   },
 
-  input:{
+  input: {
     backgroundColor: '#DFE0E1',
     height: 40,
     width: Global.size.width - 80,
@@ -109,28 +139,18 @@ var styles = StyleSheet.create({
     borderRadius: 5,
   },
 
+  checkedImage: {
+    height: 15,
+    resizeMode: Image.resizeMode.contain
+  },
+
   loginButton:{
-    margin: 20,
+    marginLeft: 20,
+    marginRight: 20,
     backgroundColor: '#FC4A68',
     height: 35,
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-
-  viewUnlogin:{
-    fontSize:12,
-    color:'#63B8FF',
-    marginLeft:10,
-  },
-
-  viewRegister:{
-    fontSize:12,
-    color:'#63B8FF',
-    marginRight:10,
-    alignItems:'flex-end',
-    flex:1,
-    flexDirection:'row',
-    textAlign:'right',
   }
 })
