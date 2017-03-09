@@ -8,6 +8,8 @@ from sharper.flaskapp.helper import json_error, json_ok, render_json_warn, rende
 from sharper.lib.error import AuthFailedError, AppError
 from sharper.lib.validator import is_mobile
 from sharper.util.helper import get_int
+from bg_biz.service.user_service import send_user_vcode
+from bg_biz.orm.user import UserVcode
 
 DefaultView = Blueprint('default', __name__)
 
@@ -62,7 +64,7 @@ def send_register_vcode():
         if not user:
             return jsonify(success=False, message=u"该手机号码未注册，请确认",msgcode=1)
     try:
-        code = send_user_vcode(phonenum, category, 'portal')
+        code = send_user_vcode(phonenum, category, 'api')
         return jsonify(success=True, code=code if code else "")
     except AppError as e:
         return jsonify(success=False, message=e.msg)
