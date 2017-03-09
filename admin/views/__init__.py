@@ -18,6 +18,7 @@ def register_views(app):
     from views.auth import AuthView
     from views.manage import ManageView
     from views.default import DefaultView
+    from views.sys import SysView
     from views.channel import ChannelView
     from views.api import ApiView
     from views.pic import PicView
@@ -25,6 +26,7 @@ def register_views(app):
 
     app.register_blueprint(AuthView)
     app.register_blueprint(DefaultView)
+    app.register_blueprint(SysView)
     app.register_blueprint(ManageView, url_prefix='/manage')
     app.register_blueprint(ChannelView, url_prefix='/channel')
     app.register_blueprint(ApiView, url_prefix='/api')

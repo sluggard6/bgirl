@@ -235,6 +235,36 @@ CREATE TABLE `page_content` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+DROP TABLE IF EXISTS `sys_config`;
+CREATE TABLE `sys_config` (
+  `name` varchar(64) NOT NULL COMMENT '配置名',
+  `value` text,
+  `descr` varchar(256) NOT NULL COMMENT '描述说明',
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+
+
+DROP TABLE IF EXISTS `user_vcode`;
+CREATE TABLE `user_vcode` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `phone` varchar(32) NOT NULL COMMENT '手机号码',
+  `vcode` varchar(32) NOT NULL COMMENT '验证码',
+  `category` tinyint(4) DEFAULT NULL COMMENT '类型，1：注册，2：忘记密码',
+  `verify_time` datetime DEFAULT NULL COMMENT '验证时间',
+  `status` int(11) DEFAULT '1' COMMENT '状态，1为已验证',
+  `ip` varchar(32) DEFAULT NULL COMMENT 'ip地址',
+  `create_time` datetime NOT NULL,
+  `modify_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `app` varchar(32) DEFAULT NULL,
+  `times` tinyint(4) DEFAULT '1',
+  `mac` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `phone` (`phone`),
+  KEY `app_category` (`category`,`app`),
+  KEY `mac` (`mac`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='用户验证码'
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

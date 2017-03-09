@@ -2,14 +2,14 @@
 """系统功能视图"""
 import flask
 
-from flask import Blueprint, g, request, current_app
+from flask import Blueprint, g, request, current_app, jsonify
 
 from sharper.flaskapp.helper import json_error, json_ok, render_json_warn, render_json_error
 from sharper.lib.error import AuthFailedError, AppError
 from sharper.lib.validator import is_mobile
 from sharper.util.helper import get_int
 from bg_biz.service.user_service import send_user_vcode
-from bg_biz.orm.user import UserVcode
+from bg_biz.orm.user import UserVcode, User
 
 DefaultView = Blueprint('default', __name__)
 

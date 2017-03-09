@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from bg_biz.orm.pic import Pic
 from flask import Blueprint, request, g
-from service.pic_service import pic_build
+from bg_biz.service.pic_service import pic_build
 
 __author__ = [
     'sluggrd'

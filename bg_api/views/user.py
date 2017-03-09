@@ -4,7 +4,7 @@ import traceback
 from bg_biz.orm.user import User, UserVcode
 from flask_login import login_required
 from flask_login import login_user
-from service.user_service import UserService, validate_vcode
+from bg_biz.service.user_service import UserService, validate_vcode
 from sharper.flaskapp.orm.base import transaction
 from sharper.lib.validator import paras_dict_validate, is_mobile
 from sharper.util.transfer import dict2vars

@@ -170,9 +170,9 @@ class UserVcode(BaseModel):
 	app = Column(u'app', VARCHAR(length=32), default=None)
 	category = Column(u'category', Integer(), default=Category.REGISTER)
 	times = Column(u'times', Integer(), default=1)
-	verifytime = Column(u'verifytime', DATETIME(), nullable=True)
-	createtime = Column(u'createtime', DATETIME(), nullable=False, default=datetime.now())
-	modifytime = Column(u'modifytime', DATETIME(), nullable=False, default=datetime.now())
+	verify_time = Column(u'verify_time', DATETIME(), nullable=True)
+	create_time = Column(u'create_time', DATETIME(), nullable=False, default=datetime.now())
+	modify_time = Column(u'modify_time', DATETIME(), nullable=False, default=datetime.now())
 
 	@property
 	def status_cn(self):

@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 from flask import Blueprint, request, g
-from service.pic_service import pic_build
+from bg_biz.service.pic_service import pic_build
 from bg_biz.orm.page import PageModule
 
 __author__ = [
