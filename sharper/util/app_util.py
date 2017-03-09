@@ -7,7 +7,8 @@ __author__ = [
 ]
 
 
-
+def get_app_name(source=""):
+    return u"meimei"
 
 def get_package_name():
     return ua_parse().get('package_name', '')

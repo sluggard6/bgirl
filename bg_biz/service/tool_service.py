@@ -7,6 +7,8 @@ from bg_biz.orm.sysconfig import SysConfig
 from bg_biz.orm.user import UserVcode, User
 import random
 from sharper.util.uploader import gen_random_path
+from bg_biz.orm.app_log import SmsLog
+from sharper.util.sms import send, SmsSender
 
 __author__ = [
     '"liubo" <liubo@hi-wifi.cn>'
@@ -27,7 +29,7 @@ class ToolService(object):
         sms_log.content = msg
         sms_log.phone = phone
         sms_log.status = ret
-        sms_log.gateway = SmsSender.XuanWu
+        sms_log.gateway = SmsSender.MEILIAN
         sms_log.length = msg.__len__()
         sms_log.insert()
 

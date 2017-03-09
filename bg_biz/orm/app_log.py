@@ -2,106 +2,13 @@
 from datetime import datetime
 from luhu_sharper.flaskapp.orm.base import BaseModel, db
 from luhu_sharper.flaskapp.orm.display_enum import DisplayEnum
-from luhu_biz.job.tools import write_app_log, write_app_log_async
+
 from sqlalchemy import Column, INTEGER, VARCHAR, DATETIME, TIMESTAMP
+
 
 __author__ = [
     '"liubo" <liubo@hi-wifi.cn>'
 ]
-
-
-class AppLog(BaseModel):
-    __bind_key__ = 'data'
-    __tablename__ = 'app_log'
-
-    id = db.Column(db.Integer, primary_key=True)
-    action = db.Column(db.String(20), nullable=False)
-    user_id = db.Column(db.Integer, nullable=True)
-    device_id = db.Column(db.String(100), nullable=True)
-    key1 = db.Column(db.String(50), nullable=True)
-    key2 = db.Column(db.String(50), nullable=True)
-    key3 = db.Column(db.String(50), nullable=True)
-    data = db.Column(db.String(500), nullable=True)
-    ip = db.Column(db.String(15), nullable=True)
-    create_time = db.Column(db.DateTime, default=datetime.now)
-
-
-    @classmethod
-    def write(cls, action, user_id=None, device_id=None, key1=None, key2=None, key3=None, data=None, ip=None):
-        if not ip:
-            try:
-                from flask import request
-
-                ip = request.headers.get('X-Forwarded-For', None) or request.remote_addr
-            except Exception:
-                pass
-        data_json = {"action": action, "user_id": user_id, "device_id": device_id, "key1": key1, "key2": key2,
-                     "key3": key3,
-                     "data": data, "ip": ip, "create_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
-
-        write_app_log_async(data_json)
-
-
-class AppLogNew(BaseModel):
-    __bind_key__ = 'data'
-    __tablename__ = 'app_log_new'
-
-    id = db.Column(db.Integer, primary_key=True)
-    action = db.Column(db.String(20), nullable=False)
-    user_id = db.Column(db.Integer, nullable=True)
-    device_id = db.Column(db.String(100), nullable=True)
-    key1 = db.Column(db.String(50), nullable=True)
-    key2 = db.Column(db.String(50), nullable=True)
-    key3 = db.Column(db.String(50), nullable=True)
-    data = db.Column(db.String(500), nullable=True)
-    ip = db.Column(db.String(15), nullable=True)
-    create_time = db.Column(db.DateTime, default=datetime.now)
-
-
-class AppAction:
-    # 登录 {'action':'Login', 'key1':'email/phone/tqq/weibo/auto_login', 'key2':'web/client'}
-    Login = "Login"
-
-    # 网站注册
-    WebReg = "WebReg"
-
-    # 客户端激活操作
-    ClientActive = "ClientActive"
-
-    # 客户端注册
-    ClientReg = "ClientReg"
-
-    # webview统计
-    WebViewTrack = "WebViewTrack"
-
-    # 流量交换app统计
-    AppTrack = "AppTrack"
-
-    # web用户访问统计
-    WebTrack = "WebTrack"
-
-    # 用户绑定
-    ClientReport = "ClientReport"
-
-    # 脚本操作
-    Script = "script"
-    # 发送短信
-    SMS = "sms"
-
-    # LOGIN_MAC
-    LOGIN_MAC = "login_mac"
-
-    # area_id_change
-    AREA_ID = "area_id"
-
-    LOGIN_WIFI = "login_wifi"
-
-    # webview统计
-    JUMP_APP = "open_app"
-
-    ERROR = "error"
-
-    CHANNEL_CHANGE = "channel"
 
 
 class SmsLog(BaseModel):

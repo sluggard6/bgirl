@@ -8,11 +8,12 @@
 """
 import base64
 from datetime import datetime
-import urllib
 from sharper.flaskapp.orm.display_enum import DisplayEnum
 
 from sharper.util.string import md5, random_number
 from sharper.util.sms_util import send_sms
+import urllib3
+from urllib import urlencode
 
 
 def gen_reg_vcode(default_length=4):
@@ -49,29 +50,27 @@ class MeiLianSender(SmsSender):
                   'mobile': phone,
                   'content': c,
                   'encode': encode}
+        http = urllib3.PoolManager()
         headers = {'User-Agent': user_agent}
-        data = urllib.parse.urlencode(values)
-        req = urllib.request.Request(url + '?' + data)
-        response = urllib.request.urlopen(req)
-        the_page = response.read()
-
+        data = urlencode(values)
+        res = http.request('GET', url + '?' + data)
+#         response = urllib.request.urlopen(req)
+#         the_page = response.read()
+        the_page = res.data
+        print "------------------------"
+        print the_page
 
 __sms_sender_config__ = {
-    SmsSender.ShuMi: ShuMiSmsSender,
-    SmsSender.ChangTian: ChangTianSmsSender,
-    SmsSender.ChuangLan: ChuangLanSmsSender,
-    SmsSender.FanMeng: FMSmsSender,
-    SmsSender.LianTong: LianTongSender,
-    SmsSender.YunXin: YunXinSender
+    SmsSender.MEILIAN: MeiLianSender
 }
 
 
-def send(phone, c, sender_type=SmsSender.ChangTian):
+def send(phone, c, sender_type=SmsSender.MEILIAN):
     sender = __sms_sender_config__.get(sender_type)()
     return sender.send(phone, c)
 
 
-def send_batch(phone, c, sender_type=SmsSender.ChangTian):
+def send_batch(phone, c, sender_type=SmsSender.MEILIAN):
     sender = __sms_sender_config__.get(sender_type)()
     return sender.send_batch(phone, c)
 

@@ -265,6 +265,27 @@ CREATE TABLE `user_vcode` (
   KEY `mac` (`mac`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='用户验证码'
 
+
+DROP TABLE IF EXISTS `sms_log`;
+CREATE TABLE `sms_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `phone` varchar(16) NOT NULL COMMENT '手机号码',
+  `gateway` varchar(32) NOT NULL COMMENT '发送网关',
+  `content` varchar(256) NOT NULL COMMENT '短信内容',
+  `length` smallint(6) NOT NULL COMMENT '短信长度',
+  `status` varchar(32) DEFAULT '1' COMMENT '发送状态，由短信网关返回',
+  `create_time` datetime NOT NULL,
+  `modify_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ip` varchar(32) DEFAULT NULL COMMENT 'ip地址',
+  `app` varchar(32) DEFAULT NULL COMMENT '来源应用',
+  `scene` varchar(32) DEFAULT NULL COMMENT '应用场景',
+  PRIMARY KEY (`id`),
+  KEY `phone` (`phone`),
+  KEY `gateway` (`gateway`),
+  KEY `app_scene` (`app`,`scene`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='短信记录'
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

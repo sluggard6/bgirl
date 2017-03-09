@@ -8,6 +8,8 @@ from sharper.flaskapp.orm.base import transaction
 from sharper.lib.error import AppError
 from sharper.lib.validator import is_mobile
 from sharper.util.string import random_number
+from sharper.util.app_util import get_app_name
+from bg_biz.orm.app_log import SmsLog
 
 __author__ = [
     "sluggrd"
@@ -55,22 +57,20 @@ def send_user_vcode(phone, category, app=UserVcode.App.ANDROID, mac=None):
         content = u"验证码：%s 欢迎您注册%s" % (vcode, get_app_name())
     elif category == UserVcode.Category.FORGET_PASS:
         content = u"您的验证码为：%s " % vcode
-    elif category == UserVcode.Category.CHANGE_PHONE_OLD:
-        content = u"您的验证码为：%s " % vcode
-    elif category == UserVcode.Category.CHANGE_PHONE_NEW:
-        content = u"您的验证码为：%s " % vcode
+#     elif category == UserVcode.Category.CHANGE_PHONE_OLD:
+#         content = u"您的验证码为：%s " % vcode
+#     elif category == UserVcode.Category.CHANGE_PHONE_NEW:
+#         content = u"您的验证码为：%s " % vcode
     else:
         content = u"您的验证码为：%s " % vcode
     need_switch = True
-    if category in [UserVcode.Category.CHANGE_PHONE_OLD, UserVcode.Category.CHANGE_PHONE_NEW]:
-        need_switch = False
+#     if category in [UserVcode.Category.CHANGE_PHONE_OLD, UserVcode.Category.CHANGE_PHONE_NEW]:
+#         need_switch = False
 
     ToolService.send_sms(phone, content, need_switch=need_switch, app=app, scene=SmsLog.Scene.VCODE)
     if category == UserVcode.Category.REGISTER \
             and sms_config.get('green_channel', False) \
             and vcode_log.times >= sms_config.get('retry_times', 2):
-        return vcode
-    if category == UserVcode.Category.BUDUI_LOGIN:
         return vcode
     return None
 
