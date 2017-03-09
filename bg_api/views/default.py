@@ -40,18 +40,18 @@ def profile():
 @DefaultView.route('/vcode')
 def send_register_vcode():
     data = request.form or request.args
-    phonenum = data.get("phonenum")
-    image_code = data.get("image_code")
-    print 'image_code:', image_code
+    phonenum = data.get("phone")
+#     image_code = data.get("image_code")
+#     print 'image_code:', image_code
     category = get_int(request.args.get('type', UserVcode.Category.REGISTER))
     if not phonenum:
         return jsonify(success=False, message=u'未指定验证手机号码')
     if not is_mobile(phonenum):
         return jsonify(success=False, message=u"请输入正确的手机号码")
-    check_result = check_validate(image_code)
-    print 'check_result', check_result
-    if not check_result:
-        return jsonify(success=False, message=u'图片验证码错误')
+#     check_result = check_validate(image_code)
+#     print 'check_result', check_result
+#     if not check_result:
+#         return jsonify(success=False, message=u'图片验证码错误')
     user = User.get_by_phone(phonenum)
     # user = User.query.filter_by(phone=phonenum).first()
     # print user
