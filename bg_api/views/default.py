@@ -7,6 +7,7 @@ from flask import Blueprint, g, request, current_app
 from sharper.flaskapp.helper import json_error, json_ok, render_json_warn, render_json_error
 from sharper.lib.error import AuthFailedError, AppError
 from sharper.lib.validator import is_mobile
+from sharper.util.helper import get_int
 
 DefaultView = Blueprint('default', __name__)
 

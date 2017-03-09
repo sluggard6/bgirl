@@ -11,14 +11,15 @@ import {
 
 import Global from '../utils/global';
 import Http from '../utils/http'
+import TimerButton from '../component/timer_button'
 
-const VCODE = "/vcode"
+const VCODE_URL = "/vcode"
 
 export default class Register extends Component{
 
   constructor(props) {
     super(props);
-    console.log(props.phone)
+    // console.log(props.phone)
     this.state = {
       loading: false,
       seconds: 60,
@@ -35,11 +36,10 @@ export default class Register extends Component{
     this.setState({seconds: 60,isDisabled:false})
   }
 
-  onPress() {
-    this.interval = setInterval(() => {
-      this.props.countdown(this.props.seconds - 1,true);
-    }, 1000);
-    this.props.onVerfiy();
+  call() {
+    console.log("--------------------do---------------------")
+    url = Global.default_host + VCODE_URL + "?phone=" + this.props.phone + "&"
+    Http.httpGet(url)
   }
 
   render(){
@@ -58,14 +58,15 @@ export default class Register extends Component{
               style={styles.shortInput}
               placeholder='输入验证码' />
           </View>
-          <TouchableOpacity onPress={()=>this.onPress()}
-              style={{backgroundColor: '#ff5a37',width:150}}
-              textStyle={{fontSize: 18}}
-              isDisabled={this.props.isDisabled}>
-            <View style={styles.vcodeBtn}>
-              <Text style={{color: '#fff'}} >获取验证码</Text>
-            </View>
-          </TouchableOpacity>
+          <TimerButton onPress={()=>this.onPress()}
+              style={styles.vcodeBtn}
+              disStyle={styles.disVcodeBtn}
+              textStyle={{fontSize: 16, color: 'white'}}
+              text="获取验证码"
+              disText="重新获取"
+              disTime={60}
+              call={this.call.bind(this)}
+              />
         </View>
         <View style={styles.inputContainer}>
           <Image source={require('../images/mima_w.png')} style={styles.inputLogo}/>
@@ -127,6 +128,17 @@ var styles = StyleSheet.create({
     marginRight: 20,
     marginTop: 20,
     backgroundColor: "#ff4563",
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+    width: (Global.size.width - 40)*1/3 - 5
+  },
+
+  disVcodeBtn: {
+    marginRight: 20,
+    marginTop: 20,
+    backgroundColor: "#949494",
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
