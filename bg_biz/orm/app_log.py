@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from datetime import datetime
-from luhu_sharper.flaskapp.orm.base import BaseModel, db
-from luhu_sharper.flaskapp.orm.display_enum import DisplayEnum
+from sharper.flaskapp.orm.base import BaseModel, db
+from sharper.flaskapp.orm.display_enum import DisplayEnum
 
 from sqlalchemy import Column, INTEGER, VARCHAR, DATETIME, TIMESTAMP
 
