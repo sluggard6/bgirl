@@ -4,29 +4,27 @@
 """
 from functools import wraps
 import re
-import traceback
-from flask import flash
-from flask_sqlalchemy import SQLAlchemy, Model, declarative_base
-
-from werkzeug.utils import cached_property
 from sharper.util import transfer
 from sharper.util.string import to_camel_case
+import traceback
+
+from flask import flash
+from flask_sqlalchemy import SQLAlchemy, Model, declarative_base
+from werkzeug.utils import cached_property
 
 
 __authors__ = ['"linnchord gao" <linnchord@gmail.com>']
 
-db = SQLAlchemy(session_options={'autocommit': True})
-# db = SQLAlchemy()
-from sqlalchemy.event import listen
-from sqlalchemy.pool import Pool
+# db = SQLAlchemy(session_options={'autocommit': True})
+db = SQLAlchemy()
 
 
-def update_autocommit(dbapi_con, connection_record):
-    # 修改autocommit，否则atlas无法实现读写分离
-    dbapi_con.autocommit(True)
+# def update_autocommit(dbapi_con, connection_record):
+#     # 修改autocommit，否则atlas无法实现读写分离
+#     dbapi_con.autocommit(True)
 
 
-listen(Pool, 'connect', update_autocommit)
+# listen(Pool, 'connect', update_autocommit)
 
 
 class OrmBase(Model):
@@ -248,6 +246,9 @@ def init_base(cls):
     import flask_sqlalchemy as sqla
 
     base = declarative_base(cls=cls, name='Model', metaclass=sqla._BoundDeclarativeMeta)
+    
+    if not getattr(base, 'query_class', None):
+        base.query_class = db.Query
 
     base.query = sqla._QueryProperty(db)
 

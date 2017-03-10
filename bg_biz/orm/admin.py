@@ -191,7 +191,7 @@ class AdminUser(BaseModel):
 	@classmethod
 	def get_by_name(cls, user_name):
 		try:
-			return cls.query.filter_by(user_name=user_name).one()
+			return cls.query.filter_by(user_name=user_name).first()
 		except:
 			return None
 

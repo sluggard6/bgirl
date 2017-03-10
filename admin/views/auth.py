@@ -95,7 +95,6 @@ def index():
     #if return_url:
     #    form.return_url.data = return_url
     if request.method == 'POST':
-        print 'test',form.validate_on_submit()
         if form.validate_on_submit():
             print 'submit :'
             #return login_ok(form.user, form.remembered, form.return_url.data)

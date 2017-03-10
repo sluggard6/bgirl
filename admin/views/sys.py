@@ -3,10 +3,10 @@ import json
 import os
 import uuid
 from flask import Blueprint, render_template, request, jsonify, current_app, url_for, redirect, flash, g
-from luhu_biz.job.tools import refresh_update_info_rq
-from luhu_biz.orm.sysconfig import SysConfig
-from luhu_biz.service.config_service import ConfigService
-from luhu_sharper.util import apk_util
+from bg_biz.job.tools import refresh_update_info_rq
+from bg_biz.orm.sysconfig import SysConfig
+from bg_biz.service.config_service import ConfigService
+from sharper.util import apk_util
 from form import obj2form, form2obj
 from form.sys_config import SysConfigForm
 from lib.upload import upload_local

@@ -1,12 +1,10 @@
 # -*- coding:utf-8 -*-
-from flask.ext.wtf import Form
+from flask_wtf import Form
 
 from bg_biz.orm.page import PageContent, PageModule
 from wtforms import SelectField, StringField, BooleanField, IntegerField, TextAreaField, HiddenField,\
     validators
 from wtforms.validators import NumberRange, DataRequired
-
-from flask.ext.wtf import Form
 
 __author__ = 'Frank'
 

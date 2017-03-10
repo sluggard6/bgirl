@@ -5,7 +5,7 @@ from bg_biz.orm.admin import AdminUser
 __author__ = [
     '"liubo" <liubo@51domi.com>'
 ]
-from flask.ext.wtf import Form
+from flask_wtf import Form
 
 from wtforms.validators import Required, Length
 from wtforms import TextField, PasswordField, BooleanField, SelectField
@@ -95,7 +95,6 @@ class LoginForm(Form):
         if not Form.validate(self):
             return False
         user = AdminUser.get_by_name(self.user_name.data)
-        print 'init user:',user
         if not user:
             self.user_name.errors = [u'该用户不存在']
             return False
