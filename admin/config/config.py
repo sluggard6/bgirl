@@ -151,7 +151,7 @@ class Release(Production):
 	SQLALCHEMY_DATABASE_URI = 'mysql://admin:admin$bgirl#2016!@127.0.0.1:3306/bgirl'
 
 	USER_MAILBIND_URL = HTTP_DOMAIN + '/auth/email/%(vcode)s'
-	SESSION_COOKIE_DOMAIN = None
+	SESSION_COOKIE_DOMAIN = test.admin.vogor.cn
 # 	REDIS_URL = 'redis://127.0.0.1:6379/0'
 	REDIS_HOST = '127.0.0.1'
 	REDIS_JOB_HOST = '127.0.0.1'
