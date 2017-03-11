@@ -216,7 +216,8 @@ def custom_content():
         content.group_id = combobox
         content.status = 1
         content.insert()
-    return redirect(url_for('.module_list'))
+    module = PageModule.get(module_id)
+    return redirect(url_for('.module_list',page=module.page))
 
 
 @PageView.route('/content/<int:id>',methods=['POST'])
