@@ -15,8 +15,8 @@ from werkzeug.utils import cached_property
 
 __authors__ = ['"linnchord gao" <linnchord@gmail.com>']
 
-# db = SQLAlchemy(session_options={'autocommit': True})
-db = SQLAlchemy()
+db = SQLAlchemy(session_options={'autocommit': True})
+#db = SQLAlchemy()
 
 
 # def update_autocommit(dbapi_con, connection_record):

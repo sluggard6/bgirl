@@ -6,9 +6,10 @@ from sharper.flaskapp.template import init_domi_template
 from flask import current_app
 from datetime import datetime
 import re
+import os
 
 CACHE_DEFAULT_DURATION = 2592000        # 默认缓存 1个月
-
+_CACHE = {}
 
 def inject_param():
     """
@@ -79,6 +80,33 @@ def date_format(s):
         return s.strftime("%Y-%m-%d")
     return s
 
+def show_static(file_path, context="mobile", add_timestamp=False):
+    """
+    自动为静态path路径添加时间戳 - 进程内缓存
+    """
+
+    from flask import request
+    if not file_path:
+        return ""
+    if file_path[0] != "/":
+        file_path = "/" + file_path
+    STATIC_HTTP_REF = current_app.config.get('CDN_STATIC_HTTP_REF', '')
+    if STATIC_HTTP_REF:
+
+        render_path = STATIC_HTTP_REF + ("/%s" % context) + file_path + (
+            '?' + datetime.fromtimestamp(
+                os.path.getmtime(current_app.root_path + file_path)
+            ).strftime('%Y%m%d%H%M%S') if add_timestamp else ''
+        )
+    else:
+        render_path =  STATIC_HTTP_REF + "/static" + file_path + (
+            '?' + datetime.fromtimestamp(
+                os.path.getmtime(current_app.root_path + file_path)
+            ).strftime('%Y%m%d%H%M%S') if add_timestamp else ''
+        )
+
+    return _CACHE.setdefault(file_path, render_path)
+
 
 def init_template(app):
     init_domi_template(app)
@@ -95,4 +123,5 @@ def init_template(app):
     app.jinja_env.filters['decimal_pretty'] = decimal_pretty
     app.jinja_env.filters['date'] = date_format
 
+    app.jinja_env.globals.update(show_static=show_static)
     #app.jinja_env.globals.update(URLResolver=URLResolver)

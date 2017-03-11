@@ -11,6 +11,8 @@ from sharper.util.transfer import orm_obj2dict
 from form import obj2form, form2obj
 from form.page import PageModuleForm, PageContentForm
 
+from bg_biz.orm.pic import Group
+
 
 __author__ = 'John Chan'
 
@@ -19,24 +21,25 @@ PageView = Blueprint('page', __name__)
 @PageView.route('/module', methods=['GET','POST'])
 def module_list():
     data = request.form or request.args
-    g.current_page = data.get("index",PageModule.Page.INDEX)
+    g.current_page = data.get("page",PageModule.Page.INDEX)
     basequery = PageModule.query.filter_by(page=g.current_page)
     g.pages = []
     for page in PageModule.Page.AllEnum():
         g.pages.append((page,PageModule.Page.get_display_cn(page)))
     page_modules = basequery.filter_by(status=PageModule.Status.AVAILABLE).order_by(PageModule.rank.desc()).order_by(PageModule.id).all()
-    # pm_sort(page_modules)
+    pm_sort(page_modules)
     # sorted(page_modules, cmp=pm_cmp)
-    return render_template("page/page_module_list.html",page_modules=page_modules)
+    groups = Group.query.filter_by(status=1).order_by(Group.id.desc()).all()
+    return render_template("page/page_module_list.html",page_modules=page_modules,groups=groups)
 
 def pm_cmp(o1,o2):
-    return int(o1.ui_order-o2.ui_order)
+    return int(o1.rank-o2.rank)
 
 def pm_sort(pms):
     index = len(pms)
     for pm in pms:
-        if pm.ui_order != index:
-            pm.ui_order=index
+        if pm.rank != index:
+            pm.rank=index
             pm.update()
         index-=1
 
@@ -83,16 +86,16 @@ def module_move_up():
     data = request.form or request.args
     g.current_page = data["page"]
     basequery = PageModule.query.filter_by(page=g.current_page)
-    page_modules = basequery.filter_by(status=PageModule.Status.AVAILABLE).order_by(PageModule.ui_order.desc()).order_by(PageModule.id).all()
+    page_modules = basequery.filter_by(status=PageModule.Status.AVAILABLE).order_by(PageModule.rank.desc()).order_by(PageModule.id).all()
     last = None
     for pm in page_modules:
         if not last:
             last = pm
             continue
         if pm.id == int(data["id"]):
-            tmp = pm.ui_order
-            pm.ui_order = last.ui_order
-            last.ui_order = tmp
+            tmp = pm.rank
+            pm.rank = last.rank
+            last.rank = tmp
             pm.update()
             last.update()
             break
@@ -105,13 +108,13 @@ def module_move_down():
     data = request.form or request.args
     g.current_page = data["page"]
     basequery = PageModule.query.filter_by(page=g.current_page)
-    page_modules = basequery.filter_by(status=PageModule.Status.AVAILABLE).order_by(PageModule.ui_order.desc()).order_by(PageModule.id).all()
+    page_modules = basequery.filter_by(status=PageModule.Status.AVAILABLE).order_by(PageModule.rank.desc()).order_by(PageModule.id).all()
     last = None
     for pm in page_modules:
         if last:
-            tmp = pm.ui_order
-            pm.ui_order = last.ui_order
-            last.ui_order = tmp
+            tmp = pm.rank
+            pm.rank = last.rank
+            last.rank = tmp
             pm.update()
             last.update()
             break
@@ -187,6 +190,32 @@ def get_content(id):
     form.source_id.data=current_resource.source_id if current_resource else ""
     return render_template("page/content_edit.html", form=form)
 
+@PageView.route('/custom_content',methods=['POST'])
+def custom_content():
+    data = request.form
+    print data
+    title = data.get('title',None)
+    combobox = data.get('combobox',None)
+    id = data.get('id',None)
+    module_id = data.get('module_id',None)
+    content_id = data.get('content_id',None)
+    pic_id = data.get('pic_id', None)
+    if module_id and content_id:
+        #module=PageModule.get(module_id)
+        content = PageContent.get(content_id)
+        content.pic_id = pic_id
+        content.group_id=combobox
+        content.status = 1
+        content.update()
+    else:
+        content = PageContent()
+        # content.category = module.category
+        content.module_id = module_id
+        content.pic_id = pic_id
+        content.group_id = combobox
+        content.status = 1
+        content.insert()
+    return redirect(url_for('.module_list'))
 
 
 @PageView.route('/content/<int:id>',methods=['POST'])

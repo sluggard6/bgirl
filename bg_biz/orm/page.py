@@ -5,6 +5,8 @@ from sharper.flaskapp.orm.display_enum import DisplayEnum
 from sharper.flaskapp.orm.kvdb_mixin import KvdbMixin
 from sqlalchemy import Column, INTEGER, VARCHAR, DATETIME, Table, ForeignKey
 
+from bg_biz.utils import get_download_url
+
 from datetime import datetime
 
 from pic import Pic
@@ -66,7 +68,43 @@ class PageModule(BaseModel):
     modifytime = Column(u'modifytime', DATETIME(), nullable=False,default=datetime.now())
     createby = Column(u'createby', VARCHAR(length=50), nullable=True)
     modifyby = Column(u'modifyby', VARCHAR(length=50), nullable=True)
-    
+
+    @property
+    def content_pics(self):
+        pics = []
+        base = PageContent.query.filter_by(module_id=self.id).filter_by(status=1)
+        if self.category == PageModule.Category.BANNER:
+            content = base.limit(1).all()
+            l = len(content)
+            s = 1-l
+            for c in content:
+                cc = dict(id=c.id,pic=c.pic.d_min)
+                pics.append(cc)
+            for i in range(s):
+                cc = dict(id=0, pic=get_download_url('image', 'no_pic.jpg'))
+                pics.append(cc)
+        elif self.category == PageModule.Category.TEH_TWO:
+            content = base.limit(2).all()
+            l = len(content)
+            s = 2-l
+            for c in content:
+                cc = dict(id=c.id, pic=c.pic.d_min)
+                pics.append(cc)
+            for i in range(s):
+                cc = dict(id=0, pic=get_download_url('image', 'no_pic.jpg'))
+                pics.append(cc)
+
+        elif self.category == PageModule.Category.THE_THREE or self.category==PageModule.Category.THREE_CIRCLE:
+            content = base.limit(3).all()
+            l = len(content)
+            s = 3 - l
+            for c in content:
+                cc = dict(id=c.id, pic=c.pic.d_min)
+                pics.append(cc)
+            for i in range(s):
+                cc = dict(id=0, pic=get_download_url('image', 'no_pic.jpg'))
+                pics.append(cc)
+        return pics
     
 class PageContent(BaseModel):
     __tablename__ = 'page_content'
