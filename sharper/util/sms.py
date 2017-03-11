@@ -42,8 +42,8 @@ class MeiLianSender(SmsSender):
         url = 'http://m.5c.com.cn/api/send/index.php'
         user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
         encode = 'UTF-8'
-        username = 'filter'  # 用户名
-        password_md5 = '1ADBB3178591FD5BB0C248518F39BF6D'  # 32位MD5密码加密，不区分大小写
+        username = 'gaoxiaoxiao'  # 用户名
+        password_md5 = 'BD9CE951E90745D9650B24EB052879DA'  # 32位MD5密码加密，不区分大小写
         values = {'username': username,
                   'password_md5': password_md5,
                   'apikey': apikey,
@@ -56,9 +56,10 @@ class MeiLianSender(SmsSender):
         res = http.request('GET', url + '?' + data)
 #         response = urllib.request.urlopen(req)
 #         the_page = response.read()
-        the_page = res.data
-        print "------------------------"
-        print the_page
+#         the_page = res.data
+#         print "------------------------"
+#         print the_page
+        return res.data
 
 __sms_sender_config__ = {
     SmsSender.MEILIAN: MeiLianSender
