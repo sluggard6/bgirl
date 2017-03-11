@@ -1,1 +1,1 @@
-require('./src/page/index');
+require('./src/page/app');

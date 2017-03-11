@@ -58,8 +58,8 @@ class User(BaseModel, KvdbMixin, UserMixin):
     score = Column(u'score', Integer(), default=0)
     birthday = Column(u'birthday', DATE(), default=None)
     balance = Column(u'balance', Integer(), default=0)
-    create_time = Column(u'create_time', DATETIME(), nullable=False, default=None)
-    modify_time = Column(u'modify_time', DATETIME(), nullable=False, default=None)
+    create_time = Column(u'create_time', DATETIME(), nullable=True, default=None)
+    modify_time = Column(u'modify_time', DATETIME(), nullable=True, default=None)
 
     @login_manager.user_loader
     def load_user(self, userid):

@@ -6,20 +6,23 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  ToastAndroid
 } from 'react-native';
 
 import Global from '../utils/global';
 import Http from '../utils/http'
 import TimerButton from '../component/timer_button'
+import Login from './login'
 
 const VCODE_URL = "/vcode"
+
+const REGISTER_URL = "/user/register"
 
 export default class Register extends Component{
 
   constructor(props) {
     super(props);
-    // console.log(props.phone)
     this.state = {
       loading: false,
       seconds: 60,
@@ -37,9 +40,39 @@ export default class Register extends Component{
   }
 
   call() {
-    console.log("--------------------do---------------------")
-    url = Global.default_host + VCODE_URL + "?phone=" + this.props.phone + "&"
-    Http.httpGet(url)
+    let url = Global.default_host + VCODE_URL + "?phone=" + this.props.phone + "&type=1"
+    Http.httpGet(url,(res) => {
+      if(res.success != true) {
+        ToastAndroid.show(res.message, ToastAndroid.SHORT)
+      }
+    })
+  }
+
+  doRegister() {
+    let params = {
+      key: this.state.vcode,
+      pwd: this.state.pwd,
+      uname: this.props.phone
+    }
+
+    if(this.state.pwd !== this.state.repwd) {
+      ToastAndroid.show("两次密码不一致", ToastAndroid.SHORT)
+      return
+    }
+    let url = Global.default_host + REGISTER_URL
+    Http.httpPost(url, params, (res) => {
+      console.log(res)
+      if(res.success != true) {
+        ToastAndroid.show(res.message, ToastAndroid.SHORT)
+      }else{
+        this.props.navigator.push({
+          component: Login,
+          params: {
+            message: res.message
+          }
+        })
+      }
+    })
   }
 
   render(){
@@ -51,12 +84,13 @@ export default class Register extends Component{
           <View style={styles.shortInputContainer}>
             <Image source={require('../images/shouji_w.png')} style={styles.inputLogo}/>
             <TextInput
-              onChangeText={(phone) => {
-                this.state.phone = phone
+              onChangeText={(vcode) => {
+                this.state.vcode = vcode
               }}
               underlineColorAndroid="transparent"
               style={styles.shortInput}
-              placeholder='输入验证码' />
+              placeholder='输入验证码'
+            />
           </View>
           <TimerButton onPress={()=>this.onPress()}
               style={styles.vcodeBtn}
@@ -71,6 +105,9 @@ export default class Register extends Component{
         <View style={styles.inputContainer}>
           <Image source={require('../images/mima_w.png')} style={styles.inputLogo}/>
           <TextInput
+            onChangeText={(pwd) => {
+              this.state.pwd = pwd
+            }}
             underlineColorAndroid="transparent"
             secureTextEntry={true}
             style={styles.input}
@@ -80,13 +117,16 @@ export default class Register extends Component{
         <View style={styles.inputContainer}>
           <Image source={require('../images/mima_w.png')} style={styles.inputLogo}/>
           <TextInput
+            onChangeText={(repwd) => {
+              this.state.repwd = repwd
+            }}
             underlineColorAndroid="transparent"
             secureTextEntry={true}
             style={styles.input}
             placeholder='重复密码'
             password={true} />
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.doRegister.bind(this)}>
           <View style={styles.loginButton}>
             <Text style={{color: '#fff', fontSize: 22}} >完成</Text>
           </View>

@@ -29,7 +29,7 @@ const buildVersion = '0.1.0'
 
 const PROFILE_URL = Global.default_host +  "/profile"
 
-class Index extends Component {
+class App extends Component {
 
   constructor(props) {
     super(props);   //这一句不能省略，照抄即可
@@ -142,4 +142,4 @@ var styles = StyleSheet.create({
 });
 
 
-AppRegistry.registerComponent('bg_client', () => Index );
+AppRegistry.registerComponent('bg_client', () => App );

@@ -68,11 +68,7 @@ def send_user_vcode(phone, category, app=UserVcode.App.ANDROID, mac=None):
 #         need_switch = False
 
     ToolService.send_sms(phone, content, need_switch=need_switch, app=app, scene=SmsLog.Scene.VCODE)
-    if category == UserVcode.Category.REGISTER \
-            and sms_config.get('green_channel', False) \
-            and vcode_log.times >= sms_config.get('retry_times', 2):
-        return vcode
-    return None
+    return vcode
 
 class UserService:
     @classmethod
