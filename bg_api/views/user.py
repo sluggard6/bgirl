@@ -69,10 +69,7 @@ def register():
     if not vcode:
         return g.ret_error_func(u'请输入验证码')
     if not validate_vcode(phone, vcode, UserVcode.Category.REGISTER):
-        if g.client_version >= g.almond_version:
-            return g.ret_error_func(u'验证码无效，请返回上一步')
-        else:
-                return g.ret_error_func(u'验证码无效，请确认')
+        return g.ret_error_func(u'验证码无效，请确认')
     if User.get_by_phone(phone):
         return g.ret_error_func(u'该手机号码已经被注册！')
 
