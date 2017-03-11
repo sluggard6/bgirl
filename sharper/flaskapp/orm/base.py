@@ -289,46 +289,18 @@ def dict2json(target, value, oldvalue, initiator):
 def transaction(f):
     @wraps(f)
     def do(*args, **kwargs):
-        # flush_method = db.session.flush
-        # commit_method = db.session.commit
-        try:
-            # db.session.commit = flush_method
-            db.engine.execute("set autocommit=0")
-            db.session.begin(subtransactions=True)
-            ret = f(*args, **kwargs)
-            # db.session.commit = commit_method
-            db.session.commit()
-            return ret
-        except Exception as e:
-            db.session.rollback()
-            import traceback
-            traceback.print_exc()
-            raise e
-        finally:
-            db.engine.execute("set autocommit=1")
-            # db.session.commit = commit_method
-
-    return do
-
-
-def transaction_for_apk(f):
-    @wraps(f)
-    def do(*args, **kwargs):
         flush_method = db.session.flush
         commit_method = db.session.commit
         try:
-            db.session.begin()
             db.session.commit = flush_method
             ret = f(*args, **kwargs)
             db.session.commit = commit_method
             db.session.commit()
             return ret
         except Exception as e:
-            # print e
             db.session.rollback()
-            import traceback
-            # traceback.print_exc()
-            flash(u'添加APK失败', 'fail')
+            print traceback.format_exc()
+            raise e
         finally:
             db.session.commit = commit_method
 
