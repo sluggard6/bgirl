@@ -303,7 +303,7 @@
                         min = item;
                     }
                 });
-                $("#pic_content").append('<label><input type="radio" name="pic_id" id="pic_id" value="' + id + '"> ' + min + '<img src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2995040420,4087761391&fm=96"></label>');
+                $("#pic_content").append('<label><input type="radio" name="pic_id" id="pic_id" value="' + id + '"> ' + min + '<img src="{{show_static("+min+")}}"></label>');
 
             });
         }

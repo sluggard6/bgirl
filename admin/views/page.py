@@ -199,8 +199,9 @@ def custom_content():
     id = data.get('id',None)
     module_id = data.get('module_id',None)
     content_id = data.get('content_id',None)
+    print content_id
     pic_id = data.get('pic_id', None)
-    if module_id and content_id:
+    if module_id and int(content_id):
         #module=PageModule.get(module_id)
         content = PageContent.get(content_id)
         content.pic_id = pic_id
