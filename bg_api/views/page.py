@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
-from flask import Blueprint, request, g
+from flask import Blueprint, request, g, render_template
 from bg_biz.service.pic_service import pic_build
-from bg_biz.orm.page import PageModule
+from bg_biz.orm.page import PageModule, PageContent
 
 __author__ = [
     'sluggrd'
@@ -12,7 +12,21 @@ PageView = Blueprint('page', __name__)
 
 @PageView.route('/<page>', methods=['GET', 'POST'])
 def page(page):
-    return '''
+    ms = PageModule.query.filter_by(page=page).order_by(PageModule.rank.desc()).all()
+    mds = [m.id for m in ms]
+    ccs = PageContent.query.filter(PageContent.module_id.in_(mds)).all()
+    mc = dict()
+    for pc in ccs:
+        if pc.module_id in mc:
+            cs = mc[pc.module_id]
+        else:
+            cs = []
+        cs.append(pc)
+        mc[pc.module_id]=cs
+    return render_template("page.json", ms=ms, mc=mc)
+
+
+    '''
 {
     "page": {
         "modules": [
@@ -195,7 +209,3 @@ def page(page):
     }
 }
     '''
-
-    if page == PageModule.Page.INDEX:
-        pass
-

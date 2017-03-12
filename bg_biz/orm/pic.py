@@ -67,7 +67,7 @@ class Channel(BaseModel):
                 ])
 
 
-class Group(BaseModel):
+class Group(BaseModel, KvdbMixin):
     __tablename__ = 'group'
 
     __table_args__ = {}

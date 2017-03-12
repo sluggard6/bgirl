@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 import sys
+from flask_login import login_manager
 
 reload(sys)
 sys.setdefaultencoding('utf-8')

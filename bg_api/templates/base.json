@@ -1,0 +1,4 @@
+{
+    {% block body %}{% endblock %}
+    "success":"{% block success %}{{ g.success }}{% endblock %}"
+}

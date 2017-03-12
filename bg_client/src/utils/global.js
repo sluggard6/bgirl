@@ -12,8 +12,9 @@ const Global = {
     height: Dimensions.get('window').height
   },
   buildVersion : '0.1.0',
-  default_host : "http://test.api.vogor.cn/",
-  pr: PixelRatio.get()
+  default_host : "http://192.168.12.104:8290",
+  pr: PixelRatio.get(),
+  logined: false
 };
 
 export default Global;

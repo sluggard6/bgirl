@@ -21,14 +21,15 @@ export default class Banner extends Component {
 
   _onPressButton() {
     this.props.navigator.push({
-			component: FullViewTab
+			component: FullViewTab,
+      groupId: this.props.data[0].group.id
 		})
   }
 
   render(){
     return (
       <TouchableOpacity onPress={this.props.onPress}>
-        <Image source={{uri:"http://test.rs.vogor.cn/image/2017/02/19/9b23d5427b6086e8.jpg"}} style={styles.container}>
+        <Image source={{uri:this.props.data[0].pic.min}} style={styles.container}>
           <View style={styles.text_container}>
             <Text style={styles.text_name}>{this.props.data[0].des}</Text>
           </View>

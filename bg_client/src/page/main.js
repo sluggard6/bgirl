@@ -31,6 +31,7 @@ export default class Main extends Component {
   }
 
   _updateData(responseData){
+    console.log(responseData.page.modules.length)
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(responseData.page.modules),
       loaded: true,
@@ -57,6 +58,7 @@ export default class Main extends Component {
   }
 
   _renderRow(rowData,sectionID, rowID) {
+    console.log("row_id:" + rowData.id)
     return(
       <Module module={rowData} navigator={this.props.navigator}/>
     );

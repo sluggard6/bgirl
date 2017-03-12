@@ -1,0 +1,48 @@
+{
+	"page": {
+		"modules": [
+			~for m in ms
+				{
+					"id": {{m.id}},
+					"category": "{{m.category}}",
+					~if m.text
+					"text": "{{m.text}}",
+					~endif
+					~if m.des
+					"text": "{{m.des}}",
+					~endif
+					~if m.rank
+					"rank": "{{m.rank}}",
+					~endif
+					"items": [
+						~if mc[m.id]:
+						~for c in mc[m.id]:
+						{
+							"id": {{c.id}},
+							"pic": {
+								"id": {{c.pic.id}},
+								"min": "{{c.pic.d_min}}",
+								"normal": "{{c.pic.d_normal}}",
+								"max": "{{c.pic.d_max}}",
+								"title": "{{c.pic.title}}"
+							},
+							"group": {
+								"id": {{c.group.id}},
+								"name": "{{c.group.name}}",
+								"thumb": "{{c.group.thumb_http}}"
+							}
+						}
+						~if loop.index!=loop.length
+						,
+						~endif
+						~endfor
+						~endif
+					]
+				}
+				~if loop.index!=loop.length
+				,
+				~endif
+			~endfor
+		]
+	}
+}

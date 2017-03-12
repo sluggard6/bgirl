@@ -48,7 +48,7 @@ class User(BaseModel, KvdbMixin, UserMixin):
 
 
     # column definitions
-    id = Column(u'id', INTEGER(), primary_key=True, nullable=False, autoincrement=False)
+    id = Column(u'id', INTEGER(), primary_key=True, nullable=False, autoincrement=True)
     phone = Column(u'phone', VARCHAR(length=32), default=None)
     passwd = Column(u'passwd', VARCHAR(length=64), nullable=False)
     ucode = Column(u'ucode', VARCHAR(length=32), nullable=False)
@@ -58,12 +58,9 @@ class User(BaseModel, KvdbMixin, UserMixin):
     score = Column(u'score', Integer(), default=0)
     birthday = Column(u'birthday', DATE(), default=None)
     balance = Column(u'balance', Integer(), default=0)
-    create_time = Column(u'create_time', DATETIME(), nullable=True, default=None)
-    modify_time = Column(u'modify_time', DATETIME(), nullable=True, default=None)
+    create_time = Column(u'create_time', DATETIME(), nullable=False, default=datetime.now())
+    modify_time = Column(u'modify_time', DATETIME(), nullable=False, default=datetime.now())
 
-    @login_manager.user_loader
-    def load_user(self, userid):
-        return User.get(userid)
 
     @classmethod
     def get(cls, id):

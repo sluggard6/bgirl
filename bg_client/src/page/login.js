@@ -28,6 +28,10 @@ export default class Login extends Component{
     ToastAndroid.show('敬请期待', ToastAndroid.SHORT);
   }
 
+  login() {
+    
+  }
+
   render(){
     return (
       <View style={styles.loginContainer}>

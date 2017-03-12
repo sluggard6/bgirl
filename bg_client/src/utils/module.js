@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+  View,
   Text
 } from 'react-native';
 
@@ -47,7 +48,16 @@ export default class Module extends Component {
 
       case "title":{
         return (
-          <Text>{module.text}</Text>
+          <View style={{justifyContent: 'center', alignItems: 'center', margin: 10}}>
+            <Text style={{fontSize: 20}}>{module.text}</Text>
+          </View>
+        );
+        break;
+      }
+
+      case "three_circle":{
+        return (
+          <TheThree data={module.items} onPress={this.onPress.bind(this)} circle={true}/>
         );
         break;
       }

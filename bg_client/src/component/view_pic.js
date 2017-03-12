@@ -26,7 +26,6 @@ export default class ViewPic extends Component {
           source={{uri: pic.max}}
         />
         <Text>{pic.title}</Text>
-        <Text>{pic.date}</Text>
       </View>
     );
   }

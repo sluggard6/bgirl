@@ -10,6 +10,7 @@ from bg_biz.utils import get_download_url
 from datetime import datetime
 
 from pic import Pic
+from bg_biz.orm.pic import Group
 
 
 class PageModule(BaseModel):
@@ -133,3 +134,7 @@ class PageContent(BaseModel):
     @property
     def pic(self):
         return Pic.get(self.pic_id)
+    
+    @property
+    def group(self):
+        return Group.get(self.group_id)

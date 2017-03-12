@@ -2,7 +2,7 @@
 """系统功能视图"""
 import flask
 
-from flask import Blueprint, g, request, current_app, jsonify
+from flask import Blueprint, g, request, current_app, jsonify, redirect, url_for
 
 from sharper.flaskapp.helper import json_error, json_ok, render_json_warn, render_json_error
 from sharper.lib.error import AuthFailedError, AppError
@@ -10,6 +10,8 @@ from sharper.lib.validator import is_mobile
 from sharper.util.helper import get_int
 from bg_biz.service.user_service import send_user_vcode
 from bg_biz.orm.user import UserVcode, User
+import os
+from flask.helpers import send_from_directory
 
 DefaultView = Blueprint('default', __name__)
 
@@ -31,6 +33,9 @@ def default():
 	g.ret_success_func = json_ok
 	return g.ret_success_func(flask='flask ' + flask.__version__)
 
+@DefaultView.route('/favicon.ico', methods=['GET'])
+def favicon():
+    return redirect(url_for('static', filename='favicon.ico'))
 
 @DefaultView.route('/profile', methods=['GET'])
 def profile():
