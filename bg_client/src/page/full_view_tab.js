@@ -9,18 +9,17 @@ import ScrollableTabView, {DefaultTabBar, } from 'react-native-scrollable-tab-vi
 
 import Http from '../utils/http'
 import Global from '../utils/global'
+import Application from '../utils/application'
 import FullPicView from './full_view'
 import FullPicTabBar from '../component/full_pic_bar'
 
 
-const GROUP_URL = "/group/"
-
-const id = 1
 
 export default class FullViewTab extends Component {
 
   constructor(props) {
 		super(props);
+    console.log("group_id:"+props.groupId)
     this.state = {
       pics: "",
       loaded: false
@@ -33,7 +32,7 @@ export default class FullViewTab extends Component {
   }
 
   _loadData() {
-    url = Global.default_host+GROUP_URL+id
+    url = Application.getUrl(Global.urls.group)+this.props.groupId
     Http.httpGet(url, this._setData.bind(this))
   }
 

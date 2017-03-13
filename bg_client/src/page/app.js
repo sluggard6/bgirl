@@ -20,6 +20,7 @@ import TabBarView from './tab_bar_view'
 import Main from './main';
 import Http from '../utils/http'
 import Global from '../utils/global'
+import Application from '../utils/application'
 
 const defaultRoute = {
   component: Guide
@@ -27,14 +28,13 @@ const defaultRoute = {
 
 const buildVersion = '0.1.0'
 
-const PROFILE_URL = Global.default_host +  "/profile"
-
 class App extends Component {
 
   constructor(props) {
     super(props);   //这一句不能省略，照抄即可
     this.state = {
       version: null,  //这里放你自己定义的state变量及初始值
+      logined: false  //是否登录过的状态
     };
     this.loadVersion = this.loadVersion.bind(this)
   }
@@ -73,7 +73,7 @@ class App extends Component {
   }
 
   loadProfile() {
-    Http.httpGet(PROFILE_URL,function(responseData){
+    Http.httpGet(Application.getUrl(Global.urls.profile),function(responseData){
       profile = responseData.profile
       Global.host = profile.host
     })

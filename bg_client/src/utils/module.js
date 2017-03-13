@@ -19,7 +19,9 @@ export default class Module extends Component {
   onPress(groupId) {
     this.props.navigator.push({
 			component: FullViewTab,
-      groupid: groupId
+      params: {
+        groupId: groupId
+      }
 		})
   }
 

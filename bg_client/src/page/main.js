@@ -10,11 +10,11 @@ import {
 
 import ViewPic from '../component/view_pic'
 import Global from '../utils/global'
+import Application from '../utils/application'
 import Http from '../utils/http'
 import TopBar from '../component/top_bar'
 import Module from '../utils/module'
 
-const PIC_URL = "/page/index"
 // const PIC_URL = "http://192.168.161.35:8290/pic/list?ids=1,2"
 
 let temp = [];
@@ -31,7 +31,6 @@ export default class Main extends Component {
   }
 
   _updateData(responseData){
-    console.log(responseData.page.modules.length)
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(responseData.page.modules),
       loaded: true,
@@ -39,8 +38,7 @@ export default class Main extends Component {
   }
 
   fetchData() {
-    url = Global.default_host + PIC_URL
-    Http.httpGet(url,this._updateData.bind(this))
+    Http.httpGet(Application.getUrl(Global.urls.pageIndex),this._updateData.bind(this))
   }
 
   componentDidMount() {
@@ -58,7 +56,6 @@ export default class Main extends Component {
   }
 
   _renderRow(rowData,sectionID, rowID) {
-    console.log("row_id:" + rowData.id)
     return(
       <Module module={rowData} navigator={this.props.navigator}/>
     );

@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import Global from '../utils/global';
+import Application from '../utils/application'
 import Http from '../utils/http'
 import TimerButton from '../component/timer_button'
 import Login from './login'
@@ -31,16 +32,8 @@ export default class Register extends Component{
     };
   }
 
-  countdown(seconds,isDisabled) {
-    this.setState({seconds: seconds,isDisabled:isDisabled});
-  }
-
-  resetCount() {
-    this.setState({seconds: 60,isDisabled:false})
-  }
-
   call() {
-    let url = Global.default_host + VCODE_URL + "?phone=" + this.props.phone + "&type=1"
+    let url = Application.getUrl(Global.urls.vcode) + "?phone=" + this.props.phone + "&type=1"
     Http.httpGet(url,(res) => {
       if(res.success != true) {
         ToastAndroid.show(res.message, ToastAndroid.SHORT)
@@ -59,8 +52,8 @@ export default class Register extends Component{
       ToastAndroid.show("两次密码不一致", ToastAndroid.SHORT)
       return
     }
-    let url = Global.default_host + REGISTER_URL
-    Http.httpPost(url, params, (res) => {
+    
+    Http.httpPost(Application.getUrl(Global.urls.register), params, (res) => {
       console.log(res)
       if(res.success != true) {
         ToastAndroid.show(res.message, ToastAndroid.SHORT)

@@ -11,6 +11,7 @@ from sharper.util.transfer import dict2vars
 
 from flask import Blueprint, request, g, session
 from flask.json import jsonify
+from flask_login.utils import current_user
 
 __author__ = [
     'sluggard'
@@ -44,7 +45,8 @@ def login():
 @login_required
 def logined():
     data = request.args or request.form
-
+    user = current_user
+    print user
     return g.ret_success_func();
 
 @UserView.route('/register', methods=['GET', 'POST'])

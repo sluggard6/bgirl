@@ -12,9 +12,9 @@ import {
 import ViewChannel from '../component/view_channel'
 import Http from '../utils/http'
 import Global from '../utils/global'
+import Application from '../utils/application'
 import TopBar from '../component/top_bar'
 
-const CHANNEL_URL = '/channel/list'
 
 export default class Channel extends Component {
 
@@ -36,8 +36,7 @@ export default class Channel extends Component {
   }
 
   fetchData() {
-    url = Global.host + CHANNEL_URL
-    Http.httpGet(url,this._updateDataSource.bind(this))
+    Http.httpGet(Application.getUrl(Global.urls.channel),this._updateDataSource.bind(this))
   }
 
   componentDidMount() {

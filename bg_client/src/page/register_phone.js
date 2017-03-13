@@ -11,10 +11,10 @@ import {
 } from 'react-native';
 
 import Global from '../utils/global';
+import Application from '../utils/application'
 import Http from '../utils/http'
 import Register from './register'
 
-const CHECK_PHONE = "/user/checkPhone"
 
 export default class RegisterPhone extends Component{
 
@@ -33,7 +33,7 @@ export default class RegisterPhone extends Component{
       ToastAndroid.show("请先阅读并同意《用户服务条款》", ToastAndroid.SHORT)
       return
     }
-    url = Global.default_host + CHECK_PHONE + "?phone=" + this.state.phone
+    url = Application.getUrl(Global.urls.checkPhone) + "?phone=" + this.state.phone
     Http.httpGet(url,this.checkPhone.bind(this))
   }
 

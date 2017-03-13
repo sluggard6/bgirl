@@ -15,4 +15,3 @@ def load_user(userid):
 def init_login(app):
 
     login_manager.init_app(app)
-    login_manager.setup_app(app)

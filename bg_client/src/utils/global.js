@@ -11,10 +11,23 @@ const Global = {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height
   },
+  urls: {
+    profile: "/profile",
+    channel: "/channel/list",
+    group: "/group/",
+    pageIndex: "/page/index",
+    checkPhone: "/user/checkPhone",
+    vcode: "/vcode",
+    register: "/user/register"
+  },
+  guide: {
+    image1: require('../images/guide_1.jpg'),
+    image2: require('../images/guide_2.jpg'),
+    image3: require('../images/guide_3.jpg')
+  },
   buildVersion : '0.1.0',
-  default_host : "http://192.168.12.104:8290",
-  pr: PixelRatio.get(),
-  logined: false
+  default_host : "http://test.api.vogor.cn",
+  pr: PixelRatio.get()
 };
 
 export default Global;

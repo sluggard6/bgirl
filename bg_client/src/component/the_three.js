@@ -17,19 +17,18 @@ export default class TheTwo extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props.data)
   }
   render(){
     let image_style = this.props.circle?styles.image_circle:styles.image
     return (
       <View style={styles.list_container}>
-        <TouchableOpacity onPress={this.props.onPress}>
+        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[0].group.id)}>
           <Image source={{uri:this.props.data[0].pic.min}} style={image_style}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.props.onPress}>
+        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[1].group.id)}>
           <Image source={{uri:this.props.data[1].pic.min}} style={image_style}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.props.onPress}>
+        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[2].group.id)}>
           <Image source={{uri:this.props.data[2].pic.min}} style={image_style}/>
         </TouchableOpacity>
       </View>
