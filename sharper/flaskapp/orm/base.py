@@ -50,7 +50,7 @@ class OrmBase(Model):
     def delete(self):
         self._before_delete()
         db.session.delete(self)
-        db.session.flush()
+        db.session.commit()
         self._after_delete()
 
 
