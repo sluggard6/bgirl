@@ -36,14 +36,14 @@ class OrmBase(Model):
     def insert(self):
         self._before_insert()
         db.session.add(self)
-        db.session.flush()
+        db.session.commit()
         self._after_insert()
         return self
 
     def update(self):
         self._before_update()
         db.session.merge(self)
-        db.session.flush()
+        db.session.commit()
         self._after_update()
         return self
 
