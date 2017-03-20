@@ -11,9 +11,20 @@ import {
 } from 'react-native';
 
 import RegisterPhone from './register_phone'
-import Global from '../utils/global';
+import TabBarView from './tab_bar_view'
+import Global from '../utils/global'
+import Application from '../utils/application'
+import Http from '../utils/http'
 
 export default class Login extends Component{
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      uname: "",
+      pwd: ""
+    }
+  }
 
   forgetPassword(){
   }
@@ -29,7 +40,22 @@ export default class Login extends Component{
   }
 
   login() {
-    
+    params = {
+      uname: this.state.uname,
+      pwd: this.state.pwd
+    }
+    Http.httpPost(Application.getUrl(Global.urls.login), params, this.loginCallBack.bind(this));
+  }
+
+  loginCallBack(res) {
+    if(res.success === true) {
+      Application.localLogin(this.state.uname, this.state.pwd, res.msg)
+      this.props.navigator.resetTo({
+        component: TabBarView
+      })
+    }else{
+      ToastAndroid.show(res.message,ToastAndroid.SHORT)
+    }
   }
 
   render(){
@@ -70,6 +96,9 @@ export default class Login extends Component{
         <View style={styles.inputContainer}>
           <Image source={require('../images/shouji.png')} style={styles.inputLogo}/>
           <TextInput
+            onChangeText={(uname) => {
+              this.state.uname = uname
+            }}
             underlineColorAndroid="transparent"
             style={styles.input}
             placeholder='手机号码' />
@@ -78,13 +107,16 @@ export default class Login extends Component{
         <View style={styles.inputContainer}>
           <Image source={require('../images/mima.png')} style={styles.inputLogo}/>
           <TextInput
+            onChangeText={(pwd) => {
+              this.state.pwd = pwd
+            }}
             underlineColorAndroid="transparent"
             secureTextEntry={true}
             style={styles.input}
             placeholder='密码'
             password={true} />
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.login.bind(this)}>
           <View style={styles.loginButton}>
             <Text style={{color: '#fff'}} >自动登录</Text>
           </View>

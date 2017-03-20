@@ -18,12 +18,16 @@ const Global = {
     pageIndex: "/page/index",
     checkPhone: "/user/checkPhone",
     vcode: "/vcode",
-    register: "/user/register"
+    register: "/user/register",
+    login: "/user/login"
   },
   guide: {
     image1: require('../images/guide_1.jpg'),
     image2: require('../images/guide_2.jpg'),
     image3: require('../images/guide_3.jpg')
+  },
+  user: {
+    nick: ""
   },
   buildVersion : '0.1.0',
   default_host : "http://test.api.vogor.cn",

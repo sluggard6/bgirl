@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 
 import Global from '../utils/global'
+import Application from '../utils/application'
 import TopBar from '../component/top_bar'
 import Login from './login'
 
@@ -30,6 +31,7 @@ export default class User extends Component {
     });
     this.state = {
       dataSource: ds.cloneWithRows(user_info_menu),
+      isLogin: Global.isLogin
     };
   }
 

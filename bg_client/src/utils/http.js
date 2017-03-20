@@ -22,6 +22,7 @@ export default class Http {
 
   static httpPost(url, params, callback, self, error){
     body = Http.json2form(params)
+    console.log(url)
     fetch(url, {
       method: "POST",
       credentials: "seid",
