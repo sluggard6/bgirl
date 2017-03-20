@@ -5,6 +5,8 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
+  Image,
+  Button,
   ListView,
   StyleSheet,
   Navigator,
@@ -49,15 +51,43 @@ export default class User extends Component {
     })
   }
 
-  render(){
-    return (
-      <View style={styles.container}>
-        <TopBar/>
+  getNick() {
+    if(Global.isLogin) {
+      return (
         <TouchableOpacity onPress={this.loginPage.bind(this)}>
           <View style={styles.userinfo}>
             <Text style={{fontSize: 25}}>Nick</Text>
           </View>
         </TouchableOpacity>
+      )
+    }else{
+      return (
+        <View>
+          <TouchableOpacity onPress={this.loginPage.bind(this)}>
+            <View style={styles.userinfo}>
+              <Image source={require('../images/touxiang.png')} style={{height: 80, resizeMode: Image.resizeMode.contain}}/>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.balance}>
+            <Button
+              style={styles.button}
+              title="登录"
+              color="#ff4563"/>
+            <Button
+              style={styles.button}
+              color="#ffa145"
+              title="注册" />
+          </View>
+        </View>
+      )
+    }
+  }
+
+  render(){
+    return (
+      <View style={styles.container}>
+        <TopBar/>
+        {this.getNick()}
         <View style={styles.balance}>
           <Text style={{color: 'red'}}>VIP</Text>
           <Text>1000</Text>
@@ -84,6 +114,10 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     margin: 20,
+  },
+  button: {
+    fontSize: 28,
+    width: 80
   },
   balance: {
     flexDirection: 'row',
