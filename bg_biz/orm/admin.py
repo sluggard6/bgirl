@@ -190,10 +190,11 @@ class AdminUser(BaseModel):
 
 	@classmethod
 	def get_by_name(cls, user_name):
-		try:
-			return cls.query.filter_by(user_name=user_name).first()
-		except:
-			return None
+		return cls.query.filter_by(user_name=user_name).first()
+# 		try:
+# 			return cls.query.filter_by(user_name=user_name).first()
+# 		except:
+# 			return None
 
 	def check_password(self, pwd):
 		return self.password == string.md5(pwd)
