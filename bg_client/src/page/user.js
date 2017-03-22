@@ -17,6 +17,7 @@ import Global from '../utils/global'
 import Application from '../utils/application'
 import TopBar from '../component/top_bar'
 import Login from './login'
+import RegisterPhone from './register_phone'
 
 var user_info_menu = [
   {text:'我的下载', actionType:'innerView', actionPath:'downloaded'},
@@ -51,6 +52,12 @@ export default class User extends Component {
     })
   }
 
+  registerPage() {
+    this.props.navigator.push({
+      component: RegisterPhone
+    })
+  }
+
   getNick() {
     if(Global.isLogin) {
       return (
@@ -70,10 +77,12 @@ export default class User extends Component {
           </TouchableOpacity>
           <View style={styles.balance}>
             <Button
+              onPress={this.loginPage.bind(this)}
               style={styles.button}
               title="登录"
               color="#ff4563"/>
             <Button
+              onPress={this.registerPage.bind(this)}
               style={styles.button}
               color="#ffa145"
               title="注册" />
@@ -117,7 +126,8 @@ var styles = StyleSheet.create({
   },
   button: {
     fontSize: 28,
-    width: 80
+    width: 80,
+
   },
   balance: {
     flexDirection: 'row',
