@@ -61,11 +61,17 @@ export default class User extends Component {
   getNick() {
     if(Global.isLogin) {
       return (
+        <View>
         <TouchableOpacity onPress={this.loginPage.bind(this)}>
           <View style={styles.userinfo}>
             <Text style={{fontSize: 25}}>Nick</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity>        
+        <View style={styles.balance}>
+          <Text style={{color: 'red'}}>VIP</Text>
+          <Text>1000</Text>
+        </View>
+        </View>
       )
     }else{
       return (
@@ -97,10 +103,6 @@ export default class User extends Component {
       <View style={styles.container}>
         <TopBar/>
         {this.getNick()}
-        <View style={styles.balance}>
-          <Text style={{color: 'red'}}>VIP</Text>
-          <Text>1000</Text>
-        </View>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this._renderRow.bind(this)}

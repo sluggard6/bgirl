@@ -24,9 +24,6 @@ UserView = Blueprint('user', __name__)
 def login():
     data = request.args or request.form
 
-    # if request.method == 'GET':
-    #     return g.ret_success_func(data='need login')
-
     phone, passwd = dict2vars(data, ('uname', 'pwd'))
 
     try:
@@ -92,3 +89,11 @@ def checkPhone():
     if user:
         return jsonify(success=False, message=u"该手机号码已经被注册",msgcode=1)
     return jsonify(success=True, message=u"可以注册的手机号码")
+
+@UserView.route('/profile')
+@login_required
+def profile():
+    u = current_user
+    return g.ret_success_func(id=u.id,status=u.status,nick=u.nick,
+                       balance=u.balance,score=u.score,
+                       realname=u.realname)
