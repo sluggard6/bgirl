@@ -5,6 +5,8 @@ from pic import PicView
 from group import GroupView
 from channel import ChannelView
 from page import PageView
+from pay import PayView
+from charge import ChargeView
 
 __author__ = [
     "sluggrd"
@@ -25,3 +27,5 @@ def register_views(app):
     app.register_blueprint(GroupView, url_prefix='/group')
     app.register_blueprint(ChannelView, url_prefix='/channel')
     app.register_blueprint(PageView, url_prefix='/page')
+    app.register_blueprint(PayView,url_prefix='/pay')
+    app.register_blueprint(ChargeView,url_prefix='/charge')
