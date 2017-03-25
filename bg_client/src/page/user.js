@@ -18,6 +18,7 @@ import Application from '../utils/application'
 import TopBar from '../component/top_bar'
 import Login from './login'
 import RegisterPhone from './register_phone'
+import Charge from './charge'
 
 var user_info_menu = [
   {text:'我的下载', actionType:'innerView', actionPath:'downloaded'},
@@ -55,6 +56,12 @@ export default class User extends Component {
   registerPage() {
     this.props.navigator.push({
       component: RegisterPhone
+    })
+  }
+
+  chargePage() {
+    this.props.navigator.push({
+      component: Charge
     })
   }
 
@@ -103,6 +110,13 @@ export default class User extends Component {
       <View style={styles.container}>
         <TopBar/>
         {this.getNick()}
+        <TouchableOpacity onPress={this.chargePage.bind(this)}>
+        <View style={styles.balance}>
+          <Image source={require('../images/charge/chongzhi.png')} />
+          <Text style={{color: 'red'}}>充值VIP</Text>
+          <Text>></Text>
+        </View>
+        </TouchableOpacity>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this._renderRow.bind(this)}

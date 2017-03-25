@@ -9,6 +9,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.yunpeng.alipay.AlipayPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +27,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
 		  new RNDeviceInfo(),
           new VectorIconsPackage(),
-          new MainReactPackage()
+          new MainReactPackage(),
+          new AlipayPackage()
       );
     }
   };

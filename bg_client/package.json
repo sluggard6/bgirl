@@ -12,7 +12,8 @@
     "react-native": "0.42.0",
     "react-native-device-info": "^0.9.7",
     "react-native-scrollable-tab-view": "^0.7.2",
-    "react-native-vector-icons": "^4.0.0"
+    "react-native-vector-icons": "^4.0.0",
+    "react-native-yunpeng-alipay": "^1.1.4"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",
