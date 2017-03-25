@@ -11,3 +11,6 @@ project(':react-native-vector-icons').projectDir = new File(rootProject.projectD
 
 include ':react-native-yunpeng-alipay'
 project(':react-native-yunpeng-alipay').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-yunpeng-alipay/android')
+
+include ':RCTWeChat'
+project(':RCTWeChat').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-wechat/android')

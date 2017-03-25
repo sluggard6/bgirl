@@ -1,6 +1,7 @@
 package com.bg_client;
 
 import com.facebook.react.ReactActivity;
+import com.theweflex.react.WeChatPackage;
 import com.yunpeng.alipay.AlipayPackage;
 
 public class MainActivity extends ReactActivity {

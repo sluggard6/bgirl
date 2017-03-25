@@ -21,6 +21,7 @@ import Main from './main';
 import Http from '../utils/http'
 import Global from '../utils/global'
 import Application from '../utils/application'
+import * as WeChat from 'react-native-wechat';
 
 const defaultRoute = {
   component: Guide
@@ -70,6 +71,7 @@ class App extends Component {
 
   componentDidMount() {
     this.loadProfile();
+    WeChat.registerApp('wx11eaa73053dd1666')
   }
 
   loadProfile() {

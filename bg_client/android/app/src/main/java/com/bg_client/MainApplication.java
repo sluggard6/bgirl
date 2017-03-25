@@ -10,6 +10,7 @@ import com.facebook.soloader.SoLoader;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.yunpeng.alipay.AlipayPackage;
+import com.theweflex.react.WeChatPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +29,8 @@ public class MainApplication extends Application implements ReactApplication {
 		  new RNDeviceInfo(),
           new VectorIconsPackage(),
           new MainReactPackage(),
-          new AlipayPackage()
+          new AlipayPackage(),
+          new WeChatPackage()
       );
     }
   };

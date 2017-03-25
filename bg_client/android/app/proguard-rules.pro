@@ -66,3 +66,7 @@
 -dontwarn okio.**
 
 -dontwarn android.text.StaticLayout
+
+-keep class com.tencent.mm.sdk.** {
+   *;
+}
