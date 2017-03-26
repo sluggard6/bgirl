@@ -26,10 +26,10 @@
 								"max": "{{c.pic.d_max}}",
 								"title": "{{c.pic.title}}"
 							},
-							"group": {
-								"id": {{c.group.id}},
-								"name": "{{c.group.name}}",
-								"thumb": "{{c.group.thumb_http}}"
+							"component": {
+								"id": {{c.component.id}},
+								"name": "{{c.component.name}}",
+								"thumb": "{{c.component.thumb_http}}"
 							},
 							"category": {{c.category}}
 						}

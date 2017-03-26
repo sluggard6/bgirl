@@ -10,7 +10,7 @@ from bg_biz.utils import get_download_url
 from datetime import datetime
 
 from pic import Pic
-from bg_biz.orm.pic import Group
+from bg_biz.orm.pic import Group, Channel
 
 
 class PageModule(BaseModel):
@@ -134,7 +134,7 @@ class PageContent(BaseModel):
     module_id = Column(u'module_id', INTEGER(), nullable=False)
     category = Column(u'category', INTEGER(), nullable=False)
     pic_id = Column(u'pic_id', INTEGER(), nullable=False)
-    group_id = Column(u'group_id', INTEGER(), nullable=False)
+    component_id = Column(u'component_id', INTEGER(), nullable=False)
     status = Column(u'status', INTEGER(), nullable=False,default=0)
     createtime = Column(u'createtime', DATETIME(), nullable=False,default=datetime.now())
     modifytime = Column(u'modifytime', DATETIME(), nullable=False,default=datetime.now())
@@ -146,5 +146,10 @@ class PageContent(BaseModel):
         return Pic.get(self.pic_id)
     
     @property
-    def group(self):
-        return Group.get(self.group_id)
+    def component(self):
+        if self.category == PageContent.Category.GROUP:
+            return Group.get(self.component_id)
+        elif self.category == PageContent.Category.CHANNEL:
+            return Channel.get(self.component_id)
+        else:
+            return None
