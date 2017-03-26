@@ -58,6 +58,7 @@ class User(BaseModel, KvdbMixin, UserMixin):
     score = Column(u'score', Integer(), default=0)
     birthday = Column(u'birthday', DATE(), default=None)
     balance = Column(u'balance', Integer(), default=0)
+    vipend = Column(u'vipend', DATETIME(), nullable=False, default=datetime.now())
     create_time = Column(u'create_time', DATETIME(), nullable=False, default=datetime.now())
     modify_time = Column(u'modify_time', DATETIME(), nullable=False, default=datetime.now())
 
