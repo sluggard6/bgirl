@@ -50,6 +50,7 @@ def send_user_vcode(phone, category, app=UserVcode.App.ANDROID, mac=None):
         vcode_log.mac = mac
         vcode_log.app = app
         vcode_log.insert()
+    print vcode_log
     content = ''
     if not is_mobile(phone):
         raise AppError(u"请输入正确的手机号码")
@@ -67,7 +68,7 @@ def send_user_vcode(phone, category, app=UserVcode.App.ANDROID, mac=None):
 #     if category in [UserVcode.Category.CHANGE_PHONE_OLD, UserVcode.Category.CHANGE_PHONE_NEW]:
 #         need_switch = False
 
-    ToolService.send_sms(phone, content, need_switch=need_switch, app=app, scene=SmsLog.Scene.VCODE)
+#     ToolService.send_sms(phone, content, need_switch=need_switch, app=app, scene=SmsLog.Scene.VCODE)
     return vcode
 
 class UserService:
@@ -84,7 +85,9 @@ def validate_vcode(phone, code, category):
     验证码验证
     """
     record = UserVcode.query.filter_by(phone=phone).filter_by(vcode=code).filter_by(category=category).first()
+    print record
     limit_time = datetime.now() - timedelta(minutes=60)
+    print limit_time > record.create_time
     if record and record.status == UserVcode.Status.INIT and record.create_time > limit_time:
         record.status = UserVcode.Status.VERIFIED
         record.update()
