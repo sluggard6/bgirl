@@ -50,7 +50,6 @@ def send_user_vcode(phone, category, app=UserVcode.App.ANDROID, mac=None):
         vcode_log.mac = mac
         vcode_log.app = app
         vcode_log.insert()
-    print vcode_log
     content = ''
     if not is_mobile(phone):
         raise AppError(u"请输入正确的手机号码")
@@ -68,7 +67,7 @@ def send_user_vcode(phone, category, app=UserVcode.App.ANDROID, mac=None):
 #     if category in [UserVcode.Category.CHANGE_PHONE_OLD, UserVcode.Category.CHANGE_PHONE_NEW]:
 #         need_switch = False
 
-#     ToolService.send_sms(phone, content, need_switch=need_switch, app=app, scene=SmsLog.Scene.VCODE)
+    ToolService.send_sms(phone, content, need_switch=need_switch, app=app, scene=SmsLog.Scene.VCODE)
     return vcode
 
 class UserService:
