@@ -4,7 +4,6 @@ import React from 'react';
 export default class Http {
 
   static httpGet(url, callback, self, error){
-    // console.log(url+"*******************");
     fetch(url, {
       method: "GET",
       credentials: "seid"
@@ -22,7 +21,7 @@ export default class Http {
 
   static httpPost(url, params, callback, self, error){
     body = Http.json2form(params)
-    console.log(url)
+    // console.log(url)
     fetch(url, {
       method: "POST",
       credentials: "seid",
@@ -39,7 +38,7 @@ export default class Http {
         if(error){
           error(err)
         }
-        console.log(err);
+        // console.log(err);
     });
   }
 

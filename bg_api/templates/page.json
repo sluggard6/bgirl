@@ -30,7 +30,8 @@
 								"id": {{c.group.id}},
 								"name": "{{c.group.name}}",
 								"thumb": "{{c.group.thumb_http}}"
-							}
+							},
+							"category": {{c.category}}
 						}
 						~if loop.index!=loop.length
 						,

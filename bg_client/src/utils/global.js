@@ -19,7 +19,8 @@ const Global = {
     checkPhone: "/user/checkPhone",
     vcode: "/vcode",
     register: "/user/register",
-    login: "/user/login"
+    login: "/user/login",
+    profile: "/user/profile"
   },
   guide: {
     image1: require('../images/guide_1.jpg'),
@@ -27,8 +28,14 @@ const Global = {
     image3: require('../images/guide_3.jpg')
   },
   user: {
-    nick: ""
+    balance: 0,
+    id: 0,
+    nick: "",
+    realname: "",
+    score: 0,
+    status: 0,
   },
+  isLogin: false,
   buildVersion : '0.1.0',
   default_host : "http://test.api.vogor.cn",
   pr: PixelRatio.get()

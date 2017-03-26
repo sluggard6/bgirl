@@ -23,10 +23,10 @@ export default class TheTwo extends Component {
     return (
       <View style={styles.list_container}>
         <TouchableOpacity onPress={() => this.props.onPress(this.props.data[0].group.id)}>
-          <ViewPic pic={this.props.data[0].pic} />
+          <ViewPic pic={this.props.data[0].pic} group={this.props.data[0].group}/>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => this.props.onPress(this.props.data[1].group.id)}>
-          <ViewPic pic={this.props.data[1].pic} />
+          <ViewPic pic={this.props.data[1].pic} group={this.props.data[0].group} />
         </TouchableOpacity>
       </View>
     );

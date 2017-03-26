@@ -15,12 +15,6 @@ export default class FullPicTabBar extends Component {
 		super(props);
 	}
 
-  propTypes: {
-    goToPage: React.PropTypes.func, // 跳转到对应tab的方法
-    activeTab: React.PropTypes.number, // 当前被选中的tab下标
-    tabs: React.PropTypes.array, // 所有tabs集合
-  }
-
   setAnimationValue({value}) {
 	}
 
@@ -30,18 +24,38 @@ export default class FullPicTabBar extends Component {
 	}
 
   renderTabOption(tab, i) {
-    if(this.props.activeTab == i){
-      return (<Text key={i}>{i+1}</Text>)
+    if(i == 0) {
+      return (
+        <Image key={i} source={require('../images/yuan1.png')} style={{height: 20, width: 20, margin: 2, resizeMode: Image.resizeMode.contain,justifyContent: 'center',alignItems: 'center'}}>
+          <Text style={{color: "white"}}>1</Text>
+        </Image>
+      )
     }
-    return;
+    if(i == this.props.tabs.length - 1){
+      return (
+        <Image key={i} source={require('../images/yuan1.png')} style={{height: 20, width: 20, margin: 2, resizeMode: Image.resizeMode.contain,justifyContent: 'center',alignItems: 'center'}}>
+          <Text style={{color: "white"}}>{this.props.tabs.length}</Text>
+        </Image>
+      )
+    }
+    if(i == 4) {
+      return (
+        <Image key={i} source={require('../images/yuan1.png')} style={{height: 20, width: 20, margin: 2, resizeMode: Image.resizeMode.contain,justifyContent: 'center',alignItems: 'center'}}>
+          <Text style={{color: "white"}}>5</Text>
+        </Image>
+      )
+    }
+    if(this.props.activeTab == i){
+      return (<Image key={i} source={require('../images/yuan2.png')} style={{height: 10, width: 10, resizeMode: Image.resizeMode.contain}} />)
+    }else{
+      return (<Image key={i} source={require('../images/yuan1.png')} style={{height: 5, width: 5, margin: 2, resizeMode: Image.resizeMode.contain}} />)
+    }
   }
 
   render() {
 		return (
 			<View style={styles.tabs}>
-        <Text>1...</Text>
         {this.props.tabs.map((tab, i) => this.renderTabOption(tab, i))}
-        <Text>...{this.props.tabs.length}</Text>
 			</View>
 		);
 	}
@@ -51,6 +65,8 @@ export default class FullPicTabBar extends Component {
 const styles = StyleSheet.create({
 	tabs: {
 		flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
 		height: 140/Global.pr,
 	},
 

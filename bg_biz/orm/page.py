@@ -119,6 +119,16 @@ class PageContent(BaseModel):
             AVAILABLE: u'有效',
             DISABLE: u'无效'
         }
+        
+    class Category(DisplayEnum):
+        GROUP = 0
+        CHANNEL = 1
+        
+        __display_cn__ = {
+            GROUP: u'专辑',
+            CHANNEL: u'频道'
+        }    
+    
 
     id = Column(u'id', INTEGER(), nullable=False,primary_key=True,autoincrement=True)
     module_id = Column(u'module_id', INTEGER(), nullable=False)

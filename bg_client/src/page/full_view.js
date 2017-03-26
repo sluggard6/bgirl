@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ScrollableTabView, {DefaultTabBar, } from 'react-native-scrollable-tab-view';
 import {
   Image,
   StyleSheet

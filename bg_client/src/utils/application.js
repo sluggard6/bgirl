@@ -9,10 +9,16 @@ import Http from './http'
 export default class Application {
 
   static localLogin(uname, pwd, seid) {
-    AsyncStorage.setItem('uname', uname)
-    AsyncStorage.setItem('pwd', pwd)
-    AsyncStorage.setItem('seid', seid)
-    Global.logined = true
+    Http.httpGet(Application.getUrl(Global.urls.profile), (res) => {
+      console.log(res)
+      if(res.success === true) {
+        Global.user = res.user
+        AsyncStorage.setItem('uname', uname)
+        AsyncStorage.setItem('pwd', pwd)
+        AsyncStorage.setItem('seid', seid)
+        Global.isLogin = true
+      }
+    })
   }
 
 

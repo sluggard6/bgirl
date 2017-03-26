@@ -15,7 +15,6 @@ export default class ViewPic extends Component {
 
   constructor(props) {
     super(props);
-    pic = props.pic;
   }
 
   render(){
@@ -23,9 +22,9 @@ export default class ViewPic extends Component {
       <View style={styles.container}>
         <Image
           style={styles.image}
-          source={{uri: pic.max}}
+          source={{uri: this.props.pic.max}}
         />
-        <Text>{pic.title}</Text>
+        <Text>{this.props.group.title}</Text>
       </View>
     );
   }
