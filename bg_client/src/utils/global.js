@@ -20,7 +20,7 @@ const Global = {
     vcode: "/vcode",
     register: "/user/register",
     login: "/user/login",
-    profile: "/user/profile",
+    user: "/user/profile",
     charge:"/charge/do"
   },
   guide: {
@@ -35,11 +35,14 @@ const Global = {
     realname: "",
     score: 0,
     status: 0,
+    vipend: 0
   },
   isLogin: false,
   buildVersion : '0.1.0',
   default_host : "http://test.api.vogor.cn",
-  pr: PixelRatio.get()
+  pr: PixelRatio.get(),
+  maxView: 5,
+  serverTime: new Date().getTime()
 };
 
 export default Global;

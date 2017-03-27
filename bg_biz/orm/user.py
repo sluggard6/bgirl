@@ -12,6 +12,7 @@ from sharper.util.string import md5
 from sqlalchemy import Column, INTEGER, VARCHAR, Integer, DATE, DATETIME
 
 from flask_login import UserMixin
+import time
 
 
 
@@ -115,11 +116,11 @@ class User(BaseModel, KvdbMixin, UserMixin):
         self.passwd = md5(pwd + self.ucode)
 
     def check_password(self, pwd):
-        print pwd
-        print md5(pwd + self.ucode)
-        print self.ucode
-        print self.passwd
         return md5(pwd + self.ucode) == self.passwd
+    
+    @property
+    def vipend_time(self):
+        return int(1000*time.mktime(self.vipend.timetuple()))
 
 
 

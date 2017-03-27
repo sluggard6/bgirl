@@ -9,7 +9,7 @@ import Http from './http'
 export default class Application {
 
   static localLogin(uname, pwd, seid) {
-    Http.httpGet(Application.getUrl(Global.urls.profile), (res) => {
+    Http.httpGet(Application.getUrl(Global.urls.user), (res) => {
       console.log(res)
       if(res.success === true) {
         Global.user = res.user
@@ -19,6 +19,13 @@ export default class Application {
         Global.isLogin = true
       }
     })
+  }
+
+  static isVip() {
+    if(Global.isLogin){
+      return Global.user.vipend > Global.serverTime
+    }
+    return false
   }
 
 

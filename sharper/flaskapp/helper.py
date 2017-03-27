@@ -15,6 +15,7 @@ import sys
 from ..lib.error import ErrorCode, AppError
 from ..util.helper import get_utf8, get_unicode
 from .logger import logger
+import time
 
 __authors__ = ['"linnchord gao" <linnchord@gmail.com>']
 
@@ -63,7 +64,8 @@ def json_error_msg(msg, code, http_status=200):
                    code=code,
                    error_code=code,
                    error_msg=msg,
-                   message=msg
+                   message=msg,
+                   serverTime=int(1000*time.time())
     )
     resp.status_code = http_status
     return resp
@@ -85,7 +87,7 @@ def json_error(err='', http_status=200):
 
 
 def json_ok(**kwargs):
-    return jsonify(success=True, **kwargs)
+    return jsonify(success=True,serverTime=int(time.time()*1000), **kwargs)
 
 
 def xml_ok(**kwargs):

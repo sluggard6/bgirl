@@ -94,6 +94,7 @@ def checkPhone():
 @login_required
 def profile():
     u = current_user
+    print u
     ret = dict()
     ret['id'] = u.id
     ret['status'] = u.status
@@ -101,6 +102,7 @@ def profile():
     ret['balance'] = u.balance
     ret['score'] = u.score
     ret['realname'] = u.realname
+    ret['vipend'] = u.vipend_time
     return g.ret_success_func(user=ret)
     
     
