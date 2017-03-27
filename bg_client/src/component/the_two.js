@@ -22,11 +22,11 @@ export default class TheTwo extends Component {
   render(){
     return (
       <View style={styles.list_container}>
-        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[0].group.id)}>
-          <ViewPic pic={this.props.data[0].pic} group={this.props.data[0].group}/>
+        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[0].component.id)}>
+          <ViewPic pic={this.props.data[0].pic} component={this.props.data[0].component}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[1].group.id)}>
-          <ViewPic pic={this.props.data[1].pic} group={this.props.data[0].group} />
+        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[1].component.id)}>
+          <ViewPic pic={this.props.data[1].pic} component={this.props.data[0].component} />
         </TouchableOpacity>
       </View>
     );

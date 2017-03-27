@@ -12,6 +12,7 @@ import Global from '../utils/global'
 import Application from '../utils/application'
 import FullPicView from './full_view'
 import FullPicTabBar from '../component/full_pic_bar'
+import LoginWindow from '../component/login'
 
 
 
@@ -19,12 +20,13 @@ export default class FullViewTab extends Component {
 
   constructor(props) {
 		super(props);
-    console.log("group_id:"+props.groupId)
     this.state = {
       pics: "",
-      loaded: false
+      loaded: false,
+      alert: false,
     }
     this._loadData = this._loadData.bind(this);
+    this._doAlert = this._doAlert.bind(this);
   }
 
   componentDidMount() {
@@ -32,15 +34,22 @@ export default class FullViewTab extends Component {
   }
 
   _loadData() {
-    url = Application.getUrl(Global.urls.group)+this.props.groupId
+    url = Application.getUrl(Global.urls.group)+this.props.componentId
     Http.httpGet(url, this._setData.bind(this))
   }
 
   _setData(responseData) {
     this.setState({
       pics: responseData.pics,
-      loaded: true
+      loaded: true,
+      alert: false
     })
+  }
+
+  _doAlert() {
+    if(this.state.alert) {
+      return <LoginWindow/>
+    }
   }
 
   render() {
@@ -53,16 +62,23 @@ export default class FullViewTab extends Component {
         </View>
       );
     }else{
-      pics = [];
-
       return (
         <ScrollableTabView
           renderTabBar={() => <FullPicTabBar/>}
           tabBarPosition="top"
+          ref={(tabView) => { this.tabView = tabView; }}
+          onChangeTab={(tab) => {
+            console.log("onChangeTab : " + tab.i)
+            if(tab.i >= Global.maxView) {
+              if(!Application.isVip()){
+                this.tabView.goToPage(tab.from)
+              }
+            }
+          }}
           >
           {
             this.state.pics.map((pic, index) => {
-              return (<FullPicView pic={pic} tabLabel={index+1} key={index}/>);  // 单行箭头函数无需写return
+              return (<FullPicView pic={pic} tabLabel={index+1} key={index} alert={false}/>);  // 单行箭头函数无需写return
             })
           }
         </ScrollableTabView>

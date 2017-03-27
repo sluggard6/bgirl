@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Global from './global'
 
 export default class Http {
 
@@ -9,6 +10,9 @@ export default class Http {
       credentials: "seid"
     }).then((response) => response.json())
       .then((responseData) => {
+        if(responseData.serverTime != null){
+          Global.serverTime = responseData.serverTime
+        }
         callback(responseData)
       }).catch((err) => {
         console.log(err);

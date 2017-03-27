@@ -22,7 +22,7 @@ export default class Banner extends Component {
 
   render(){
     return (
-      <TouchableOpacity onPress={() => this.props.onPress(this.props.data[0].group.id)}>
+      <TouchableOpacity onPress={() => this.props.onPress(this.props.data[0].component.id)}>
         <Image source={{uri:this.props.data[0].pic.min}} style={styles.container}>
           <View style={styles.text_container}>
             <Text style={styles.text_name}>{this.props.data[0].des}</Text>

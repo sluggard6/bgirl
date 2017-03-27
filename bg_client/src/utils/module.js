@@ -16,11 +16,11 @@ export default class Module extends Component {
     this.buildModule = this.buildModule.bind(this)
   }
 
-  onPress(groupId) {
+  onPress(componentId, category) {
     this.props.navigator.push({
 			component: FullViewTab,
       params: {
-        groupId: groupId
+        componentId: componentId
       }
 		})
   }

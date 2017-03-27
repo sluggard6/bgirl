@@ -11,10 +11,20 @@ import BgirlTabBar from '../component/bgirl_tab_bar'
 import Global from '../utils/global'
 
 
+
+
 export default class FullPicView extends Component {
 
   constructor(props) {
 		super(props);
+  }
+
+  componentWillUpdate(nextProps, nextState){
+    // console.log(this.props)
+    // console.log(nextProps)
+    // console.log("---------------------------")
+    // console.log(this.state)
+    // console.log(nextState)
   }
 
   render() {

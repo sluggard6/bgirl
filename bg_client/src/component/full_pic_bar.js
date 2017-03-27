@@ -38,10 +38,10 @@ export default class FullPicTabBar extends Component {
         </Image>
       )
     }
-    if(i == 4) {
+    if(i == Global.maxView - 1) {
       return (
         <Image key={i} source={require('../images/yuan1.png')} style={{height: 20, width: 20, margin: 2, resizeMode: Image.resizeMode.contain,justifyContent: 'center',alignItems: 'center'}}>
-          <Text style={{color: "white"}}>5</Text>
+          <Text style={{color: "white"}}>{Global.maxView}</Text>
         </Image>
       )
     }

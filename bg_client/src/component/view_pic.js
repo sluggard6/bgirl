@@ -24,7 +24,7 @@ export default class ViewPic extends Component {
           style={styles.image}
           source={{uri: this.props.pic.max}}
         />
-        <Text>{this.props.group.title}</Text>
+        <Text>{this.props.component.title}</Text>
       </View>
     );
   }
