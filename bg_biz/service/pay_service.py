@@ -121,14 +121,6 @@ class PayService(object):
             return Alipay()
         elif channel == Transaction.PayType.ALIPAY_WAP:
             return AlipayWap()
-        elif channel == Transaction.PayType.FUZHIFU:
-            return Fuzhifu()
-        elif channel == Transaction.PayType.YEEPAY_CREDIT:
-            return YeepayCredit()
-        elif channel == Transaction.PayType.YEEPAY_DEPOSIT:
-            return YeepayDeposit()
-        elif channel == Transaction.PayType.YEEPAY_CARD:
-            return YeepayCard()
         #         elif trans.pay_type == Transaction.PayType.SANXIAFU_WAP:
         #             return SanxiaPayMobile()
         #         elif trans.pay_type == Transaction.PayType.SANXIAFU_DIRECT:
