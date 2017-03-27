@@ -21,7 +21,7 @@ import * as WeChat from 'react-native-wechat';
 
 export default class Charge extends Component{
   alipayPage() {
-    Http.httpGet(Application.getUrl(Global.urls.pageIndex),this.alipayCallback.bind(this))
+    Http.httpGet(Application.getUrl(Global.urls.charge)+"?pay_type=alipay_app",this.alipayCallback.bind(this))
 
   }
   alipayCallback(responseData){
