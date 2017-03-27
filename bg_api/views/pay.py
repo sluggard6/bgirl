@@ -304,6 +304,32 @@ def alipay_app_notify():
         print '-------------',e
         raise AppError(u"支付宝回调失败")
 
+@PayView.route('/notify/auth/alipay_app', methods=['POST'])
+def alipay_app_notify():
+    logger_pay.error("\n=================alipay notify auth===========================\n")
+    logger_pay.error(request.url)
+    logger_pay.error(request.form)
+    try:
+        trade_status = request.form.get('trade_status', None)
+        if trade_status == u'TRADE_SUCCESS':
+            verify_result = Alipay.verify_sign_rsa(request.form)
+            if verify_result:
+                trans_id = request.form.get('out_trade_no', None)
+                trans = Transaction.get(trans_id)
+                if trans.status == Transaction.Status.NEW:
+                    trans.memo = ', '.join("%s:%s" % (key, request.form[key]) for key in request.form)
+                    trans.pay_time = request.form.get('gmt_payment', datetime.now())
+                    trans.payment_account = request.form.get('buyer_email', None)
+                    trans.out_serial_no = request.form.get('trade_no', None)
+                    PayService.get_callback(trans).execute(trans)
+                    trans.update()
+        return "success"
+    except Exception as e:
+        logger_pay.error(traceback.format_exc())
+        logger_pay.error(e)
+        print '-------------',e
+        raise AppError(u"支付宝回调失败")
+
 
 @PayView.route('/notify/fuzhifu', methods=['POST'])
 def fuzhifu_notify():
