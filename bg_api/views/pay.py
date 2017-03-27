@@ -305,7 +305,7 @@ def alipay_app_notify():
         raise AppError(u"支付宝回调失败")
 
 @PayView.route('/notify/auth/alipay_app', methods=['POST'])
-def alipay_app_notify():
+def alipay_app_auth_notify():
     logger_pay.error("\n=================alipay notify auth===========================\n")
     logger_pay.error(request.url)
     logger_pay.error(request.form)
