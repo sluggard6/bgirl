@@ -15,7 +15,7 @@ def do_pay():
     pay_type = request.args.get('pay_type')
     title = u'支付宝充值'
     detail = u'昧昧充值'
-    amount = 1
+    amount = 100
     charge_id = 1
     callback = ''
     object_type = Transaction.ObjectType.CHARGE
