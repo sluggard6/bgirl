@@ -20,7 +20,8 @@ const Global = {
     vcode: "/vcode",
     register: "/user/register",
     login: "/user/login",
-    user: "/user/profile"
+    user: "/user/profile",
+    charge:"/charge/do"
   },
   guide: {
     image1: require('../images/guide_1.jpg'),

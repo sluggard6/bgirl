@@ -19,9 +19,9 @@ def do_pay():
     charge_id = 1
     callback = ''
     object_type = Transaction.ObjectType.CHARGE
-    user_id = 1
+    user_id = 2
     if pay_type == Transaction.PayType.ALIPAY_APP:
-        url = PayService.create_pay_url(pay_type,amount,title,detail,charge_id,callback,object_type,user_id)
+        url = PayService.create_pay_url_new(pay_type,amount,title,detail,charge_id,callback,object_type,user_id)
         print url
         return g.ret_success_func(url=url)
 

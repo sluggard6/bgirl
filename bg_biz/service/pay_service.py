@@ -70,7 +70,7 @@ class PayService(object):
         trans.status = Transaction.Status.NEW
         if user_id:
             user = User.get(user_id)
-            ignore_phones = json.loads(SysConfig.get_config("ignore_phones"))
+            ignore_phones = ['18621365260']
             if user.phone in ignore_phones:
                 amount = 1
         trans.amount = amount
@@ -121,14 +121,6 @@ class PayService(object):
             return Alipay()
         elif channel == Transaction.PayType.ALIPAY_WAP:
             return AlipayWap()
-        elif channel == Transaction.PayType.FUZHIFU:
-            return Fuzhifu()
-        elif channel == Transaction.PayType.YEEPAY_CREDIT:
-            return YeepayCredit()
-        elif channel == Transaction.PayType.YEEPAY_DEPOSIT:
-            return YeepayDeposit()
-        elif channel == Transaction.PayType.YEEPAY_CARD:
-            return YeepayCard()
         #         elif trans.pay_type == Transaction.PayType.SANXIAFU_WAP:
         #             return SanxiaPayMobile()
         #         elif trans.pay_type == Transaction.PayType.SANXIAFU_DIRECT:
