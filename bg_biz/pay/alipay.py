@@ -15,7 +15,35 @@ gateway = "https://www.alipay.com/cooperate/gateway.do"
 
 
 class Alipay(object):
-    ALIPAY_RSA_PRIVATE = 'MIIEpQIBAAKCAQEA2ujHGXxEmbv5N0kjodcqSxHGNmo+qy86KnnOdrzxEbuvHQwYHluQ5zur0rIEP3g6p2fekcKI22CFD1h9sKhm5pFtVvzY+aXBLWDSZXetEgZxX3nSre6KU80EWAPAgxZXOOeL7QTH8BbH2W6sxUt0j1BR8GmnkEeXNVnRTh1T9cJ+HFCvPoVDa6Mx2TPG/OBHBsL+J689S5BX/5IehKLkfqZQsD8DI7GV0XaxuBHek04A1aAKIaLvL56+Yr16sMozxfdH4yduixPT7gboCHt8I4orYZozwlZvkrccFOSUJW05ZqalmutElRJOHAR1lZlm7u1FqbN1SfJ0caOhmSp7rQIDAQABAoIBAQCJ6/19XiEupxMmtQshLZp0/7bdk+T2H+RK3MGrZ/GO1axH5dXQUqqiNaNVNVmdz5dM4BGHzoRBi7dp6rwOMJvciyXTl6zw5XEnsQf+a/98CtklaXDGqzM2B0bEWWDSdqHvtVsgs1FxQDkcEjICgD7pCJcHnNm4+pIXSAaqa6n5fSzY7kr00FBGvHvDGh1hn6WUwYt2u1WuqmIj3t164OFOwbYpr3q6tGtIa46oEw0IHK1ostVKUZuaRROoaMzbwZrSR2blt/7nuqih3Gc7XC5vD+6tDtzcvIoA+ZWa50YsnT+rs9o+O6/GxIwTL5UCm/nCoZITKHQtqvIAm6yjCfKhAoGBAPzqhwmEkWKDRqPKy4o/FbDtAUC3zYgUM7de1+Ov3dXtc04FbdbdC5vV+mF4xR11Nbd6wKELjFJE9eE9nGoBGKXJVd50l4P9EwMagAe81QMwl0+ao7Ml1CcDqThUvtmboKuRPJNTkAJ/duz/QbVQUrzLjd2a4z1KLOjRS1eUNQB1AoGBAN2UGT4LeTNahZICGE4gpHF7RJy+RkFYqtJfzuxC684b7ZWe+Ka9zaMnXpWgXG1TLiG6pbCDralcT9vKWoYwhLUKbIT4mO1Qu3e2QC8w0IcTu0DUU5gnpQElKzL9CySc730bS92nSbZd66mtd++H/9pwFPwWnAtlcwCEC1pjjadZAoGBAL4Z2h5BUrXlTndWut7SxA8UVdi7TvV1mdm+pC8zxV5C+GQwmHrj8xHTKDuTdzXJH/MlhRyHfZVo2BfRI3xaDpiuWKi4ohpHYr72cD1gpgubvl/LMDg7utcIXW1F5Z3S6FWM+ScTrC70eANzaYRLN6VIqv1iqmMrGc51YlgVwjDxAoGAQ2SRDOL2eR0WNSN3+wNIoM9qPfZNbgCm7BeB2zA7glPSPki8vhJKok4OIZpFombDSDT5wic6waE3FNWGFPxa0Kmb+hGWic+dRTrkaLYDJqJkuMIbrtKYCDIi4n4+TmOBH98WgxMng1UroU8GhI8rzWd7qnTB/2FayhRfU52l7vkCgYEA9EanJNrSyibkle8OlP0wQcNuGSTYaoprFOD/SjpEdnvLgY8j7PrnUtDsJVh/gGFt3lxeknWBZz+BxbrnnMgwt2iabq8iYyYOUmMLl5a1s1Q7L1HqQsp86e+NFOzL1E2wmY+uLW8PcAIwHs1vQbtsfzmPyrxJjSgNBedduYGvzNI='
+    ALIPAY_RSA_PRIVATE = '''
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEAsCCJoP332rYh+sITLKfyvXXdSxhgH7oVJk/KFFMgzngnLxX3
+Gu7MOyTxj18bEnqAC6j4xsj/Xzm8l4Qr2P7R1R1Waq0DrV2DWQB7hsw2q3kJxx8b
+7/vszPxYdLnAINofDmwHjRkwgAdp9ynuU2iremuve+N933NG4kJCTdAGtYsYNUaB
+8ZRCXuBDAhQL5++3O5w/3Sw/lnBx4Jwu01+YkvHPJjX8/1s6keftqxmNg67eC/9S
+jIHQ3TBTdx7BNmZ9+iym64sN/nqDf3cG0VhoypGZpnklFRAFwBUJSfZmSVeX/qmH
+nP7nVGeU0D9FwE9lhPKaqATOsm4BLMP19OXuTQIDAQABAoIBAEkO5iga0SIvJL8w
+m+WNMRq39nh8/vqKJNXEiS2PIe+jVZWphdvtLFhoRa9UIxWyLMUpbTCAFbY5a+pp
+0ApuATpmtf8AD6NtQ9u6YIMU2KSeS5kGZX9Rv/NzxXl9x52Y/QLteuBjj4O8D4+Q
+HCULKP5aBuvb/M2gssmN9JT0cqQBArfkyysShPtaNOiEGc28H/3AdTT3dzdGnkVd
+2rUmHunRDw/r9PgnxS3FxQw1ZuwB5CJc0+0/ZTteVeFOpSRz8x1NOCaFGxg4xUG+
+e4kTbI/ACzxiABBb6WPMnWnVmzS3+jZDNDSPpt2wVfp/cEmfyFMC4RsqEJrIO2R5
+R2k2YqECgYEA6QrvYt8X+xB/4pbRHBIPY35xuCBNsxy5WYhR9bG38CgGYMKKY+F2
+GXj5AKVdaQoi71CmwVuvonU4/mXq0rHIIVBCvNomVJfllh9To6i3SARhZtGRKDUP
+BbUekXVCmBCTotcBZkbKWduZuLNkjssAurENXW/Gk3BGjQ9r7g2f3ikCgYEAwXpB
+2Q7yl7pqWy0lqnsp1DwG9A6aKTuJXuDHNE9Y/O95F3YqP3AiwpfWMtlu7n4w4O7/
+kv0XM/uxrDcQQYvjO3UIzDWPw2rSFfxsrUijVcMCUbvuIgMZ5Dy9on6wDD0fsFoz
+/ImYT9Wug46lGyA11dPWSK4CjImhX49nuHnly4UCgYA1WzCWBZg6/nsZSQiVkbj+
+QawNyS+hC7mQOzrwswD3NmLHcqM23R8qE92G/VWWwCBhhKi5aqGa45XqATGzjcrR
+fcvZ62SNR73kEkYXGYDlN0OJw/+lIgjPeLmH+j4GDP2QcgO7BAg+bJ4UgNZML0R6
+eiEiPH5NsY4lq9s9RNdOiQKBgEXhmZ0DqB2jaDzMXrlnyODuWXiXOZlA9sn9GBZN
+vo+FE1ClDndhUjzEyMoO/OFJVPA5grgdj97nvvG75bQ3CXj1OZtAkU986qqkRMCF
+5vDYAaNx5H4GbrigM8JYTc/t199DhVlmfUwAmwrLX9kfVjKIU/JmX2dRYqb4Tfc0
+mApdAoGBAOKxGPM6yynd7PpBxPWYx1YU4SsDXhSNxyC6xF+ZYFVyiY6Czr3q7YDs
++wHe/vtx2CHYddmUlXO+IAV3U4K6L0Nt8jAnROI3YIUFWj0vDTsp6P8aHU09w8K+
+U8XGCAUxbYVZgvtFt5f6pW3lqLVPr8iIrD9K92+VyP1vIfWS2ImH
+-----END RSA PRIVATE KEY-----
+'''
     account = "2810396709@qq.com"
 
     @classmethod
@@ -29,7 +57,17 @@ class Alipay(object):
         signature = key.sign(digest, "sha1")
         return urllib.quote_plus(base64.b64encode(signature))
 
-    alipay_rsa_public_key = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2ujHGXxEmbv5N0kjodcqSxHGNmo+qy86KnnOdrzxEbuvHQwYHluQ5zur0rIEP3g6p2fekcKI22CFD1h9sKhm5pFtVvzY+aXBLWDSZXetEgZxX3nSre6KU80EWAPAgxZXOOeL7QTH8BbH2W6sxUt0j1BR8GmnkEeXNVnRTh1T9cJ+HFCvPoVDa6Mx2TPG/OBHBsL+J689S5BX/5IehKLkfqZQsD8DI7GV0XaxuBHek04A1aAKIaLvL56+Yr16sMozxfdH4yduixPT7gboCHt8I4orYZozwlZvkrccFOSUJW05ZqalmutElRJOHAR1lZlm7u1FqbN1SfJ0caOhmSp7rQIDAQAB'
+    alipay_rsa_public_key = '''
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsCCJoP332rYh+sITLKfy
+vXXdSxhgH7oVJk/KFFMgzngnLxX3Gu7MOyTxj18bEnqAC6j4xsj/Xzm8l4Qr2P7R
+1R1Waq0DrV2DWQB7hsw2q3kJxx8b7/vszPxYdLnAINofDmwHjRkwgAdp9ynuU2ir
+emuve+N933NG4kJCTdAGtYsYNUaB8ZRCXuBDAhQL5++3O5w/3Sw/lnBx4Jwu01+Y
+kvHPJjX8/1s6keftqxmNg67eC/9SjIHQ3TBTdx7BNmZ9+iym64sN/nqDf3cG0Vho
+ypGZpnklFRAFwBUJSfZmSVeX/qmHnP7nVGeU0D9FwE9lhPKaqATOsm4BLMP19OXu
+TQIDAQAB
+-----END PUBLIC KEY-----
+'''
     partner = "2016080300154007"
     key = "evXk728NyjEEV2jmb6agRA=="
 
@@ -343,7 +381,7 @@ class AlipayAPP(Alipay):
         ''' Make sure using unicode or utf-8 as params
         '''
         # 价格在这里进行转换
-        print '--------source--------',source
+        print '----------source------',source
         if source == "gateway":
             return_url = "%s/pay/gateway/%s/callback" % (ConfigService.get_host(ConfigService.Host.MOBILE), trans.id)
             notify_url = ConfigService.get_host(ConfigService.Host.API) + "/pay/gateway/notify/alipay_app"
@@ -351,7 +389,7 @@ class AlipayAPP(Alipay):
             return_url = "%s/pay/%s/callback" % (ConfigService.get_host(ConfigService.Host.MOBILE), trans.id)
             notify_url = ConfigService.get_host(ConfigService.Host.API) + "/pay/notify/alipay_app"
         amount = decimal_pretty(float(trans.amount) / 100)
-        print '--------amount--------',amount
+        print '-------amount---------',amount
         params = {
             "service": "mobile.securitypay.pay",
             "partner": cls.partner,
@@ -362,13 +400,13 @@ class AlipayAPP(Alipay):
             "total_fee":str(amount),
             "body":trans.detail
         }
-        print '--------service--------',params['service']
+        print '---------service-------',params['service']
         before_sign_str = '''service="%s"&partner="%s"&_input_charset="utf-8"&notify_url="%s"&out_trade_no="%s"&subject="%s"&payment_type="1"&seller_id="%s"&total_fee="%s"&body="%s"''' \
                           % (
             params['service'], params['partner'], params['notify_url'], params['out_trade_no'], params['subject'],params['seller_id'], params['total_fee'],params['body'])
-        print '--------before sign str--------',before_sign_str
+        print '-------before_sign_str---------',before_sign_str
         sign = cls.sign_rsa(before_sign_str)
         request_data = '%s&sign="%s"&sign_type="RSA"' % (before_sign_str, sign)
-        print '--------request data--------',request_data
+        print '---------request_data-------',request_data
         return request_data.encode("utf-8")
 
