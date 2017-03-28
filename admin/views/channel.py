@@ -105,9 +105,11 @@ def group_edit():
     data = request.form or request.args
     print data
     id = data.get('id', None)
+
     form = GroupForm()
     print 'channel=', id
-
+    channels = Channel.query.filter_by(status=1).order_by(Channel.id.asc()).all()
+    g.channels = channels
     if id:
         group = Group.get(id)
         g.thumb =group.thumb_http
@@ -144,6 +146,8 @@ def group_edit():
                     AdminLog.write("新组添加", g.me.id, ip=request.remote_addr, key1=group.id,
                                    key2=group.name)
                     flash(u'创建组成功', 'ok')
+                    r_list = request.form.getlist('channel_selected')
+                    group.update_channels(map(lambda x: int(x), r_list))
                     return redirect(url_for("channel.group_list"))
                 except IntegrityError as e:
                     print e
@@ -174,6 +178,8 @@ def group_edit():
 
                     form.name.data = group.name
                     flash(u'修改组成功', 'ok')
+                    r_list = request.form.getlist('channel_selected')
+                    group.update_channels(map(lambda x: int(x), r_list))
                     return redirect(url_for("channel.group_list"))
                 except IntegrityError as e:
                     db.session.rollback()

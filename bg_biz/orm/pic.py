@@ -101,11 +101,21 @@ class Group(BaseModel, KvdbMixin):
     def _clear_all_pics(self):
         db.engine.execute('DELETE FROM group_pic_mapping WHERE group_id=%s', self.id)
 
+    def _clear_all_channels(self):
+        db.engine.execute('DELETE FROM group_channel_mapping WHERE group_id=%s', self.id)
+
     def update_pics(self, pic_id_list):
         self._clear_all_pics()
         if pic_id_list:
             db.engine.execute(group_pic_mapping.insert(), [
                 dict(group_id=self.id, pic_id=rid) for rid in pic_id_list
+                ])
+
+    def update_channels(self, channel_id_list):
+        self._clear_all_channels()
+        if channel_id_list:
+            db.engine.execute(group_channel_mapping.insert(), [
+                dict(group_id=self.id, channel_id=rid) for rid in channel_id_list
                 ])
 
     @property

@@ -134,9 +134,11 @@
                 <form action="/page/custom_content" method="post">
                     <input type="hidden" name="module_id" id="module_id" value=""/>
                     <input type="hidden" name="content_id" id="content_id" value=""/>
-                    <!--<div class="form-group">-->
-                        <!--<label><input type="checkbox" name="title" id="title" value="title">标题</label>-->
-                    <!--</div>-->
+                    <div class="form-group">
+                        <label><input type="radio" name="channel" id="channel" value="1">频道</label>
+                        <label><input type="radio" name="group" id="group" value="0">专辑</label>
+                    </div>
+
                     <div class="form-group">
                         <label>专辑</label>
                         <select id="combobox" name="combobox">
