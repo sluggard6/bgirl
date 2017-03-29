@@ -41,8 +41,10 @@ const Global = {
   buildVersion : '0.1.0',
   default_host : "http://test.api.vogor.cn",
   pr: PixelRatio.get(),
-  maxView: 5,
-  serverTime: new Date().getTime()
+  maxView: 3,
+  isAlert: false,
+  serverTime: new Date().getTime(),
+  navigator: null
 };
 
 export default Global;

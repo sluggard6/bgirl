@@ -9,6 +9,8 @@ import Channel from './channel'
 import User from './user'
 import BgirlTabBar from '../component/bgirl_tab_bar'
 import Global from '../utils/global'
+import AlertWinow from '../component/windows'
+
 
 
 
@@ -27,9 +29,19 @@ export default class FullPicView extends Component {
     // console.log(nextState)
   }
 
+  _doAlert() {
+    if(Global.isAlert) {
+      return (<AlertWinow unLock={this.props.unLock}/>)
+    }
+    return
+  }
+
   render() {
+    // console.log("-------------pic_view_render---------------- : " + this.props.tabLabel)
     return (
-      <Image source={{uri: this.props.pic.max}} style={styles.image}/>
+      <Image source={{uri: this.props.pic.max}} style={styles.image}>
+        {this._doAlert()}
+      </Image>
     );
   }
 

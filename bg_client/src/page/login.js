@@ -35,27 +35,14 @@ export default class Login extends Component{
     })
   }
 
-  unSupport() {
-    ToastAndroid.show('敬请期待', ToastAndroid.SHORT);
+  doLogin(){
+    Application.login(this.state.uname, this.state.pwd, this.loginCallBack.bind(this))
   }
 
-  login() {
-    params = {
-      uname: this.state.uname,
-      pwd: this.state.pwd
-    }
-    Http.httpPost(Application.getUrl(Global.urls.login), params, this.loginCallBack.bind(this));
-  }
-
-  loginCallBack(res) {
-    if(res.success === true) {
-      Application.localLogin(this.state.uname, this.state.pwd, res.msg)
-      this.props.navigator.resetTo({
-        component: TabBarView
-      })
-    }else{
-      ToastAndroid.show(res.message,ToastAndroid.SHORT)
-    }
+  loginCallBack() {
+    this.props.navigator.resetTo({
+      component: TabBarView
+    })
   }
 
   render(){
@@ -65,7 +52,7 @@ export default class Login extends Component{
           <Text style={{color: '#fff', fontSize: 20}}>登   录</Text>
         </View>
         <View style={styles.oauthContainer}>
-          <TouchableOpacity onPress={this.unSupport}>
+          <TouchableOpacity onPress={Application.unSupport}>
             <View sytle={styles.oauthBean}>
               <Image source={require('../images/sina.png')} style={styles.oauthImage}/>
               <View style={{alignItems:'center'}}>
@@ -73,7 +60,7 @@ export default class Login extends Component{
               </View>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.unSupport}>
+          <TouchableOpacity onPress={Application.unSupport}>
             <View sytle={styles.oauthBean}>
               <Image source={require('../images/QQ.png')} style={styles.oauthImage}/>
               <View style={{alignItems:'center'}}>
@@ -81,7 +68,7 @@ export default class Login extends Component{
               </View>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.unSupport}>
+          <TouchableOpacity onPress={Application.unSupport}>
             <View sytle={styles.oauthBean}>
               <Image source={require('../images/weixin.png')} style={styles.oauthImage}/>
               <View style={{alignItems:'center'}}>
@@ -116,7 +103,7 @@ export default class Login extends Component{
             placeholder='密码'
             password={true} />
         </View>
-        <TouchableOpacity onPress={this.login.bind(this)}>
+        <TouchableOpacity onPress={this.doLogin.bind(this)}>
           <View style={styles.loginButton}>
             <Text style={{color: '#fff'}} >自动登录</Text>
           </View>

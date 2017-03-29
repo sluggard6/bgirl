@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
+import {View} from 'react-native'
 import ScrollableTabView, {DefaultTabBar, } from 'react-native-scrollable-tab-view';
 
 import Main from './main'
 import Channel from './channel'
 import User from './user'
 import BgirlTabBar from '../component/bgirl_tab_bar'
+import LoginWiodow from '../component/windows'
+import Global from '../utils/global'
 
 export default class TabBarView extends Component {
   constructor(props) {
@@ -15,6 +18,10 @@ export default class TabBarView extends Component {
       tabActiveIconNames: [require('../images/w_main.png'), require('../images/w_channel.png'), require('../images/w_user.png')]
 		};
 	}
+
+  componentWillMount() {
+    Global.navigator = this.props.navigator
+  }
 
   render() {
     return (

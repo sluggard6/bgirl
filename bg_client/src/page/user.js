@@ -35,7 +35,6 @@ export default class User extends Component {
     });
     this.state = {
       dataSource: ds.cloneWithRows(user_info_menu),
-      isLogin: Global.isLogin
     };
   }
 
@@ -66,12 +65,11 @@ export default class User extends Component {
   }
 
   getNick() {
-    console.log(Global.isLogin)
     if(Global.isLogin) {
       let nick = Global.user.nick==null?"新用户"+Global.user.id:Global.user.nick
       return (
         <View>
-        <TouchableOpacity onPress={this.loginPage.bind(this)}>
+        <TouchableOpacity>
           <View style={styles.userinfo}>
             <Text style={{fontSize: 25}}>{nick}</Text>
           </View>

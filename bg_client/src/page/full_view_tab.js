@@ -12,7 +12,6 @@ import Global from '../utils/global'
 import Application from '../utils/application'
 import FullPicView from './full_view'
 import FullPicTabBar from '../component/full_pic_bar'
-import LoginWindow from '../component/login'
 
 
 
@@ -23,14 +22,21 @@ export default class FullViewTab extends Component {
     this.state = {
       pics: "",
       loaded: false,
-      alert: false,
+      locked: false,
+      goBack: true
     }
-    this._loadData = this._loadData.bind(this);
-    this._doAlert = this._doAlert.bind(this);
+    this._loadData = this._loadData.bind(this)
   }
 
   componentDidMount() {
     this._loadData();
+  }
+
+  componentDidUpdate() {
+    if(this.state.goBack) {
+      this.state.goBack = false
+      this.tabView.goToPage(Global.maxView - 1)
+    } 
   }
 
   _loadData() {
@@ -46,13 +52,21 @@ export default class FullViewTab extends Component {
     })
   }
 
-  _doAlert() {
-    if(this.state.alert) {
-      return <LoginWindow/>
-    }
+  doLock() {
+    this.setState({
+      locked: true
+    })
+  }
+
+  unLock() {
+    this.setState({
+      locked: false,
+      goBack: true
+    })
   }
 
   render() {
+    // console.log("scrollable view render : " + this.state.locked)
     if(!this.state.loaded){
       return (
         <View style={styles.loading}>
@@ -67,18 +81,20 @@ export default class FullViewTab extends Component {
           renderTabBar={() => <FullPicTabBar/>}
           tabBarPosition="top"
           ref={(tabView) => { this.tabView = tabView; }}
+          locked={this.state.locked}
           onChangeTab={(tab) => {
-            console.log("onChangeTab : " + tab.i)
+            {/*console.log("onChangeTab : " + tab.i)*/}
             if(tab.i >= Global.maxView) {
               if(!Application.isVip()){
-                this.tabView.goToPage(tab.from)
+                Application.doAlert()
+                this.doLock()
               }
             }
           }}
           >
           {
             this.state.pics.map((pic, index) => {
-              return (<FullPicView pic={pic} tabLabel={index+1} key={index} alert={false}/>);  // 单行箭头函数无需写return
+              return (<FullPicView pic={pic} tabLabel={index+1} key={index} unLock={this.unLock.bind(this)}/>);  // 单行箭头函数无需写return
             })
           }
         </ScrollableTabView>
