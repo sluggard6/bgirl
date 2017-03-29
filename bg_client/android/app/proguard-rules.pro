@@ -67,6 +67,9 @@
 
 -dontwarn android.text.StaticLayout
 
+-dontwarn android.net.**
+-keep class android.net.SSLCertificateSocketFactory{*;}
+
 -keep class com.tencent.mm.sdk.** {
    *;
 }
