@@ -179,7 +179,7 @@
                     $("#channel_name").html('频道');
                     $("#combobox").empty();
                     ~for c in channels
-                    $("#combobox").append('<option value="{{ c.id }}" title="{{ c.group }}">{{ c.name }}</option>');
+                    $("#combobox").append('<option value="{{ c.id }}" title="{{ c.pics }}">{{ c.name }}</option>');
                             ~endfor
                 }else{
                     $("#channel_name").html('专辑');
@@ -229,7 +229,7 @@
                             this._trigger("select", event, {
                                 item: ui.item.option
                             });
-                            var title = $("input[name='title']:checked").val();
+                            var title = $("input[name='optionsRadiosinline']:checked").val();
 
                             var ls = $('#combobox>option:selected').attr("title");
                             show_pics(title, ls);
@@ -315,9 +315,7 @@
 
         });
         function show_pics(title, value) {
-            if (title == 'title') {
-                $("#pic_content").html("");
-            } else {
+
                 $("#pic_content").html("");
                 $.each(jQuery.parseJSON(value), function (i, item) {
                     var id = "";
@@ -326,14 +324,16 @@
                         if (i == "id") {
                             id = item;
                         }
+
                         if (i == 'min') {
                             min = item;
                         }
+
                     });
                     $("#pic_content").append('<label><input type="radio" name="pic_id" id="pic_id" value="' + id + '"> <img width="100px" height="100px" src="http://test.rs.vogor.cn/image/' + min + '"></label>');
 
                 });
-            }
+
         }
         $('#modal-container-28657').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal

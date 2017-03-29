@@ -195,6 +195,7 @@ def get_content(id):
 def custom_content():
     data = request.form
     print data
+    optionsRadiosinline = data.get('optionsRadiosinline',0)
     title = data.get('title',None)
     combobox = data.get('combobox',None)
     id = data.get('id',None)
@@ -206,6 +207,7 @@ def custom_content():
         #module=PageModule.get(module_id)
         content = PageContent.get(content_id)
         content.pic_id = pic_id
+        content.category = optionsRadiosinline
         content.component_id=combobox
         content.status = 1
         content.update()
@@ -215,6 +217,7 @@ def custom_content():
         content.module_id = module_id
         content.pic_id = pic_id
         content.component_id = combobox
+        content.category = optionsRadiosinline
         content.status = 1
         content.insert()
     module = PageModule.get(module_id)

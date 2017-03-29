@@ -65,6 +65,16 @@ class Channel(BaseModel):
             db.engine.execute(group_channel_mapping.insert(), [
                 dict(channel_id=self.id, group_id=rid) for rid in group_id_list
                 ])
+    @property
+    def pics(self):
+        pics =[]
+        for g in self.group:
+            print g
+            for pic in g.pics:
+                print pic
+                pics.append(pic)
+        print pics
+        return pics
 
 
 class Group(BaseModel, KvdbMixin):
