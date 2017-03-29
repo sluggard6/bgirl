@@ -29,6 +29,8 @@ class GroupForm(FlaskForm):
         optional()]
                             )
     thumb = HiddenField(u"封面")
+    thumb2 = HiddenField(u"封面2")
+    thumb3 = HiddenField(u"封面3")
 
     images = HiddenField(u"images")
     status = BooleanField(u'状态')

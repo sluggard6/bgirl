@@ -113,6 +113,8 @@ def group_edit():
     if id:
         group = Group.get(id)
         g.thumb =group.thumb_http
+        g.thumb2 = group.thumb2_http
+        g.thumb3 = group.thumb3_http
         g.photo_and_thumbs = group.pics
         act = u'编辑'
         if request.method == 'GET':

@@ -95,6 +95,8 @@ class Group(BaseModel, KvdbMixin):
     name = Column(u'name', VARCHAR(length=25), nullable=False)
     description = Column(u'description', VARCHAR(length=200))
     thumb = Column(u'thumb', VARCHAR(length=200))
+    thumb2 = Column(u'thumb2', VARCHAR(length=200))
+    thumb3 = Column(u'thumb3', VARCHAR(length=200))
     status = Column(u'status', INTEGER(), nullable=False, default=1)
 
     channels = relation('Channel',
@@ -132,6 +134,12 @@ class Group(BaseModel, KvdbMixin):
     def thumb_http(self):
         return get_download_url('image',self.thumb)
 
+    @property
+    def thumb2_http(self):
+        return get_download_url('image',self.thumb2)
+    @property
+    def thumb3_http(self):
+        return get_download_url('image',self.thumb3)
 
 class Pic(BaseModel, KvdbMixin):
     __tablename__ = 'pic'
