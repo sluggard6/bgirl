@@ -14,3 +14,16 @@ def pic_build(pic):
     dic['create_time'] = pic.create_time.strftime("%Y-%m-%d %H:%M:%S")
     dic['modify_time'] = pic.modify_time.strftime("%Y-%m-%d %H:%M:%S")
     return dic
+
+
+def group_build(group):
+    dic = dict()
+    dic['id'] = group.id
+    dic['name'] = group.name
+    dic['description'] = group.description
+    dic['status'] = group.status
+    dic['t1'] = group.thumb_http
+    dic['t2'] = group.thumb2_http
+    dic['t3'] = group.thumb3_http
+    return dic
+    

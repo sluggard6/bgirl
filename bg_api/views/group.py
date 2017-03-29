@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from bg_biz.orm.pic import Group, Channel
 from flask import Blueprint, g, request
-from bg_biz.service.pic_service import pic_build
+from bg_biz.service.pic_service import pic_build, group_build
 from sharper.util.transfer import orm_obj2dict
 
 __author__ = [
@@ -23,7 +23,7 @@ def group():
 @GroupView.route('/list/<int:channel_id>', methods=['POST', 'GET'])
 def group_by_channel(channel_id):
     channel = Channel.get(channel_id)
-    groups = [orm_obj2dict(gu) for gu in channel.group]
+    groups = [group_build(gu) for gu in channel.group]
     return g.ret_success_func(groups=groups)
 
 @GroupView.route('/<int:group_id>', methods=['POST', 'GET'])

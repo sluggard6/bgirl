@@ -97,7 +97,7 @@ class Group(BaseModel, KvdbMixin):
     thumb = Column(u'thumb', VARCHAR(length=200))
     thumb2 = Column(u'thumb2', VARCHAR(length=200))
     thumb3 = Column(u'thumb3', VARCHAR(length=200))
-    status = Column(u'status', INTEGER(), nullable=False, default=1)
+    status = Column(u'status', INTEGER(), nullable=False, default=Status.AVAILABLE)
 
     channels = relation('Channel',
                         primaryjoin='Group.id==group_channel_mapping.c.group_id',

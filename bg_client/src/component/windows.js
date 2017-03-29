@@ -9,12 +9,12 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  TouchableHighlight,
   TouchableWithoutFeedback
 } from 'react-native';
 import Global from '../utils/global'
 import Application from '../utils/application'
 import RegisterPhone from '../page/register_phone'
+import Charge from '../page/charge'
 
 export default class AlertWindow extends Component {
 
@@ -84,6 +84,14 @@ export class LoginWindow extends Component {
       component: RegisterPhone
     })
   }
+
+  goCharge(){
+    Global.navigator.push({
+      component: Charge
+    })
+  }
+
+
 
   doLogin() {
      Application.login(this.state.uname, this.state.pwd, this.props.cannel)
