@@ -1,326 +1,350 @@
 {% extends "layout/default.html" %}
 {% block head_js_css %}
-<style>
-    .custom-combobox {
-        position: relative;
-        display: inline-block;
-    }
+    <style>
+        .custom-combobox {
+            position: relative;
+            display: inline-block;
+        }
 
-    .custom-combobox-toggle {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        margin-left: -1px;
-        padding: 0;
-        /* 支持： IE7 */
-        *height: 1.7em;
-        *top: 0.1em;
-    }
+        .custom-combobox-toggle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin-left: -1px;
+            padding: 0;
+            /* 支持： IE7 */
+            *height: 1.7em;
+            *top: 0.1em;
+        }
 
-    .custom-combobox-input {
-        margin: 0;
-        padding: 0.3em;
-    }
+        .custom-combobox-input {
+            margin: 0;
+            padding: 0.3em;
+        }
 
-    .ui-autocomplete {
-        z-index: 9999;
-    }
-</style>
+        .ui-autocomplete {
+            z-index: 9999;
+        }
+    </style>
 {% endblock %}
 {% block container %}
-<div class="well">
-    <span class="title">新增、编辑页面模块。</span>
-    <select class="form-control inline_select" onchange="changePage()" id="page">
-        ~for page,page_cn in g.pages
-        <option value="{{ page }}"
-                ~if g.current_page==page
-                selected
+    <div class="well">
+        <span class="title">新增、编辑页面模块。</span>
+        <select class="form-control inline_select" onchange="changePage()" id="page">
+            ~for page,page_cn in g.pages
+            <option value="{{ page }}"
+                    ~if g.current_page==page
+                    selected
+                    ~endif
+            >{{ page_cn }}
+            </option>
+            ~endfor
+        </select>
+        <a href="/page/module/0?page={{ g.current_page }}" class="btn btn-default pull-right btn-nav">新增</a>
+        <!--<a href="/promotion/sort" class="btn btn-default pull-right btn-nav">排序</a>-->
+    </div>
+
+    ~for pm in page_modules
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    ~if pm.text
+                    {{ pm.text }}
+                    ~else
+                    -
+                    ~endif
+                </div>
+                <div class="col-md-6">
+                    <a href="/page/module/{{ pm.id }}" class="pull-right" style="margin-left:5px;">编辑</a>
+                    <a href="/page/module/up?id={{ pm.id }}&page={{ g.current_page }}" class="pull-right"
+                       style="margin-left:5px;">上升</a>
+                    <a href="/page/module/down?id={{ pm.id }}&page={{ g.current_page }}" class="pull-right"
+                       style="margin-left:5px;">下降</a>
+                    <a href="/page/module/del/{{ pm.id }}?page={{ g.current_page }}" class="pull-right"
+                       style="margin-left:5px;">删除</a>
+                </div>
+            </div>
+            <div class="row">
+                ~if pm.category == 'banner'
+
+                ~for c in pm.content_pics
+                <div class="col-md-12">
+                    <div class="thumbnail">
+
+                        <a data-whatever="{{ pm.id }}-{{ c.id }}" href="#modal-container-28657" role="button"
+                           class="btn btn-default btn-block"
+                           data-toggle="modal"><img src="{{ c.pic }}"></a>
+
+
+                    </div>
+                </div>
+                ~endfor
+                ~elif pm.category == 'the_two'
+                ~for c in pm.content_pics
+                <div class="col-md-6">
+                    <div class="thumbnail">
+                        <a data-whatever="{{ pm.id }}-{{ c.id }}" href="#modal-container-28657" role="button"
+                           class="btn btn-default btn-block"
+                           data-toggle="modal"><img src="{{ c.pic }}"></a>
+                    </div>
+                </div>
+                ~endfor
+                ~elif pm.category == 'the_three'
+                ~for c in pm.content_pics
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <a data-whatever="{{ pm.id }}-{{ c.id }}" href="#modal-container-28657" role="button"
+                           class="btn btn-default btn-block"
+                           data-toggle="modal"><img src="{{ c.pic }}"></a>
+                    </div>
+                </div>
+                ~endfor
+                ~elif pm.category == 'three_circle'
+                ~for c in pm.content_pics
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <a data-whatever="{{ pm.id }}-{{ c.id }}" href="#modal-container-28657" role="button"
+                           class="btn btn-default btn-block"
+                           data-toggle="modal"><img class="img-circle" src="{{ c.pic }}"></a>
+                        <!--<img class="img-responsive img-circle" src="http://test.rs.vogor.cn/image/2017/02/19/3e57c167529775e3.jpg">-->
+                    </div>
+                </div>
+                ~endfor
+                ~elif pm.category == 'title'
+                <div class="col-md-12">
+                    <div class="thumbnail">
+                        {{ pm.text }}
+                    </div>
+                </div>
                 ~endif
-        >{{ page_cn }}
-        </option>
-        ~endfor
-    </select>
-    <a href="/page/module/0?page={{ g.current_page }}" class="btn btn-default pull-right btn-nav">新增</a>
-    <!--<a href="/promotion/sort" class="btn btn-default pull-right btn-nav">排序</a>-->
-</div>
-
-~for pm in page_modules
-<div class="row">
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-6">
-                ~if pm.text
-                {{ pm.text }}
-                ~else
-                -
-                ~endif
             </div>
-            <div class="col-md-6">
-                <a href="/page/module/{{ pm.id }}" class="pull-right" style="margin-left:5px;">编辑</a>
-                <a href="/page/module/up?id={{ pm.id }}&page={{ g.current_page }}" class="pull-right"
-                   style="margin-left:5px;">上升</a>
-                <a href="/page/module/down?id={{ pm.id }}&page={{ g.current_page }}" class="pull-right"
-                   style="margin-left:5px;">下降</a>
-                <a href="/page/module/del/{{ pm.id }}?page={{ g.current_page }}" class="pull-right"
-                   style="margin-left:5px;">删除</a>
-            </div>
-        </div>
-        <div class="row">
-            ~if pm.category == 'banner'
-
-            ~for c in pm.content_pics
-            <div class="col-md-12">
-                <div class="thumbnail">
-
-                    <a data-whatever="{{pm.id}}-{{c.id}}" href="#modal-container-28657" role="button"
-                       class="btn btn-default btn-block"
-                       data-toggle="modal"><img src="{{c.pic}}" ></a>
-
-
-
-                </div>
-            </div>
-            ~endfor
-            ~elif pm.category == 'the_two'
-            ~for c in pm.content_pics
-            <div class="col-md-6">
-                <div class="thumbnail">
-                    <a data-whatever="{{pm.id}}-{{c.id}}" href="#modal-container-28657" role="button"
-                       class="btn btn-default btn-block"
-                       data-toggle="modal"><img src="{{c.pic}}" ></a>
-                </div>
-            </div>
-            ~endfor
-            ~elif pm.category == 'the_three'
-            ~for c in pm.content_pics
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a data-whatever="{{pm.id}}-{{c.id}}" href="#modal-container-28657" role="button" class="btn btn-default btn-block"
-                       data-toggle="modal"><img src="{{c.pic}}" ></a>
-                </div>
-            </div>
-            ~endfor
-            ~elif pm.category == 'three_circle'
-            ~for c in pm.content_pics
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a data-whatever="{{pm.id}}-{{c.id}}" href="#modal-container-28657" role="button" class="btn btn-default btn-block"
-                       data-toggle="modal"><img class="img-circle" src="{{c.pic}}" ></a>
-                    <!--<img class="img-responsive img-circle" src="http://test.rs.vogor.cn/image/2017/02/19/3e57c167529775e3.jpg">-->
-                </div>
-            </div>
-            ~endfor
-            ~elif pm.category == 'title'
-            <div class="col-md-12">
-                <div class="thumbnail">
-                    {{pm.text}}
-                </div>
-            </div>
-            ~endif
         </div>
     </div>
-</div>
-~endfor
+    ~endfor
 
-<div class="modal fade" id="modal-container-28657" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">素材选择器</h4>
-            </div>
-            <div class="modal-body">
-                <form action="/page/custom_content" method="post">
-                    <input type="hidden" name="module_id" id="module_id" value=""/>
-                    <input type="hidden" name="content_id" id="content_id" value=""/>
-                    <div class="form-group">
-                        <label><input type="radio" name="channel" id="channel" value="1">频道</label>
-                        <label><input type="radio" name="group" id="group" value="0">专辑</label>
-                    </div>
-
-                    <div class="form-group">
-                        <label>专辑</label>
-                        <select id="combobox" name="combobox">
-                            <option></option>
-                            ~for g in groups
-                            <option value="{{g.id}}" title="{{g.pics}}">{{g.name}}</option>
-                            ~endfor
-                        </select>
-                    </div>
-                    <div class="form-group">
-
-                        <div id="pic_content">
-
+    <div class="modal fade" id="modal-container-28657" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">素材选择器</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="/page/custom_content" method="post">
+                        <input type="hidden" name="module_id" id="module_id" value=""/>
+                        <input type="hidden" name="content_id" id="content_id" value=""/>
+                        <div class="form-group">
+                            <label class="checkbox-inline">
+                                <input type="radio" name="optionsRadiosinline" value="0"
+                                       checked> 专辑
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="optionsRadiosinline" value="1"> 频道
+                            </label>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label id="channel_name">专辑</label>
+                            <select id="combobox" name="combobox">
+                                <option></option>
+                                ~for g in groups
+                                <option value="{{ g.id }}" title="{{ g.pics }}">{{ g.name }}</option>
+                                ~endfor
+                            </select>
+                        </div>
+                        <div class="form-group">
 
-                    <div class="modal-footer">
-                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-                        <button class="btn btn-primary">保存设置</button>
-                    </div>
-                </form>
+                            <div id="pic_content">
+
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                            <button class="btn btn-primary">保存设置</button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
-
         </div>
     </div>
-</div>
 
-<script type="text/javascript">
-
-    function changePage() {
-        var page = $('#page').val();
-        var url = LuhuAdmin.replaceOrAddUrlParam(location.href, "page", page);
-        LuhuAdmin.loadUrl(url);
-    }
-
-    (function ($) {
-        $.widget("custom.combobox", {
-            _create: function () {
-                this.wrapper = $("<span>")
-                        .addClass("custom-combobox")
-                        .insertAfter(this.element);
-                this.element.hide();
-                this._createAutocomplete();
-                this._createShowAllButton();
-            },
-            _createAutocomplete: function () {
-                var selected = this.element.children(":selected"),
-                        value = selected.val() ? selected.text() : "";
-                this.input = $("<input>")
-                        .appendTo(this.wrapper)
-                        .val(value)
-                        .attr("title", "")
-                        .addClass("custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left")
-                        .autocomplete({
-                            delay: 0,
-                            minLength: 0,
-                            source: $.proxy(this, "_source")
-                        })
-                        .tooltip({
-                            tooltipClass: "ui-state-highlight"
-                        });
-                this._on(this.input, {
-                    autocompleteselect: function (event, ui) {
-                        ui.item.option.selected = true;
-                        this._trigger("select", event, {
-                            item: ui.item.option
-                        });
-                        var title = $("input[name='title']:checked").val();
-                        var ls = $('#combobox>option:selected').attr("title");
-                        show_pics(title, ls);
-                    },
-                    autocompletechange: "_removeIfInvalid"
-                });
-            },
-            _createShowAllButton: function () {
-                var input = this.input,
-                        wasOpen = false;
-                $("<a>")
-                        .attr("tabIndex", -1)
-                        .appendTo(this.wrapper)
-                        .button({
-                            icons: {
-                                primary: "ui-icon-triangle-1-s"
-                            },
-                            text: false
-                        })
-                        .removeClass("ui-corner-all")
-                        .addClass("custom-combobox-toggle ui-corner-right")
-                        .mousedown(function () {
-                            wasOpen = input.autocomplete("widget").is(":visible");
-                        })
-                        .click(function () {
-                            input.focus();
-                            // 如果已经可见则关闭
-                            if (wasOpen) {
-                                return;
-                            }
-                            // 传递空字符串作为搜索的值，显示所有的结果
-                            input.autocomplete("search", "");
-                        });
-            },
-            _source: function (request, response) {
-                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
-                response(this.element.children("option").map(function () {
-                    var text = $(this).text();
-                    if (this.value && ( !request.term || matcher.test(text) ))
-                        return {
-                            label: text,
-                            value: text,
-                            option: this
-                        };
-                }));
-            },
-            _removeIfInvalid: function (event, ui) {
-                // 选择一项，不执行其他动作
-                if (ui.item) {
-                    return;
+    <script type="text/javascript">
+        $(function () {
+            $(":radio").click(function () {
+                var channel = $(this).val();
+                if(channel==1){
+                    $("#channel_name").html('频道');
+                    $("#combobox").empty();
+                    ~for c in channels
+                    $("#combobox").append('<option value="{{ c.id }}" title="{{ c.group }}">{{ c.name }}</option>');
+                            ~endfor
+                }else{
+                    $("#channel_name").html('专辑');
+                    $("#combobox").empty();
+                    ~for g in groups
+                    $("#combobox").append('<option value="{{ g.id }}" title="{{ g.pics }}">{{ g.name }}</option>');
+                            ~endfor
                 }
-                // 搜索一个匹配（不区分大小写）
-                var value = this.input.val(),
-                        valueLowerCase = value.toLowerCase(),
-                        valid = false;
-                this.element.children("option").each(function () {
-                    if ($(this).text().toLowerCase() === valueLowerCase) {
-                        this.selected = valid = true;
-                        return false;
-                    }
-                });
-                // 找到一个匹配，不执行其他动作
-                if (valid) {
-                    return;
-                }
-                // 移除无效的值
-                this.input
-                        .val("");
-                this.element.val("");
-                this._delay(function () {
-                    this.input.tooltip("close").attr("title", "");
-                }, 2500);
-                this.input.data("ui-autocomplete").term = "";
-            },
-            _destroy: function () {
-                this.wrapper.remove();
-                this.element.show();
-            }
-        });
-    })(jQuery);
-    $(function () {
-        $("#combobox").combobox();
-
-    });
-    function show_pics(title, value) {
-        if (title == 'title') {
-            $("#pic_content").html("");
-        } else {
-            $.each(jQuery.parseJSON(value), function (i, item) {
-                var id = "";
-                var min = "";
-                $.each(item, function (i, item) {
-                    if (i == "id") {
-                        id = item;
-                    }
-                    if (i == 'min') {
-                        min = item;
-                    }
-                });
-                $("#pic_content").append('<label><input type="radio" name="pic_id" id="pic_id" value="' + id + '"> <img width="100px" height="100px" src="http://test.rs.vogor.cn/image/'+min+'"></label>');
-
             });
+        });
+
+        function changePage() {
+            var page = $('#page').val();
+            var url = LuhuAdmin.replaceOrAddUrlParam(location.href, "page", page);
+            LuhuAdmin.loadUrl(url);
         }
-    }
-    $('#modal-container-28657').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var recipient = button.data('whatever') // Extract info from data-* attributes
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var r_p = recipient.split('-');
-        var modal = $(this)
-        modal.find('.modal-body input[id="module_id"]').val(r_p[0])
-        modal.find('.modal-body input[id="content_id"]').val(r_p[1])
-    })
-</script>
+
+        (function ($) {
+            $.widget("custom.combobox", {
+                _create: function () {
+                    this.wrapper = $("<span>")
+                            .addClass("custom-combobox")
+                            .insertAfter(this.element);
+                    this.element.hide();
+                    this._createAutocomplete();
+                    this._createShowAllButton();
+                },
+                _createAutocomplete: function () {
+                    var selected = this.element.children(":selected"),
+                            value = selected.val() ? selected.text() : "";
+                    this.input = $("<input>")
+                            .appendTo(this.wrapper)
+                            .val(value)
+                            .attr("title", "")
+                            .addClass("custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left")
+                            .autocomplete({
+                                delay: 0,
+                                minLength: 0,
+                                source: $.proxy(this, "_source")
+                            })
+                            .tooltip({
+                                tooltipClass: "ui-state-highlight"
+                            });
+                    this._on(this.input, {
+                        autocompleteselect: function (event, ui) {
+                            ui.item.option.selected = true;
+                            this._trigger("select", event, {
+                                item: ui.item.option
+                            });
+                            var title = $("input[name='title']:checked").val();
+
+                            var ls = $('#combobox>option:selected').attr("title");
+                            show_pics(title, ls);
+                        },
+                        autocompletechange: "_removeIfInvalid"
+                    });
+                },
+                _createShowAllButton: function () {
+                    var input = this.input,
+                            wasOpen = false;
+                    $("<a>")
+                            .attr("tabIndex", -1)
+                            .appendTo(this.wrapper)
+                            .button({
+                                icons: {
+                                    primary: "ui-icon-triangle-1-s"
+                                },
+                                text: false
+                            })
+                            .removeClass("ui-corner-all")
+                            .addClass("custom-combobox-toggle ui-corner-right")
+                            .mousedown(function () {
+                                wasOpen = input.autocomplete("widget").is(":visible");
+                            })
+                            .click(function () {
+                                input.focus();
+                                // 如果已经可见则关闭
+                                if (wasOpen) {
+                                    return;
+                                }
+                                // 传递空字符串作为搜索的值，显示所有的结果
+                                input.autocomplete("search", "");
+                            });
+                },
+                _source: function (request, response) {
+                    var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+                    response(this.element.children("option").map(function () {
+                        var text = $(this).text();
+                        if (this.value && ( !request.term || matcher.test(text) ))
+                            return {
+                                label: text,
+                                value: text,
+                                option: this
+                            };
+                    }));
+                },
+                _removeIfInvalid: function (event, ui) {
+                    // 选择一项，不执行其他动作
+                    if (ui.item) {
+                        return;
+                    }
+                    // 搜索一个匹配（不区分大小写）
+                    var value = this.input.val(),
+                            valueLowerCase = value.toLowerCase(),
+                            valid = false;
+                    this.element.children("option").each(function () {
+                        if ($(this).text().toLowerCase() === valueLowerCase) {
+                            this.selected = valid = true;
+                            return false;
+                        }
+                    });
+                    // 找到一个匹配，不执行其他动作
+                    if (valid) {
+                        return;
+                    }
+                    // 移除无效的值
+                    this.input
+                            .val("");
+                    this.element.val("");
+                    this._delay(function () {
+                        this.input.tooltip("close").attr("title", "");
+                    }, 2500);
+                    this.input.data("ui-autocomplete").term = "";
+                },
+                _destroy: function () {
+                    this.wrapper.remove();
+                    this.element.show();
+                }
+            });
+        })(jQuery);
+        $(function () {
+            $("#combobox").combobox();
+
+        });
+        function show_pics(title, value) {
+            if (title == 'title') {
+                $("#pic_content").html("");
+            } else {
+                $.each(jQuery.parseJSON(value), function (i, item) {
+                    var id = "";
+                    var min = "";
+                    $.each(item, function (i, item) {
+                        if (i == "id") {
+                            id = item;
+                        }
+                        if (i == 'min') {
+                            min = item;
+                        }
+                    });
+                    $("#pic_content").append('<label><input type="radio" name="pic_id" id="pic_id" value="' + id + '"> <img width="100px" height="100px" src="http://test.rs.vogor.cn/image/' + min + '"></label>');
+
+                });
+            }
+        }
+        $('#modal-container-28657').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('whatever') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var r_p = recipient.split('-');
+            var modal = $(this)
+            modal.find('.modal-body input[id="module_id"]').val(r_p[0])
+            modal.find('.modal-body input[id="content_id"]').val(r_p[1])
+        })
+    </script>
 
 {% endblock %}
 

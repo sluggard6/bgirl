@@ -11,7 +11,7 @@ from sharper.util.transfer import orm_obj2dict
 from form import obj2form, form2obj
 from form.page import PageModuleForm, PageContentForm
 
-from bg_biz.orm.pic import Group
+from bg_biz.orm.pic import Group,Channel
 
 
 __author__ = 'John Chan'
@@ -30,7 +30,8 @@ def module_list():
     pm_sort(page_modules)
     # sorted(page_modules, cmp=pm_cmp)
     groups = Group.query.filter_by(status=1).order_by(Group.id.desc()).all()
-    return render_template("page/page_module_list.html",page_modules=page_modules,groups=groups)
+    channels = Channel.query.filter_by(status=1).order_by(Channel.id.desc()).all()
+    return render_template("page/page_module_list.html",page_modules=page_modules,groups=groups,channels=channels)
 
 def pm_cmp(o1,o2):
     return int(o1.rank-o2.rank)
@@ -205,7 +206,7 @@ def custom_content():
         #module=PageModule.get(module_id)
         content = PageContent.get(content_id)
         content.pic_id = pic_id
-        content.group_id=combobox
+        content.component_id=combobox
         content.status = 1
         content.update()
     else:
@@ -213,7 +214,7 @@ def custom_content():
         # content.category = module.category
         content.module_id = module_id
         content.pic_id = pic_id
-        content.group_id = combobox
+        content.component_id = combobox
         content.status = 1
         content.insert()
     module = PageModule.get(module_id)
