@@ -5,6 +5,7 @@ import Global from './global'
 export default class Http {
 
   static httpGet(url, callback, self, error){
+    // console.log(url)
     fetch(url, {
       method: "GET",
       credentials: "seid"

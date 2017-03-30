@@ -18,6 +18,9 @@ import Charge from '../page/charge'
 
 export default class AlertWindow extends Component {
 
+  constructor(props) {
+    super(props)
+  }
 
   cannel(){
     Application.cannel()
@@ -25,16 +28,53 @@ export default class AlertWindow extends Component {
   }
 
   render(){
-    console.log("--------------Alert Window------------------")
+    console.log(this.props.charge)
     if(Global.isLogin) {
-      return(
-        <BuyWindow cannel={this.cannel.bind(this)}/>
-      )
+      if(this.props.charge){
+        return (
+          <ChargeWindow cannel={this.cannel.bind(this)}/>
+        )
+      }else{
+        return(
+          <BuyWindow cannel={this.cannel.bind(this)}/>
+        )
+      }    
     }else{
       return(
         <LoginWindow cannel={this.cannel.bind(this)}/>
       )
     }
+  }
+
+}
+
+export class ChargeWindow extends Component {
+
+  render(){
+    return(
+      <TouchableWithoutFeedback onPress={this.props.cannel}>
+        <View style={styles.container}>
+          <View style={styles.buyWindow}>
+            <TouchableOpacity>
+              <View style={styles.chargeButton}>
+                <Text style={{color: '#fff'}} >微信支付</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View style={styles.chargeButton}>
+                <Text style={{color: '#fff'}} >支付宝支付</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.props.cannel}>
+              <View style={styles.cannelButton}>
+                <Text style={{color: '#fff'}} >再看看</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+
+    )
   }
 
 }
@@ -171,6 +211,7 @@ var styles = StyleSheet.create({
     width: Global.size.width, 
     height: Global.size.height,
     backgroundColor: "transparent",
+    zIndex: 99
   },
 
   window:{
@@ -178,7 +219,6 @@ var styles = StyleSheet.create({
     marginTop: 150,
     paddingTop:10,
     alignItems: 'center',
-    zIndex: 99,
     backgroundColor: "white",
     borderRadius: 5,
     borderWidth: 1,
@@ -250,6 +290,18 @@ var styles = StyleSheet.create({
   },
 
   payButton:{
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 25,
+    backgroundColor: '#FC4A68',
+    height: 35,
+    width: 290,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  chargeButton: {
     marginLeft: 10,
     marginRight: 10,
     marginTop: 25,

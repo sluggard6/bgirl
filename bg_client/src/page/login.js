@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   StyleSheet,
+  AsyncStorage,
   TouchableOpacity,
   ToastAndroid
 } from 'react-native';
@@ -24,6 +25,19 @@ export default class Login extends Component{
       uname: "",
       pwd: ""
     }
+  }
+
+  componentDidMount() {
+    AsyncStorage.getItem('uname').then((uname) => {
+      if(uname != null) {
+        AsyncStorage.getItem('pwd').then((pwd) => {
+          this.setState({
+            uname: uname,
+            pwd: pwd
+          })
+        })
+      }
+    })
   }
 
   forgetPassword(){

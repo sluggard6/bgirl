@@ -10,17 +10,32 @@ import TabBarView from '../page/tab_bar_view'
 
 export default class Application {
 
-  static localLogin(uname, pwd, seid) {
-    Http.httpGet(Application.getUrl(Global.urls.user), (res) => {
+  static saveLoginInfo(uname, pwd) {
+    AsyncStorage.setItem('uname', uname)
+    AsyncStorage.setItem('pwd', pwd)
+  }
+
+  static localLogin(seid) {
+    Http.httpGet(Application.getUrl(Global.urls.user)+"?seid="+seid, (res) => {
+      // console.log(res)
       if(res.success === true) {
         Global.user = res.user
-        AsyncStorage.setItem('uname', uname)
-        AsyncStorage.setItem('pwd', pwd)
         AsyncStorage.setItem('seid', seid)
         Global.isLogin = true
+      }else{
+        AsyncStorage.setItem('seid', seid)
       }
     })
   }
+
+  static autoLogin() {
+    AsyncStorage.getItem('seid').then((seid) => {
+      if(seid != null) {
+        Application.localLogin(seid)
+      }
+    })
+  }
+
 
   static login(uname, pwd, callback) {
     console.log("uname : " + uname)
@@ -32,8 +47,8 @@ export default class Application {
     }
     Http.httpPost(Application.getUrl(Global.urls.login), params, (res) => {
       if(res.success === true) {
-        Application.localLogin(uname, pwd, res.msg)
-        console.log(typeof callback)
+        Application.saveLoginInfo(uname, pwd)
+        Application.localLogin(res.msg)
         if(typeof callback === 'function'){
           callback()
         }
@@ -61,21 +76,6 @@ export default class Application {
   static cannel() {
     Global.isAlert = false;
   }
-
-
-
-  // static autoLogin() {
-  //   uname = AsyncStorage.getItem('uname')
-  //   pwd = AsyncSotrage.getItem('pwd')
-  //   if(uname != null && pwd != null) {
-  //     Http.httpGet(Application.getHost(Global.url.login)+"?uname="+uname+"&pwd="+pwd)
-  //   }
-  //   AsyncStorage.getItem('seid').then(
-  //     (seid) => {
-  //       Http.httpGet()
-  //     }
-  //   )
-  // }
 
   static getHost() {
     return Global.host||Global.default_host

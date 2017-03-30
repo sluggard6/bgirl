@@ -8,6 +8,7 @@ import User from './user'
 import BgirlTabBar from '../component/bgirl_tab_bar'
 import LoginWiodow from '../component/windows'
 import Global from '../utils/global'
+import Application from '../utils/application'
 
 export default class TabBarView extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ export default class TabBarView extends Component {
 
   componentWillMount() {
     Global.navigator = this.props.navigator
+    Application.autoLogin()
   }
 
   render() {

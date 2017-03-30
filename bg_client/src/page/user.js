@@ -10,7 +10,8 @@ import {
   ListView,
   StyleSheet,
   Navigator,
-  TouchableOpacity
+  TouchableOpacity,
+  ToastAndroid
 } from 'react-native';
 
 import Global from '../utils/global'
@@ -19,6 +20,7 @@ import TopBar from '../component/top_bar'
 import Login from './login'
 import RegisterPhone from './register_phone'
 import Charge from './charge'
+import Pay from './pay'
 
 var user_info_menu = [
   {text:'我的下载', actionType:'innerView', actionPath:'downloaded'},
@@ -64,6 +66,16 @@ export default class User extends Component {
     })
   }
 
+  checkVip() {
+    if(Application.isVip()) {
+      ToastAndroid.show("您已经是至尊VIP了", ToastAndroid.CENTER)
+    }else{
+      Global.navigator.push({
+        component: Pay
+      })
+    }
+  }
+
   getNick() {
     if(Global.isLogin) {
       let nick = Global.user.nick==null?"新用户"+Global.user.id:Global.user.nick
@@ -75,8 +87,12 @@ export default class User extends Component {
           </View>
         </TouchableOpacity>        
         <View style={styles.balance}>
-          <Text style={{color: 'red'}}>VIP</Text>
-          <Text>1000</Text>
+          <TouchableOpacity onPress={this.checkVip.bind(this)}>
+           <Text style={{color: 'red'}}>至尊VIP</Text>
+          </TouchableOpacity>        
+          <TouchableOpacity onPress={Application.unSupport}>
+            <Text>0金币</Text>
+          </TouchableOpacity>        
         </View>
         </View>
       )
