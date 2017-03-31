@@ -198,6 +198,6 @@ class ExchangeWifiRecord(BaseModel):
     after_net_end = Column(u'after_net_end', DATETIME(), nullable=True)
     score = Column(u'score', INTEGER(), nullable=True)
     create_time = Column(u'create_time', DATETIME(), nullable=True, default=datetime.now)
-    modify_time = Column(u'modify_time', TIMESTAMP(), nullable=True, default=datetime.now)
+    modify_time = Column(u'modify_time', DATETIME(), nullable=True, default=datetime.now)
     ip = Column(u'ip', VARCHAR(length=32), nullable=True)
     seconds = Column(u'seconds', INTEGER(), nullable=True)
