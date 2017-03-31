@@ -9,8 +9,8 @@ from bg_biz.orm.user import User
 from bg_biz.pay.alipay import Alipay
 from bg_biz.service.pay_service import PayService
 from bg_biz.service.user_service import UserService
-from form.charge import GiveHiCoinForm
-from form.score import GiveScoreForm
+#from form.charge import GiveHiCoinForm
+#from form.score import GiveScoreForm
 from lib.decorator import pagination
 from views.helper import get_phones
 
