@@ -8,7 +8,7 @@ from bg_biz.orm.pay.transaction import Transaction
 from bg_biz.orm.user import User
 from bg_biz.pay.alipay import Alipay
 from bg_biz.service.pay_service import PayService
-from luhu_biz.service.user_service import UserService
+from bg_biz.service.user_service import UserService
 from form.charge import GiveHiCoinForm
 from form.score import GiveScoreForm
 from lib.decorator import pagination
