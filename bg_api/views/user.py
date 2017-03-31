@@ -97,6 +97,7 @@ def profile():
     print u
     ret = dict()
     ret['id'] = u.id
+    ret['phone'] = u.phone
     ret['status'] = u.status
     ret['nick'] = u.nick
     ret['balance'] = u.balance
