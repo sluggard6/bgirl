@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta
 
 from bg_biz.orm.sysconfig import SysConfig
-from bg_biz.orm.user import User, UserVcode,ExchangeWifiRecord
+from bg_biz.orm.user import User, UserVcode, ExchangeWifiRecord
 from bg_biz.service.tool_service import ToolService
 from sharper.flaskapp.orm.base import transaction
 from sharper.lib.error import AppError
@@ -10,7 +10,7 @@ from sharper.lib.validator import is_mobile
 from sharper.util.string import random_number
 from sharper.util.app_util import get_app_name
 from bg_biz.orm.app_log import SmsLog
-from bg_biz.orm.admin import AdminLog,AdminAction
+from bg_biz.orm.admin import AdminLog, AdminAction
 
 __author__ = [
     "sluggrd"
@@ -61,7 +61,7 @@ def send_user_vcode(phone, category, app=UserVcode.App.ANDROID, mac=None):
         content = u"验证码：%s 欢迎您注册%s" % (vcode, get_app_name())
     elif category == UserVcode.Category.FORGET_PASS:
         content = u"您的验证码为：%s " % vcode
-    #     elif category == UserVcode.Category.CHANGE_PHONE_OLD:
+    # elif category == UserVcode.Category.CHANGE_PHONE_OLD:
     #         content = u"您的验证码为：%s " % vcode
     #     elif category == UserVcode.Category.CHANGE_PHONE_NEW:
     #         content = u"您的验证码为：%s " % vcode
@@ -84,6 +84,46 @@ class UserService:
         u = User.register(phone, password)
         return u
 
+    @classmethod
+    @transaction
+    def delay_wifi(cls, user, day=None, seconds=None, admin_log_info="", category=None, obj_id=None):
+        now = datetime.now()
+        vipend = user.vipend
+        if user:
+            if vipend > now:
+                if day:
+                    net_end = vipend + timedelta(days=int(day))
+                else:
+                    net_end = vipend + timedelta(seconds=int(seconds))
+            else:
+                if day:
+                    net_end = now + timedelta(days=int(day))
+                else:
+                    net_end = now + timedelta(seconds=int(seconds))
+            user.vipend = net_end
+            record = ExchangeWifiRecord()
+            record.before_net_end = vipend
+            record.category = category
+            record.obj_id = obj_id
+
+            if day:
+                record.days = day
+            elif seconds:
+                record.seconds = seconds
+            record.user_id = user.id
+            record.after_net_end = net_end
+            record.insert()
+            user.update()
+            if not admin_log_info:
+                admin_log_info = '延长时间_理由为空'
+            if not day:
+                log = AdminLog.write(AdminAction.DelayNetEnd, user.id, ip="", key1=user.id,
+                                     key2=admin_log_info, key3=seconds)
+            else:
+                log = AdminLog.write(AdminAction.DelayNetEnd, user.id, ip="", key1=user.id,
+                                     key2=admin_log_info, key3=day)
+        return True
+
 
 def validate_vcode(phone, code, category):
     """
@@ -98,52 +138,3 @@ def validate_vcode(phone, code, category):
         record.update()
         return True
     return False
-
-
-@classmethod
-
-
-@transaction
-def delay_wifi(cls, user, day=None, seconds=None, admin_log_info="", category=None, obj_id=None):
-    now = datetime.now()
-    vipend = user.vipend
-    if user:
-        if vipend > now:
-            if day:
-                net_end = vipend + timedelta(days=int(day))
-            # user.net_end = user.net_end + timedelta(days = int(day))
-            else:
-                net_end = vipend + timedelta(seconds=int(seconds))
-            # user.net_end = user.net_end + timedelta(seconds = int(seconds))
-        else:
-            if day:
-                net_end = now + timedelta(days=int(day))
-            # user.net_end = now + timedelta(days = int(day))
-            else:
-                net_end = now + timedelta(seconds=int(seconds))
-            # user.net_end = now + timedelta(seconds = int(seconds))
-        user.vipend = net_end
-        record = ExchangeWifiRecord()
-        record.before_net_end = vipend
-        record.category = category
-        record.obj_id = obj_id
-
-        if day:
-            record.days = day
-        elif seconds:
-            record.seconds = seconds
-        record.user_id = user.id
-        record.after_net_end = net_end
-        record.insert()
-        user.update()
-        if not admin_log_info:
-            admin_log_info = '延长时间_理由为空'
-        if not day:
-            log = AdminLog.write(AdminAction.DelayNetEnd, user.id, ip="", key1=user.id,
-                                 key2=admin_log_info, key3=seconds)
-        else:
-            log = AdminLog.write(AdminAction.DelayNetEnd, user.id, ip="", key1=user.id,
-                                 key2=admin_log_info, key3=day)
-        # AdminLog.write(AdminAction.DelayNetEnd, user.id, ip=request.remote_addr, key1=user.id,
-        # key2="%s兑换"%g.balance_name,key3=day)
-    return True
