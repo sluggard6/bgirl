@@ -14,12 +14,9 @@ from sqlalchemy import Column, INTEGER, VARCHAR, Integer, DATE, DATETIME
 from flask_login import UserMixin
 import time
 
-
-
 __author__ = [
     'sluggard'
 ]
-
 
 
 class User(BaseModel, KvdbMixin, UserMixin):
@@ -47,7 +44,6 @@ class User(BaseModel, KvdbMixin, UserMixin):
             DISABLE: u'无效'
         }
 
-
     # column definitions
     id = Column(u'id', INTEGER(), primary_key=True, nullable=False, autoincrement=True)
     phone = Column(u'phone', VARCHAR(length=32), default=None)
@@ -62,7 +58,6 @@ class User(BaseModel, KvdbMixin, UserMixin):
     vipend = Column(u'vipend', DATETIME(), nullable=False, default=datetime.now())
     create_time = Column(u'create_time', DATETIME(), nullable=False, default=datetime.now())
     modify_time = Column(u'modify_time', DATETIME(), nullable=False, default=datetime.now())
-
 
     @classmethod
     def get(cls, id):
@@ -101,7 +96,7 @@ class User(BaseModel, KvdbMixin, UserMixin):
 
     @classmethod
     def get_by_phone(self, phone):
-        return self.get_by_kvdb_unique('phone',phone);
+        return self.get_by_kvdb_unique('phone', phone);
 
     def gen_usercode(self):
         self.ucode = str(uuid4()).replace('-', '')
@@ -117,67 +112,92 @@ class User(BaseModel, KvdbMixin, UserMixin):
 
     def check_password(self, pwd):
         return md5(pwd + self.ucode) == self.passwd
-    
+
     @property
     def vipend_time(self):
-        return int(1000*time.mktime(self.vipend.timetuple()))
-
+        return int(1000 * time.mktime(self.vipend.timetuple()))
 
 
 class UserVcode(BaseModel):
-	__tablename__ = 'user_vcode'
+    __tablename__ = 'user_vcode'
 
-	__table_args__ = {}
+    __table_args__ = {}
 
-	class Status(DisplayEnum):
-		INIT = 0
-		VERIFIED = 1
-		__display_cn__ = {
-			INIT: u'未验证',
-			VERIFIED: u'已验证'
-		}
+    class Status(DisplayEnum):
+        INIT = 0
+        VERIFIED = 1
+        __display_cn__ = {
+            INIT: u'未验证',
+            VERIFIED: u'已验证'
+        }
 
-	class Category(DisplayEnum):
-		REGISTER = 1
-		FORGET_PASS = 2
-		LOGIN = 3
+    class Category(DisplayEnum):
+        REGISTER = 1
+        FORGET_PASS = 2
+        LOGIN = 3
 
-		__display_cn__ = {
-			REGISTER: u'注册',
-			FORGET_PASS: u'忘记密码',
-			LOGIN: u'登录',
-		}
+        __display_cn__ = {
+            REGISTER: u'注册',
+            FORGET_PASS: u'忘记密码',
+            LOGIN: u'登录',
+        }
 
-	class App(DisplayEnum):
-		PORTAL = 'portal'
-		ANDROID = 'Android'
-		IOS = 'iOS'
+    class App(DisplayEnum):
+        PORTAL = 'portal'
+        ANDROID = 'Android'
+        IOS = 'iOS'
 
-		__display_cn__ = {
-			PORTAL: u'portal',
-			ANDROID: u'Android',
-			IOS: u'iOS'
-		}
+        __display_cn__ = {
+            PORTAL: u'portal',
+            ANDROID: u'Android',
+            IOS: u'iOS'
+        }
 
-	# column definitions
+    # column definitions
 
-	id = Column(u'id', INTEGER(), primary_key=True, nullable=False, autoincrement=True)
-	phone = Column(u'phone', VARCHAR(length=32), default=None)
-	vcode = Column(u'vcode', VARCHAR(length=32), default=None)
-	mac = Column(u'mac', VARCHAR(length=32), default=None)
-	status = Column(u'status', Integer(), default=Status.INIT)
-	app = Column(u'app', VARCHAR(length=32), default=None)
-	category = Column(u'category', Integer(), default=Category.REGISTER)
-	times = Column(u'times', Integer(), default=1)
-	verify_time = Column(u'verify_time', DATETIME(), nullable=True)
-	create_time = Column(u'create_time', DATETIME(), nullable=False, default=datetime.now())
-	modify_time = Column(u'modify_time', DATETIME(), nullable=False, default=datetime.now())
+    id = Column(u'id', INTEGER(), primary_key=True, nullable=False, autoincrement=True)
+    phone = Column(u'phone', VARCHAR(length=32), default=None)
+    vcode = Column(u'vcode', VARCHAR(length=32), default=None)
+    mac = Column(u'mac', VARCHAR(length=32), default=None)
+    status = Column(u'status', Integer(), default=Status.INIT)
+    app = Column(u'app', VARCHAR(length=32), default=None)
+    category = Column(u'category', Integer(), default=Category.REGISTER)
+    times = Column(u'times', Integer(), default=1)
+    verify_time = Column(u'verify_time', DATETIME(), nullable=True)
+    create_time = Column(u'create_time', DATETIME(), nullable=False, default=datetime.now())
+    modify_time = Column(u'modify_time', DATETIME(), nullable=False, default=datetime.now())
 
-	@property
-	def status_cn(self):
-		return self.Status.get_display_cn(self.status)
+    @property
+    def status_cn(self):
+        return self.Status.get_display_cn(self.status)
 
-	@property
-	def category_cn(self):
-		return self.Category.get_display_cn(self.category)
-   
+    @property
+    def category_cn(self):
+        return self.Category.get_display_cn(self.category)
+
+
+class ExchangeWifiRecord(BaseModel):
+    __tablename__ = 'exchange_wifi_record'
+    __table_args__ = {}
+    #__bind_key__ = 'beijing'
+
+    class Category(DisplayEnum):
+        CHARGE = 1
+        EXCHANGE = 2
+        LOTTERY = 3
+        PRIZE = 4
+        TASK=5
+
+
+    id = Column(u'id', INTEGER(), nullable=False, primary_key=True, autoincrement=True)
+    user_id = Column(u'user_id', INTEGER(), nullable=True)
+    days = Column(u'days', INTEGER(), nullable=True)
+    obj_id = Column(u'obj_id', VARCHAR(100), nullable=True)
+    category = Column(u'category', INTEGER(), nullable=True)
+    before_net_end = Column(u'before_net_end', DATETIME(), nullable=True)
+    after_net_end = Column(u'after_net_end', DATETIME(), nullable=True)
+    score = Column(u'score', INTEGER(), nullable=True)
+    create_time = Column(u'create_time', DATETIME(), nullable=True, default=datetime.now)
+    modify_time = Column(u'modify_time', TIMESTAMP(), nullable=True, default=datetime.now)
+    ip = Column(u'ip', VARCHAR(length=32), nullable=True)
+    seconds = Column(u'seconds', INTEGER(), nullable=True)

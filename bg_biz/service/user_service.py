@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta
 
 from bg_biz.orm.sysconfig import SysConfig
-from bg_biz.orm.user import User, UserVcode
+from bg_biz.orm.user import User, UserVcode,ExchangeWifiRecord
 from bg_biz.service.tool_service import ToolService
 from sharper.flaskapp.orm.base import transaction
 from sharper.lib.error import AppError
@@ -10,10 +10,12 @@ from sharper.lib.validator import is_mobile
 from sharper.util.string import random_number
 from sharper.util.app_util import get_app_name
 from bg_biz.orm.app_log import SmsLog
+from bg_biz.orm.admin import AdminLog,AdminAction
 
 __author__ = [
     "sluggrd"
 ]
+
 
 @transaction
 def send_user_vcode(phone, category, app=UserVcode.App.ANDROID, mac=None):
@@ -25,11 +27,13 @@ def send_user_vcode(phone, category, app=UserVcode.App.ANDROID, mac=None):
     # 如果指定时间内发送过同类型的验证码，并且未使用过，则发送相同验证码
     keep_time = datetime.now() - timedelta(minutes=sms_config.get('keep_minutes', 30))
     delay_time = datetime.now() - timedelta(minutes=1)
-    vcode_today = UserVcode.query.filter_by(phone=phone).filter("date(create_time)='%s'"%datetime.now().strftime("%Y-%m-%d")).all()
+    vcode_today = UserVcode.query.filter_by(phone=phone).filter(
+        "date(create_time)='%s'" % datetime.now().strftime("%Y-%m-%d")).all()
     vcode_today = sum([x.times for x in vcode_today])
-    if vcode_today>9:
+    if vcode_today > 9:
         raise AppError(u"今日获取短信过多，已关闭验证码发送")
-    vcode_latest_log = UserVcode.query.with_lockmode("update").filter_by(phone=phone).filter_by(category=category).filter_by(app=app).filter(
+    vcode_latest_log = UserVcode.query.with_lockmode("update").filter_by(phone=phone).filter_by(
+        category=category).filter_by(app=app).filter(
         UserVcode.modify_time > delay_time.strftime("%Y-%m-%d %H:%M:%S")).first()
     if vcode_latest_log:
         raise AppError(u"获取短信过于频繁，请稍后再试")
@@ -57,18 +61,19 @@ def send_user_vcode(phone, category, app=UserVcode.App.ANDROID, mac=None):
         content = u"验证码：%s 欢迎您注册%s" % (vcode, get_app_name())
     elif category == UserVcode.Category.FORGET_PASS:
         content = u"您的验证码为：%s " % vcode
-#     elif category == UserVcode.Category.CHANGE_PHONE_OLD:
-#         content = u"您的验证码为：%s " % vcode
-#     elif category == UserVcode.Category.CHANGE_PHONE_NEW:
-#         content = u"您的验证码为：%s " % vcode
+    #     elif category == UserVcode.Category.CHANGE_PHONE_OLD:
+    #         content = u"您的验证码为：%s " % vcode
+    #     elif category == UserVcode.Category.CHANGE_PHONE_NEW:
+    #         content = u"您的验证码为：%s " % vcode
     else:
         content = u"您的验证码为：%s " % vcode
     need_switch = True
-#     if category in [UserVcode.Category.CHANGE_PHONE_OLD, UserVcode.Category.CHANGE_PHONE_NEW]:
-#         need_switch = False
+    #     if category in [UserVcode.Category.CHANGE_PHONE_OLD, UserVcode.Category.CHANGE_PHONE_NEW]:
+    #         need_switch = False
 
     ToolService.send_sms(phone, content, need_switch=need_switch, app=app, scene=SmsLog.Scene.VCODE)
     return vcode
+
 
 class UserService:
     @classmethod
@@ -78,6 +83,7 @@ class UserService:
             return AppError(msg=u'该手机号码已经被注册。')
         u = User.register(phone, password)
         return u
+
 
 def validate_vcode(phone, code, category):
     """
@@ -92,3 +98,52 @@ def validate_vcode(phone, code, category):
         record.update()
         return True
     return False
+
+
+@classmethod
+
+
+@transaction
+def delay_wifi(cls, user, day=None, seconds=None, admin_log_info="", category=None, obj_id=None):
+    now = datetime.now()
+    vipend = user.vipend
+    if user:
+        if vipend > now:
+            if day:
+                net_end = vipend + timedelta(days=int(day))
+            # user.net_end = user.net_end + timedelta(days = int(day))
+            else:
+                net_end = vipend + timedelta(seconds=int(seconds))
+            # user.net_end = user.net_end + timedelta(seconds = int(seconds))
+        else:
+            if day:
+                net_end = now + timedelta(days=int(day))
+            # user.net_end = now + timedelta(days = int(day))
+            else:
+                net_end = now + timedelta(seconds=int(seconds))
+            # user.net_end = now + timedelta(seconds = int(seconds))
+        user.vipend = net_end
+        record = ExchangeWifiRecord()
+        record.before_net_end = vipend
+        record.category = category
+        record.obj_id = obj_id
+
+        if day:
+            record.days = day
+        elif seconds:
+            record.seconds = seconds
+        record.user_id = user.id
+        record.after_net_end = net_end
+        record.insert()
+        user.update()
+        if not admin_log_info:
+            admin_log_info = '延长时间_理由为空'
+        if not day:
+            log = AdminLog.write(AdminAction.DelayNetEnd, user.id, ip="", key1=user.id,
+                                 key2=admin_log_info, key3=seconds)
+        else:
+            log = AdminLog.write(AdminAction.DelayNetEnd, user.id, ip="", key1=user.id,
+                                 key2=admin_log_info, key3=day)
+        # AdminLog.write(AdminAction.DelayNetEnd, user.id, ip=request.remote_addr, key1=user.id,
+        # key2="%s兑换"%g.balance_name,key3=day)
+    return True
