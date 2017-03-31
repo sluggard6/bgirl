@@ -115,7 +115,7 @@ class UserService:
             record.insert()
             user.update()
             if not admin_log_info:
-                admin_log_info = '延长时间_理由为空'
+                admin_log_info = '空'
             if not day:
                 log = AdminLog.write(AdminAction.DelayNetEnd, user.id, ip="", key1=user.id,
                                      key2=admin_log_info, key3=seconds)

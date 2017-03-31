@@ -13,10 +13,12 @@ from sqlalchemy import Column, INTEGER, VARCHAR, DATETIME, TIMESTAMP
 from sharper.flaskapp.orm.base import BaseModel
 from bg_biz.orm.user import User
 
+
 class Charge(BaseModel):
     __tablename__ = 'charge'
     __table_args__ = {}
-    #__bind_key__ = 'beijing'
+
+    # __bind_key__ = 'beijing'
 
     class AskStatus(DisplayEnum):
         NEW = 1
@@ -58,7 +60,6 @@ class Charge(BaseModel):
             THIRD_WIFI: u'代理商充值上网时间'
         }
 
-
     id = Column(u'id', INTEGER(), nullable=False, primary_key=True, autoincrement=True)
     user_id = Column(u'user_id', INTEGER(), nullable=True)
     amount = Column(u'amount', INTEGER(), nullable=True)
@@ -96,8 +97,7 @@ class Charge(BaseModel):
 
     @property
     def check_day(self):
-        return ConfigService.get_wifi_day(self.amount/100,area_id=self.user.area_id)
-
+        return ConfigService.get_wifi_day(self.amount / 100, area_id=self.user.area_id)
 
     def _after_insert(self):
         """if self.discount_info:
@@ -105,6 +105,7 @@ class Charge(BaseModel):
             if discount_rule and discount_rule.display_type!=DiscountRule.DisplayType.ALL:
                 if discount_rule."""
         pass
+
 
 class GatewayCharge(BaseModel):
     __tablename__ = 'gateway_charge'
@@ -168,6 +169,7 @@ class GatewayCharge(BaseModel):
     @property
     def user(self):
         return User.get(self.user_id) if self.user_id else None
+
 
 class ChargeGatewayProducts(BaseModel):
     __tablename__ = 'charge_gateway_products'
