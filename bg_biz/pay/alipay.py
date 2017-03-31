@@ -59,7 +59,10 @@ U8XGCAUxbYVZgvtFt5f6pW3lqLVPr8iIrD9K92+VyP1vIfWS2ImH
 
     alipay_rsa_public_key = '''
 -----BEGIN PUBLIC KEY-----
-MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAF
+ljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/
+VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9
+zpgmLCUYuLkxpLQIDAQAB
 -----END PUBLIC KEY-----
 '''
     partner = "2088521928938173"
@@ -82,6 +85,8 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64
                     or k == "sign" or k == "sign_type" or k == "key":
                 continue
             rlt = "%s&%s=%s" % (rlt, k, new_params[k])
+            print '----cz---',rlt
+            print 'chongzu------',rlt[1:]
         return rlt[1:]
 
     @classmethod
