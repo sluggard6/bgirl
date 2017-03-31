@@ -1,0 +1,29 @@
+{% extends "layout/default.html" %}
+{% block container %}
+    <div class="well">
+        <span class="title">赠送积分列表。</span>
+        <a href="/charge/give" class="btn btn-default pull-right btn-nav">赠送</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>用户id</th>
+            <th>手机号码</th>
+            <th>Hi币</th>
+            <th>赠送时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        ~for log in score_logs
+        <tr>
+            <td>{{ log.user_id }}</td>
+            <td>{{ log.user.phone }}</td>
+            <td>{{ log.amount }}</td>
+            <td>{{ log.create_time|date2str }}</td>
+            <!--<td><a href="javascript:void(0);" onclick="">删除</a></td>-->
+        </tr>
+        ~endfor
+        </tbody>
+    </table>
+    ~include 'inc/pagination.html'
+{% endblock %}

@@ -1,0 +1,16 @@
+~extends 'layout/default.html'
+{% block title %}赠送积分{% endblock %}
+{% block container %}
+    ~ from "macros.html" import render_field,render_textarea,render_hidden_field
+    <form class="form-horizontal" id="score_form" method="POST">
+        {{ form.csrf_token }}
+        {{ render_field(form.coin) }}
+        {{ render_field(form.descr) }}
+        {{ render_textarea(form.phones, tip=',逗号分隔') }}
+        <div class="col-lg-10 col-lg-offset-2">
+            <button class="btn btn-primary">确定</button>
+        </div>
+    </form>
+    <script>
+    </script>
+{% endblock %}

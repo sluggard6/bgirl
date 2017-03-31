@@ -1,0 +1,30 @@
+{% extends "layout/default.html" %}
+{% block container %}
+    <div class="well">
+        <span class="title">充值情况</span>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>用户id</th>
+            <th>创建时间</th>
+            <th>充值金额</th>
+        </tr>
+        </thead>
+        <tbody>
+        ~for charge in charges
+        <tr id="{{ charge.id }}">
+            <td>{{ charge.id }}</td>
+            <td><a href="/user/{{ charge.user_id }}" target="_blank">{{ charge.user_id or '' }}</a></td>
+            <td>{{ charge.create_time }}</td>
+            <td>{{ (charge.amount / 100) |decimal_pretty }}</td>
+        </tr>
+        ~endfor
+        </tbody>
+    </table>
+    ~include 'inc/pagination.html'
+{% endblock %}
+{% block pageTail %}
+
+{% endblock %}

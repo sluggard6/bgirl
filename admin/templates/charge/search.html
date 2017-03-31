@@ -1,0 +1,99 @@
+{% extends "layout/default.html" %}
+{% block container %}
+
+    <div class="well">
+        <span class="title">用户电话</span>
+        <input type="text" class="" id="phone" value="{{ g.phone or '' }}"
+               style="margin-left: 30px;" placeholder="用户电话"/>
+        <span class="title">充值时间</span>
+        <input type="text" class="" name="charge_date" id="charge_date" value="{{ g.charge_date or '' }}"
+               style="margin-left: 30px;" placeholder="充值日期"/>
+        <span class="title">订单号</span>
+        <input type="text" class="" name="trans_id" id="trans_id" value="{{ g.trans_id or '' }}"
+               style="margin-left: 30px;" placeholder="订单号"/>
+        <span class="title">卡号</span>
+        <input type="text" class="" name="card_num" id="card_num" value="{{ g.card_num or '' }}"
+               style="margin-left: 30px;" placeholder="卡号"/>
+        <button class="btn" style="margin-top: 0px;" type="button" onclick="search()">查询</button>
+        <a target="_blank" href="http://www.yeepay.com/category/help/selfHelp/queryArticle/53bfb4f9c83bd7d83151b918">
+        <img src="http://www.yeepay.com/images/button_ann_cd.gif" width="75" height="23" border="0" />
+        </a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>手机号码</th>
+            <th>area id</th>
+            <th>昵称</th>
+            <th>充值时间</th>
+            <th>充值号码</th>
+            <th>充值类型</th>
+            <th>充值金额</th>
+            <th>支付方式</th>
+            <th>交易状态</th>
+            <th>到账状态</th>
+            <th>第三方查询</th>
+        </tr>
+        </thead>
+        <tbody>
+        ~for transaction in transactions
+        <tr id="{{ transaction.id }}">
+            <td>{{ transaction.id }}</td>
+            <td>{{ transaction.user.phone }}</td>
+            <td>{{ transaction.user.area_id }}</td>
+            <td>{{ transaction.user.nick_name or '' }}</td>
+            <td>{{ transaction.create_time }}</td>
+            <td>{{ transaction.charge.user.phone }}</td>
+            <td>{{ transaction.charge.source_cn }}</td>
+            <td>{{ transaction.charge.amount }}</td>
+            <td>{{ transaction.pay_type_cn }}</td>
+            <td>{{ transaction.status_info }}</td>
+            <td>{{ transaction.charge.status_cn }}</td>
+            <td>
+                <button class="btn btn-info" style="padding:5px 10px" onclick="refresh_callback({{ transaction.id }})">刷新状态</button>
+            </td>
+            <td>
+                {% if transaction.pay_type in ["alipay_direct","alipay_wap"] %}
+                <a target="_blank" href="/charge/alipay_check/{{ transaction.id }}">点击查询</a>
+                {% elif transaction.pay_type in ["yeepay_deposit","yeepay_card"] %}
+                <a target="_blank" href="http://www.yeepay.com/category/help/selfHelp/queryArticle/53bfb4f9c83bd7d83151b918">点击查询</a>
+                {% else %}
+                不支持查询
+                {% endif %}
+            </td>
+        </tr>
+        ~endfor
+        </tbody>
+    </table>
+    ~include 'inc/pagination.html'
+{% endblock %}
+{% block pageTail %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#charge_date').datepicker({
+                'dateFormat': 'yy-mm-dd'
+            });
+        })
+        function search() {
+            var chargeDate = $('#charge_date').val();
+            var phone = $('#phone').val();
+            var trans_id = $('#trans_id').val();
+            var card_num = $('#card_num').val();
+            //if ($.isBlankStr(phone)) {
+            //    $.showMessage('请填写账号', 'warn');
+            //} else {
+                url = "/charge/search?charge_date="+chargeDate+"&phone="+phone+"&trans_id="+trans_id+"&card_num="+card_num;
+                LuhuAdmin.loadUrl(url);
+            //}
+
+        }
+
+        function refresh_callback(transaction_id) {
+            LuhuAdmin.post("/charge/callback/"+transaction_id, data = "", function () {
+                $.showMessage("操作成功", "ok");
+                reload();
+            });
+        }
+    </script>
+{% endblock %}
