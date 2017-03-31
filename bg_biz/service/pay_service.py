@@ -70,7 +70,7 @@ class PayService(object):
         trans.status = Transaction.Status.NEW
         if user_id:
             user = User.get(user_id)
-            ignore_phones = ['18621365260']
+            ignore_phones = ['18621365260','13918778151','18916208830']
             if user.phone in ignore_phones:
                 amount = 1
         trans.amount = amount

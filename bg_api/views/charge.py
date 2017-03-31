@@ -19,7 +19,8 @@ def do_pay():
     pay_type = request.args.get('pay_type')
     title = u'充值VIP'
     detail = u'昧昧充值'
-    amount = 1
+    amount = 19900
+    day = 365
     callback = ''
     charge = Charge()
     charge.user_id = current_user.id
@@ -29,7 +30,7 @@ def do_pay():
     charge.paid = amount
     charge.category = Charge.Category.WIFI
     charge.source = Charge.Source.WIFI
-    charge.day = 365
+    charge.day = day
     charge.insert()
 
     object_type = Transaction.ObjectType.CHARGE
