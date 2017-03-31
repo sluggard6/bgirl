@@ -20,7 +20,7 @@ export default class TabBarView extends Component {
 		};
 	}
 
-  componentWillMount() {
+  componentDidMount() {
     Global.navigator = this.props.navigator
     Application.autoLogin()
   }

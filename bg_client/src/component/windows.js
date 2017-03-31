@@ -14,29 +14,42 @@ import {
 import Global from '../utils/global'
 import Application from '../utils/application'
 import RegisterPhone from '../page/register_phone'
-import Charge from '../page/charge'
+import Alipay from 'react-native-yunpeng-alipay'
+import * as WeChat from 'react-native-wechat'
+import Http from '../utils/http'
+
 
 export default class AlertWindow extends Component {
 
   constructor(props) {
     super(props)
+    this.state={
+      charge: this.props.charge
+    }
   }
 
   cannel(){
     Application.cannel()
+    this.state.charge = false
     this.props.unLock()
   }
 
+  alertPay(){
+    this.setState({
+      charge: true
+    })
+  }
+
   render(){
-    console.log(this.props.charge)
+    console.log(this.state.charge)
     if(Global.isLogin) {
-      if(this.props.charge){
+      if(this.state.charge){
         return (
           <ChargeWindow cannel={this.cannel.bind(this)}/>
         )
       }else{
         return(
-          <BuyWindow cannel={this.cannel.bind(this)}/>
+          <BuyWindow cannel={this.cannel.bind(this)} alertPay={this.alertPay.bind(this)}/>
         )
       }    
     }else{
@@ -50,18 +63,46 @@ export default class AlertWindow extends Component {
 
 export class ChargeWindow extends Component {
 
+  alipayPage() {
+    Http.httpGet(Application.getUrl(Global.urls.charge)+"?pay_type=alipay_app",this.alipayCallback.bind(this))
+
+  }
+
+  alipayCallback(responseData){
+    console.log(responseData.url);
+    Alipay.pay(responseData.url).then(function(data){
+                    console.log(data);
+                }, function (err) {
+                    console.log(err);
+                });
+  }
+
+  wxPayPage(){
+    const result = WeChat.pay({
+        partnerId: 'wx11eaa73053dd1666',  // 商家向财付通申请的商家id
+        prepayId: '',   // 预支付订单
+        nonceStr: '',   // 随机串，防重发
+        timeStamp: '',  // 时间戳，防重发
+        package: '',    // 商家根据财付通文档填写的数据和签名
+        sign: ''        // 商家根据微信开放平台文档对数据做的签名
+      }
+    );
+  }
+
   render(){
     return(
       <TouchableWithoutFeedback onPress={this.props.cannel}>
         <View style={styles.container}>
           <View style={styles.buyWindow}>
-            <TouchableOpacity>
-              <View style={styles.chargeButton}>
+            <TouchableOpacity onPress={this.wxPayPage.bind(this)}>
+              <View style={[styles.chargeButton,{backgroundColor: '#FB4867'}]}>
+                <Image source={require('../images/charge/weixin.png')} style={styles.chargeLogo}/>
                 <Text style={{color: '#fff'}} >微信支付</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.chargeButton}>
+            <TouchableOpacity onPress={this.alipayPage.bind(this)}>
+              <View style={[styles.chargeButton,{backgroundColor: '#FCA150'}]}>
+                <Image source={require('../images/charge/zhifubao.png')} style={styles.chargeLogo}/>
                 <Text style={{color: '#fff'}} >支付宝支付</Text>
               </View>
             </TouchableOpacity>
@@ -86,7 +127,7 @@ export class BuyWindow extends Component {
       <TouchableWithoutFeedback onPress={this.props.cannel}>
         <View style={styles.container}>
           <View style={styles.buyWindow}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={this.props.alertPay}>
               <View style={styles.payButton}>
                 <Text style={{color: '#fff'}} >包场一年</Text>
               </View>
@@ -309,8 +350,16 @@ var styles = StyleSheet.create({
     height: 35,
     width: 290,
     borderRadius: 5,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+
+  chargeLogo: {
+    height: 35,
+    width: 35,
+    // position: 'absolute',
+    resizeMode: Image.resizeMode.contain
   },
 
   cannelButton:{
