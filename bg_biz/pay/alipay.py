@@ -381,7 +381,7 @@ class AlipayAPP(Alipay):
             notify_url = ConfigService.get_host(ConfigService.Host.API) + "/pay/gateway/notify/alipay_app"
         else:
             return_url = "%s/pay/%s/callback" % (ConfigService.get_host(ConfigService.Host.MOBILE), trans.id)
-            notify_url = ConfigService.get_host(ConfigService.Host.API) + "/pay/notify/alipay_app"
+            notify_url = "http://test.api.vogor.cn/pay/notify/alipay_app"
         amount = decimal_pretty(float(trans.amount) / 100)
         print '-------amount---------',amount
         params = {
