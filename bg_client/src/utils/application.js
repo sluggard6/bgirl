@@ -16,20 +16,22 @@ export default class Application {
   }
 
   static localLogin(seid) {
+    console.log(Application.getUrl(Global.urls.user)+"?seid="+seid)
     Http.httpGet(Application.getUrl(Global.urls.user)+"?seid="+seid, (res) => {
-      // console.log(res)
+      console.log(res)
       if(res.success === true) {
         Global.user = res.user
         AsyncStorage.setItem('seid', seid)
         Global.isLogin = true
       }else{
-        AsyncStorage.setItem('seid', seid)
+        AsyncStorage.removeItem('seid')
       }
     })
   }
 
   static autoLogin() {
     AsyncStorage.getItem('seid').then((seid) => {
+      console.log(seid)
       if(seid != null) {
         Application.localLogin(seid)
       }
@@ -38,9 +40,9 @@ export default class Application {
 
 
   static login(uname, pwd, callback) {
-    console.log("uname : " + uname)
-    console.log("pwd : " + pwd)
-    console.log(callback)
+    // console.log("uname : " + uname)
+    // console.log("pwd : " + pwd)
+    // console.log(callback)
     params = {
       uname: uname,
       pwd: pwd

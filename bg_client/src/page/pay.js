@@ -49,9 +49,11 @@ export default class Pay extends Component {
   }
 
   unLock() {
-    this.setState({
-      alert: false
-    })
+    // this.setState({
+    //   alert: false
+    // })
+    this.state.alert = false
+    this.doClose()
   }
 
   render(){
@@ -108,9 +110,10 @@ var styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    flexWrap: 'nowrap',
+    // flexWrap: 'nowrap',
     alignItems: 'center',
-    backgroundColor: '#DFE0E1'
+    // backgroundColor: 'transparent'
+    // backgroundColor: '#DFE0E1'
   },
 
   topBar: {
