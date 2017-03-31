@@ -12,7 +12,6 @@ import {
 
 import Global from '../utils/global'
 import Application from '../utils/application'
-import Charge from './charge'
 import AlertWinow from '../component/windows'
 
 export default class Pay extends Component {
@@ -22,12 +21,6 @@ export default class Pay extends Component {
     this.state = {
       alert: false
     }
-  }
-
-  goCharge() {
-    Global.navigator.push({
-      component: Charge
-    })
   }
 
   doClose() {

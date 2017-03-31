@@ -19,7 +19,6 @@ import Application from '../utils/application'
 import TopBar from '../component/top_bar'
 import Login from './login'
 import RegisterPhone from './register_phone'
-import Charge from './charge'
 import Pay from './pay'
 
 var user_info_menu = [
@@ -59,12 +58,7 @@ export default class User extends Component {
       component: RegisterPhone
     })
   }
-
-  chargePage() {
-    this.props.navigator.push({
-      component: Charge
-    })
-  }
+  
 
   checkVip() {
     if(Application.isVip()) {
@@ -126,13 +120,6 @@ export default class User extends Component {
       <View style={styles.container}>
         <TopBar/>
         {this.getNick()}
-        <TouchableOpacity onPress={this.chargePage.bind(this)}>
-        <View style={styles.balance}>
-          <Image source={require('../images/charge/chongzhi.png')} />
-          <Text style={{color: 'red'}}>充值VIP</Text>
-          <Text>></Text>
-        </View>
-        </TouchableOpacity>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this._renderRow.bind(this)}
