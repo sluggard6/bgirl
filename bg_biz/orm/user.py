@@ -9,7 +9,7 @@ from sharper.flaskapp.login import login_manager
 from sharper.lib.error import ParaValidateFailError
 from sharper.util.string import md5
 
-from sqlalchemy import Column, INTEGER, VARCHAR, Integer, DATE, DATETIME
+from sqlalchemy import Column, INTEGER, VARCHAR, Integer, DATE, DATETIME,TIMESTAMP
 
 from flask_login import UserMixin
 import time
