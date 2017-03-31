@@ -65,7 +65,7 @@ prwCtzvzQETrNRwVxLO5jVmRGi60j8Ue1efIlzPXV9je9mkjzOmdssymZkh2QhUr
 CmZYI/FCEa3/cNMW0QIDAQAB
 -----END PUBLIC KEY-----
 '''
-    partner = "2016080300154007"
+    partner = "2017032606414413"
     key = "evXk728NyjEEV2jmb6agRA=="
 
     def __init__(self):
