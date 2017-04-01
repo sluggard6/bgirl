@@ -15,7 +15,7 @@ const Global = {
     profile: "/profile",
     channel: "/channel/list",
     group: "/group/",
-    pageIndex: "/page/index",
+    page: "/page/",
     checkPhone: "/user/checkPhone",
     vcode: "/vcode",
     register: "/user/register",

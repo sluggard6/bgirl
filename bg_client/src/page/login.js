@@ -44,7 +44,7 @@ export default class Login extends Component{
   }
 
   register(){
-    this.props.navigator.push({
+    Global.navigator.push({
       component: RegisterPhone
     })
   }
@@ -54,7 +54,7 @@ export default class Login extends Component{
   }
 
   loginCallBack() {
-    this.props.navigator.resetTo({
+    Global.navigator.resetTo({
       component: TabBarView
     })
   }

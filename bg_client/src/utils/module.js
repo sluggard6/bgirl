@@ -9,6 +9,7 @@ import Banner from '../component/banner'
 import TheTwo from '../component/the_two'
 import TheThree from '../component/the_three'
 import FullViewTab from '../page/full_view_tab'
+import Gloabl from './global'
 
 export default class Module extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ export default class Module extends Component {
   }
 
   onPress(componentId, category) {
-    this.props.navigator.push({
+    Gloabl.navigator.push({
 			component: FullViewTab,
       params: {
         componentId: componentId
@@ -31,21 +32,18 @@ export default class Module extends Component {
         return (
           <Banner data={module.items} onPress={this.onPress.bind(this)}/>
         );
-        break;
       }
 
       case "the_two":{
         return (
           <TheTwo data={module.items} onPress={this.onPress.bind(this)}/>
         );
-        break;
       }
 
       case "the_three":{
         return (
           <TheThree data={module.items} onPress={this.onPress.bind(this)}/>
         );
-        break;
       }
 
       case "title":{
@@ -54,14 +52,12 @@ export default class Module extends Component {
             <Text style={{fontSize: 20}}>{module.text}</Text>
           </View>
         );
-        break;
       }
 
       case "three_circle":{
         return (
           <TheThree data={module.items} onPress={this.onPress.bind(this)} circle={true}/>
         );
-        break;
       }
 
       default: {

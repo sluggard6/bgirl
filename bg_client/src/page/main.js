@@ -8,7 +8,7 @@ import {
   Navigator
 } from 'react-native'
 
-import ViewPic from '../component/view_pic'
+import Page from '../component/page'
 import Global from '../utils/global'
 import Application from '../utils/application'
 import Http from '../utils/http'
@@ -23,55 +23,13 @@ export default class Main extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      loaded: false
-    };
-    this.fetchData = this.fetchData.bind(this);
-  }
-
-  _updateData(responseData){
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(responseData.page.modules),
-      loaded: true,
-    });
-  }
-
-  fetchData() {
-    Http.httpGet(Application.getUrl(Global.urls.pageIndex),this._updateData.bind(this))
-  }
-
-  componentDidMount() {
-    this.fetchData();
-  }
-
-  renderLoadingView() {
-    return (
-      <View style={styles.container}>
-        <Text>
-          正在加载数据……
-        </Text>
-      </View>
-    );
-  }
-
-  _renderRow(rowData,sectionID, rowID) {
-    return(
-      <Module module={rowData} navigator={this.props.navigator}/>
-    );
   }
 
   render() {
-    if (!this.state.loaded) {
-      return this.renderLoadingView();
-    }
     return (
       <View style={styles.container}>
         <TopBar/>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this._renderRow.bind(this)}
-        />
+        <Page pageName={this.props.pageName}/>
       </View>
     )
   }
@@ -86,15 +44,6 @@ var styles = StyleSheet.create({
     flexWrap: 'nowrap',
     alignItems: 'center',
     backgroundColor: '#DFE0E1'
-  },
-
-  list_container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    flexWrap: 'nowrap',
-    alignItems: 'center',
-    width: Global.size.width
-  },
+  }
 
 });

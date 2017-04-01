@@ -83,7 +83,7 @@ export default class RegisterPhone extends Component{
         </TouchableOpacity>
         <TouchableOpacity onPress={this.goRegister.bind(this)}>
           <View style={styles.loginButton}>
-            <Text style={{color: '#fff'}} >自动登录</Text>
+            <Text style={{color: '#fff'}} >下一步</Text>
           </View>
         </TouchableOpacity>
       </View>

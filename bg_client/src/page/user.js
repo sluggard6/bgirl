@@ -48,13 +48,13 @@ export default class User extends Component {
   }
 
   loginPage() {
-    this.props.navigator.push({
+    Global.navigator.push({
       component: Login
     })
   }
 
   registerPage() {
-    this.props.navigator.push({
+    Global.navigator.push({
       component: RegisterPhone
     })
   }

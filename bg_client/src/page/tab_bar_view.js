@@ -3,7 +3,7 @@ import {View} from 'react-native'
 import ScrollableTabView, {DefaultTabBar, } from 'react-native-scrollable-tab-view';
 
 import Main from './main'
-import Channel from './channel'
+import ChannelTabView from './channel_tab_view'
 import User from './user'
 import BgirlTabBar from '../component/bgirl_tab_bar'
 import LoginWiodow from '../component/windows'
@@ -34,9 +34,9 @@ export default class TabBarView extends Component {
           tabActiveIconNames={this.state.tabActiveIconNames}
         />}
         tabBarPosition="bottom">
-        <Main tabLabel="Main" navigator={this.props.navigator}/>
-        <Channel tabLabel="频道" navigator={this.props.navigator}/>
-        <User tabLabel="User" navigator={this.props.navigator}/>
+        <Main tabLabel="Main" pageName="index"/>
+        <ChannelTabView tabLabel="频道"/>
+        <User tabLabel="User"/>
       </ScrollableTabView>
     );
   }
