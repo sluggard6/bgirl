@@ -32,6 +32,7 @@ const Global = {
     balance: 0,
     id: 0,
     nick: "",
+    phone: "",
     realname: "",
     score: 0,
     status: 0,

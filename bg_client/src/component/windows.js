@@ -93,7 +93,7 @@ export class ChargeWindow extends Component {
     return(
       <TouchableWithoutFeedback onPress={this.props.cannel}>
         <View style={styles.container}>
-          <View style={styles.buyWindow}>
+          <View style={[styles.window,{height: 200,marginTop: 180}]}>
             <TouchableOpacity onPress={this.wxPayPage.bind(this)}>
               <View style={[styles.chargeButton,{backgroundColor: '#FB4867'}]}>
                 <Image source={require('../images/charge/weixin.png')} style={styles.chargeLogo}/>
@@ -126,7 +126,7 @@ export class BuyWindow extends Component {
     return(
       <TouchableWithoutFeedback onPress={this.props.cannel}>
         <View style={styles.container}>
-          <View style={styles.buyWindow}>
+          <View style={[styles.window,{height: 200}]}>
             <TouchableOpacity onPress={this.props.alertPay}>
               <View style={styles.payButton}>
                 <Text style={{color: '#fff'}} >包场一年</Text>
@@ -267,19 +267,6 @@ var styles = StyleSheet.create({
     height: 280
   },
 
-  buyWindow:{
-    flexDirection: 'column',
-    marginTop: 150,
-    paddingTop:10,
-    alignItems: 'center',
-    zIndex: 99,
-    backgroundColor: "white",
-    borderRadius: 5,
-    borderWidth: 1,
-    width: 300,
-    height: 200
-  },
-
   oauthContainer: {
     height: 80,
     flexDirection: 'row',
@@ -358,7 +345,6 @@ var styles = StyleSheet.create({
   chargeLogo: {
     height: 35,
     width: 35,
-    // position: 'absolute',
     resizeMode: Image.resizeMode.contain
   },
 

@@ -70,9 +70,19 @@ export default class User extends Component {
     }
   }
 
+  getSecPhone(){
+    let phone = Global.user.phone
+    let ps = phone.split("")
+    ps[ps.length - 5] = '*'
+    ps[ps.length - 6] = '*'
+    ps[ps.length - 7] = '*'
+    ps[ps.length - 8] = '*'
+    return ps.join("")
+  }
+
   getNick() {
     if(Global.isLogin) {
-      let nick = Global.user.nick==null?"新用户"+Global.user.id:Global.user.nick
+      let nick = Global.user.nick==null?this.getSecPhone():Global.user.nick
       return (
         <View>
         <TouchableOpacity>

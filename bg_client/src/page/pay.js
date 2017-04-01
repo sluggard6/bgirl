@@ -31,7 +31,6 @@ export default class Pay extends Component {
     if(this.state.alert) {
       return (<AlertWinow unLock={this.unLock.bind(this)} charge={true}/>)
     }
-    console.log("------null-------")
     return
   }
 
