@@ -59,6 +59,7 @@ class MeiLianSender(SmsSender):
 #         the_page = res.data
 #         print "------------------------"
 #         print the_page
+#         print res.data
         return res.data
 
 __sms_sender_config__ = {
