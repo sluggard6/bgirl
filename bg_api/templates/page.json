@@ -30,7 +30,7 @@
 								"id": {{c.component.id}},
 								"name": "{{c.component.name}}",
 								"thumb": "{{c.component.thumb_http}}",
-								"des":{{c.component.description}}
+								"des": "{{c.component.description}}"
 							},
 							"category": {{c.category}}
 						}
