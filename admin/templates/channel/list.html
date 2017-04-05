@@ -42,6 +42,7 @@
 					<div class="btn-group btn-group-xs">
 						<a class="btn btn-primary" href="/channel/edit?id={{u.id}}">编辑</a>
 						<a class="btn btn-primary" href="/channel/group/{{u.id}}">组管理</a>
+                        <a class="btn btn-primary" href="/channel/channel_delete?id={{u.id}}" onclick="return del()">删除</a>
 					</div>
 				</td>
 			</tr>
@@ -50,4 +51,11 @@
 			</thead>
 		</table>
 	</div>
+    <script type="text/javascript">
+function del(){
+if(!confirm("确认要删除？")){
+window.event.returnValue = false;
+}
+}
+</script>
 {% endblock %}

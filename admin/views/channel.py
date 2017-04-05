@@ -17,9 +17,20 @@ ChannelView = Blueprint('channel', __name__)
 
 @ChannelView.route('/list', methods=['GET', 'POST'])
 def list():
-    channels = Channel.query.order_by(Channel.id.asc()).all()
+    channels = Channel.query.filter(Channel.status<>3).order_by(Channel.id.asc()).all()
 
     return render_template('channel/list.html', channels=channels)
+
+@ChannelView.route('/channel_delete', methods=['GET', 'POST'])
+def channel_delete():
+    data = request.form or request.args
+    print data
+    id = data.get('id', None)
+    channel = Channel.query.filter_by(id=id).first()
+    channel.status = 3
+    channel.update()
+    flash(u'删除成功', 'ok')
+    return redirect(url_for("channel.list"))
 
 
 @ChannelView.route('/edit', methods=['GET', 'POST'])
