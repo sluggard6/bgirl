@@ -93,22 +93,23 @@ export class ChargeWindow extends Component {
     return(
       <TouchableWithoutFeedback onPress={this.props.cannel}>
         <View style={styles.container}>
+          <View style={styles.view_opacity}/>
           <View style={[styles.window,{height: 200,marginTop: 180}]}>
             <TouchableOpacity onPress={this.wxPayPage.bind(this)}>
               <View style={[styles.chargeButton,{backgroundColor: '#FB4867'}]}>
                 <Image source={require('../images/charge/weixin.png')} style={styles.chargeLogo}/>
-                <Text style={{color: '#fff'}} >微信支付</Text>
+                <Text style={styles.text} >微信支付</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.alipayPage.bind(this)}>
               <View style={[styles.chargeButton,{backgroundColor: '#FCA150'}]}>
                 <Image source={require('../images/charge/zhifubao.png')} style={styles.chargeLogo}/>
-                <Text style={{color: '#fff'}} >支付宝支付</Text>
+                <Text style={styles.text} >支付宝支付</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.props.cannel}>
               <View style={styles.cannelButton}>
-                <Text style={{color: '#fff'}} >再看看</Text>
+                <Text style={styles.text} >再看看</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -126,15 +127,16 @@ export class BuyWindow extends Component {
     return(
       <TouchableWithoutFeedback onPress={this.props.cannel}>
         <View style={styles.container}>
+          <View style={styles.view_opacity}/>
           <View style={[styles.window,{height: 200}]}>
             <TouchableOpacity onPress={this.props.alertPay}>
               <View style={styles.payButton}>
-                <Text style={{color: '#fff'}} >包场一年</Text>
+                <Text style={styles.text} >包场一年</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.props.cannel}>
               <View style={styles.cannelButton}>
-                <Text style={{color: '#fff'}} >银子不够</Text>
+                <Text style={styles.text} >银子不够</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -185,6 +187,7 @@ export class LoginWindow extends Component {
     return(
       <TouchableWithoutFeedback onPress={this.props.cannel}>
         <View style={styles.container}>
+          <View style={styles.view_opacity}/>
           <View style={styles.window}>
             <View style={styles.inputContainer}>
               <Image source={require('../images/shouji.png')} style={styles.inputLogo}/>
@@ -211,7 +214,7 @@ export class LoginWindow extends Component {
             </View>
             <TouchableOpacity onPress={this.doLogin.bind(this)}>
               <View style={styles.loginButton}>
-                <Text style={{color: '#fff'}} >登录</Text>
+                <Text style={styles.text} >登录</Text>
               </View>
             </TouchableOpacity>
             <View style={{flexDirection:'row',justifyContent: 'space-around', marginTop: 20, width: 280}}>
@@ -255,9 +258,17 @@ var styles = StyleSheet.create({
     zIndex: 99
   },
 
+  view_opacity: {
+    width: Global.size.width,
+    height: Global.size.height,
+    opacity:0.5,
+    backgroundColor:'#AEAEAE',
+  },
+
   window:{
+    position: 'absolute',
     flexDirection: 'column',
-    marginTop: 150,
+    marginTop: 130,
     paddingTop:10,
     alignItems: 'center',
     backgroundColor: "white",
@@ -310,7 +321,7 @@ var styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     backgroundColor: '#FC4A68',
-    height: 35,
+    height: 40,
     width: 290,
     borderRadius: 5,
     justifyContent: 'center',
@@ -322,7 +333,7 @@ var styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 25,
     backgroundColor: '#FC4A68',
-    height: 35,
+    height: 40,
     width: 290,
     borderRadius: 5,
     justifyContent: 'center',
@@ -334,7 +345,7 @@ var styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 25,
     backgroundColor: '#FC4A68',
-    height: 35,
+    height: 40,
     width: 290,
     borderRadius: 5,
     flexDirection: 'row',
@@ -353,7 +364,7 @@ var styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 25,
     backgroundColor: '#C3C3C3',
-    height: 35,
+    height: 40,
     width: 290,
     borderRadius: 5,
     justifyContent: 'center',
@@ -368,5 +379,10 @@ var styles = StyleSheet.create({
     fontSize:14,
     flexDirection:'row',
     textAlign:'right',
+  },
+
+  text:{
+    color: "white",
+    fontSize: 18
   }
 })

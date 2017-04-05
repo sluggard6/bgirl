@@ -52,7 +52,7 @@ export default class Page extends Component {
 
   _renderRow(rowData,sectionID, rowID) {
     return(
-      <Module module={rowData}/>
+      <Module module={rowData} style={{marginBottom: 5}}/>
     );
   }
 
@@ -61,10 +61,12 @@ export default class Page extends Component {
       return this.renderLoadingView();
     }
     return (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this._renderRow.bind(this)}
-      />
+      <View style={styles.container}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this._renderRow.bind(this)}
+        />
+      </View>
     )
   }
 }
@@ -74,7 +76,7 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     flexWrap: 'nowrap',
     alignItems: 'center',
     backgroundColor: '#DFE0E1'

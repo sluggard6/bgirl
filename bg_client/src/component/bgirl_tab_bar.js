@@ -15,16 +15,6 @@ export default class BgirlTabBar extends Component {
 		super(props);
 	}
 
-  propTypes: {
-    goToPage: React.PropTypes.func, // 跳转到对应tab的方法
-    activeTab: React.PropTypes.number, // 当前被选中的tab下标
-    tabs: React.PropTypes.array, // 所有tabs集合
-
-    tabNames: React.PropTypes.array, // 保存Tab名称
-		tabIconNames: React.PropTypes.array, // 保存Tab图标
-		tabActiveIconNames: React.PropTypes.array, // 保存Tab图标
-  }
-
   setAnimationValue({value}) {
 	}
 

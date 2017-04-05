@@ -40,10 +40,10 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     flexWrap: 'nowrap',
     alignItems: 'center',
-    backgroundColor: '#DFE0E1'
+    backgroundColor: '#e0e0e0'
   }
 
 });

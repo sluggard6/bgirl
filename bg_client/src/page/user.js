@@ -22,10 +22,11 @@ import RegisterPhone from './register_phone'
 import Pay from './pay'
 
 var user_info_menu = [
-  {text:'我的下载', actionType:'innerView', actionPath:'downloaded'},
-  {text:'未读消息', actionType:'innerView', actionPath:'downloaded'},
-  {text:'每日任务', actionType:'innerView', actionPath:'downloaded'},
-  {text:'个人设置', actionType:'innerView', actionPath:'downloaded'}
+  {text:'充值VIP', actionType:'innerView', actionPath:'downloaded'}
+  // {text:'我的下载', actionType:'innerView', actionPath:'downloaded'},
+  // {text:'未读消息', actionType:'innerView', actionPath:'downloaded'},
+  // {text:'每日任务', actionType:'innerView', actionPath:'downloaded'},
+  // {text:'个人设置', actionType:'innerView', actionPath:'downloaded'}
 ]
 
 export default class User extends Component {
@@ -42,7 +43,7 @@ export default class User extends Component {
   _renderRow(menu) {
     return(
       <View style={styles.menu}>
-        <Text>{menu.text}</Text>
+        <Text style={{fontSize: 18}}>{menu.text}</Text>
       </View>
     );
   }
@@ -102,7 +103,7 @@ export default class User extends Component {
       )
     }else{
       return (
-        <View>
+        <View style={{backgroundColor: "white"}}>
           <TouchableOpacity onPress={this.loginPage.bind(this)}>
             <View style={styles.userinfo}>
               <Image source={require('../images/touxiang.png')} style={{height: 80, resizeMode: Image.resizeMode.contain}}/>
@@ -164,7 +165,6 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     margin: 2,
-    borderWidth: 1,
     width: Global.size.width-10
   },
   menu: {
@@ -173,7 +173,11 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     margin: 2,
-    borderWidth: 1,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    height: 50,
+    // borderTop: 1,
+    borderColor: "#e0e0e0",
     width: Global.size.width-10
   },
   list_view: {

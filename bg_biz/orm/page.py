@@ -11,6 +11,7 @@ from datetime import datetime
 
 from pic import Pic
 from bg_biz.orm.pic import Group, Channel
+from lxml.html.builder import THEAD
 
 
 class PageModule(BaseModel):
@@ -42,16 +43,20 @@ class PageModule(BaseModel):
     class Category(DisplayEnum):
         TITLE = "title"
         BANNER = "banner"
-        TEH_TWO = "the_two"
+        THE_TWO = "the_two"
+        THE_TWO_SQUARE = "the_two_square"
         THE_THREE = "the_three"
         THREE_CIRCLE = "three_circle"
+        SEPARATOR = "separator"
         
         __display_cn__ = {
             TITLE: u"标题",
             BANNER: u"大图",
-            TEH_TWO: u"左右两张",
+            THE_TWO: u"左右两张",
+            THE_TWO_SQUARE: u"左右两张方形",
             THE_THREE: u"三张方形",
             THREE_CIRCLE: u"三张圆形",
+            SEPARATOR: u"分隔符"
         }
     
     

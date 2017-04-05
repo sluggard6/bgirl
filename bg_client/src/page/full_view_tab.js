@@ -67,6 +67,7 @@ export default class FullViewTab extends Component {
 
   render() {
     // console.log("scrollable view render : " + this.state.locked)
+    console.log(this.state.pics)
     if(!this.state.loaded){
       return (
         <View style={styles.loading}>

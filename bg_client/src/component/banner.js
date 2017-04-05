@@ -25,7 +25,8 @@ export default class Banner extends Component {
       <TouchableOpacity onPress={() => this.props.onPress(this.props.data[0].component.id)}>
         <Image source={{uri:this.props.data[0].pic.min}} style={styles.container}>
           <View style={styles.text_container}>
-            <Text style={styles.text_name}>{this.props.data[0].des}</Text>
+            <View style={styles.view_opacity}/>
+            <Text style={styles.text_name}>{this.props.data[0].component.name}-{this.props.data[0].component.des}</Text>
           </View>
         </Image>
       </TouchableOpacity>
@@ -48,23 +49,24 @@ var styles = StyleSheet.create({
 
   text_container: {
     flexDirection: "row",
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingRight: 10,
+    height: 60,
+    backgroundColor:'transparent',
+  },
+
+  view_opacity: {
+    width: Global.size.width,
     height: 60,
     opacity:0.5,
-    backgroundColor:'#AEAEAF',
-    borderColor: "black"
+    backgroundColor:'#AEAEAE',
   },
 
   text_name: {
-    alignItems: 'flex-end',
+    position: 'absolute',
     color: 'white',
+    paddingLeft: 10,
     fontSize: 22,
   },
 
-  text_des: {
-    alignItems: 'flex-end',
-    fontSize: 18,
-  }
 })

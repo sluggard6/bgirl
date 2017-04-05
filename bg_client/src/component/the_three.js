@@ -38,32 +38,28 @@ export default class TheTwo extends Component {
 
 var styles = StyleSheet.create({
 
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    flexWrap: 'nowrap',
-    alignItems: 'center',
-  },
-
   list_container: {
-    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     flexWrap: 'nowrap',
     alignItems: 'center',
-    marginBottom: 1,
+    marginBottom: 20,
     width: Global.size.width
   },
 
   image: {
-    width: (Global.size.width-5)/3,
-    height: (Global.size.width-5)/3,
+    width: (Global.size.width-5)/3-5,
+    height: (Global.size.width-5)/3-5,
+    borderWidth: 1,
+    borderColor: "white"
   },
 
   image_circle: {
-    width: (Global.size.width-5)/3,
-    height: (Global.size.width-5)/3,
-    borderRadius: (Global.size.width-5)/6
+    width: (Global.size.width-5)/3-10,
+    height: (Global.size.width-5)/3-10,
+    borderRadius: (Global.size.width-5)/6,
+    borderWidth: 2,
+    borderColor: "white",
+    margin: 4
   }
 });

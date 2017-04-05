@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {
+  Text,
+  View,
   Image,
   StyleSheet
 } from 'react-native';
@@ -39,9 +41,14 @@ export default class FullPicView extends Component {
   render() {
     // console.log("-------------pic_view_render---------------- : " + this.props.tabLabel)
     return (
-      <Image source={{uri: this.props.pic.max}} style={styles.image}>
+      <View style={styles.container}>
         {this._doAlert()}
-      </Image>
+        <Image source={{uri: this.props.pic.max}} style={styles.image}>
+        </Image>
+        <View style={{height: (140/Global.pr), backgroundColor: "white"}}>
+          <Text>底部效果</Text>
+        </View>
+      </View>
     );
   }
 
@@ -50,13 +57,16 @@ export default class FullPicView extends Component {
 var styles = StyleSheet.create({
 
   container: {
+    flex: 1,
     flexDirection: "column",
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'center',
+    width: Global.size.width,
+    height: Global.size.height-(280/Global.pr),
   },
   image: {
     width: Global.size.width,
-    height: Global.size.height,
-    resizeMode: "contain"
+    height: Global.size.height-(280/Global.pr),
+    resizeMode: Image.resizeMode.contain
   }
 })

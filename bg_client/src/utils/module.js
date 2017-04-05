@@ -54,6 +54,12 @@ export default class Module extends Component {
         );
       }
 
+      case "the_two_square":{
+        return (
+          <TheThree data={module.items} onPress={this.onPress.bind(this)} square={true}/>
+        );
+      }
+
       case "three_circle":{
         return (
           <TheThree data={module.items} onPress={this.onPress.bind(this)} circle={true}/>
@@ -62,7 +68,7 @@ export default class Module extends Component {
 
       default: {
         return (
-          <Banner data={module.items} />
+          <Separator/>
         );
       }
     }
@@ -71,4 +77,12 @@ export default class Module extends Component {
   render() {
     return this.buildModule(this.props.module)
   }
+}
+
+export class Separator extends Component{
+
+  render(){
+    <View sytle={{height: 10, width: Global.size.width, backgroundColor: "#DFE0E1"}}/>
+  }
+
 }

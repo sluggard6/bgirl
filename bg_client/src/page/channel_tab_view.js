@@ -54,13 +54,13 @@ class ChannelTabBar extends Component {
   }
 
   renderTabOption(tab, i) {
-    let fontSize = this.props.activeTab == i? "21" : "18"; // 判断i是否是当前选中的tab，设置不同的颜色
+    let fontSize = this.props.activeTab == i? {borderColor: "ff4563"} : "18"; // 判断i是否是当前选中的tab，设置不同的颜色
     // const css = this.props.activeTab == i? "sytles.active_tab" : "sytles.tab";
     if(this.props.activeTab == i){
       return (
         <TouchableOpacity onPress={()=>this.props.goToPage(i)} style={styles.active_tab} key={i}>
           <View style={styles.tabItem}>
-            <Text style={{fontSize: 18}}>
+            <Text style={styles.text}>
               {this.props.tabNames[i]}
             </Text>
           </View>
@@ -70,7 +70,7 @@ class ChannelTabBar extends Component {
       return (
         <TouchableOpacity onPress={()=>this.props.goToPage(i)} style={styles.tab} key={i}>
           <View style={styles.tabItem}>
-            <Text style={{fontSize: 18}}>
+            <Text style={{fontSize: 18, color: "#e0e0e0"}}>
               {this.props.tabNames[i]}
             </Text>
           </View>
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexWrap: 'nowrap',
     alignItems: 'center',
-    backgroundColor: '#DFE0E1'
+    backgroundColor: '#333740'
   },
 
 	tabs: {
@@ -117,7 +117,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-    backgroundColor: '#ff4563',
     padding: 6/Global.pr
 	},
 
@@ -126,6 +125,13 @@ const styles = StyleSheet.create({
     width: 44/Global.pr,
     resizeMode: "contain",
     borderColor: "black"
+  },
+
+  text: {
+    borderColor: "#ff4563",
+    fontSize: 20,
+    borderBottomWidth: 2,
+    color: "white"
   },
 
 	tabItem: {

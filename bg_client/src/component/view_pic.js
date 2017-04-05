@@ -24,7 +24,7 @@ export default class ViewPic extends Component {
           style={styles.image}
           source={{uri: this.props.pic.max}}
         />
-        <Text>{this.props.component.title}</Text>
+        <Text style={styles.text}>{this.props.component.name}</Text>
       </View>
     );
   }
@@ -34,11 +34,21 @@ var styles = StyleSheet.create({
 
   container: {
     flexDirection: "column",
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   image: {
     width: (Global.size.width-20)/2,
     height: (Global.size.width-20)/3*2,
+    borderWidth: 1,
+    borderColor: "white"
+  },
+  text: {
+    textAlign: 'center',
+    width: (Global.size.width-20)/2-2,
+    height: 30,
+    backgroundColor: "red",
+    fontSize: 18,
+    color: "white"
   }
 })
