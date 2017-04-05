@@ -11,7 +11,7 @@
 			<thead class="thead-default">
 			<tr>
 				<th>id</th>
-				<th>用户名</th>
+				<th>专辑名</th>
 				<th>描述</th>
 				<th>状态</th>
 				<th>操作</th>
@@ -41,6 +41,7 @@
 				<td>
 					<div class="btn-group btn-group-xs">
 						<a class="btn btn-primary" href="/channel/group_edit?id={{u.id}}">编辑</a>
+                        <a class="btn btn-primary" href="/channel/group_delete?id={{u.id}}" onclick="return del()">删除</a>
 					</div>
 				</td>
 			</tr>
@@ -49,4 +50,11 @@
 			</thead>
 		</table>
 	</div>
+    <script type="text/javascript">
+function del(){
+if(!confirm("确认要删除？")){
+window.event.returnValue = false;
+}
+}
+</script>
 {% endblock %}

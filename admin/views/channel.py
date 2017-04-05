@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 
-from flask import (g, render_template, Blueprint, flash, request, redirect, url_for)
+from flask import (g, render_template, Blueprint, flash, request, redirect, url_for,jsonify)
 from sqlalchemy.exc import IntegrityError
 from bg_biz.orm.pic import Channel, Group, Pic
 from form.channel import ChannelForm, GroupForm
@@ -95,7 +95,7 @@ def group(channel_id):
 
 @ChannelView.route('/group_list', methods=['GET', 'POST'])
 def group_list():
-    groups = Group.query.order_by(Group.id.asc()).all()
+    groups = Group.query.filter(Group.status<>3).order_by(Group.id.asc()).all()
 
     return render_template('channel/group_list.html', groups=groups)
 
@@ -190,3 +190,15 @@ def group_edit():
                     form.user_name.errors = [u'组名重复！']
 
     return render_template('channel/group_edit.html', act=act, group=group, form=form)
+
+
+@ChannelView.route('/group_delete', methods=['GET', 'POST'])
+def group_delete():
+    data = request.form or request.args
+    print data
+    id = data.get('id', None)
+    group = Group.query.filter_by(id=id).first()
+    group.status = 3
+    group.update()
+    flash(u'删除成功', 'ok')
+    return redirect(url_for("channel.group_list"))
