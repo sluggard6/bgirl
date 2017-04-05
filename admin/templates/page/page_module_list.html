@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="row">
-            	{{pm.content_pics}}
+
                 ~if pm.category == 'banner'
 
                 ~for c in pm.content_pics
@@ -120,7 +120,7 @@
                 </div>
                	~elif pm.category == 'the_two_square'
                	~for c in pm.content_pics
-               	<h1>test</h1>
+
                 <div class="col-md-6">
                     <div class="thumbnail">
                         <a data-whatever="{{ pm.id }}-{{ c.id }}" href="#modal-container-28657" role="button"
@@ -129,6 +129,12 @@
                     </div>
                 </div>
                 ~endfor
+                ~elif pm.category == 'separator'
+                <div class="col-md-12">
+                    <ul class="nav nav-list">
+                        <li class="divider">--------------------------------------</li>
+                    </ul>
+                </div>
                 ~endif
             </div>
         </div>

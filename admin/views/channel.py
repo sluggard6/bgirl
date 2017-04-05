@@ -159,6 +159,8 @@ def group_edit():
                 try:
 
                     group.thumb = form.thumb.data
+                    group.thumb2 = form.thumb2.data
+                    group.thumb3 = form.thumb3.data
                     group.status = 1 if form.status.data else 0
                     group.description = form.description.data
 

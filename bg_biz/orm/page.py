@@ -89,7 +89,7 @@ class PageModule(BaseModel):
             for i in range(s):
                 cc = dict(id=0, pic=get_download_url('image', 'no_pic.jpg'))
                 pics.append(cc)
-        elif self.category == PageModule.Category.TEH_TWO or self.category == PageModule.Category.THE_TWO_SQUARE:
+        elif self.category == PageModule.Category.THE_TWO or self.category == PageModule.Category.THE_TWO_SQUARE:
             content = base.limit(2).all()
             l = len(content)
             s = 2-l
