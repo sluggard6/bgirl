@@ -66,6 +66,7 @@
                 </div>
             </div>
             <div class="row">
+            	{{pm.content_pics}}
                 ~if pm.category == 'banner'
 
                 ~for c in pm.content_pics
@@ -117,6 +118,17 @@
                         {{ pm.text }}
                     </div>
                 </div>
+               	~elif pm.category == 'the_two_square'
+               	~for c in pm.content_pics
+               	<h1>test</h1>
+                <div class="col-md-6">
+                    <div class="thumbnail">
+                        <a data-whatever="{{ pm.id }}-{{ c.id }}" href="#modal-container-28657" role="button"
+                           class="btn btn-default btn-block"
+                           data-toggle="modal"><img src="{{ c.pic }}"></a>
+                    </div>
+                </div>
+                ~endfor
                 ~endif
             </div>
         </div>
