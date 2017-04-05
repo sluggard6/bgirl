@@ -52,7 +52,7 @@ export default class Page extends Component {
 
   _renderRow(rowData,sectionID, rowID) {
     return(
-      <Module module={rowData} style={{marginBottom: 5}}/>
+      <Module module={rowData}/>
     );
   }
 

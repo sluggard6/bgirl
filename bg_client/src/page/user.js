@@ -22,7 +22,10 @@ import RegisterPhone from './register_phone'
 import Pay from './pay'
 
 var user_info_menu = [
-  {text:'充值VIP', actionType:'innerView', actionPath:'downloaded'}
+  {text:'充值VIP', img:require('../images/chongzhi.png'), actionPath:Pay},
+  {text:'关于我们', img:require('../images/guanyuwomen.png'), actionPath:Pay},
+  {text:'免责申明', img:require('../images/mianzeshenming.png'), actionPath:Pay},
+  {text:'帮助', img:require('../images/bangzhu.png'), actionPath:Pay}
   // {text:'我的下载', actionType:'innerView', actionPath:'downloaded'},
   // {text:'未读消息', actionType:'innerView', actionPath:'downloaded'},
   // {text:'每日任务', actionType:'innerView', actionPath:'downloaded'},
@@ -32,6 +35,7 @@ var user_info_menu = [
 export default class User extends Component {
   constructor(props) {
     super(props)
+    this.goAction.bind(this)
     const ds = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
@@ -42,10 +46,22 @@ export default class User extends Component {
 
   _renderRow(menu) {
     return(
-      <View style={styles.menu}>
-        <Text style={{fontSize: 18}}>{menu.text}</Text>
-      </View>
+      <TouchableOpacity onPress={() => {
+        this.goAction(menu.actionPath)
+        }}>
+        <View style={styles.menu}>
+          <Image source={menu.img} style={styles.menu_logo}/>
+          <Text style={styles.menu_text}>{menu.text}</Text>
+          <Image source={require('../images/jiantou.png')} style={styles.menu_logo}/>
+        </View>
+      </TouchableOpacity>
     );
+  }
+
+  goAction(actionPath) {
+    Global.navigator.push({
+      component: actionPath
+    })
   }
 
   loginPage() {
@@ -110,16 +126,12 @@ export default class User extends Component {
             </View>
           </TouchableOpacity>
           <View style={styles.balance}>
-            <Button
-              onPress={this.loginPage.bind(this)}
-              style={styles.button}
-              title="登录"
-              color="#ff4563"/>
-            <Button
-              onPress={this.registerPage.bind(this)}
-              style={styles.button}
-              color="#ffa145"
-              title="注册" />
+            <TouchableOpacity onPress={this.loginPage.bind(this)}>
+              <Text style={[styles.button,{backgroundColor: '#ff4563'}]}>登录</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.registerPage.bind(this)}>
+              <Text style={[styles.button,{backgroundColor: '#ffa145'}]}>注册</Text>
+            </TouchableOpacity>
           </View>
         </View>
       )
@@ -155,8 +167,12 @@ var styles = StyleSheet.create({
     margin: 20,
   },
   button: {
-    fontSize: 28,
-    width: 80,
+    fontSize: 18,
+    height: 40,
+    width: Global.size.width/2-20,
+    borderRadius: 5,
+    textAlign: 'center',
+    textAlignVertical: 'center'
 
   },
   balance: {
@@ -169,16 +185,24 @@ var styles = StyleSheet.create({
   },
   menu: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     padding: 10,
     margin: 2,
     borderTopWidth: 1,
     borderBottomWidth: 1,
     height: 50,
-    // borderTop: 1,
     borderColor: "#e0e0e0",
     width: Global.size.width-10
+  },
+  menu_text:{
+    textAlign: 'center',
+    fontSize: 18,
+    width: 200
+  },
+  menu_logo: {
+    height: 40,
+    resizeMode: Image.resizeMode.contain
   },
   list_view: {
     flexDirection: 'row',

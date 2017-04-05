@@ -22,7 +22,9 @@ export default class TheTwo extends Component {
 
   renderPic(data){
     if(this.props.square){
-      <Image style={styles.image} source={{uri: data.pic.max}} />
+      return(
+        <Image style={styles.image} source={{uri: data.pic.max}} />
+      )
     }else{
       return (
         <ViewPic pic={data.pic} component={data.component}/>
@@ -47,7 +49,6 @@ export default class TheTwo extends Component {
 var styles = StyleSheet.create({
 
   container: {
-    flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     flexWrap: 'nowrap',
@@ -55,17 +56,15 @@ var styles = StyleSheet.create({
   },
 
   list_container: {
-    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     flexWrap: 'nowrap',
     alignItems: 'center',
     width: Global.size.width,
-    marginBottom: 10
   },
   image: {
-    width: (Global.size.width-20)/2,
-    height: (Global.size.width-20)/2,
+    width: (Global.size.width-4)/2,
+    height: (Global.size.width-4)/2,
     borderWidth: 1,
     borderColor: "white"
   },

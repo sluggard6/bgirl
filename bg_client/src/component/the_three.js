@@ -43,7 +43,6 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     flexWrap: 'nowrap',
     alignItems: 'center',
-    marginBottom: 20,
     width: Global.size.width
   },
 
