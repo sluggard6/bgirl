@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
     StyleSheet,
+    View,
     Image,
 } from 'react-native';
 
@@ -10,7 +11,9 @@ export default class TopBar extends Component {
 
   render(){
     return(
-      <Image style={styles.top_bar} source={require('../images/top_bar.png')}/>
+      <View style={styles.top_bar}>
+        <Image style={styles.tob_bar_logo} source={require('../images/logo.png')}/>
+      </View>
     );
   }
 }
@@ -21,8 +24,15 @@ var styles = StyleSheet.create({
     flexWrap: 'nowrap',
     justifyContent: 'center',
     alignItems: 'center',
-    resizeMode: 'contain',
     height: 200/Global.pr,
+    width: Global.size.width,
+    backgroundColor: "#333740"
   },
+
+  tob_bar_logo: {
+    height: 150/Global.pr,
+    width: 150/Global.pr,
+    resizeMode: 'contain',
+  }
 
 });

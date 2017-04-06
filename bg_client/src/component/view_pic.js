@@ -38,14 +38,14 @@ var styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: (Global.size.width-20)/2,
-    height: (Global.size.width-20)/3*2,
+    width: (Global.size.width-4)/2,
+    height: (Global.size.width-4)/3*2,
     borderWidth: 1,
     borderColor: "white"
   },
   text: {
     textAlign: 'center',
-    width: (Global.size.width-20)/2-2,
+    width: (Global.size.width-4)/2-2,
     height: 30,
     backgroundColor: "red",
     fontSize: 18,

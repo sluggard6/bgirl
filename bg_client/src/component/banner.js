@@ -22,6 +22,7 @@ export default class Banner extends Component {
 
   render(){
     return (
+      <View style={styles.list_container}>
       <TouchableOpacity onPress={() => this.props.onPress(this.props.data[0].component.id)}>
         <Image source={{uri:this.props.data[0].pic.min}} style={styles.container}>
           <View style={styles.text_container}>
@@ -30,21 +31,29 @@ export default class Banner extends Component {
           </View>
         </Image>
       </TouchableOpacity>
+      </View>
     );
   }
 }
 
 var styles = StyleSheet.create({
 
+  list_container: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    flexWrap: 'nowrap',
+    alignItems: 'center',
+    width: Global.size.width
+  },
+
   container: {
     flexDirection: "column",
     justifyContent: 'flex-end',
-    alignItems: 'stretch',
+    alignItems: 'center',
     height: 255,
-    width: Global.size.width,
+    width: Global.size.width-4,
     borderWidth: 1,
-    borderColor: "white",
-    marginBottom:10,
+    borderColor: "white"
   },
 
   text_container: {

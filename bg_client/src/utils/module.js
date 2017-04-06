@@ -56,7 +56,7 @@ export default class Module extends Component {
 
       case "the_two_square":{
         return (
-          <TheThree data={module.items} onPress={this.onPress.bind(this)} square={true}/>
+          <TheTwo data={module.items} onPress={this.onPress.bind(this)} square={true}/>
         );
       }
 
@@ -82,7 +82,9 @@ export default class Module extends Component {
 export class Separator extends Component{
 
   render(){
-    <View sytle={{height: 10, width: Global.size.width, backgroundColor: "#DFE0E1"}}/>
+    return(
+      <View style={{height: 10, width: Gloabl.size.width, backgroundColor: "#DFE0E1"}}/>
+    )
   }
 
 }
