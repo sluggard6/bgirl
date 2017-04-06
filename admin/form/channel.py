@@ -21,8 +21,7 @@ class GroupForm(FlaskForm):
     id = HiddenField(u'id')
     name = TextField(u'名称', [
         optional(),
-        Length(min=2, max=16, message=u'名称必须为2～16字符。'),
-        special_chars
+        Length(min=2, max=16, message=u'名称必须为2～16字符。')
     ]
                      )
     description = TextField(u'描述', [
@@ -41,8 +40,7 @@ class ChannelForm(FlaskForm):
     id = HiddenField(u'id')
     name = TextField(u'名称', [
         optional(),
-        Length(min=2, max=16, message=u'名称必须为2～16字符。'),
-        special_chars
+        Length(min=2, max=16, message=u'名称必须为2～16字符。')
     ]
                      )
     thumb = HiddenField(u"封面")
