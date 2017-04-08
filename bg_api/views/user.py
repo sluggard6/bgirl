@@ -73,6 +73,7 @@ def register():
         return g.ret_error_func(u'该手机号码已经被注册！')
 
     user = UserService.register(phone, password)
+    print user
     login_user(user)
     return g.ret_success_func(seid=session.sid)
 

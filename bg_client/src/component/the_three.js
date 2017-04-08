@@ -47,8 +47,8 @@ var styles = StyleSheet.create({
   },
 
   image: {
-    width: (Global.size.width-5)/3-5,
-    height: (Global.size.width-5)/3-5,
+    width: (Global.size.width-2)/3-1,
+    height: (Global.size.width-2)/3-1,
     borderWidth: 1,
     borderColor: "white"
   },

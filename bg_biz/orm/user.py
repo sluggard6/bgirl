@@ -73,7 +73,6 @@ class User(BaseModel, KvdbMixin, UserMixin):
         u.nickname = nickname
 
         u.set_password(password)
-
         u.insert()
         return u
 

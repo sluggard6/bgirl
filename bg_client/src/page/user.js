@@ -50,8 +50,10 @@ export default class User extends Component {
         this.goAction(menu.actionPath)
         }}>
         <View style={styles.menu}>
+          <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row', height: 50}}>
           <Image source={menu.img} style={styles.menu_logo}/>
           <Text style={styles.menu_text}>{menu.text}</Text>
+          </View>
           <Image source={require('../images/jiantou.png')} style={styles.menu_logo}/>
         </View>
       </TouchableOpacity>
@@ -75,7 +77,7 @@ export default class User extends Component {
       component: RegisterPhone
     })
   }
-  
+
 
   checkVip() {
     if(Application.isVip()) {
@@ -100,28 +102,26 @@ export default class User extends Component {
   getNick() {
     if(Global.isLogin) {
       let nick = Global.user.nick==null?this.getSecPhone():Global.user.nick
+      let payInfo = "普通用户"
       return (
-        <View>
-        <TouchableOpacity>
-          <View style={styles.userinfo}>
-            <Text style={{fontSize: 25}}>{nick}</Text>
+        <View style={styles.userinfo}>
+          <Image source={require('../images/touxiang.png')} style={{height: 80, resizeMode: Image.resizeMode.contain, marginLeft: 80, marginRight: 40}}/>
+          <View style={styles.user_nick}>
+            <Text style={{fontSize: 20, textAlign: 'center', marginBottom: 5}}>{nick}</Text>
+            <TouchableOpacity onPress={this.checkVip.bind(this)}>
+              <View style={styles.vip_info}>
+                <Image source={require('../images/huangguan0.png')} style={{height: 20, width: 20, marginRight: 10, resizeMode: Image.resizeMode.contain}}/>
+                <Text style={{fontSize: 18, textAlign: 'center'}}>{payInfo}</Text>
+              </View>
+            </TouchableOpacity>
           </View>
-        </TouchableOpacity>        
-        <View style={styles.balance}>
-          <TouchableOpacity onPress={this.checkVip.bind(this)}>
-           <Text style={{color: 'red'}}>至尊VIP</Text>
-          </TouchableOpacity>        
-          <TouchableOpacity onPress={Application.unSupport}>
-            <Text>0金币</Text>
-          </TouchableOpacity>        
-        </View>
         </View>
       )
     }else{
       return (
         <View style={{backgroundColor: "white"}}>
           <TouchableOpacity onPress={this.loginPage.bind(this)}>
-            <View style={styles.userinfo}>
+            <View style={[styles.userinfo,{justifyContent: 'center'}]}>
               <Image source={require('../images/touxiang.png')} style={{height: 80, resizeMode: Image.resizeMode.contain}}/>
             </View>
           </TouchableOpacity>
@@ -162,9 +162,17 @@ var styles = StyleSheet.create({
   },
   userinfo: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     margin: 20,
+    width: Global.size.width-40
+  },
+  user_nick: {
+  },
+  vip_info: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   button: {
     fontSize: 18,
@@ -173,7 +181,6 @@ var styles = StyleSheet.create({
     borderRadius: 5,
     textAlign: 'center',
     textAlignVertical: 'center'
-
   },
   balance: {
     flexDirection: 'row',
@@ -198,7 +205,7 @@ var styles = StyleSheet.create({
   menu_text:{
     textAlign: 'center',
     fontSize: 18,
-    width: 200
+    width: 150
   },
   menu_logo: {
     height: 40,
