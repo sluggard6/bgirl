@@ -144,6 +144,8 @@ class Group(BaseModel, KvdbMixin):
     def thumb3_http(self):
         return get_download_url('image',self.thumb3)
 
+
+
 class Pic(BaseModel, KvdbMixin):
     __tablename__ = 'pic'
 
@@ -170,7 +172,7 @@ class Pic(BaseModel, KvdbMixin):
         return get_download_url('image',self.max)
 
 
-class Supplier(BaseModel,KvdbMixin):
+class Supplier(BaseModel):
     __tablename__ ='supplier'
 
     __table_args__={}
@@ -191,3 +193,7 @@ class Supplier(BaseModel,KvdbMixin):
     description = Column(u'description', VARCHAR(length=200))
     status = Column(u'status', INTEGER(), nullable=False, default=Status.AVAILABLE)
 
+    @classmethod
+    def suppliers(cls):
+        list = Supplier.query.filter_by(status=1).all()
+        return list

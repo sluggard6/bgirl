@@ -36,7 +36,8 @@ class GroupForm(FlaskForm):
     images = HiddenField(u"images")
     status = BooleanField(u'状态')
     choices = list()
-    for t in Supplier.query.filter_by(status=1).all():
+    suppliers = Supplier.query.filter_by(status=1).all()
+    for t in suppliers:
         choices.append((t.id, t.name))
     supplier_id = SelectField(u'供应商', [DataRequired(message=u'请选择供应商')], choices=choices, coerce=int)
 
