@@ -12,7 +12,7 @@ PageView = Blueprint('page', __name__)
 
 @PageView.route('/<page>', methods=['GET', 'POST'])
 def page(page):
-    ms = PageModule.query.filter_by(page=page).order_by(PageModule.rank.desc()).all()
+    ms = PageModule.query.filter_by(page=page).filter_by(status=PageModule.Status.AVAILABLE).order_by(PageModule.rank.desc()).order_by(PageModule.id).all()
     mds = [m.id for m in ms]
     ccs = PageContent.query.filter(PageContent.module_id.in_(mds)).all()
     mc = dict()
