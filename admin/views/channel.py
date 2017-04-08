@@ -174,7 +174,10 @@ def group_edit():
                     group.thumb3 = form.thumb3.data
                     group.status = 1 if form.status.data else 0
                     group.description = form.description.data
-
+                    group.supplier_id = form.supplier_id.data
+                    group.group_no = form.group_no.data
+                    group.shoot_time = form.shoot_time.data
+                    group.name = form.name.data
                     group.update()
                     img_list = []
                     if form.images.data:

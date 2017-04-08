@@ -97,6 +97,9 @@ class Group(BaseModel, KvdbMixin):
     thumb = Column(u'thumb', VARCHAR(length=200))
     thumb2 = Column(u'thumb2', VARCHAR(length=200))
     thumb3 = Column(u'thumb3', VARCHAR(length=200))
+    supplier_id =Column(u'supplier_id',VARCHAR(length=45))
+    shoot_time = Column(u'shoot_time',DATETIME(),default=datetime.today())
+    group_no = Column(u'group_no',VARCHAR(length=45))
     status = Column(u'status', INTEGER(), nullable=False, default=Status.AVAILABLE)
 
     channels = relation('Channel',
@@ -165,3 +168,26 @@ class Pic(BaseModel, KvdbMixin):
     @property
     def d_max(self):
         return get_download_url('image',self.max)
+
+
+class Supplier(BaseModel,KvdbMixin):
+    __tablename__ ='supplier'
+
+    __table_args__={}
+
+    class Status(DisplayEnum):
+        AVAILABLE = 1
+        DISABLE = 0
+
+        __display_cn__ = {
+            AVAILABLE: u'有效',
+            DISABLE: u'无效'
+        }
+
+    id = Column(u'id', INTEGER(), nullable=False, primary_key=True, autoincrement=True)
+    name = Column(u'name', VARCHAR(length=100), nullable=True)
+    create_time = Column(u'create_time', DATETIME(), nullable=False, default=datetime.now())
+    update_time = Column(u'update_time', DATETIME(), nullable=False, default=datetime.now())
+    description = Column(u'description', VARCHAR(length=200))
+    status = Column(u'status', INTEGER(), nullable=False, default=Status.AVAILABLE)
+

@@ -1,0 +1,60 @@
+{% extends "layout/default.html" %}
+{% block container %}
+	<h3 class="page-header">
+		新增、编辑供应商
+		<div style="float:right;">
+			<a href="/supplier/edit" class="btn btn-primary btn-sm">新增供应商</a>
+		</div>
+	</h3>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead class="thead-default">
+			<tr>
+				<th>id</th>
+				<th>供应商</th>
+				<th>描述</th>
+				<th>状态</th>
+				<th>操作</th>
+			</tr>
+			<tbody>
+			~for u in suppliers
+			<tr>
+				<td>{{ u.id }}</td>
+				<td>{{ u.name }}</td>
+				<td>{{ u.description or '' }}</td>
+				<td>
+					<div class="btn-group btn-group-xs" role="group">
+						<button type="button"
+								class="{% if u.status %}btn btn-success{% else %}btn btn-default{% endif %}"
+								onclick=""
+								id="user_{{ u.id }}_enable">
+							启用
+						</button>
+						<button type="button"
+								class="{% if u.status %}btn btn-default{% else %}btn btn-danger{% endif %}"
+								onclick=""
+								id="user_{{ u.id }}_disable">
+							禁用
+						</button>
+					</div>
+				</td>
+				<td>
+					<div class="btn-group btn-group-xs">
+						<a class="btn btn-primary" href="/supplier/edit?id={{u.id}}">编辑</a>
+                        <a class="btn btn-primary" href="/supplier/delete?id={{u.id}}" onclick="return del()">删除</a>
+					</div>
+				</td>
+			</tr>
+			~endfor
+			</tbody>
+			</thead>
+		</table>
+	</div>
+    <script type="text/javascript">
+function del(){
+if(!confirm("确认要删除？")){
+window.event.returnValue = false;
+}
+}
+</script>
+{% endblock %}

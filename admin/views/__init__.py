@@ -24,6 +24,7 @@ def register_views(app):
     from views.pic import PicView
     from views.page import PageView
     from views.charge import ChargeView
+    from views.supplier import SupplierView
 
     app.register_blueprint(AuthView)
     app.register_blueprint(DefaultView)
@@ -35,6 +36,7 @@ def register_views(app):
     app.register_blueprint(PageView,url_prefix='/page')
     app.register_blueprint(rq_dashboard.blueprint, url_prefix="/rq")
     app.register_blueprint(ChargeView,url_prefix="/charge")
+    app.register_blueprint(SupplierView,url_prefix='/supplier')
 
     app.errorhandler(404)(error_handler)
     app.errorhandler(500)(error_handler)
