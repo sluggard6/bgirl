@@ -193,7 +193,3 @@ class Supplier(BaseModel):
     description = Column(u'description', VARCHAR(length=200))
     status = Column(u'status', INTEGER(), nullable=False, default=Status.AVAILABLE)
 
-    @classmethod
-    def suppliers(cls):
-        list = Supplier.query.filter_by(status=1).all()
-        return list

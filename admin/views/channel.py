@@ -2,7 +2,7 @@
 
 from flask import (g, render_template, Blueprint, flash, request, redirect, url_for,jsonify)
 from sqlalchemy.exc import IntegrityError
-from bg_biz.orm.pic import Channel, Group, Pic
+from bg_biz.orm.pic import Channel, Group, Pic,Supplier
 from form.channel import ChannelForm, GroupForm
 from form import obj2form, form2obj
 from sharper.flaskapp.orm.base import db
@@ -116,7 +116,8 @@ def group_edit():
     data = request.form or request.args
     print data
     id = data.get('id', None)
-
+    suppliers = Supplier.query.filter_by(status=1).order_by(Supplier.id.asc()).all()
+    g.suppliers = suppliers
     form = GroupForm()
     print 'channel=', id
     channels = Channel.query.filter_by(status=1).order_by(Channel.id.asc()).all()
@@ -127,6 +128,7 @@ def group_edit():
         g.thumb2 = group.thumb2_http
         g.thumb3 = group.thumb3_http
         g.photo_and_thumbs = group.pics
+        g.supplier_id = group.supplier_id
         act = u'编辑'
         if request.method == 'GET':
             obj2form(group, form)

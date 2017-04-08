@@ -15,7 +15,17 @@
         {{ render_field(form.name, dict(required=True)) }}
         {{ render_field(form.group_no) }}
         {{ render_field(form.shoot_time) }}
-        {{ render_field(form.supplier_id) }}
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="supplier_id"><label for="supplier_id">供应商</label></label>
+        <div class="col-lg-10">
+                <select id="supplier_id" name="supplier_id" class="form-control">
+                    ~for s in g.suppliers
+                    <option value="{{ s.id }}" {% if g.supplier_id|int == s.id|int %} selected='selected' {% endif %}>{{ s.name }}</option>
+                    ~endfor
+                </select>
+
+            </div>
+    </div>
         <div class="form-group">
             <label class="col-lg-2 control-label" for="thumb_img"><label for="thumb_img">封面1</label></label>
 
