@@ -135,6 +135,7 @@ def group_edit():
         form.name.flags.disabled = u'disabled'
     else:
         group = None
+        g.supplier_id=0
         act = u'创建'
 
     if request.method == 'POST':
