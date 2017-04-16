@@ -194,14 +194,14 @@ def get_content(id):
 @PageView.route('/custom_content',methods=['POST'])
 def custom_content():
     data = request.form
-    print data
+    #print data
     optionsRadiosinline = data.get('optionsRadiosinline',0)
     title = data.get('title',None)
     combobox = data.get('combobox',None)
     id = data.get('id',None)
     module_id = data.get('module_id',None)
     content_id = data.get('content_id',None)
-    print content_id
+    #print content_id
     pic_id = data.get('pic_id', None)
     if module_id and int(content_id):
         #module=PageModule.get(module_id)
