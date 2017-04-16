@@ -69,11 +69,11 @@ class Channel(BaseModel):
     def pics(self):
         pics =[]
         for g in self.group:
-            print g
+            #print g
             for pic in g.pics:
-                print pic
+                #print pic
                 pics.append(pic)
-        print pics
+        #print pics
         return pics
 
 
