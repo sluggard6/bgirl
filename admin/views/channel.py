@@ -246,7 +246,7 @@ def create_pic():
 
 @ChannelView.route('/test', methods=['GET', 'POST'])
 def test():
-    for i in range(22, 23):
+    for i in range(23, 69):
         group = Group.query.filter_by(id=i).first()
         if group:
             if group.thumb:
