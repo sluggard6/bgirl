@@ -195,18 +195,19 @@ def get_content(id):
 def custom_content():
     data = request.form
     #print data
+    module_id = data.get('module_id', None)
+    module = PageModule.get(module_id)
     optionsRadiosinline = data.get('optionsRadiosinline',0)
     title = data.get('title',None)
     combobox = data.get('combobox',None)
     if not combobox:
-        return jsonify(success=False)
+        return redirect(url_for('.module_list', page=module.page))
     id = data.get('id',None)
-    module_id = data.get('module_id',None)
     content_id = data.get('content_id',None)
     #print content_id
     pic_id = data.get('pic_id', None)
     if not pic_id:
-        return jsonify(success=False)
+        return redirect(url_for('.module_list', page=module.page))
     if module_id and int(content_id):
         #module=PageModule.get(module_id)
         content = PageContent.get(content_id)
@@ -224,7 +225,7 @@ def custom_content():
         content.category = optionsRadiosinline
         content.status = 1
         content.insert()
-    module = PageModule.get(module_id)
+
     return redirect(url_for('.module_list',page=module.page))
 
 
