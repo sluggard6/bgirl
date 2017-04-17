@@ -2,6 +2,10 @@ apply plugin: "com.android.application"
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
+apply plugin: 'packer'
+
+
+
 import com.android.build.OutputFile
 
 /**
@@ -84,6 +88,21 @@ def enableSeparateBuildPerCPUArchitecture = true
  */
 def enableProguardInReleaseBuilds = true
 
+packer {
+    // 指定渠道打包输出目录
+    archiveOutput = file(new File(project.rootProject.buildDir.path, "apks"))
+    // 指定渠道打包输出文件名格式
+    // archiveNameFormat = ''
+    // 指定渠道打包需要修改的AndroidManifest文件项
+    manifestMatcher = ['CHANNEL_NAME']
+    // 指定是否使用build版本号自增
+    buildNumberAuto = false
+    // 指定使用版本号自增的buildType，默认是全部
+    buildNumberTypeMatcher = ['release']
+
+}
+
+
 android {
 	signingConfigs {
         config {
@@ -92,6 +111,7 @@ android {
             storeFile file('/Users/frank/keystores/bgirl.jks')
             storePassword 'bg@2016#girl'
         }
+
     }
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -141,7 +161,6 @@ dependencies {
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
     compile project(':react-native-device-info')
-    compile project(':react-native-vector-icons')
     compile project(':react-native-yunpeng-alipay')
     compile project(':RCTWeChat')
 }

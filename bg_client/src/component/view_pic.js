@@ -47,7 +47,7 @@ var styles = StyleSheet.create({
     textAlign: 'center',
     width: (Global.size.width-4)/2-2,
     height: 30,
-    backgroundColor: "red",
+    backgroundColor: "#ff4563",
     fontSize: 18,
     color: "white"
   }

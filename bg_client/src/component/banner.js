@@ -27,7 +27,7 @@ export default class Banner extends Component {
         <Image source={{uri:this.props.data[0].pic.min}} style={styles.container}>
           <View style={styles.text_container}>
             <View style={styles.view_opacity}/>
-            <Text style={styles.text_name}>{this.props.data[0].component.name}-{this.props.data[0].component.des}</Text>
+            <Text style={styles.text_name}>{this.props.data[0].component.name}</Text>
           </View>
         </Image>
       </TouchableOpacity>

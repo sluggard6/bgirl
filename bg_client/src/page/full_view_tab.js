@@ -36,7 +36,7 @@ export default class FullViewTab extends Component {
     if(this.state.goBack) {
       this.state.goBack = false
       this.tabView.goToPage(Global.maxView - 1)
-    } 
+    }
   }
 
   _loadData() {
@@ -66,7 +66,6 @@ export default class FullViewTab extends Component {
   }
 
   render() {
-    // console.log("scrollable view render : " + this.state.locked)
     if(!this.state.loaded){
       return (
         <View style={styles.loading}>
@@ -83,7 +82,6 @@ export default class FullViewTab extends Component {
           ref={(tabView) => { this.tabView = tabView; }}
           locked={this.state.locked}
           onChangeTab={(tab) => {
-            {/*console.log("onChangeTab : " + tab.i)*/}
             if(tab.i >= Global.maxView) {
               if(!Application.isVip()){
                 Application.doAlert()

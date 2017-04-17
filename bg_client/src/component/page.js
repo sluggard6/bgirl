@@ -26,6 +26,7 @@ export default class Page extends Component {
   }
 
   _updateData(responseData){
+    console.log(responseData)
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(responseData.page.modules),
       loaded: true,

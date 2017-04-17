@@ -1,14 +1,15 @@
 package com.bg_client;
 
 import android.app.Application;
+import android.content.pm.PackageManager;
 
+import com.bg_client.packer.ChannelPackage;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.yunpeng.alipay.AlipayPackage;
 import com.theweflex.react.WeChatPackage;
 
@@ -25,12 +26,13 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
+
       return Arrays.<ReactPackage>asList(
-		  new RNDeviceInfo(),
-          new VectorIconsPackage(),
-          new MainReactPackage(),
-          new AlipayPackage(),
-          new WeChatPackage()
+        new RNDeviceInfo(),
+        new MainReactPackage(),
+        new AlipayPackage(),
+        new WeChatPackage(),
+        new ChannelPackage()
       );
     }
   };

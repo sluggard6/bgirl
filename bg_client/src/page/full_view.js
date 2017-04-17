@@ -24,11 +24,6 @@ export default class FullPicView extends Component {
   }
 
   componentWillUpdate(nextProps, nextState){
-    // console.log(this.props)
-    // console.log(nextProps)
-    // console.log("---------------------------")
-    // console.log(this.state)
-    // console.log(nextState)
   }
 
   _doAlert() {
@@ -39,14 +34,14 @@ export default class FullPicView extends Component {
   }
 
   render() {
-    // console.log("-------------pic_view_render---------------- : " + this.props.tabLabel)
     return (
       <View style={styles.container}>
         {this._doAlert()}
         <Image source={{uri: this.props.pic.max}} style={styles.image}>
         </Image>
-        <View style={{height: (140/Global.pr), backgroundColor: "white"}}>
-          <Text>底部效果</Text>
+        <View style={styles.bottom}>
+          <Image source={require('../images/zan.png')}/>
+          <Text>0</Text>
         </View>
       </View>
     );
@@ -68,5 +63,12 @@ var styles = StyleSheet.create({
     width: Global.size.width,
     height: Global.size.height-(280/Global.pr),
     resizeMode: Image.resizeMode.contain
+  },
+  bottom: {
+    flexDirection: "row",
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: (140/Global.pr), 
+    backgroundColor: "white"
   }
 })
