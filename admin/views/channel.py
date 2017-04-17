@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 
-from flask import (g, render_template, Blueprint, flash, request, redirect, url_for,jsonify)
+from flask import (g, render_template, Blueprint, flash, request, redirect, url_for, jsonify)
 from sqlalchemy.exc import IntegrityError
-from bg_biz.orm.pic import Channel, Group, Pic,Supplier
+from bg_biz.orm.pic import Channel, Group, Pic, Supplier
 from form.channel import ChannelForm, GroupForm
 from form import obj2form, form2obj
 from sharper.flaskapp.orm.base import db
@@ -17,9 +17,10 @@ ChannelView = Blueprint('channel', __name__)
 
 @ChannelView.route('/list', methods=['GET', 'POST'])
 def list():
-    channels = Channel.query.filter(Channel.status<>3).order_by(Channel.id.asc()).all()
+    channels = Channel.query.filter(Channel.status <> 3).order_by(Channel.id.asc()).all()
 
     return render_template('channel/list.html', channels=channels)
+
 
 @ChannelView.route('/channel_delete', methods=['GET', 'POST'])
 def channel_delete():
@@ -106,7 +107,7 @@ def group(channel_id):
 
 @ChannelView.route('/group_list', methods=['GET', 'POST'])
 def group_list():
-    groups = Group.query.filter(Group.status<>3).order_by(Group.id.asc()).all()
+    groups = Group.query.filter(Group.status <> 3).order_by(Group.id.asc()).all()
 
     return render_template('channel/group_list.html', groups=groups)
 
@@ -124,7 +125,7 @@ def group_edit():
     g.channels = channels
     if id:
         group = Group.get(id)
-        g.thumb =group.thumb_http
+        g.thumb = group.thumb_http
         g.thumb2 = group.thumb2_http
         g.thumb3 = group.thumb3_http
         g.thumb4 = group.thumb4_http
@@ -136,7 +137,7 @@ def group_edit():
         form.name.flags.disabled = u'disabled'
     else:
         group = None
-        g.supplier_id=0
+        g.supplier_id = 0
         act = u'创建'
 
     if request.method == 'POST':
@@ -157,7 +158,7 @@ def group_edit():
                             pic.max = img;
                             pic.normal = img;
                             pic.min = img
-                            pic.good =0
+                            pic.good = 0
                             pic.bad = 0
                             pic.insert()
                             img_list.append(pic.id)
@@ -195,7 +196,7 @@ def group_edit():
                             pic.max = img;
                             pic.normal = img;
                             pic.min = img
-                            pic.good=0
+                            pic.good = 0
                             pic.bad = 0
                             pic.insert()
                             img_list.append(pic.id)
@@ -226,11 +227,12 @@ def group_delete():
     flash(u'删除成功', 'ok')
     return redirect(url_for("channel.group_list"))
 
+
 @ChannelView.route('/create_pic', methods=['GET', 'POST'])
 def create_pic():
     data = request.form or request.args
-    uri = data.get('uri',None)
-    group_name = data.get('group_name',None)
+    uri = data.get('uri', None)
+    group_name = data.get('group_name', None)
     pic = Pic()
     pic.title = u'封面'
     pic.max = uri;
@@ -239,4 +241,45 @@ def create_pic():
     pic.good = 0
     pic.bad = 0
     pic.insert()
-    return jsonify(success=True,pic_id=pic.id)
+    return jsonify(success=True, pic_id=pic.id)
+
+
+@ChannelView.route('/test', methods=['GET', 'POST'])
+def test():
+    for i in range(22, 68):
+        group = Group.query.filter_by(id=i).fist()
+        if group:
+            if group.thumb:
+                pic = Pic()
+                pic.title = u''
+                pic.max = group.thumb
+                pic.normal = group.thumb
+                pic.min = group.thumb
+                pic.good = 0
+                pic.bad = 0
+                pic.insert()
+                group.thumb = pic.id
+                group.update()
+            if group.thumb2:
+                pic = Pic()
+                pic.title = u''
+                pic.max = group.thumb2
+                pic.normal = group.thumb2
+                pic.min = group.thumb2
+                pic.good = 0
+                pic.bad = 0
+                pic.insert()
+                group.thumb2 = pic.id
+                group.update()
+            if group.thumb3:
+                pic = Pic()
+                pic.title = u''
+                pic.max = group.thumb3
+                pic.normal = group.thumb3
+                pic.min = group.thumb3
+                pic.good = 0
+                pic.bad = 0
+                pic.insert()
+                group.thumb3 = pic.id
+                group.update()
+    return jsonify(success=True)
