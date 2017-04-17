@@ -244,42 +244,42 @@ def create_pic():
     return jsonify(success=True, pic_id=pic.id)
 
 
-@ChannelView.route('/test', methods=['GET', 'POST'])
-def test():
-    for i in range(23, 69):
-        group = Group.query.filter_by(id=i).first()
-        if group:
-            if group.thumb:
-                pic = Pic()
-                pic.title = u''
-                pic.max = group.thumb
-                pic.normal = group.thumb
-                pic.min = group.thumb
-                pic.good = 0
-                pic.bad = 0
-                pic.insert()
-                group.thumb = pic.id
-                group.update()
-            if group.thumb2:
-                pic = Pic()
-                pic.title = u''
-                pic.max = group.thumb2
-                pic.normal = group.thumb2
-                pic.min = group.thumb2
-                pic.good = 0
-                pic.bad = 0
-                pic.insert()
-                group.thumb2 = pic.id
-                group.update()
-            if group.thumb3:
-                pic = Pic()
-                pic.title = u''
-                pic.max = group.thumb3
-                pic.normal = group.thumb3
-                pic.min = group.thumb3
-                pic.good = 0
-                pic.bad = 0
-                pic.insert()
-                group.thumb3 = pic.id
-                group.update()
-    return jsonify(success=True)
+# @ChannelView.route('/test', methods=['GET', 'POST'])
+# def test():
+#     for i in range(23, 69):
+#         group = Group.query.filter_by(id=i).first()
+#         if group:
+#             if group.thumb:
+#                 pic = Pic()
+#                 pic.title = u''
+#                 pic.max = group.thumb
+#                 pic.normal = group.thumb
+#                 pic.min = group.thumb
+#                 pic.good = 0
+#                 pic.bad = 0
+#                 pic.insert()
+#                 group.thumb = pic.id
+#                 group.update()
+#             if group.thumb2:
+#                 pic = Pic()
+#                 pic.title = u''
+#                 pic.max = group.thumb2
+#                 pic.normal = group.thumb2
+#                 pic.min = group.thumb2
+#                 pic.good = 0
+#                 pic.bad = 0
+#                 pic.insert()
+#                 group.thumb2 = pic.id
+#                 group.update()
+#             if group.thumb3:
+#                 pic = Pic()
+#                 pic.title = u''
+#                 pic.max = group.thumb3
+#                 pic.normal = group.thumb3
+#                 pic.min = group.thumb3
+#                 pic.good = 0
+#                 pic.bad = 0
+#                 pic.insert()
+#                 group.thumb3 = pic.id
+#                 group.update()
+#     return jsonify(success=True)
