@@ -127,6 +127,7 @@ def group_edit():
         g.thumb =group.thumb_http
         g.thumb2 = group.thumb2_http
         g.thumb3 = group.thumb3_http
+        g.thumb4 = group.thumb4_http
         g.photo_and_thumbs = group.pics
         g.supplier_id = group.supplier_id
         act = u'编辑'
@@ -175,6 +176,7 @@ def group_edit():
                     group.thumb = form.thumb.data
                     group.thumb2 = form.thumb2.data
                     group.thumb3 = form.thumb3.data
+                    group.thumb4 = form.thumb4.data
                     group.status = 1 if form.status.data else 0
                     group.description = form.description.data
                     group.supplier_id = form.supplier_id.data

@@ -25,5 +25,6 @@ def group_build(group):
     dic['t1'] = group.thumb_http
     dic['t2'] = group.thumb2_http
     dic['t3'] = group.thumb3_http
+    dic['t4'] = group.thumb4_http
     return dic
     
