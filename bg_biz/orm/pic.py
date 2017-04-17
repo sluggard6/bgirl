@@ -207,8 +207,8 @@ class Pic(BaseModel, KvdbMixin):
     min = Column(u'min', VARCHAR(length=200), nullable=False)
     normal = Column(u'normal', VARCHAR(length=200), nullable=False)
     max = Column(u'max', VARCHAR(length=200), nullable=False)
-    good = Column(u'good', INTEGER(), nullable=False)
-    bad = Column(u'bad', INTEGER(), nullable=False)
+    good = Column(u'good', INTEGER(), nullable=False,default=0)
+    bad = Column(u'bad', INTEGER(), nullable=False,default=0)
     create_time = Column(u'create_time', DATETIME(), nullable=False, default=datetime.now())
     modify_time = Column(u'modify_time', DATETIME(), nullable=False, default=datetime.now())
 

@@ -157,6 +157,8 @@ def group_edit():
                             pic.max = img;
                             pic.normal = img;
                             pic.min = img
+                            pic.good =0
+                            pic.bad = 0
                             pic.insert()
                             img_list.append(pic.id)
                         group.update_pics(img_list);
@@ -193,6 +195,8 @@ def group_edit():
                             pic.max = img;
                             pic.normal = img;
                             pic.min = img
+                            pic.good=0
+                            pic.bad = 0
                             pic.insert()
                             img_list.append(pic.id)
                     group.update_pics(img_list);
@@ -232,5 +236,7 @@ def create_pic():
     pic.max = uri;
     pic.normal = uri;
     pic.min = uri
+    pic.good = 0
+    pic.bad = 0
     pic.insert()
     return jsonify(success=True,pic_id=pic.id)
