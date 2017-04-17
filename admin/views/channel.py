@@ -221,3 +221,16 @@ def group_delete():
     group.update()
     flash(u'删除成功', 'ok')
     return redirect(url_for("channel.group_list"))
+
+@ChannelView.route('/create_pic', methods=['GET', 'POST'])
+def create_pic():
+    data = request.form or request.args
+    uri = data.get('uri',None)
+    group_name = data.get('group_name',None)
+    pic = Pic()
+    pic.title = u'封面'
+    pic.max = uri;
+    pic.normal = uri;
+    pic.min = uri
+    pic.insert()
+    return jsonify(success=True,pic_id=pic.id)

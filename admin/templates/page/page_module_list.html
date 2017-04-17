@@ -168,7 +168,7 @@
                             <select id="combobox" name="combobox">
                                 <option></option>
                                 ~for g in groups
-                                <option value="{{ g.id }}" title="{{ g.pics }}">{{ g.name }}</option>
+                                <option value="{{ g.id }}" title="{{ g.thumb_list }}">{{ g.name }}</option>
                                 ~endfor
                             </select>
                         </div>
@@ -198,13 +198,13 @@
                     $("#channel_name").html('频道');
                     $("#combobox").empty();
                     ~for c in channels
-                    $("#combobox").append('<option value="{{ c.id }}" title="{{ c.pics }}">{{ c.name }}</option>');
+                    $("#combobox").append('<option value="{{ c.id }}" title="{{ c.thumb_list }}">{{ c.name }}</option>');
                             ~endfor
                 }else{
                     $("#channel_name").html('专辑');
                     $("#combobox").empty();
                     ~for g in groups
-                    $("#combobox").append('<option value="{{ g.id }}" title="{{ g.pics }}">{{ g.name }}</option>');
+                    $("#combobox").append('<option value="{{ g.id }}" title="{{ g.thumb_list }}">{{ g.name }}</option>');
                             ~endfor
                 }
             });

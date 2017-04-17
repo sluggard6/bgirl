@@ -76,6 +76,16 @@ class Channel(BaseModel):
         #print pics
         return pics
 
+    @property
+    def thumb_list(self):
+        pics = []
+        for g in self.group:
+            # print g
+            for pic in g.thumb_list:
+                # print pic
+                pics.append(pic)
+        # print pics
+        return pics
 
 class Group(BaseModel, KvdbMixin):
     __tablename__ = 'group'
@@ -136,19 +146,55 @@ class Group(BaseModel, KvdbMixin):
 
     @property
     def thumb_http(self):
-        return get_download_url('image',self.thumb)
+        if self.thumb:
+            pic = Pic.get(self.thumb)
+            if pic:
+                return pic.d_normal
+        return ''
 
     @property
     def thumb2_http(self):
-        return get_download_url('image',self.thumb2)
+        if self.thumb2:
+            pic = Pic.get(self.thumb2)
+            if pic:
+                return pic.d_normal
+        return ''
     @property
     def thumb3_http(self):
-        return get_download_url('image',self.thumb3)
+        if self.thumb3:
+            pic = Pic.get(self.thumb3)
+            if pic:
+                return pic.d_normal
+        return ''
 
     @property
     def thumb4_http(self):
-        return get_download_url('image', self.thumb4)
+        if self.thumb4:
+            pic = Pic.get(self.thumb4)
+            if pic:
+                return pic.d_normal
+        return ''
 
+    @property
+    def thumb_list(self):
+        pics = []
+        if self.thumb:
+            pic = Pic.get(self.thumb)
+            if pic:
+                pics.append(pic)
+        if self.thumb2:
+            pic = Pic.get(self.thumb2)
+            if pic:
+                pics.append(pic)
+        if self.thumb3:
+            pic = Pic.get(self.thumb3)
+            if pic:
+                pics.append(pic)
+        if self.thumb4:
+            pic = Pic.get(self.thumb4)
+            if pic:
+                pics.append(pic)
+        return pics
 
 
 class Pic(BaseModel, KvdbMixin):

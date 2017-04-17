@@ -138,25 +138,34 @@
         var link = data.thumb;
         var uri = data.uri;
         $('#thumb_img').attr("src", link);
-        $('#thumb').val(uri);
+        LuhuAdmin.post('/channel/create_pic', data = "uri=" + uri, function (data) {
+                $('#thumb').val(data.pic_id);
+            });
+
     });
     LuhuAdmin.upload("#detail_uploader2", "image", function (data) {
         var link = data.thumb;
         var uri = data.uri;
         $('#thumb_img2').attr("src", link);
-        $('#thumb2').val(uri);
+        LuhuAdmin.post('/channel/create_pic', data = "uri=" + uri, function (data) {
+                $('#thumb2').val(data.pic_id);
+            });
     });
     LuhuAdmin.upload("#detail_uploader3", "image", function (data) {
         var link = data.thumb;
         var uri = data.uri;
         $('#thumb_img3').attr("src", link);
-        $('#thumb3').val(uri);
+        LuhuAdmin.post('/channel/create_pic', data = "uri=" + uri, function (data) {
+                $('#thumb3').val(data.pic_id);
+            });
     });
     LuhuAdmin.upload("#detail_uploader4", "image", function (data) {
         var link = data.thumb;
         var uri = data.uri;
         $('#thumb_img4').attr("src", link);
-        $('#thumb4').val(uri);
+        LuhuAdmin.post('/channel/create_pic', data = "uri=" + uri, function (data) {
+                $('#thumb4').val(data.pic_id);
+            });
     });
     function submitProduct() {
         var images = new Array();
