@@ -36,7 +36,6 @@ export default class Http {
       body: body
     }).then((response) => response.json())
       .then((responseData) => {
-        console.log(responseData)
         callback(responseData)
       }).catch((err) => {
         console.log(err);

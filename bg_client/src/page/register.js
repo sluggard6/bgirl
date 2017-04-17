@@ -54,7 +54,6 @@ export default class Register extends Component{
     }
     
     Http.httpPost(Application.getUrl(Global.urls.register), params, (res) => {
-      console.log(res)
       if(res.success != true) {
         ToastAndroid.show(res.message, ToastAndroid.SHORT)
       }else{

@@ -20,12 +20,13 @@ import TopBar from '../component/top_bar'
 import Login from './login'
 import RegisterPhone from './register_phone'
 import Pay from './pay'
+import ChannelPackage from '../utils/channel_info'
 
 var user_info_menu = [
   {text:'充值VIP', img:require('../images/chongzhi.png'), actionPath:Pay},
   {text:'关于我们', img:require('../images/guanyuwomen.png'), actionPath:Pay},
   {text:'免责申明', img:require('../images/mianzeshenming.png'), actionPath:Pay},
-  {text:'帮助', img:require('../images/bangzhu.png'), actionPath:Pay}
+  {text:'帮助'+ChannelPackage.CHANNEL, img:require('../images/bangzhu.png'), actionPath:Pay}
   // {text:'我的下载', actionType:'innerView', actionPath:'downloaded'},
   // {text:'未读消息', actionType:'innerView', actionPath:'downloaded'},
   // {text:'每日任务', actionType:'innerView', actionPath:'downloaded'},
@@ -54,7 +55,7 @@ export default class User extends Component {
           <Image source={menu.img} style={styles.menu_logo}/>
           <Text style={styles.menu_text}>{menu.text}</Text>
           </View>
-          <Image source={require('../images/jiantou.png')} style={styles.menu_logo}/>
+          <Image source={require('../images/jiantou.png')} style={styles.menu_taget}/>
         </View>
       </TouchableOpacity>
     );
@@ -105,7 +106,7 @@ export default class User extends Component {
       let payInfo = "普通用户"
       return (
         <View style={styles.userinfo}>
-          <Image source={require('../images/touxiang.png')} style={{height: 80, resizeMode: Image.resizeMode.contain, marginLeft: 80, marginRight: 40}}/>
+          <Image source={require('../images/touxiang.png')} style={{height: 80, resizeMode: Image.resizeMode.contain, marginLeft: 100/Global.pr, marginRight: 100/Global.pr}}/>
           <View style={styles.user_nick}>
             <Text style={{fontSize: 20, textAlign: 'center', marginBottom: 5}}>{nick}</Text>
             <TouchableOpacity onPress={this.checkVip.bind(this)}>
@@ -198,7 +199,7 @@ var styles = StyleSheet.create({
     margin: 2,
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    height: 50,
+    height: 60,
     borderColor: "#e0e0e0",
     width: Global.size.width-10
   },
@@ -209,6 +210,11 @@ var styles = StyleSheet.create({
   },
   menu_logo: {
     height: 40,
+    resizeMode: Image.resizeMode.contain
+  },
+  menu_taget: {
+    height: 30,
+    width: 30,
     resizeMode: Image.resizeMode.contain
   },
   list_view: {

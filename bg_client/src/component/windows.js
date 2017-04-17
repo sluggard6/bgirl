@@ -41,7 +41,6 @@ export default class AlertWindow extends Component {
   }
 
   render(){
-    console.log(this.state.charge)
     if(Global.isLogin) {
       if(this.state.charge){
         return (
@@ -69,9 +68,7 @@ export class ChargeWindow extends Component {
   }
 
   alipayCallback(responseData){
-    console.log(responseData.url);
     Alipay.pay(responseData.url).then(function(data){
-                    console.log(data);
                 }, function (err) {
                     console.log(err);
                 });
@@ -183,7 +180,6 @@ export class LoginWindow extends Component {
   render(){
     let unlogin="<忘记密码"
     let register="注册账号>"
-    console.log("--------------Login Window------------------")
     return(
       <TouchableWithoutFeedback onPress={this.props.cannel}>
         <View style={styles.container}>
