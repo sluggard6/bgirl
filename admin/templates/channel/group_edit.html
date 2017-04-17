@@ -11,7 +11,8 @@
 
         {{ render_hidden_field(form.thumb) }}
          {{ render_hidden_field(form.thumb2) }}
-    {{ render_hidden_field(form.thumb3) }}
+        {{ render_hidden_field(form.thumb3) }}
+        {{ render_hidden_field(form.thumb4) }}
         {{ render_field(form.name, dict(required=True)) }}
         {{ render_field(form.group_no) }}
         {{ render_field(form.shoot_time) }}
@@ -27,7 +28,7 @@
             </div>
     </div>
         <div class="form-group">
-            <label class="col-lg-2 control-label" for="thumb_img"><label for="thumb_img">封面1</label></label>
+            <label class="col-lg-2 control-label" for="thumb_img"><label for="thumb_img">封面169</label></label>
 
             <div class="col-lg-10">
                 <input type="file" id="detail_uploader" name="detail_uploader"/>
@@ -36,7 +37,7 @@
             </div>
         </div>
     <div class="form-group">
-            <label class="col-lg-2 control-label" for="thumb_img2"><label for="thumb_img2">封面2</label></label>
+            <label class="col-lg-2 control-label" for="thumb_img2"><label for="thumb_img2">封面111</label></label>
 
             <div class="col-lg-10">
                 <input type="file" id="detail_uploader2" name="detail_uploader2"/>
@@ -45,11 +46,20 @@
             </div>
         </div>
     <div class="form-group">
-            <label class="col-lg-2 control-label" for="thumb_img3"><label for="thumb_img3">封面3</label></label>
+            <label class="col-lg-2 control-label" for="thumb_img3"><label for="thumb_img3">封面112</label></label>
 
             <div class="col-lg-10">
                 <input type="file" id="detail_uploader3" name="detail_uploader3"/>
                 <img id="thumb_img3" style="width: 128px; height:128px;" src="{{ g.thumb3 }}">
+
+            </div>
+        </div>
+    <div class="form-group">
+            <label class="col-lg-2 control-label" for="thumb_img4"><label for="thumb_img4">封面34</label></label>
+
+            <div class="col-lg-10">
+                <input type="file" id="detail_uploader4" name="detail_uploader4"/>
+                <img id="thumb_img4" style="width: 128px; height:128px;" src="{{ g.thumb4 }}">
 
             </div>
         </div>
@@ -142,7 +152,12 @@
         $('#thumb_img3').attr("src", link);
         $('#thumb3').val(uri);
     });
-
+    LuhuAdmin.upload("#detail_uploader4", "image", function (data) {
+        var link = data.thumb;
+        var uri = data.uri;
+        $('#thumb_img4').attr("src", link);
+        $('#thumb4').val(uri);
+    });
     function submitProduct() {
         var images = new Array();
         $('#photo_container .photo_pre img').each(function () {

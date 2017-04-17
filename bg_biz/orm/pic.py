@@ -97,6 +97,7 @@ class Group(BaseModel, KvdbMixin):
     thumb = Column(u'thumb', VARCHAR(length=200))
     thumb2 = Column(u'thumb2', VARCHAR(length=200))
     thumb3 = Column(u'thumb3', VARCHAR(length=200))
+    thumb4 = Column(u'thumb4', VARCHAR(length=200))
     supplier_id =Column(u'supplier_id',VARCHAR(length=45))
     shoot_time = Column(u'shoot_time',DATETIME(),default=datetime.today())
     group_no = Column(u'group_no',VARCHAR(length=45))
@@ -143,6 +144,10 @@ class Group(BaseModel, KvdbMixin):
     @property
     def thumb3_http(self):
         return get_download_url('image',self.thumb3)
+
+    @property
+    def thumb4_http(self):
+        return get_download_url('image', self.thumb4)
 
 
 

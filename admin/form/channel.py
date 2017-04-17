@@ -28,9 +28,10 @@ class GroupForm(FlaskForm):
     description = TextField(u'描述', [
         optional()]
                             )
-    thumb = HiddenField(u"封面")
-    thumb2 = HiddenField(u"封面2")
-    thumb3 = HiddenField(u"封面3")
+    thumb = HiddenField(u"封面169")
+    thumb2 = HiddenField(u"封面111")
+    thumb3 = HiddenField(u"封面112")
+    thumb4 = HiddenField(u"封面34")
     shoot_time = TextField(u"拍摄时间")
     group_no = TextField(u"编号")
     images = HiddenField(u"images")
