@@ -14,7 +14,6 @@ from sqlalchemy import Column, INTEGER, VARCHAR, Integer, DATE, DATETIME,TIMESTA
 from flask_login import UserMixin
 import time
 from sharper.flaskapp.orm import display_enum
-from numpy.distutils.log import good
 
 __author__ = [
     'sluggard'
