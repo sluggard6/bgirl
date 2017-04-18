@@ -17,6 +17,7 @@ ChargeView = Blueprint('charge', __name__)
 @login_required
 def do_pay():
     pay_type = request.args.get('pay_type')
+    channel = request.args.get('channel')
     title = u'充值VIP'
     detail = u'昧昧充值'
     amount = 19900
@@ -31,6 +32,7 @@ def do_pay():
     charge.category = Charge.Category.WIFI
     charge.source = Charge.Source.WIFI
     charge.day = day
+    charge.channel = channel
     charge.insert()
 
     object_type = Transaction.ObjectType.CHARGE

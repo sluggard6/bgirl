@@ -78,6 +78,7 @@ class Charge(BaseModel):
     create_time = Column(u'create_time', DATETIME(), nullable=True, default=datetime.now)
     modify_time = Column(u'modify_time', TIMESTAMP(), nullable=True, default=datetime.now)
     ip = Column(u'ip', VARCHAR(length=32), nullable=True)
+    channel = Column(u'channel',VARCHAR(200),nullable=True)
 
     @property
     def status_cn(self):
