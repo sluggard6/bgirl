@@ -23,7 +23,7 @@ export default class TheTwo extends Component {
   renderPic(data){
     if(this.props.square){
       return(
-        <Image style={styles.image} source={{uri: data.pic.max}} />
+        <Image style={styles.image} source={{uri: data.pic.min}} />
       )
     }else{
       return (

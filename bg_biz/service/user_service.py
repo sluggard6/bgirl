@@ -2,9 +2,9 @@
 from datetime import datetime, timedelta
 
 from bg_biz.orm.sysconfig import SysConfig
-from bg_biz.orm.user import User, UserVcode, ExchangeWifiRecord
+from bg_biz.orm.user import User, UserVcode, ExchangeWifiRecord, UserHit
 from bg_biz.service.tool_service import ToolService
-from sharper.flaskapp.orm.base import transaction
+from sharper.flaskapp.orm.base import transaction, db
 from sharper.lib.error import AppError
 from sharper.lib.validator import is_mobile
 from sharper.util.string import random_number
@@ -77,6 +77,14 @@ def send_user_vcode(phone, category, app=UserVcode.App.ANDROID, mac=None):
 
 
 class UserService:
+    
+    @classmethod
+    def add_hit(cls, user_hit):
+        sql = 'insert into user_hit (user_id,pic_id,status) values (%s,%s,%s) ON DUPLICATE KEY UPDATE status=%s' % (user_hit.user_id,user_hit.pic_id,user_hit.status,user_hit.status)
+        print sql
+        return db.engine.execute(sql)
+        
+        
     @classmethod
     @transaction
     def register(cls, phone, password):

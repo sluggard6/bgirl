@@ -24,7 +24,9 @@
 								"min": "{{c.pic.d_min}}",
 								"normal": "{{c.pic.d_normal}}",
 								"max": "{{c.pic.d_max}}",
-								"title": "{{c.pic.title}}"
+								"title": "{{c.pic.title}}",
+								"good": {{c.pic.good}},
+								"bad": {{c.pic.bad}}
 							},
 							"component": {
 								"id": {{c.component.id}},

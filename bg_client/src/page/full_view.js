@@ -12,7 +12,7 @@ import User from './user'
 import BgirlTabBar from '../component/bgirl_tab_bar'
 import Global from '../utils/global'
 import AlertWinow from '../component/windows'
-
+import HitButton from '../component/hit_button'
 
 
 
@@ -39,10 +39,9 @@ export default class FullPicView extends Component {
         {this._doAlert()}
         <Image source={{uri: this.props.pic.max}} style={styles.image}>
         </Image>
-        <View style={styles.bottom}>
-          <Image source={require('../images/zan.png')}/>
-          <Text>0</Text>
-        </View>
+        <HitButton
+          pic={this.props.pic}
+        />
       </View>
     );
   }
@@ -64,11 +63,4 @@ var styles = StyleSheet.create({
     height: Global.size.height-(280/Global.pr),
     resizeMode: Image.resizeMode.contain
   },
-  bottom: {
-    flexDirection: "row",
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: (140/Global.pr), 
-    backgroundColor: "white"
-  }
 })

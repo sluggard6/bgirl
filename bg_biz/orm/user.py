@@ -13,6 +13,8 @@ from sqlalchemy import Column, INTEGER, VARCHAR, Integer, DATE, DATETIME,TIMESTA
 
 from flask_login import UserMixin
 import time
+from sharper.flaskapp.orm import display_enum
+from numpy.distutils.log import good
 
 __author__ = [
     'sluggard'
@@ -116,6 +118,26 @@ class User(BaseModel, KvdbMixin, UserMixin):
     def vipend_time(self):
         return int(1000 * time.mktime(self.vipend.timetuple()))
 
+class UserHit(BaseModel):
+    __tablename__ = 'user_hit'
+    __table_args__ = {}
+    
+    class Status(DisplayEnum):
+        INIT = 0
+        GOOD = 1
+        BAD = 2
+#         ALL = 3
+
+        __display_cn__ = {
+            INIT: u'初始化',
+            GOOD: u'赞',
+            BAD: u'踩'
+#             ALL: u'全部'
+        }
+
+    user_id = Column(u'user_id', INTEGER(), nullable=False,primary_key=True)
+    pic_id = Column(u'pic_id', INTEGER(), nullable=False,primary_key=True)
+    status = Column(u'status', INTEGER(), nullable=False)
 
 class UserVcode(BaseModel):
     __tablename__ = 'user_vcode'

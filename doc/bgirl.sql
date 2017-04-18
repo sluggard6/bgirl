@@ -41,6 +41,22 @@ CREATE TABLE IF NOT EXISTS `bgirl`.`user` (
 ENGINE = InnoDB
 COMMENT = '用户表';
 
+-- -----------------------------------------------------
+-- Table `bgirl`.`user_hit`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `user_hit`;
+
+CREATE TABLE IF NOT EXISTS `bgirl`.`user_hit` (
+  `user_id` INT NOT NULL COMMENT '用户id',
+  `pic_id` INT NOT NULL COMMENT '图片id',
+  `status` INT NOT NULL DEFAULT 0 COMMENT '点赞状态, 0-初始状态,1-点赞,2-点踩,3-赞踩',
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modify_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`, `pic_id`))
+ENGINE = InnoDB
+COMMENT = '用户点赞记录表';
+
 
 -- -----------------------------------------------------
 -- Table `bgirl`.`pic`
@@ -55,6 +71,8 @@ CREATE TABLE IF NOT EXISTS `bgirl`.`pic` (
   `min` VARCHAR(200) NOT NULL COMMENT '图片地址(小)',
   `normal` VARCHAR(200) NOT NULL COMMENT '图片地址(中)',
   `max` VARCHAR(200) NOT NULL COMMENT '图片地址(大)',
+  `good` INT NOT NULL DEFAULT 0 COMMENT '点赞数',
+  `bad` INT NOT NULL DEFAULT 0 COMMENT '点踩数',
   `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modify_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))

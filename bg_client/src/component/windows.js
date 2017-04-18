@@ -91,7 +91,7 @@ export class ChargeWindow extends Component {
       <TouchableWithoutFeedback onPress={this.props.cannel}>
         <View style={styles.container}>
           <View style={styles.view_opacity}/>
-          <View style={[styles.window,{height: 200,marginTop: 180}]}>
+          <View style={[styles.window,{height: 250,marginTop: 180}]}>
             <TouchableOpacity onPress={this.wxPayPage.bind(this)}>
               <View style={[styles.chargeButton,{backgroundColor: '#FB4867'}]}>
                 <Image source={require('../images/charge/weixin.png')} style={styles.chargeLogo}/>

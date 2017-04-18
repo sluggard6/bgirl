@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import traceback
 
-from bg_biz.orm.user import User, UserVcode
+from bg_biz.orm.user import User, UserVcode, UserHit
 from flask_login import login_required
 from flask_login import login_user
 from bg_biz.service.user_service import UserService, validate_vcode
@@ -36,6 +36,7 @@ def login():
         myuser.clear_unique_kvdb("phone", phone)
         return g.ret_error_func(u"手机号码或者密码错误，请确认")
     login_user(user)
+    session['user_hits'] = set(UserHit.query.filter_by(user_id=user.id).all())
     return g.ret_success_func(msg=session.sid)
 
 @UserView.route('/logined', methods=['POST', 'GET'])

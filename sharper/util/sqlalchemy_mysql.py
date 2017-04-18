@@ -4,7 +4,7 @@ __author__ = [
     '"liubo" <liubo@51domi.com>'
 ]
 
-tables = ["page_content"]
+tables = ["user_hit"]
 
 HOST = "106.75.97.108"
 USER = "admin"
