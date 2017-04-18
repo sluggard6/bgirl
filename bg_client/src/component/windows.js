@@ -17,7 +17,7 @@ import RegisterPhone from '../page/register_phone'
 import Alipay from 'react-native-yunpeng-alipay'
 import * as WeChat from 'react-native-wechat'
 import Http from '../utils/http'
-
+import ChannelPackage from '../utils/channel_info'
 
 export default class AlertWindow extends Component {
 
@@ -63,7 +63,7 @@ export default class AlertWindow extends Component {
 export class ChargeWindow extends Component {
 
   alipayPage() {
-    Http.httpGet(Application.getUrl(Global.urls.charge)+"?pay_type=alipay_app",this.alipayCallback.bind(this))
+    Http.httpGet(Application.getUrl(Global.urls.charge)+"?pay_type=alipay_app&channel="+ChannelPackage.CHANNEL,this.alipayCallback.bind(this))
 
   }
 
