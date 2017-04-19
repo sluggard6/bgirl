@@ -29,23 +29,23 @@ def one(id):
     pic = Pic.get_by_kvdb(id)
     return g.ret_success_func(pic=pic_build(pic))
 
-@login_required
 @PicView.route('/<int:id>/good', methods=['POST', 'GET'])
+@login_required
 def good(id):
     return hit(id,UserHit.Status.GOOD, 1)
     
-@login_required
 @PicView.route('/<int:id>/ungood', methods=['POST', 'GET'])
+@login_required
 def ungood(id):
     return hit(id,UserHit.Status.GOOD, 0)
         
-@login_required
 @PicView.route('/<int:id>/bad', methods=['POST', 'GET'])
+@login_required
 def bad(id):
     return hit(id,UserHit.Status.BAD, 1)
-        
-@login_required
+
 @PicView.route('/<int:id>/unbad', methods=['POST', 'GET'])
+@login_required
 def unbad(id):
     return hit(id,UserHit.Status.BAD, 0)
         

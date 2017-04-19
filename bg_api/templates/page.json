@@ -3,7 +3,7 @@
 		"modules": [
 			~for m in ms
 				{
-					"id": {{m.id}},
+					"key": {{m.id}},
 					"category": "{{m.category}}",
 					~if m.text
 					"text": "{{m.text}}",
