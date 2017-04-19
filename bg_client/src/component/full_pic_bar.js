@@ -26,29 +26,29 @@ export default class FullPicTabBar extends Component {
   renderTabOption(tab, i) {
     if(i == 0) {
       return (
-        <Image key={i} source={require('../images/yuan1.png')} style={{height: 20, width: 20, margin: 2, resizeMode: Image.resizeMode.contain,justifyContent: 'center',alignItems: 'center'}}>
-          <Text style={{color: "white"}}>1</Text>
+        <Image key={i} source={require('../images/yuan1.png')} style={{height: 15, width: 15, margin: 1, resizeMode: Image.resizeMode.contain,justifyContent: 'center',alignItems: 'center'}}>
+          <Text style={styles.text}>1</Text>
         </Image>
       )
     }
     if(i == this.props.tabs.length - 1){
       return (
-        <Image key={i} source={require('../images/yuan1.png')} style={{height: 20, width: 20, margin: 2, resizeMode: Image.resizeMode.contain,justifyContent: 'center',alignItems: 'center'}}>
-          <Text style={{color: "white"}}>{this.props.tabs.length}</Text>
+        <Image key={i} source={require('../images/yuan1.png')} style={{height: 15, width: 15, margin: 1, resizeMode: Image.resizeMode.contain,justifyContent: 'center',alignItems: 'center'}}>
+          <Text style={styles.text}>{this.props.tabs.length}</Text>
         </Image>
       )
     }
     if(i == Global.maxView - 1) {
       return (
-        <Image key={i} source={require('../images/yuan1.png')} style={{height: 20, width: 20, margin: 2, resizeMode: Image.resizeMode.contain,justifyContent: 'center',alignItems: 'center'}}>
-          <Text style={{color: "white"}}>{Global.maxView}</Text>
+        <Image key={i} source={require('../images/yuan1.png')} style={{height: 15, width: 15, margin: 1, resizeMode: Image.resizeMode.contain,justifyContent: 'center',alignItems: 'center'}}>
+          <Text style={styles.text}>{Global.maxView}</Text>
         </Image>
       )
     }
     if(this.props.activeTab == i){
-      return (<Image key={i} source={require('../images/yuan2.png')} style={{height: 10, width: 10, resizeMode: Image.resizeMode.contain}} />)
+      return (<Image key={i} source={require('../images/yuan2.png')} style={{height: 5, width: 5, margin: 1, resizeMode: Image.resizeMode.contain}} />)
     }else{
-      return (<Image key={i} source={require('../images/yuan1.png')} style={{height: 5, width: 5, margin: 2, resizeMode: Image.resizeMode.contain}} />)
+      return (<Image key={i} source={require('../images/yuan1.png')} style={{height: 5, width: 5, margin: 1, resizeMode: Image.resizeMode.contain}} />)
     }
   }
 
@@ -96,4 +96,9 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		alignItems: 'center',
 	},
+
+  text: {
+    color: "white",
+    fontSize: 10
+  }
 });

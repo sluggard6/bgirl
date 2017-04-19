@@ -12,10 +12,11 @@
 					"text": "{{m.des}}",
 					~endif
 					~if m.rank
-					"rank": "{{m.rank}}",
+					"rank": "{{m.rank}}"
 					~endif
+					~if mc[m.id]:
+					,
 					"items": [
-						~if mc[m.id]:
 						~for c in mc[m.id]:
 						{
 							"id": {{c.id}},
@@ -40,8 +41,8 @@
 						,
 						~endif
 						~endfor
-						~endif
 					]
+					~endif
 				}
 				~if loop.index!=loop.length
 				,

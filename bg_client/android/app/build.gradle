@@ -1,10 +1,6 @@
 apply plugin: "com.android.application"
 
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
-
 apply plugin: 'packer'
-
-
 
 import com.android.build.OutputFile
 
@@ -101,7 +97,6 @@ packer {
     buildNumberTypeMatcher = ['release']
 
 }
-
 
 android {
 	signingConfigs {

@@ -21,7 +21,8 @@ const Global = {
     register: "/user/register",
     login: "/user/login",
     user: "/user/profile",
-    charge:"/charge/do"
+    charge: "/charge/do",
+    pic: "/pic/"
   },
   guide: {
     image1: require('../images/guide_1.jpg'),

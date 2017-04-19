@@ -23,7 +23,9 @@ export default class FullViewTab extends Component {
       pics: "",
       loaded: false,
       locked: false,
-      goBack: true
+      alert: false,
+      goBack: false,
+      tabNumber: 0
     }
     this._loadData = this._loadData.bind(this)
   }
@@ -35,7 +37,9 @@ export default class FullViewTab extends Component {
   componentDidUpdate() {
     if(this.state.goBack) {
       this.state.goBack = false
-      this.tabView.goToPage(Global.maxView - 1)
+      if(!Application.isVip() && this.state.tabNumber >= Global.maxView) {
+        this.tabView.goToPage(Global.maxView - 1)
+      }
     }
   }
 
@@ -52,15 +56,17 @@ export default class FullViewTab extends Component {
     })
   }
 
-  doLock() {
+  doAlert() {
     this.setState({
-      locked: true
+      locked: true,
+      alert: true
     })
   }
 
-  unLock() {
+  cannel() {
     this.setState({
       locked: false,
+      alert: false,
       goBack: true
     })
   }
@@ -82,17 +88,25 @@ export default class FullViewTab extends Component {
           ref={(tabView) => { this.tabView = tabView; }}
           locked={this.state.locked}
           onChangeTab={(tab) => {
+            this.state.tabNumber = tab.i
             if(tab.i >= Global.maxView) {
               if(!Application.isVip()){
-                Application.doAlert()
-                this.doLock()
+                this.doAlert()
               }
             }
           }}
           >
           {
             this.state.pics.map((pic, index) => {
-              return (<FullPicView pic={pic} tabLabel={index+1} key={index} unLock={this.unLock.bind(this)}/>);  // 单行箭头函数无需写return
+              return (
+                <FullPicView 
+                  pic={pic} 
+                  tabLabel={index+1} 
+                  key={index} 
+                  alert={this.state.alert} 
+                  cannel={this.cannel.bind(this)} 
+                  doAlert={this.doAlert.bind(this)}
+                />);  // 单行箭头函数无需写return
             })
           }
         </ScrollableTabView>

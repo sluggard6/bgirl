@@ -14,3 +14,4 @@ ChannelView = Blueprint('channel', __name__)
 def channel_list():
     channels = Channel.query.all()
     return g.ret_success_func(channels=[orm_obj2dict(channel) for channel in channels])
+

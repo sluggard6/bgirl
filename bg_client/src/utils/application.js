@@ -37,9 +37,6 @@ export default class Application {
 
 
   static login(uname, pwd, callback) {
-    // console.log("uname : " + uname)
-    // console.log("pwd : " + pwd)
-    // console.log(callback)
     params = {
       uname: uname,
       pwd: pwd
@@ -68,8 +65,11 @@ export default class Application {
     return false
   }
 
-  static doAlert() {
+  static doAlert(callback) {
     Global.isAlert = true;
+    if(typeof callback === 'function'){
+      callback()
+    }
   }
 
   static cannel() {
@@ -83,4 +83,5 @@ export default class Application {
   static getUrl(url) {
     return Application.getHost() + url
   }
+
 }

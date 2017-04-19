@@ -35,9 +35,8 @@ class App extends Component {
     super(props);   //这一句不能省略，照抄即可
     this.state = {
       version: null,  //这里放你自己定义的state变量及初始值
-      logined: false  //是否登录过的状态
     };
-    this.loadVersion = this.loadVersion.bind(this)
+    this.loadVersion()
   }
 
   componentWillMount() {

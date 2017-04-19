@@ -4,6 +4,7 @@ import {
   View,
   Text,
   ListView,
+  FlatList,
   StyleSheet,
   Navigator
 } from 'react-native'
@@ -19,7 +20,7 @@ export default class Page extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      dataSource: null,
       loaded: false
     };
     this.fetchData = this.fetchData.bind(this);
@@ -27,7 +28,7 @@ export default class Page extends Component {
 
   _updateData(responseData){
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(responseData.page.modules),
+      dataSource: responseData.page.modules,
       loaded: true,
     });
   }
@@ -50,11 +51,9 @@ export default class Page extends Component {
     );
   }
 
-  _renderRow(rowData,sectionID, rowID) {
-    return(
-      <Module module={rowData}/>
-    );
-  }
+  _renderItem=({item}) => (
+    <Module module={item}/>
+  );
 
   render() {
     if (!this.state.loaded) {
@@ -62,9 +61,9 @@ export default class Page extends Component {
     }
     return (
       <View style={styles.container}>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this._renderRow.bind(this)}
+        <FlatList
+          data={this.state.dataSource}
+          renderItem={this._renderItem}
         />
       </View>
     )

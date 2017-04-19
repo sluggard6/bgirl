@@ -34,8 +34,8 @@ export default class Guide extends Component {
         <Image source={Global.guide.image1} style={styles.backgroundImage} resizeMode={Image.resizeMode.contain} />
         <Image source={Global.guide.image2} style={styles.backgroundImage} resizeMode={Image.resizeMode.contain} />
         <Image source={Global.guide.image3} style={styles.backgroundImage} resizeMode={Image.resizeMode.contain}>
-          <TouchableOpacity onPress={this._onPressButton.bind(this)} style={styles.runMainButton}>
-            <Text>点我跳转</Text>
+          <TouchableOpacity onPress={this._onPressButton.bind(this)}>
+            <Image source={require('../images/start_button.png')} style={{height: 100, width: 100, margin: 150, resizeMode: Image.resizeMode.contain}} />
           </TouchableOpacity>
         </Image>
       </ScrollView>
@@ -56,15 +56,5 @@ var styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-end",
     margin: 5,
-  },
-  runMainButton: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "blue",
-    width: 150,
-    height : 50,
-    margin: 150,
   }
 });

@@ -23,12 +23,9 @@ export default class FullPicView extends Component {
 		super(props);
   }
 
-  componentWillUpdate(nextProps, nextState){
-  }
-
   _doAlert() {
-    if(Global.isAlert) {
-      return (<AlertWinow unLock={this.props.unLock}/>)
+    if(this.props.alert) {
+      return (<AlertWinow unLock={this.props.cannel}/>)
     }
     return
   }
@@ -36,12 +33,12 @@ export default class FullPicView extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this._doAlert()}
-        <Image source={{uri: this.props.pic.max}} style={styles.image}>
-        </Image>
+        <Image source={{uri: this.props.pic.max}} style={styles.image}/>
         <HitButton
           pic={this.props.pic}
+          doAlert={this.props.doAlert}
         />
+        {this._doAlert()}
       </View>
     );
   }
@@ -59,8 +56,8 @@ var styles = StyleSheet.create({
     height: Global.size.height-(280/Global.pr),
   },
   image: {
-    width: Global.size.width,
-    height: Global.size.height-(280/Global.pr),
+    width: Global.size.width - 6,
+    height: Global.size.height-(400/Global.pr),
     resizeMode: Image.resizeMode.contain
   },
 })

@@ -24,12 +24,11 @@ export default class AlertWindow extends Component {
   constructor(props) {
     super(props)
     this.state={
-      charge: this.props.charge
+      charge: false
     }
   }
 
   cannel(){
-    Application.cannel()
     this.state.charge = false
     this.props.unLock()
   }
@@ -40,15 +39,15 @@ export default class AlertWindow extends Component {
     })
   }
 
-  render(){
+  getWindows() {
     if(Global.isLogin) {
       if(this.state.charge){
         return (
-          <ChargeWindow cannel={this.cannel.bind(this)}/>
+          <ChargeWindow/>
         )
       }else{
         return(
-          <BuyWindow cannel={this.cannel.bind(this)} alertPay={this.alertPay.bind(this)}/>
+          <BuyWindow alertPay={this.alertPay.bind(this)}/>
         )
       }    
     }else{
@@ -56,6 +55,19 @@ export default class AlertWindow extends Component {
         <LoginWindow cannel={this.cannel.bind(this)}/>
       )
     }
+  }
+
+  render(){
+    return(
+      <TouchableWithoutFeedback onPress={this.cannel.bind(this)}>
+        <View style={styles.container}>
+          <View style={styles.view_opacity}/>
+          {
+            this.getWindows()
+          }
+        </View>
+      </TouchableWithoutFeedback>
+    )
   }
 
 }
@@ -88,31 +100,25 @@ export class ChargeWindow extends Component {
 
   render(){
     return(
-      <TouchableWithoutFeedback onPress={this.props.cannel}>
-        <View style={styles.container}>
-          <View style={styles.view_opacity}/>
-          <View style={[styles.window,{height: 250,marginTop: 180}]}>
-            <TouchableOpacity onPress={this.wxPayPage.bind(this)}>
-              <View style={[styles.chargeButton,{backgroundColor: '#FB4867'}]}>
-                <Image source={require('../images/charge/weixin.png')} style={styles.chargeLogo}/>
-                <Text style={styles.text} >微信支付</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.alipayPage.bind(this)}>
-              <View style={[styles.chargeButton,{backgroundColor: '#FCA150'}]}>
-                <Image source={require('../images/charge/zhifubao.png')} style={styles.chargeLogo}/>
-                <Text style={styles.text} >支付宝支付</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.props.cannel}>
-              <View style={styles.cannelButton}>
-                <Text style={styles.text} >再看看</Text>
-              </View>
-            </TouchableOpacity>
+      <View style={[styles.window,{height: 250,marginTop: 180}]}>
+        <TouchableOpacity onPress={this.wxPayPage.bind(this)}>
+          <View style={[styles.chargeButton,{backgroundColor: '#FB4867'}]}>
+            <Image source={require('../images/charge/weixin.png')} style={styles.chargeLogo}/>
+            <Text style={styles.text} >微信支付</Text>
           </View>
-        </View>
-      </TouchableWithoutFeedback>
-
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.alipayPage.bind(this)}>
+          <View style={[styles.chargeButton,{backgroundColor: '#FCA150'}]}>
+            <Image source={require('../images/charge/zhifubao.png')} style={styles.chargeLogo}/>
+            <Text style={styles.text} >支付宝支付</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.props.cannel}>
+          <View style={styles.cannelButton}>
+            <Text style={styles.text} >再看看</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     )
   }
 
@@ -122,24 +128,18 @@ export class BuyWindow extends Component {
 
   render(){
     return(
-      <TouchableWithoutFeedback onPress={this.props.cannel}>
-        <View style={styles.container}>
-          <View style={styles.view_opacity}/>
-          <View style={[styles.window,{height: 200}]}>
-            <TouchableOpacity onPress={this.props.alertPay}>
-              <View style={styles.payButton}>
-                <Text style={styles.text} >包场一年</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.props.cannel}>
-              <View style={styles.cannelButton}>
-                <Text style={styles.text} >银子不够</Text>
-              </View>
-            </TouchableOpacity>
+      <View style={[styles.window,{height: 200}]}>
+        <TouchableOpacity onPress={this.props.alertPay}>
+          <View style={styles.payButton}>
+            <Text style={styles.text} >包场一年</Text>
           </View>
-        </View>
-      </TouchableWithoutFeedback>
-
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.props.cannel}>
+          <View style={styles.cannelButton}>
+            <Text style={styles.text} >银子不够</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     )
   }
 
@@ -174,71 +174,66 @@ export class LoginWindow extends Component {
 
 
   doLogin() {
-     Application.login(this.state.uname, this.state.pwd, this.props.cannel)
+    Application.login(this.state.uname, this.state.pwd, this.props.cannel)
   }
 
   render(){
     let unlogin="<忘记密码"
     let register="注册账号>"
     return(
-      <TouchableWithoutFeedback onPress={this.props.cannel}>
-        <View style={styles.container}>
-          <View style={styles.view_opacity}/>
-          <View style={styles.window}>
-            <View style={styles.inputContainer}>
-              <Image source={require('../images/shouji.png')} style={styles.inputLogo}/>
-              <TextInput
-                onChangeText={(uname) => {
-                  this.state.uname = uname
-                }}
-                underlineColorAndroid="transparent"
-                style={styles.input}
-                placeholder='手机号码' />
-                <View style={{height:1,backgroundColor:'#f4f4f4'}} />
-            </View>
-            <View style={styles.inputContainer}>
-              <Image source={require('../images/mima.png')} style={styles.inputLogo}/>
-              <TextInput
-                onChangeText={(pwd) => {
-                  this.state.pwd = pwd
-                }}
-                underlineColorAndroid="transparent"
-                secureTextEntry={true}
-                style={styles.input}
-                placeholder='密码 5-20位数字或字母'
-                password={true} />
-            </View>
-            <TouchableOpacity onPress={this.doLogin.bind(this)}>
-              <View style={styles.loginButton}>
-                <Text style={styles.text} >登录</Text>
-              </View>
-            </TouchableOpacity>
-            <View style={{flexDirection:'row',justifyContent: 'space-around', marginTop: 20, width: 280}}>
-              <TouchableOpacity>
-                <Text style={styles.viewUnlogin}>
-                    {unlogin}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={this.register.bind(this)}>
-                <Text style={styles.viewRegister}>
-                    {register}
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.oauthContainer}>
-              <TouchableOpacity onPress={Application.unSupport}>
-                <Image source={require('../images/sina.png')} style={styles.oauthImage}/>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={Application.unSupport}>
-                <Image source={require('../images/QQ.png')} style={styles.oauthImage}/>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={Application.unSupport}>
-                <Image source={require('../images/weixin.png')} style={styles.oauthImage}/>
-              </TouchableOpacity>
-            </View>
-          </View>
+      <View style={styles.window}>
+        <View style={styles.inputContainer}>
+          <Image source={require('../images/shouji.png')} style={styles.inputLogo}/>
+          <TextInput
+            onChangeText={(uname) => {
+              this.state.uname = uname
+            }}
+            underlineColorAndroid="transparent"
+            style={styles.input}
+            placeholder='手机号码' />
+            <View style={{height:1,backgroundColor:'#f4f4f4'}} />
         </View>
-      </TouchableWithoutFeedback>
+        <View style={styles.inputContainer}>
+          <Image source={require('../images/mima.png')} style={styles.inputLogo}/>
+          <TextInput
+            onChangeText={(pwd) => {
+              this.state.pwd = pwd
+            }}
+            underlineColorAndroid="transparent"
+            secureTextEntry={true}
+            style={styles.input}
+            placeholder='密码 5-20位数字或字母'
+            password={true} />
+        </View>
+        <TouchableOpacity onPress={this.doLogin.bind(this)}>
+          <View style={styles.loginButton}>
+            <Text style={styles.text} >登录</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={{flexDirection:'row',justifyContent: 'space-around', marginTop: 20, width: 280}}>
+          <TouchableOpacity>
+            <Text style={styles.viewUnlogin}>
+                {unlogin}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.register.bind(this)}>
+            <Text style={styles.viewRegister}>
+                {register}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.oauthContainer}>
+          <TouchableOpacity onPress={Application.unSupport}>
+            <Image source={require('../images/sina.png')} style={styles.oauthImage}/>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={Application.unSupport}>
+            <Image source={require('../images/QQ.png')} style={styles.oauthImage}/>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={Application.unSupport}>
+            <Image source={require('../images/weixin.png')} style={styles.oauthImage}/>
+          </TouchableOpacity>
+        </View>
+      </View>
     )
   }
 }
@@ -250,8 +245,7 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     width: Global.size.width, 
     height: Global.size.height,
-    backgroundColor: "transparent",
-    zIndex: 99
+    backgroundColor: "transparent"
   },
 
   view_opacity: {

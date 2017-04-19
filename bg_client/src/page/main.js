@@ -15,8 +15,6 @@ import Http from '../utils/http'
 import TopBar from '../component/top_bar'
 import Module from '../utils/module'
 
-// const PIC_URL = "http://192.168.161.35:8290/pic/list?ids=1,2"
-
 let temp = [];
 
 export default class Main extends Component {
