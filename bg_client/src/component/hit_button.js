@@ -31,7 +31,7 @@ export default class HitButton extends Component {
     AsyncStorage.getItem('pic:'+this.props.pic.id).then((hit) => {
       console.log(hit)
       if(hit != null) {
-        this.setState(hit)
+        this.setState(JSON.parse(hit))
       }
     })
   }
@@ -50,14 +50,12 @@ export default class HitButton extends Component {
       this.props.pic.bad -= 1
     }
     this.props.pic.good += 1
-    console.log(Application.getUrl(Global.urls.pic)+this.props.pic.id+"/good")
     Http.httpGet(Application.getUrl(Global.urls.pic)+this.props.pic.id+"/good",(res) => {
-      console.log(res)
       if(res.success){
-        AsyncStorage.setItem("pic:"+this.props.pic.id, {
+        AsyncStorage.setItem("pic:"+this.props.pic.id, JSON.stringify({
           good: true,
           bad: false
-        })
+        }))
       }
     })
     this.setState({
@@ -83,10 +81,10 @@ export default class HitButton extends Component {
     this.props.pic.bad += 1
     Http.httpGet(Application.getUrl(Global.urls.pic)+this.props.pic.id+"/bad",(res) => {
       if(res.success){
-        AsyncStorage.setItem("pic:"+this.props.pic.id, {
+        AsyncStorage.setItem("pic:"+this.props.pic.id, JSON.stringify({
           good: false,
           bad: true
-        })
+        }))
       }
     })
     this.setState({
