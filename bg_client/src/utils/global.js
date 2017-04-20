@@ -13,7 +13,7 @@ const Global = {
   },
   urls: {
     profile: "/profile",
-    channel: "/channel/list",
+    channel: "/group/list/",
     group: "/group/",
     page: "/page/",
     checkPhone: "/user/checkPhone",

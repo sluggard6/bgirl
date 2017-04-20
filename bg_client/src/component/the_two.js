@@ -35,10 +35,10 @@ export default class TheTwo extends Component {
   render(){
     return (
       <View style={styles.list_container}>
-        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[0].component.id)}>
+        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[0].component.id,this.props.data[0].category)}>
           {this.renderPic(this.props.data[0])}
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[1].component.id)}>
+        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[1].component.id,this.props.data[1].category)}>
           {this.renderPic(this.props.data[1])}
         </TouchableOpacity>
       </View>

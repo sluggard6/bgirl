@@ -22,13 +22,13 @@ export default class TheTwo extends Component {
     let image_style = this.props.circle?styles.image_circle:styles.image
     return (
       <View style={styles.list_container}>
-        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[0].component.id)}>
+        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[0].component.id,this.props.data[0].category)}>
           <Image source={{uri:this.props.data[0].pic.min}} style={image_style}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[1].component.id)}>
+        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[1].component.id,this.props.data[1].category)}>
           <Image source={{uri:this.props.data[1].pic.min}} style={image_style}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[2].component.id)}>
+        <TouchableOpacity onPress={() => this.props.onPress(this.props.data[2].component.id,this.props.data[2].category)}>
           <Image source={{uri:this.props.data[2].pic.min}} style={image_style}/>
         </TouchableOpacity>
       </View>

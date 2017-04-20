@@ -6,6 +6,7 @@ import {
   ListView,
   FlatList,
   StyleSheet,
+  ActivityIndicator,
   Navigator
 } from 'react-native'
 
@@ -13,6 +14,7 @@ import Global from '../utils/global'
 import Application from '../utils/application'
 import Http from '../utils/http'
 import Module from '../utils/module'
+import Loading from './loading'
 
 
 export default class Page extends Component {
@@ -21,7 +23,8 @@ export default class Page extends Component {
     super(props);
     this.state = {
       dataSource: null,
-      loaded: false
+      loaded: false,
+      loading: false,
     };
     this.fetchData = this.fetchData.bind(this);
   }
@@ -42,22 +45,28 @@ export default class Page extends Component {
   }
 
   renderLoadingView() {
-    return (
-      <View style={styles.container}>
-        <Text>
-          正在加载数据……
-        </Text>
-      </View>
-    );
+    return (<Loading/>)
   }
 
   _renderItem=({item}) => (
-    <Module module={item}/>
+    <Module module={item} setLoading={this.setLoading.bind(this)}/>
   );
+
+  _showLoading(){
+    if(this.state.loading){
+      return (<Loading/>)
+    }
+  }
+
+  setLoading(loading){
+    this.setState({
+      loading: loading
+    })
+  }
 
   render() {
     if (!this.state.loaded) {
-      return this.renderLoadingView();
+      return this.renderLoadingView()
     }
     return (
       <View style={styles.container}>
@@ -65,6 +74,7 @@ export default class Page extends Component {
           data={this.state.dataSource}
           renderItem={this._renderItem}
         />
+        {this._showLoading()}
       </View>
     )
   }

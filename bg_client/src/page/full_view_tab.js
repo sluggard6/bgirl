@@ -21,18 +21,18 @@ export default class FullViewTab extends Component {
 		super(props);
     this.state = {
       pics: "",
-      loaded: false,
+      // loaded: false,
       locked: false,
       alert: false,
       goBack: false,
       tabNumber: 0
     }
-    this._loadData = this._loadData.bind(this)
+    // this._loadData = this._loadData.bind(this)
   }
 
-  componentDidMount() {
-    this._loadData();
-  }
+  // componentDidMount() {
+  //   this._loadData();
+  // }
 
   componentDidUpdate() {
     if(this.state.goBack) {
@@ -43,18 +43,18 @@ export default class FullViewTab extends Component {
     }
   }
 
-  _loadData() {
-    url = Application.getUrl(Global.urls.group)+this.props.componentId
-    Http.httpGet(url, this._setData.bind(this))
-  }
+  // _loadData() {
+  //   url = Application.getUrl(Global.urls.group)+this.props.componentId
+  //   Http.httpGet(url, this._setData.bind(this))
+  // }
 
-  _setData(responseData) {
-    this.setState({
-      pics: responseData.pics,
-      loaded: true,
-      alert: false
-    })
-  }
+  // _setData(responseData) {
+  //   this.setState({
+  //     pics: responseData.pics,
+  //     loaded: true,
+  //     alert: false
+  //   })
+  // }
 
   doAlert() {
     this.setState({
@@ -72,7 +72,7 @@ export default class FullViewTab extends Component {
   }
 
   render() {
-    if(!this.state.loaded){
+    /*if(!this.state.loaded){
       return (
         <View style={styles.loading}>
           <Text>
@@ -80,7 +80,7 @@ export default class FullViewTab extends Component {
           </Text>
         </View>
       );
-    }else{
+    }else{*/
       return (
         <ScrollableTabView
           renderTabBar={() => <FullPicTabBar/>}
@@ -97,7 +97,7 @@ export default class FullViewTab extends Component {
           }}
           >
           {
-            this.state.pics.map((pic, index) => {
+            this.props.pics.map((pic, index) => {
               return (
                 <FullPicView 
                   pic={pic} 
@@ -111,11 +111,10 @@ export default class FullViewTab extends Component {
           }
         </ScrollableTabView>
       );
-    }
-
+    // }
   }
-
 }
+
 var styles = StyleSheet.create({
   loading: {
     flex: 1,

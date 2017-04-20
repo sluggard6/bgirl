@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import {
   View,
-  ListView,
+  FlatList,
   StyleSheet,
   Text
 } from 'react-native';
@@ -13,63 +13,40 @@ import Http from '../utils/http'
 import Global from '../utils/global'
 import Application from '../utils/application'
 import TopBar from '../component/top_bar'
+import FullViewTab from './full_view_tab'
 
 
 export default class Channel extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      loaded: false,
-    };
-    this.setState.bind(this)
-    this._updateDataSource.bind(this)
   }
 
-  _updateDataSource(responseData){
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(responseData.channels),
-      loaded: true,
-    });
+  onPress(componentId) {
+    url = Application.getUrl(Global.urls.group)+componentId
+    Http.httpGet(url, (res)=>{
+      Global.navigator.push({
+        component: FullViewTab,
+        params: {
+          pics: res.pics
+        }
+      })
+    })
   }
 
-  fetchData() {
-    Http.httpGet(Application.getUrl(Global.urls.channel),this._updateDataSource.bind(this))
-  }
-
-  componentDidMount() {
-    this.fetchData();
-  }
-
-  _renderRow(rowData,sectionID, rowID ){
-    return (
-      <ViewChannel data={rowData} />
-    );
-  }
+  _renderRow=({item}) => (<ViewChannel group={item} onPress={this.onPress.bind(this)}/>)
 
   render(){
-    if(this.state.loaded){
-      return (
-        <View style={styles.container}>
-          <TopBar/>
-          <ListView
-            style={styles.channel_list}
-            dataSource={this.state.dataSource}
-            renderRow={this._renderRow.bind(this)}
-          />
-        </View>
-      );
-    }else{
-      return (
-        <View style={styles.loading}>
-          <Text>
-            Loading data...
-          </Text>
-        </View>
-      );
-    }
-
+    return (
+      <View style={styles.container}>
+        <TopBar/>
+        <FlatList
+          style={styles.channel_list}
+          data={this.props.groups}
+          renderItem={this._renderRow}
+        />
+      </View>
+    );
   }
 }
 

@@ -9,7 +9,10 @@ import Banner from '../component/banner'
 import TheTwo from '../component/the_two'
 import TheThree from '../component/the_three'
 import FullViewTab from '../page/full_view_tab'
-import Gloabl from './global'
+import Channel from '../page/channel'
+import Global from './global'
+import Application from './application'
+import Http from './http'
 
 export default class Module extends Component {
   constructor(props) {
@@ -18,12 +21,31 @@ export default class Module extends Component {
   }
 
   onPress(componentId, category) {
-    Gloabl.navigator.push({
-			component: FullViewTab,
-      params: {
-        componentId: componentId
-      }
-		})
+    console.log(componentId, category)
+    this.props.setLoading(true)
+    if(category==0){
+      url = Application.getUrl(Global.urls.group)+componentId
+      Http.httpGet(url, (res)=>{
+        this.props.setLoading(false)
+        Global.navigator.push({
+          component: FullViewTab,
+          params: {
+            pics: res.pics
+          }
+        })
+      })
+    }else if(category==1){
+      url = Application.getUrl(Global.urls.channel)+componentId
+      Http.httpGet(url, (res)=>{
+        this.props.setLoading(false)
+        Global.navigator.push({
+          component: Channel,
+          params: {
+            groups: res.groups
+          }
+        })
+      })
+    } 
   }
 
   buildModule(module) {
@@ -83,7 +105,7 @@ export class Separator extends Component{
 
   render(){
     return(
-      <View style={{height: 10, width: Gloabl.size.width, backgroundColor: "#DFE0E1"}}/>
+      <View style={{height: 10, width: Global.size.width, backgroundColor: "#DFE0E1"}}/>
     )
   }
 

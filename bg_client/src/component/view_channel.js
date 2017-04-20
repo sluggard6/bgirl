@@ -6,6 +6,7 @@ import {
   StyleSheet,
   View,
   Image,
+  TouchableOpacity,
   Text
 } from 'react-native';
 
@@ -16,14 +17,24 @@ export default class ViewChannel extends Component {
   constructor(props) {
     super(props);
   }
+
   render(){
     return (
-      <Image source={{uri:"http://test.rs.vogor.cn/image/2017/02/19/9b23d5427b6086e8.jpg"}} style={styles.container}>
-        <View style={styles.text_container}>
-          <Text style={styles.text_name}>{this.props.data.name}</Text>
-          <Text style={styles.text_des}>{this.props.data.description}</Text>
+      <TouchableOpacity onPress={() => this.props.onPress(this.props.group.key)}>
+        <View style={styles.container}>
+          <Image source={{uri:this.props.group.t1}} style={styles.image_banner}>
+            <View style={styles.text_container}>
+              <Text style={styles.text_name}>{this.props.group.name}</Text>
+              <Text style={styles.text_des}>{this.props.group.description}</Text>
+            </View>
+          </Image>
+          <View style={styles.list_container}>
+            <Image source={{uri:this.props.group.t2}} style={styles.image}/>
+            <Image source={{uri:this.props.group.t3}} style={styles.image}/>
+            <Image source={{uri:this.props.group.t4}} style={styles.image}/>
+          </View>
         </View>
-      </Image>
+      </TouchableOpacity>
     );
   }
 }
@@ -31,13 +42,16 @@ export default class ViewChannel extends Component {
 var styles = StyleSheet.create({
 
   container: {
+    marginBottom: 20,
+  },
+
+  image_banner: {
     flexDirection: "column",
     justifyContent: 'center',
     alignItems: 'stretch',
-    height: 400/Global.pr,
+    height: (Global.size.width-2)/3,
     borderWidth: 1,
     borderColor: "white",
-    marginBottom:20,
   },
 
   text_container: {
@@ -54,5 +68,21 @@ var styles = StyleSheet.create({
   text_des: {
     alignItems: 'flex-end',
     fontSize: 18,
-  }
+  },
+
+  list_container: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    flexWrap: 'nowrap',
+    alignItems: 'center',
+    width: Global.size.width
+  },
+
+  image: {
+    width: (Global.size.width-2)/3,
+    height: (Global.size.width-2)/3,
+    borderWidth: 1,
+    borderColor: "white"
+  },
+
 })
