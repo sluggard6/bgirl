@@ -20,7 +20,7 @@ def pic_build(pic):
 
 def group_build(group):
     dic = dict()
-    dic['id'] = group.id
+    dic['key'] = group.id
     dic['name'] = group.name
     dic['description'] = group.description
     dic['status'] = group.status
