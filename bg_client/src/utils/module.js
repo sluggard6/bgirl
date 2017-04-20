@@ -21,7 +21,6 @@ export default class Module extends Component {
   }
 
   onPress(componentId, category) {
-    console.log(componentId, category)
     this.props.setLoading(true)
     if(category==0){
       url = Application.getUrl(Global.urls.group)+componentId

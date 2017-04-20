@@ -29,7 +29,6 @@ export default class HitButton extends Component {
 
   componentDidMount(){
     AsyncStorage.getItem('pic:'+this.props.pic.id).then((hit) => {
-      console.log(hit)
       if(hit != null) {
         this.setState(JSON.parse(hit))
       }
