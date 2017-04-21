@@ -13,6 +13,7 @@ import {
 import Global from '../utils/global'
 import Application from '../utils/application'
 import AlertWinow from '../component/windows'
+import {TextTopBar} from '../component/top_bar'
 
 export default class Pay extends Component {
 
@@ -41,20 +42,15 @@ export default class Pay extends Component {
   }
 
   unLock() {
-    // this.setState({
-    //   alert: false
-    // })
-    this.state.alert = false
-    this.doClose()
+    this.setState({
+      alert: false
+    })
   }
 
   render(){
     return(
       <View style={styles.container}>
-        {this._doAlert()}
-        <View style={styles.topBar}>
-          <Text style={{color: '#fff', fontSize: 20}}>充值</Text>
-        </View>
+        <TextTopBar text={'充  值'}/>
         <View style={styles.balanceBanner}>
           <Text style={styles.text}>账户余额:</Text>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -91,6 +87,7 @@ export default class Pay extends Component {
             <Text style={[styles.text,styles.textContext]}>优先申请参加线上活动</Text>
           </View>
         </View>
+        {this._doAlert()}
       </View>
     )
   }

@@ -14,6 +14,7 @@ import Global from '../utils/global';
 import Application from '../utils/application'
 import Http from '../utils/http'
 import Register from './register'
+import {TextTopBar} from '../component/top_bar'
 
 
 export default class RegisterPhone extends Component{
@@ -60,9 +61,7 @@ export default class RegisterPhone extends Component{
     const checked = this.state.checked ? require('../images/xuanzhong.png') : require('../images/weixuan.png');
     return (
       <View style={styles.loginContainer}>
-        <View style={styles.topBar}>
-          <Text style={{color: '#fff', fontSize: 20}}>注   册</Text>
-        </View>
+        <TextTopBar text={"注   册"}/>
         <View style={styles.inputContainer}>
           <Image source={require('../images/shouji.png')} style={styles.inputLogo}/>
           <TextInput

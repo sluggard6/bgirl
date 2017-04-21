@@ -16,6 +16,7 @@ import TabBarView from './tab_bar_view'
 import Global from '../utils/global'
 import Application from '../utils/application'
 import Http from '../utils/http'
+import {TextTopBar} from '../component/top_bar'
 
 export default class Login extends Component{
 
@@ -62,9 +63,7 @@ export default class Login extends Component{
   render(){
     return (
       <View style={styles.loginContainer}>
-        <View style={styles.topBar}>
-          <Text style={{color: '#fff', fontSize: 20}}>登   录</Text>
-        </View>
+        <TextTopBar text={'登   录'}/>
         <View style={styles.oauthContainer}>
           <TouchableOpacity onPress={Application.unSupport}>
             <View sytle={styles.oauthBean}>

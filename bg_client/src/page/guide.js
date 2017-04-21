@@ -32,9 +32,9 @@ export default class Guide extends Component {
         pagingEnabled={true}
         removeClippedSubviews={true}
         horizontal={true}>
-        <Image source={Global.guide.image1} style={styles.backgroundImage} resizeMode={Image.resizeMode.contain} />
-        <Image source={Global.guide.image2} style={styles.backgroundImage} resizeMode={Image.resizeMode.contain} />
-        <Image source={Global.guide.image3} style={styles.backgroundImage} resizeMode={Image.resizeMode.contain}>
+        <Image source={Global.guide.image1} style={styles.backgroundImage}/>
+        <Image source={Global.guide.image2} style={styles.backgroundImage}/>
+        <Image source={Global.guide.image3} style={styles.backgroundImage}>
           <TouchableOpacity onPress={this._onPressButton.bind(this)}>
             <Image source={require('../images/start_button.png')} style={{height: 100, width: 100, margin: 150, resizeMode: Image.resizeMode.contain}} />
           </TouchableOpacity>
@@ -52,11 +52,11 @@ var styles = StyleSheet.create({
   backgroundImage: {
     width: Global.size.width,
     height: Global.size.height,
-    flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "flex-end",
-    margin: 5,
+    // margin: 5,
+    resizeMode: Image.resizeMode.cover,
     overflow: "hidden"
   }
 });

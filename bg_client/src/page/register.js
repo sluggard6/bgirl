@@ -14,6 +14,7 @@ import Global from '../utils/global';
 import Application from '../utils/application'
 import Http from '../utils/http'
 import TimerButton from '../component/timer_button'
+import {TextTopBar} from '../component/top_bar'
 import Login from './login'
 
 const VCODE_URL = "/vcode"
@@ -71,7 +72,7 @@ export default class Register extends Component{
     const checked = this.state.checked ? require('../images/xuanzhong.png') : require('../images/weixuan.png');
     return (
       <View style={styles.loginContainer}>
-        <View style={styles.topBar} />
+        <TextTopBar text={"注   册"}/>
         <View style={{flexDirection: 'row', alignItems: 'center',}}>
           <View style={styles.shortInputContainer}>
             <Image source={require('../images/shouji_w.png')} style={styles.inputLogo}/>

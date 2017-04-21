@@ -13,3 +13,6 @@ admin
 #测试用户
 gxx
 123456
+
+#多渠道打包命令
+./gradlew -Pmarket=markets.txt clean archiveApkRelease
