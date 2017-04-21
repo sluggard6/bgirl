@@ -13,7 +13,6 @@
     "react-native-device-info": "^0.9.7",
     "react-native-orientation": "^1.17.0",
     "react-native-scrollable-tab-view": "^0.7.3",
-    "react-native-vector-icons": "^4.0.0",
     "react-native-wechat": "^1.9.0",
     "react-native-yunpeng-alipay": "^1.1.4"
   },

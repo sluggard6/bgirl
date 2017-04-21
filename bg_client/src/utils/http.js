@@ -20,7 +20,6 @@ export default class Http {
         if(error){
           error(err)
         }
-        console.log(err);
     });
   }
 

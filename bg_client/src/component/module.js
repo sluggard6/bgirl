@@ -5,14 +5,14 @@ import {
 } from 'react-native';
 
 
-import Banner from '../component/banner'
-import TheTwo from '../component/the_two'
-import TheThree from '../component/the_three'
+import Banner from './banner'
+import TheTwo from './the_two'
+import TheThree from './the_three'
 import FullViewTab from '../page/full_view_tab'
 import Channel from '../page/channel'
-import Global from './global'
-import Application from './application'
-import Http from './http'
+import Global from '../utils/global'
+import Application from '../utils/application'
+import Http from '../utils/http'
 
 export default class Module extends Component {
   constructor(props) {

@@ -13,7 +13,7 @@ import {
 import Global from '../utils/global'
 import Application from '../utils/application'
 import Http from '../utils/http'
-import Module from '../utils/module'
+import Module from './module'
 import Loading from './loading'
 
 

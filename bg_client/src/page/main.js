@@ -13,7 +13,6 @@ import Global from '../utils/global'
 import Application from '../utils/application'
 import Http from '../utils/http'
 import TopBar from '../component/top_bar'
-import Module from '../utils/module'
 
 let temp = [];
 

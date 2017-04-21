@@ -54,6 +54,7 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     width: Global.size.width,
     height: Global.size.height-(280/Global.pr),
+    overflow: 'hidden'
   },
   image: {
     width: Global.size.width - 6,

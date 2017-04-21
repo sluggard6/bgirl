@@ -30,6 +30,7 @@ export default class Guide extends Component {
         contentContainerStyle={styles.contentContainer}
         bounces={false}
         pagingEnabled={true}
+        removeClippedSubviews={true}
         horizontal={true}>
         <Image source={Global.guide.image1} style={styles.backgroundImage} resizeMode={Image.resizeMode.contain} />
         <Image source={Global.guide.image2} style={styles.backgroundImage} resizeMode={Image.resizeMode.contain} />
@@ -56,5 +57,6 @@ var styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-end",
     margin: 5,
+    overflow: "hidden"
   }
 });
