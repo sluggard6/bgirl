@@ -184,8 +184,8 @@ class UserVcode(BaseModel):
     category = Column(u'category', Integer(), default=Category.REGISTER)
     times = Column(u'times', Integer(), default=1)
     verify_time = Column(u'verify_time', DATETIME(), nullable=True)
-    create_time = Column(u'create_time', DATETIME(), nullable=False, default=datetime.now())
-    modify_time = Column(u'modify_time', DATETIME(), nullable=False, default=datetime.now())
+    create_time = Column(u'create_time', DATETIME(), nullable=False)
+    modify_time = Column(u'modify_time', DATETIME(), nullable=False)
 
     @property
     def status_cn(self):
