@@ -2,10 +2,18 @@
 {% block container %}
 	<h3 class="page-header">
 		专辑列表
-		<div style="float:right;">
-			<a href="/channel/group_edit" class="btn btn-primary btn-sm">新增专辑</a>
-		</div>
+        <div class="panel-body">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="apk_name">专辑名</label>
+                        <input type="text" id="apk_name" class="form-control" placeholder="apk关键字">
+                    </div>
+                    <button type="button" class="btn btn-primary btn-md" onclick="search()">搜索</button>
+                    <a href="/channel/group_edit" class="btn btn-primary btn-md pull-right">新增专辑</a>
+                </div>
+        </div>
 	</h3>
+
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<thead class="thead-default">
