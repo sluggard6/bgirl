@@ -20,17 +20,14 @@ import TopBar from '../component/top_bar'
 import Login from './login'
 import RegisterPhone from './register_phone'
 import Pay from './pay'
-import ChannelPackage from '../utils/channel_info'
+import License from './license'
+import AboutUs from './about_us'
 
 var user_info_menu = [
-  {text:'充值VIP', img:require('../images/chongzhi.png'), actionPath:Pay},
-  {text:'关于我们', img:require('../images/guanyuwomen.png'), actionPath:Pay},
-  {text:'免责申明', img:require('../images/mianzeshenming.png'), actionPath:Pay},
-  {text:'帮助'+ChannelPackage.CHANNEL, img:require('../images/bangzhu.png'), actionPath:Pay}
-  // {text:'我的下载', actionType:'innerView', actionPath:'downloaded'},
-  // {text:'未读消息', actionType:'innerView', actionPath:'downloaded'},
-  // {text:'每日任务', actionType:'innerView', actionPath:'downloaded'},
-  // {text:'个人设置', actionType:'innerView', actionPath:'downloaded'}
+  {text:'订购', img:require('../images/chongzhi.png'), actionPath:Pay},
+  {text:'关于我们', img:require('../images/guanyuwomen.png'), actionPath:AboutUs},
+  {text:'免责申明', img:require('../images/mianzeshenming.png'), actionPath:License},
+  {text:'下载说明', img:require('../images/bangzhu.png'), actionPath:Pay}
 ]
 
 export default class User extends Component {

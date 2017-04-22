@@ -24,9 +24,9 @@ export default class Pay extends Component {
     }
   }
 
-  doClose() {
-    Global.navigator.pop()
-  }
+  // doClose() {
+  //   Global.navigator.pop()
+  // }
 
   _doAlert() {
     if(this.state.alert) {
@@ -51,43 +51,45 @@ export default class Pay extends Component {
     return(
       <View style={styles.container}>
         <TextTopBar text={'充  值'}/>
-        <View style={styles.balanceBanner}>
-          <Text style={styles.text}>账户余额:</Text>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Image source={require('../images/jinbi.png')} style={{width: 18, height:18, borderWidth: 1, marginLeft: 10, marginRight: 5, resizeMode: Image.resizeMode.contain}}/>
-            <Text style={styles.text}>0昧币</Text>
-          </View>
-        </View>
-        <View style={styles.vipBanner}>
-          <Text style={[styles.text,{color: 'white'}]}>至尊VIP</Text>
-          <Text style={[styles.text,{color: 'white'}]}>享受365天</Text>
-          <TouchableOpacity onPress={this.doClose.bind(this)}>
-            <Text style={[styles.text,{color: 'white'}]}>点击关闭</Text>
-          </TouchableOpacity>
+        <View style={[styles.vipBanner,{backgroundColor:"#FBA150"}]}>
+          <Text style={[styles.text,{color: 'white'}]}>包月用户可享受的权限</Text>
           <TouchableOpacity onPress={this.lock.bind(this)}>
-            <Text style={[styles.text,{color: 'white', borderWidth: 1, borderColor: 'white', paddingLeft: 2}]}>¥199</Text>
+            <Text style={[styles.text,{color: 'white', borderWidth: 1, borderColor: 'white', paddingLeft: 2}]}>¥ 39 </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.vipContext}>
-          <Text style={[styles.text,styles.textContext]}>可享受权限</Text>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Image source={require('../images/xiala1.png')} style={{width: 18, height:18, marginLeft: 10, resizeMode: Image.resizeMode.contain}}/>
-            <Text style={[styles.text,styles.textContext]}>订阅有效期内的每期高清图片</Text>
-          </View>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Image source={require('../images/xiala2.png')} style={{width: 18, height:18, marginLeft: 10, resizeMode: Image.resizeMode.contain}}/>
-            <Text style={[styles.text,styles.textContext]}>VIP高清视频任意看</Text>
-          </View>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Image source={require('../images/xiala3.png')} style={{width: 18, height:18, marginLeft: 10, resizeMode: Image.resizeMode.contain}}/>
-            <Text style={[styles.text,styles.textContext]}>不定期发布的典藏特刊</Text>
-          </View>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Image source={require('../images/xiala4.png')} style={{width: 18, height:18, marginLeft: 10, resizeMode: Image.resizeMode.contain}}/>
-            <Text style={[styles.text,styles.textContext]}>优先申请参加线上活动</Text>
-          </View>
+          <ProductInfo image={require('../images/pay_icon_1.png')} text={"全馆3000张以上美女任意看,价值299元"}/>
+          <ProductInfo image={require('../images/pay_icon_2.png')} text={"每周更新100张,3位美女套图,全年不少于4000张+更新量,价值399元"}/>
+          <ProductInfo image={require('../images/pay_icon_3.png')} text={"新订购用户赠送当月主推美女写真海报一份,价值129元"}/>
+        </View>
+        <View style={styles.vipBanner}>
+          <Text style={[styles.text,{color: 'white'}]}>包年用户可享受的权限</Text>
+          <TouchableOpacity onPress={this.lock.bind(this)}>
+            <Text style={[styles.text,{color: 'white', borderWidth: 1, borderColor: 'white', paddingLeft: 2}]}>¥299</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.vipContext}>
+          <ProductInfo image={require('../images/pay_icon_1.png')} text={"全馆3000张以上美女任意看,价值299元"}/>
+          <ProductInfo image={require('../images/pay_icon_2.png')} text={"每周更新100张,3位美女套图,全年不少于4000张+更新量,价值399元"}/>
+          <ProductInfo image={require('../images/pay_icon_3.png')} text={"新订购用户赠送当月主推美女写真海报一份,价值129元"}/>
+          <ProductInfo image={require('../images/pay_icon_4.png')} text={"美女叫床铃声定制赠送,价值29元"}/>
+          <ProductInfo image={require('../images/pay_icon_5.png')} text={"每季度线下私拍包名申请资格,价值699元"}/>
+          <ProductInfo image={require('../images/pay_icon_6.png')} text={"商城季节特卖会优惠券,价值169元"}/>
+          <ProductInfo image={require('../images/pay_icon_7.png')} text={"美女图片下载资格"}/>
         </View>
         {this._doAlert()}
+      </View>
+    )
+  }
+}
+
+export class ProductInfo extends Component {
+
+  render() {
+    return (
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <Image source={this.props.image} style={{width: 25, height:25, marginLeft: 10, resizeMode: Image.resizeMode.contain}}/>
+        <Text style={styles.textContext}>{this.props.text}</Text>
       </View>
     )
   }
@@ -105,14 +107,6 @@ var styles = StyleSheet.create({
     // backgroundColor: '#DFE0E1'
   },
 
-  topBar: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 200/Global.pr,
-    width: Global.size.width,
-    backgroundColor: '#313840'
-  },
-
   balanceBanner: {
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -127,8 +121,9 @@ var styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-    height: 200/Global.pr,
+    height: 150/Global.pr,
     width: Global.size.width,
+    marginTop: 10,
     paddingLeft: 20,
     paddingRight: 20,
     backgroundColor: '#ff4563'
@@ -143,7 +138,7 @@ var styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: 18
+    fontSize: 22
   },
 
   textContext: {

@@ -75,7 +75,7 @@ var styles = StyleSheet.create({
     position: 'absolute',
     color: 'white',
     paddingLeft: 10,
-    fontSize: 22,
+    fontSize: 20,
   },
 
 })
