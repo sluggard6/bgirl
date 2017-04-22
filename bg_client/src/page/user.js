@@ -27,7 +27,7 @@ var user_info_menu = [
   {text:'订购', img:require('../images/chongzhi.png'), actionPath:Pay},
   {text:'关于我们', img:require('../images/guanyuwomen.png'), actionPath:AboutUs},
   {text:'免责申明', img:require('../images/mianzeshenming.png'), actionPath:License},
-  {text:'下载说明', img:require('../images/bangzhu.png'), actionPath:Pay}
+  {text:'下载说明'+Global.size.width+":"+Global.size.height+":"+Global.pr, img:require('../images/bangzhu.png'), actionPath:Pay}
 ]
 
 export default class User extends Component {
