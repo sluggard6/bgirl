@@ -28,6 +28,17 @@ export default class Application {
     })
   }
 
+  static clearLoginInfo() {
+    AsyncStorage.removeItem('uname')
+    AsyncStorage.removeItem('pwd')
+  }
+
+  static localLogout() {
+    Global.user = {}
+    Global.isLogin = false
+    AsyncStorage.removeItem('seid')
+  }
+
   static autoLogin() {
     AsyncStorage.getItem('seid').then((seid) => {
       if(seid != null) {
@@ -49,6 +60,17 @@ export default class Application {
         if(typeof callback === 'function'){
           callback()
         }
+      }else{
+        ToastAndroid.show(res.message,ToastAndroid.SHORT)
+      }
+    });
+  }
+
+  static logout(){
+    Http.httpGet(Application.getUrl(Global.urls.logout), (res) => {
+      if(res.success === true) {
+        Application.clearLoginInfo()
+        Application.localLogout()
       }else{
         ToastAndroid.show(res.message,ToastAndroid.SHORT)
       }

@@ -70,7 +70,7 @@ class ChannelTabBar extends Component {
       return (
         <TouchableOpacity onPress={()=>this.props.goToPage(i)} style={styles.tab} key={i}>
           <View style={styles.tabItem}>
-            <Text style={{fontSize: 18, color: "#e0e0e0"}}>
+            <Text style={{fontSize: 16, color: "#e0e0e0"}}>
               {this.props.tabNames[i]}
             </Text>
           </View>
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
 
 	tabs: {
 		flexDirection: 'row',
-		height: 140/Global.pr,
+		height: 50,
 	},
 
 	tab: {
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
 
   text: {
     borderColor: "#ff4563",
-    fontSize: 20,
+    fontSize: 18,
     borderBottomWidth: 2,
     color: "white"
   },

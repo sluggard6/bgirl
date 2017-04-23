@@ -27,7 +27,7 @@ export default class Banner extends Component {
         <Image source={{uri:this.props.data[0].pic.min}} style={styles.container}>
           <View style={styles.text_container}>
             <View style={styles.view_opacity}/>
-            <Text style={styles.text_name}>{this.props.data[0].component.name}</Text>
+            <Text style={styles.text_name}>{this.props.data[0].component.des}</Text>
           </View>
         </Image>
       </TouchableOpacity>
@@ -50,7 +50,7 @@ var styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: 'flex-end',
     alignItems: 'center',
-    height: 255,
+    height: Global.size.width/2,
     width: Global.size.width-4,
     borderWidth: 1,
     borderColor: "white"
@@ -60,7 +60,7 @@ var styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: 'flex-start',
     alignItems: 'center',
-    height: 60,
+    height: 40,
     backgroundColor:'transparent',
   },
 
@@ -75,7 +75,7 @@ var styles = StyleSheet.create({
     position: 'absolute',
     color: 'white',
     paddingLeft: 10,
-    fontSize: 20,
+    fontSize: 16,
   },
 
 })

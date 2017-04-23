@@ -88,7 +88,7 @@ export default class Register extends Component{
           <TimerButton onPress={()=>this.onPress()}
               style={styles.vcodeBtn}
               disStyle={styles.disVcodeBtn}
-              textStyle={{fontSize: 16, color: 'white'}}
+              textStyle={{fontSize: 14, color: 'white'}}
               text="获取验证码"
               disText="重新获取"
               disTime={60}
@@ -121,7 +121,7 @@ export default class Register extends Component{
         </View>
         <TouchableOpacity onPress={this.doRegister.bind(this)}>
           <View style={styles.loginButton}>
-            <Text style={{color: '#fff', fontSize: 22}} >完成</Text>
+            <Text style={{color: '#fff', fontSize: 16}} >完成</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -135,14 +135,6 @@ var styles = StyleSheet.create({
     backgroundColor: '#f4f4f4',
   },
 
-  topBar: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 200/Global.pr,
-    width: Global.size.width,
-    backgroundColor: '#313840'
-  },
-
   logoImage:{
     borderRadius: 35,
     height: 90,
@@ -152,7 +144,7 @@ var styles = StyleSheet.create({
   },
 
   inputLogo: {
-    height: 30,
+    height: 25,
     marginLeft: 10,
     resizeMode: Image.resizeMode.contain
   },
@@ -196,7 +188,7 @@ var styles = StyleSheet.create({
     height: 40,
     width: 120,
     paddingLeft: 10,
-    fontSize: 16,
+    fontSize: 14,
     borderRadius: 5,
   },
 
@@ -216,7 +208,7 @@ var styles = StyleSheet.create({
     height: 40,
     width: Global.size.width - 100,
     paddingLeft: 10,
-    fontSize: 16,
+    fontSize: 14,
     borderRadius: 5,
   },
 

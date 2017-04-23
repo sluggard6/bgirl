@@ -22,12 +22,13 @@ import RegisterPhone from './register_phone'
 import Pay from './pay'
 import License from './license'
 import AboutUs from './about_us'
+import Download from './download'
 
 var user_info_menu = [
-  {text:'订购', img:require('../images/chongzhi.png'), actionPath:Pay},
+  {text:'会员订购', img:require('../images/chongzhi.png'), actionPath:Pay},
   {text:'关于我们', img:require('../images/guanyuwomen.png'), actionPath:AboutUs},
   {text:'免责申明', img:require('../images/mianzeshenming.png'), actionPath:License},
-  {text:'下载说明'+Global.size.width+":"+Global.size.height+":"+Global.pr, img:require('../images/bangzhu.png'), actionPath:Pay}
+  {text:'下载说明', img:require('../images/xiazai.png'), actionPath:Download}
 ]
 
 export default class User extends Component {
@@ -39,6 +40,7 @@ export default class User extends Component {
     });
     this.state = {
       dataSource: ds.cloneWithRows(user_info_menu),
+      isLogin: Global.isLogin
     };
   }
 
@@ -98,18 +100,18 @@ export default class User extends Component {
   }
 
   getNick() {
-    if(Global.isLogin) {
+    if(this.state.isLogin) {
       let nick = Global.user.nick==null?this.getSecPhone():Global.user.nick
       let payInfo = "普通用户"
       return (
         <View style={styles.userinfo}>
-          <Image source={require('../images/touxiang.png')} style={{height: 80, resizeMode: Image.resizeMode.contain, marginLeft: 100/Global.pr, marginRight: 100/Global.pr}}/>
+          <Image source={require('../images/touxiang.png')} style={{height: 50, resizeMode: Image.resizeMode.contain, marginLeft: 20, marginRight: 0}}/>
           <View style={styles.user_nick}>
-            <Text style={{fontSize: 20, textAlign: 'center', marginBottom: 5}}>{nick}</Text>
+            <Text style={{fontSize: 16, textAlign: 'center', marginBottom: 5}}>{nick}</Text>
             <TouchableOpacity onPress={this.checkVip.bind(this)}>
               <View style={styles.vip_info}>
                 <Image source={require('../images/huangguan0.png')} style={{height: 20, width: 20, marginRight: 10, resizeMode: Image.resizeMode.contain}}/>
-                <Text style={{fontSize: 18, textAlign: 'center'}}>{payInfo}</Text>
+                <Text style={{fontSize: 14, textAlign: 'center'}}>{payInfo}</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -136,6 +138,33 @@ export default class User extends Component {
     }
   }
 
+  logout() {
+    Application.logout()
+    if(this.state.isLogin != Global.isLogin) {
+      this.setState({
+        isLogin: Global.isLogin
+      })
+    }
+  }
+
+  getLogout() {
+    if (Global.isLogin) {
+      return (
+        <TouchableOpacity onPress={() => {
+          this.logout()
+          }}>
+          <View style={styles.menu}>
+            <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row', height: 50}}>
+            <Image source={require('../images/xiazai.png')} style={styles.menu_logo}/>
+            <Text style={styles.menu_text}>退出登录</Text>
+            </View>
+            <Image source={require('../images/jiantou.png')} style={styles.menu_taget}/>
+          </View>
+        </TouchableOpacity>
+      )
+    }
+  }
+
   render(){
     return (
       <View style={styles.container}>
@@ -144,6 +173,7 @@ export default class User extends Component {
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this._renderRow.bind(this)}
+          renderFooter={this.getLogout.bind(this)}
         />
       </View>
     );
@@ -173,7 +203,7 @@ var styles = StyleSheet.create({
     alignItems: 'center'
   },
   button: {
-    fontSize: 18,
+    fontSize: 16,
     height: 40,
     width: Global.size.width/2-20,
     borderRadius: 5,
@@ -202,16 +232,16 @@ var styles = StyleSheet.create({
   },
   menu_text:{
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 14,
     width: 150
   },
   menu_logo: {
-    height: 40,
+    height: 30,
     resizeMode: Image.resizeMode.contain
   },
   menu_taget: {
-    height: 30,
-    width: 30,
+    height: 15,
+    width: 15,
     resizeMode: Image.resizeMode.contain
   },
   list_view: {

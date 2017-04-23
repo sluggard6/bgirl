@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 
 import Global from '../utils/global'
-import ViewPic from './view_pic'
 
 export default class TheTwo extends Component {
 

@@ -111,7 +111,7 @@ var styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection: 'row',
-    height: 200/Global.pr,
+    height: 50,
     width: Global.size.width,
     paddingLeft: 20,
     backgroundColor: 'white'
@@ -121,7 +121,7 @@ var styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-    height: 150/Global.pr,
+    height: 50,
     width: Global.size.width,
     marginTop: 10,
     paddingLeft: 20,
@@ -133,16 +133,19 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     width: Global.size.width,
-    paddingTop: 10,
+    paddingTop: 5,
     backgroundColor: 'white'
   },
 
   text: {
-    fontSize: 22
+    fontSize: 16
   },
 
   textContext: {
-    padding: 10
+    width: Global.size.width - 40,
+    padding: 8,
+    paddingLeft: 10,
+    fontSize: 14
   }
 
 });

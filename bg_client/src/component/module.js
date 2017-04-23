@@ -70,7 +70,7 @@ export default class Module extends Component {
       case "title":{
         return (
           <View style={{justifyContent: 'center', alignItems: 'center', margin: 10}}>
-            <Text style={{fontSize: 20}}>{module.text}</Text>
+            <Text style={{fontSize: 18}}>{module.text}</Text>
           </View>
         );
       }

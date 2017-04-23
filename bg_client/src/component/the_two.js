@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 
 import Global from '../utils/global'
-import ViewPic from './view_pic'
 import FullViewTab from '../page/full_view_tab'
 
 export default class TheTwo extends Component {
@@ -23,7 +22,7 @@ export default class TheTwo extends Component {
   renderPic(data){
     if(this.props.square){
       return(
-        <Image style={styles.image} source={{uri: data.pic.min}} />
+        <Image style={styles.image_square} source={{uri: data.pic.min}} />
       )
     }else{
       return (
@@ -46,11 +45,31 @@ export default class TheTwo extends Component {
   }
 }
 
+export class ViewPic extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  render(){
+    return (
+      <View style={[styles.container,{borderWidth: 1, borderColor: "white"}]}>
+        <Image
+          style={styles.image}
+          source={{uri: this.props.pic.max}}
+        />
+        <Text style={styles.text}>{this.props.component.des}</Text>
+      </View>
+    );
+  }
+}
+
+
 var styles = StyleSheet.create({
 
   container: {
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     flexWrap: 'nowrap',
     alignItems: 'center',
   },
@@ -62,11 +81,26 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     width: Global.size.width,
   },
-  image: {
+
+  image_square: {
     width: (Global.size.width-4)/2,
     height: (Global.size.width-4)/2,
     borderWidth: 1,
     borderColor: "white"
   },
+  
+  image: {
+    width: (Global.size.width-4)/2,
+    height: (Global.size.width-4)/3*2,
+  },
+
+  text: {
+    textAlign: 'center',
+    width: (Global.size.width-4)/2,
+    height: 30,
+    backgroundColor: "#333740",
+    fontSize: 18,
+    color: "white"
+  }
 
 });

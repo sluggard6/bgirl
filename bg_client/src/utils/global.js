@@ -20,6 +20,7 @@ const Global = {
     vcode: "/vcode",
     register: "/user/register",
     login: "/user/login",
+    logout: "/logout",
     user: "/user/profile",
     charge: "/charge/do",
     pic: "/pic/"

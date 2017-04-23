@@ -115,7 +115,7 @@ var styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: 'center',
     alignItems: 'center',
-    height: (140/Global.pr)
+    height: 50
     // backgroundColor: "white"
   },
 
