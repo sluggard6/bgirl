@@ -45,6 +45,8 @@ def good(id):
             return g.ret_error_func(err=u"已经赞过了")
         elif user_hit.status == UserHit.Status.INIT:
             user_hit.status = UserHit.Status.GOOD
+            pic.good += 1
+            pic.update()
             UserService.add_hit(user_hit)
             return g.ret_success_func()
         else:
