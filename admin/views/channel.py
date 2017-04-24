@@ -107,8 +107,20 @@ def group(channel_id):
 
 @ChannelView.route('/group_list', methods=['GET', 'POST'])
 def group_list():
-    groups = Group.query.filter(Group.status <> 3).order_by(Group.id.asc()).all()
-
+    data = request.form or request.args
+    supplier_id = data.get('supplier_id',0)
+    name = data.get('name', None)
+    suppliers = Supplier.query.filter(Supplier.status<>3).all()
+    g.suppliers = suppliers
+    g.supplier_id = supplier_id
+    base_query = Group.query.filter(Group.status <> 3).order_by(Group.id.asc())
+    if supplier_id and str(supplier_id) != '0':
+        print supplier_id
+        base_query = base_query.filter_by(supplier_id=supplier_id)
+    if name:
+        print '==',name,'--'
+        base_query = base_query.filter(Group.name.like("%"+name+"%"))
+    groups = base_query.all()
     return render_template('channel/group_list.html', groups=groups)
 
 

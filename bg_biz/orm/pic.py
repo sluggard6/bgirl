@@ -112,6 +112,7 @@ class Group(BaseModel, KvdbMixin):
     shoot_time = Column(u'shoot_time',DATETIME(),default=datetime.today())
     group_no = Column(u'group_no',VARCHAR(length=45))
     status = Column(u'status', INTEGER(), nullable=False, default=Status.AVAILABLE)
+    designation = Column(u'designation',VARCHAR(length=45))
 
     channels = relation('Channel',
                         primaryjoin='Group.id==group_channel_mapping.c.group_id',
@@ -245,4 +246,5 @@ class Supplier(BaseModel):
     update_time = Column(u'update_time', DATETIME(), nullable=False, default=datetime.now())
     description = Column(u'description', VARCHAR(length=200))
     status = Column(u'status', INTEGER(), nullable=False, default=Status.AVAILABLE)
+    designation_prefix = Column(u'designation_prefix', VARCHAR(length=45))
 
