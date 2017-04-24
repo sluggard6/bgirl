@@ -64,7 +64,7 @@ export default class BgirlTabBar extends Component {
 const styles = StyleSheet.create({
 	tabs: {
 		flexDirection: 'row',
-		height: 140/Global.pr,
+		height: 50,
 	},
 
 	tab: {
@@ -83,8 +83,8 @@ const styles = StyleSheet.create({
 	},
 
   image: {
-    height: 64/Global.pr,
-    width: 44/Global.pr,
+    height: 25,
+    width: 18,
     resizeMode: "contain",
     borderColor: "black"
   },

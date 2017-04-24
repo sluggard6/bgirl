@@ -74,10 +74,17 @@ export default class RegisterPhone extends Component{
             <View style={{height:1,backgroundColor:'#f4f4f4'}} />
         </View>
         <TouchableOpacity onPress={this.checkRule.bind(this)}>
-          <View style={{flexDirection: 'row', width:Global.size.width - 40,justifyContent: 'center', alignItems: 'center', margin: 20}}>
+          <View style={{flexDirection: 'row', width:Global.size.width - 40,justifyContent: 'flex-start', alignItems: 'center', margin: 20, marginBottom: 0}}>
             <Image source={checked} style={styles.checkedImage}/>
-            <Text>我已阅读并同意</Text>
-            <Text style={{color: 'red'}}>《用户服务条款》</Text>
+            <Text style={styles.license}>我已阅读并同意</Text>
+            <Text style={[styles.license,{color: 'red'}]}>《用户服务条款》</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.checkRule.bind(this)}>
+          <View style={{flexDirection: 'row', width:Global.size.width - 40,justifyContent: 'flex-start', alignItems: 'center', margin: 20}}>
+            <Image source={checked} style={styles.checkedImage}/>
+            <Text style={styles.license}>我已阅读并同意</Text>
+            <Text style={[styles.license,{color: 'red'}]}>《免责申明》</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.goRegister.bind(this)}>
@@ -129,12 +136,16 @@ var styles = StyleSheet.create({
     height:40
   },
 
+  license: {
+    fontSize: 12
+  },
+
   input: {
     backgroundColor: '#DFE0E1',
-    height: 40,
+    height: 35,
     width: Global.size.width - 80,
     paddingLeft: 10,
-    fontSize: 16,
+    fontSize: 14,
     borderRadius: 5,
   },
 

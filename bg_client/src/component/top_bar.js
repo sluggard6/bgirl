@@ -23,7 +23,7 @@ export class TextTopBar extends Component {
   render(){
     return(
       <View style={styles.top_bar}>
-        <Text style={{color: '#fff', fontSize: 20}}>{this.props.text}</Text>
+        <Text style={{color: '#fff', fontSize: 18}}>{this.props.text}</Text>
       </View>
     );
   }
@@ -35,14 +35,14 @@ var styles = StyleSheet.create({
     flexWrap: 'nowrap',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 200/Global.pr,
+    height: 50,
     width: Global.size.width,
     backgroundColor: "#333740"
   },
 
   tob_bar_logo: {
-    height: 150/Global.pr,
-    width: 150/Global.pr,
+    height: 40,
+    width: 40,
     resizeMode: 'contain',
   }
 

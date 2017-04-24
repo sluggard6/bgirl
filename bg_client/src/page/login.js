@@ -75,7 +75,7 @@ export default class Login extends Component{
           </TouchableOpacity>
           <TouchableOpacity onPress={Application.unSupport}>
             <View sytle={styles.oauthBean}>
-              <Image source={require('../images/QQ.png')} style={styles.oauthImage}/>
+              <Image source={require('../images/qq.png')} style={styles.oauthImage}/>
               <View style={{alignItems:'center'}}>
                 <Text style={styles.oauthText}>QQ登录</Text>
               </View>
@@ -118,7 +118,7 @@ export default class Login extends Component{
         </View>
         <TouchableOpacity onPress={this.doLogin.bind(this)}>
           <View style={styles.loginButton}>
-            <Text style={{color: '#fff'}} >自动登录</Text>
+            <Text style={{color: '#fff', fontSize: 15}} >自动登录</Text>
           </View>
         </TouchableOpacity>
         <View style={{flexDirection:'row',justifyContent: 'space-around', marginTop: 20}}>
@@ -173,14 +173,14 @@ var styles = StyleSheet.create({
   },
 
   oauthImage: {
-    height: 30,
+    height: 25,
     resizeMode: Image.resizeMode.contain
   },
 
   oauthText: {
     paddingTop: 5,
     alignItems: 'center',
-    fontSize: 16,
+    fontSize: 14,
   },
 
   logoImage: {
@@ -192,7 +192,7 @@ var styles = StyleSheet.create({
   },
 
   inputLogo: {
-    height: 30,
+    height: 25,
     marginLeft: 10,
     resizeMode: Image.resizeMode.contain
   },
@@ -213,7 +213,7 @@ var styles = StyleSheet.create({
     height: 40,
     width: Global.size.width - 80,
     paddingLeft: 10,
-    fontSize: 16,
+    fontSize: 14,
     borderRadius: 5,
   },
 

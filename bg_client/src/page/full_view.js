@@ -53,12 +53,12 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: Global.size.width,
-    height: Global.size.height-(280/Global.pr),
+    height: Global.size.height-100,
     overflow: 'hidden'
   },
   image: {
     width: Global.size.width - 6,
-    height: Global.size.height-(400/Global.pr),
+    height: Global.size.height-120,
     resizeMode: Image.resizeMode.contain
   },
 })

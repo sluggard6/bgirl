@@ -80,10 +80,12 @@ export class ChargeWindow extends Component {
   }
 
   alipayCallback(responseData){
-    Alipay.pay(responseData.url).then(function(data){
-                }, function (err) {
-                    console.log(err);
-                });
+    Alipay.pay(responseData.url).then(
+      function(data){
+        console.log(data)
+      }, function (err) {
+          console.log(err);
+      });
   }
 
   wxPayPage(){
@@ -101,7 +103,7 @@ export class ChargeWindow extends Component {
   render(){
     return(
       <View style={styles.window}>
-        <Image source={require('../images/renwu.png')} style={{width: 300, height: 200, resizeMode: Image.resizeMode.contain}}/>
+        <Image source={require('../images/renwu.png')} style={styles.renwu}/>
         <View style={styles.button_container}>
           <TouchableOpacity onPress={this.wxPayPage.bind(this)}>
             <View style={[styles.chargeButton,{backgroundColor: '#FB4867'}]}>
@@ -124,7 +126,6 @@ export class ChargeWindow extends Component {
       </View>
     )
   }
-
 }
 
 export class BuyWindow extends Component {
@@ -132,7 +133,7 @@ export class BuyWindow extends Component {
   render(){
     return(
       <View style={styles.window}>
-        <Image source={require('../images/renwu.png')} style={{width: 300, height: 200, resizeMode: Image.resizeMode.contain}}/>
+        <Image source={require('../images/renwu.png')} style={styles.renwu}/>
         <View style={styles.button_container}>
           <TouchableOpacity onPress={this.props.alertPay}>
             <View style={styles.payButton}>
@@ -193,8 +194,8 @@ export class LoginWindow extends Component {
     let register="注册账号>"
     return(
       <View style={styles.window}>
-        <Image source={require('../images/renwu.png')} style={{width: 300, height: 200, resizeMode: Image.resizeMode.contain}}/>
-        <View style={[styles.button_container,{height: 255, paddingTop: 10}]}>
+        <Image source={require('../images/renwu.png')} style={styles.renwu}/>
+        <View style={[styles.button_container,{height: 230, paddingTop: 10}]}>
           <View style={styles.inputContainer}>
             <Image source={require('../images/shouji.png')} style={styles.inputLogo}/>
             <TextInput
@@ -240,7 +241,7 @@ export class LoginWindow extends Component {
               <Image source={require('../images/sina.png')} style={styles.oauthImage}/>
             </TouchableOpacity>
             <TouchableOpacity onPress={Application.unSupport}>
-              <Image source={require('../images/QQ.png')} style={styles.oauthImage}/>
+              <Image source={require('../images/qq.png')} style={styles.oauthImage}/>
             </TouchableOpacity>
             <TouchableOpacity onPress={Application.unSupport}>
               <Image source={require('../images/weixin.png')} style={styles.oauthImage}/>
@@ -266,24 +267,30 @@ var styles = StyleSheet.create({
     width: Global.size.width,
     height: Global.size.height,
     opacity:0.8,
-    backgroundColor:'#AEAEAE',
+    backgroundColor:'black',
   },
 
   window:{
     position: 'absolute',
     flexDirection: 'column',
-    marginTop: 100,
+    marginTop: 30,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 5,
-    width: 300,
+    width: 250,
     height: 500, 
     backgroundColor: "transparent"
   },
 
+  renwu: {
+    width: 250, 
+    height: 150, 
+    resizeMode: Image.resizeMode.contain
+  },
+
   button_container: {
-    width: 300, 
-    height: 220, 
+    width: 250, 
+    height: 150, 
     backgroundColor: "white", 
     borderRadius: 5, 
     alignItems: "center", 
@@ -292,7 +299,7 @@ var styles = StyleSheet.create({
   },
 
   oauthContainer: {
-    height: 80,
+    height: 60,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -304,8 +311,8 @@ var styles = StyleSheet.create({
   },
 
   inputLogo: {
-    height: 30,
-    width: 30,
+    height: 25,
+    width: 25,
     marginLeft: 10,
     resizeMode: Image.resizeMode.contain
   },
@@ -313,20 +320,20 @@ var styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 10,
+    marginLeft: 5,
+    marginRight: 5,
+    marginBottom: 5,
     backgroundColor: '#DFE0E1',
     borderRadius: 5,
-    height:40
+    height:35
   },
 
   input:{
     backgroundColor: '#DFE0E1',
-    height: 40,
-    width: 250,
+    height: 35,
+    width: 200,
     paddingLeft: 10,
-    fontSize: 16,
+    fontSize: 14,
     borderRadius: 5,
   },
 
@@ -334,8 +341,8 @@ var styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     backgroundColor: '#FC4A68',
-    height: 40,
-    width: 290,
+    height: 35,
+    width: 235,
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
@@ -344,10 +351,10 @@ var styles = StyleSheet.create({
   payButton:{
     marginLeft: 10,
     marginRight: 10,
-    marginTop: 25,
+    marginTop: 10,
     backgroundColor: '#FC4A68',
-    height: 40,
-    width: 290,
+    height: 35,
+    width: 235,
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
@@ -356,10 +363,10 @@ var styles = StyleSheet.create({
   chargeButton: {
     marginLeft: 10,
     marginRight: 10,
-    marginTop: 25,
+    marginTop: 10,
     backgroundColor: '#FC4A68',
-    height: 40,
-    width: 290,
+    height: 35,
+    width: 235,
     borderRadius: 5,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -367,18 +374,18 @@ var styles = StyleSheet.create({
   },
 
   chargeLogo: {
-    height: 35,
-    width: 35,
+    height: 25,
+    width: 25,
     resizeMode: Image.resizeMode.contain
   },
 
   cannelButton:{
     marginLeft: 10,
     marginRight: 10,
-    marginTop: 25,
+    marginTop: 10,
     backgroundColor: '#C3C3C3',
     height: 40,
-    width: 290,
+    width: 235,
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
@@ -396,6 +403,6 @@ var styles = StyleSheet.create({
 
   text:{
     color: "white",
-    fontSize: 18
+    fontSize: 16
   }
 })

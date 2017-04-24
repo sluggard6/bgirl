@@ -12,6 +12,7 @@ from bg_biz.service.user_service import send_user_vcode
 from bg_biz.orm.user import UserVcode, User
 import os
 from flask.helpers import send_from_directory
+from flask_login.utils import logout_user
 
 DefaultView = Blueprint('default', __name__)
 
@@ -43,6 +44,11 @@ def profile():
 	ret['host'] = current_app.config.get("HTTP_DOMAIN");
 	ret['port'] = current_app.config.get("PORT");
 	return g.ret_success_func(profile=ret)
+
+@DefaultView.route('/logout', methods=['GET', 'POST'])
+def logout():
+	logout_user()
+	return g.ret_success_func()
 
 @DefaultView.route('/vcode')
 def send_register_vcode():
