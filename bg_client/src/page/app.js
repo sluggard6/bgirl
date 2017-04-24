@@ -21,7 +21,9 @@ import Main from './main';
 import Http from '../utils/http'
 import Global from '../utils/global'
 import Application from '../utils/application'
-import * as WeChat from 'react-native-wechat';
+import * as WeChat from 'react-native-wechat'
+import UMNative from '../utils/umeng_native'
+
 
 const defaultRoute = {
   component: Guide
@@ -36,20 +38,20 @@ class App extends Component {
     this.state = {
       version: null,  //这里放你自己定义的state变量及初始值
     };
-    this.loadVersion()
   }
 
   componentWillMount() {
-    this.loadVersion();
     if (Platform.OS === 'android') {
       BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
     }
+    UMNative.onPageBegin("App")
   }
 
   componentWillUnmount() {
     if (Platform.OS === 'android') {
       BackAndroid.removeEventListener('hardwareBackPress', this.onBackAndroid);
     }
+    UMNative.onPageEnd("App")
   }
 
   onBackAndroid = () => {
@@ -69,6 +71,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+    this.loadVersion();
     this.loadProfile();
     WeChat.registerApp('wx11eaa73053dd1666')
   }
@@ -82,11 +85,15 @@ class App extends Component {
 
 
   async loadVersion() {
+    this.timer = setTimeout(() => {
+      this.setState({
+        version: storageVersion
+      })
+      this.timer && clearTimeout(this.timer)
+    },1000)
     storageVersion = await AsyncStorage.getItem('buildVersion');
     if(!storageVersion) {storageVersion = "None"}
-    this.setState({
-      version: storageVersion
-    })
+    
   }
 
   _renderScene(route, navigator) {
@@ -99,9 +106,8 @@ class App extends Component {
   rerenderLoadingView() {
     return (
       <View style={styles.container}>
-        <Text>
-          正在加载数据……
-        </Text>
+        <Image source={Global.loadingPage} style={{width: Global.size.width, height: Global.size.height, resizeMode: Image.resizeMode.cover}}>
+        </Image>
       </View>
     );
   }

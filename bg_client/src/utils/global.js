@@ -5,11 +5,14 @@ import {
 } from 'react-native';
 
 
-
 const Global = {
   size: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height
+  },
+  products:{
+    1: 3900,
+    2: 29900
   },
   urls: {
     profile: "/profile",
@@ -43,6 +46,7 @@ const Global = {
   isLogin: false,
   buildVersion : '0.1.0',
   default_host : "http://test.api.vogor.cn",
+  loadingPage : require('../images/pic.jpg'),
   pr: PixelRatio.get(),
   maxView: 3,
   isAlert: false,

@@ -24,7 +24,8 @@ export default class AlertWindow extends Component {
   constructor(props) {
     super(props)
     this.state={
-      charge: false
+      charge: false,
+      productId: 0,
     }
   }
 
@@ -33,9 +34,10 @@ export default class AlertWindow extends Component {
     this.props.unLock()
   }
 
-  alertPay(){
+  alertPay(productId){
     this.setState({
-      charge: true
+      charge: true,
+      productId: productId
     })
   }
 
@@ -43,7 +45,7 @@ export default class AlertWindow extends Component {
     if(Global.isLogin) {
       if(this.state.charge){
         return (
-          <ChargeWindow/>
+          <ChargeWindow productId={this.state.productId}/>
         )
       }else{
         return(
@@ -74,7 +76,7 @@ export default class AlertWindow extends Component {
 
 export class ChargeWindow extends Component {
 
-  alipayPage() {
+  alipayPage(productId, amount) {
     Http.httpGet(Application.getUrl(Global.urls.charge)+"?pay_type=alipay_app&channel="+ChannelPackage.CHANNEL,this.alipayCallback.bind(this))
 
   }
@@ -111,7 +113,7 @@ export class ChargeWindow extends Component {
               <Text style={styles.text} >微信支付</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.alipayPage.bind(this)}>
+          <TouchableOpacity onPress={() => this.alipayPage(this.props.productId, Application.getPrice(this.props.productId))}>
             <View style={[styles.chargeButton,{backgroundColor: '#FCA150'}]}>
               <Image source={require('../images/charge/zhifubao.png')} style={styles.chargeLogo}/>
               <Text style={styles.text} >支付宝支付</Text>
@@ -135,12 +137,12 @@ export class BuyWindow extends Component {
       <View style={styles.window}>
         <Image source={require('../images/renwu.png')} style={styles.renwu}/>
         <View style={styles.button_container}>
-          <TouchableOpacity onPress={this.props.alertPay}>
+          <TouchableOpacity onPress={() => this.props.alertPay(2)}>
             <View style={styles.payButton}>
               <Text style={styles.text} >包场一年</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.props.alertPay}>
+          <TouchableOpacity onPress={() => this.props.alertPay(1)}>
             <View style={[styles.payButton,{backgroundColor: '#FDA04F'}]}>
               <Text style={styles.text} >包场一月</Text>
             </View>
@@ -329,7 +331,7 @@ var styles = StyleSheet.create({
   },
 
   input:{
-    backgroundColor: '#DFE0E1',
+    backgroundColor: "transparent",
     height: 35,
     width: 200,
     paddingLeft: 10,

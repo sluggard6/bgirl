@@ -58,7 +58,7 @@ def send_user_vcode(phone, category, app=UserVcode.App.ANDROID, mac=None):
     if not is_mobile(phone):
         raise AppError(u"请输入正确的手机号码")
     if category == UserVcode.Category.REGISTER:
-        content = u"验证码：%s 欢迎您注册%s" % (vcode, get_app_name())
+        content = u"您在%s的验证码是：%s 。 请不要把验证码泄露给其他人。如非本人操作，可不用理会！" % (get_app_name(), vcode)
     elif category == UserVcode.Category.FORGET_PASS:
         content = u"您的验证码为：%s " % vcode
     # elif category == UserVcode.Category.CHANGE_PHONE_OLD:

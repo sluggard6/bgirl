@@ -9,6 +9,7 @@ import Global from './global'
 import Http from './http'
 import TabBarView from '../page/tab_bar_view'
 
+
 export default class Application {
 
   static saveLoginInfo(uname, pwd) {
@@ -23,7 +24,7 @@ export default class Application {
         AsyncStorage.setItem('seid', seid)
         Global.isLogin = true
       }else{
-        AsyncStorage.removeItem('seid')
+        Application.localLogout()
       }
     })
   }
@@ -105,6 +106,10 @@ export default class Application {
 
   static getUrl(url) {
     return Application.getHost() + url
+  }
+
+  static getPrice(productId) {
+    return Global.products[productId]
   }
 
 }

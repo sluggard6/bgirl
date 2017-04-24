@@ -23,6 +23,7 @@ import Pay from './pay'
 import License from './license'
 import AboutUs from './about_us'
 import Download from './download'
+import UMNative from '../utils/umeng_native'
 
 var user_info_menu = [
   {text:'会员订购', img:require('../images/chongzhi.png'), actionPath:Pay},
@@ -43,6 +44,15 @@ export default class User extends Component {
       isLogin: Global.isLogin
     };
   }
+
+  componentWillMount() {
+    UMNative.onPageBegin("user")
+  }
+
+  componentWillUnmount() {
+    UMNative.onPageEnd("user")
+  }
+
 
   _renderRow(menu) {
     return(
@@ -102,7 +112,9 @@ export default class User extends Component {
   getNick() {
     if(this.state.isLogin) {
       let nick = Global.user.nick==null?this.getSecPhone():Global.user.nick
-      let payInfo = "普通用户"
+      let payInfo = Application.isVip()?"至尊VIP":"普通用户"
+      let icon = Application.isVip()?require('../images/huangguan1.png'):require('../images/huangguan0.png')
+      let icon_style = Application.isVip()?{color:"#F6A248"}:{}
       return (
         <View style={styles.userinfo}>
           <Image source={require('../images/touxiang.png')} style={{height: 50, resizeMode: Image.resizeMode.contain, marginLeft: 20, marginRight: 0}}/>
@@ -110,8 +122,8 @@ export default class User extends Component {
             <Text style={{fontSize: 16, textAlign: 'center', marginBottom: 5}}>{nick}</Text>
             <TouchableOpacity onPress={this.checkVip.bind(this)}>
               <View style={styles.vip_info}>
-                <Image source={require('../images/huangguan0.png')} style={{height: 20, width: 20, marginRight: 10, resizeMode: Image.resizeMode.contain}}/>
-                <Text style={{fontSize: 14, textAlign: 'center'}}>{payInfo}</Text>
+                <Image source={icon} style={{height: 20, width: 20, marginRight: 10, resizeMode: Image.resizeMode.contain}}/>
+                <Text style={[{fontSize: 14, textAlign: 'center'},icon_style]}>{payInfo}</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -155,7 +167,7 @@ export default class User extends Component {
           }}>
           <View style={styles.menu}>
             <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row', height: 50}}>
-            <Image source={require('../images/xiazai.png')} style={styles.menu_logo}/>
+            <Image source={require('../images/logout.png')} style={styles.menu_logo}/>
             <Text style={styles.menu_text}>退出登录</Text>
             </View>
             <Image source={require('../images/jiantou.png')} style={styles.menu_taget}/>

@@ -36,6 +36,7 @@ export default class FullPicView extends Component {
         <Image source={{uri: this.props.pic.max}} style={styles.image}/>
         <HitButton
           pic={this.props.pic}
+          group={this.props.group}
           doAlert={this.props.doAlert}
         />
         {this._doAlert()}

@@ -29,7 +29,8 @@ export default class Module extends Component {
         Global.navigator.push({
           component: FullViewTab,
           params: {
-            pics: res.pics
+            pics: res.pics,
+            group: res.group
           }
         })
       })

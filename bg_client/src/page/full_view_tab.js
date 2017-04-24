@@ -12,6 +12,7 @@ import Global from '../utils/global'
 import Application from '../utils/application'
 import FullPicView from './full_view'
 import FullPicTabBar from '../component/full_pic_bar'
+import UMNative from '../utils/umeng_native'
 
 
 
@@ -26,6 +27,14 @@ export default class FullViewTab extends Component {
       goBack: false,
       tabNumber: 0
     }
+  }
+
+  componentWillMount() {
+    UMNative.onPageBegin("group")
+  }
+
+  componentWillUnmount() {
+    UMNative.onPageEnd("group")
   }
 
   componentDidUpdate() {
@@ -67,12 +76,16 @@ export default class FullViewTab extends Component {
             }
           }
         }}
+        onScroll={(e) => {
+          console.log(e)
+        }}
         >
         {
           this.props.pics.map((pic, index) => {
             return (
               <FullPicView 
-                pic={pic} 
+                pic={pic}
+                group={this.props.group}
                 tabLabel={index+1} 
                 key={index} 
                 alert={this.state.alert} 

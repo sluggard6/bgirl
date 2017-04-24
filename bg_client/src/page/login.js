@@ -209,7 +209,7 @@ var styles = StyleSheet.create({
   },
 
   input:{
-    backgroundColor: '#DFE0E1',
+    backgroundColor: 'transparent',
     height: 40,
     width: Global.size.width - 80,
     paddingLeft: 10,

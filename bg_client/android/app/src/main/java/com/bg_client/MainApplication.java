@@ -3,6 +3,7 @@ package com.bg_client;
 import android.app.Application;
 
 import com.bg_client.packer.ChannelPackage;
+import com.bg_client.umeng.UmengReactPackage;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -30,7 +31,8 @@ public class MainApplication extends Application implements ReactApplication {
           new RNDeviceInfo(),
           new AlipayPackage(),
           new WeChatPackage(),
-          new ChannelPackage()
+          new ChannelPackage(),
+          new UmengReactPackage()
       );
     }
   };

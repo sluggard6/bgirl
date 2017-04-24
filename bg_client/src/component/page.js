@@ -15,6 +15,7 @@ import Application from '../utils/application'
 import Http from '../utils/http'
 import Module from './module'
 import Loading from './loading'
+import UMNative from '../utils/umeng_native'
 
 
 export default class Page extends Component {
@@ -27,6 +28,14 @@ export default class Page extends Component {
       loading: false,
     };
     this.fetchData = this.fetchData.bind(this);
+  }
+
+  componentWillMount() {
+    UMNative.onPageBegin(this.props.pageName)
+  }
+
+  componentWillUnmount() {
+    UMNative.onPageEnd(this.props.pageName)
   }
 
   _updateData(responseData){

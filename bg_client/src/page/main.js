@@ -14,8 +14,6 @@ import Application from '../utils/application'
 import Http from '../utils/http'
 import TopBar from '../component/top_bar'
 
-let temp = [];
-
 export default class Main extends Component {
 
   constructor(props) {

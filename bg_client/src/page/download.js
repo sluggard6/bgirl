@@ -26,17 +26,17 @@ export default class Download extends Component {
   render() {
     return(
       <View style={styles.container}>
-        <TextTopBar text={"下载说明"}/>
+        <TextTopBar text={"下载说明 "}/>
         <View style={styles.icon_view}>
           <Image source={require('../images/1.jpg')} style={styles.icon_img}/>
         </View>
         <View style={styles.inputContainer}>
           <Image source={require('../images/qq_b.png')} style={styles.inputLogo}/>
-          <Text style={styles.input_text}>Q Q 客服 : 1057691850</Text>
+          <Text style={styles.input_text}>Q Q 群客服 : 1057691850</Text>
         </View>
         <View style={[styles.inputContainer,{borderBottomWidth: 1}]}>
           <Image source={require('../images/weixin_b.png')} style={styles.inputLogo}/>
-          <Text style={styles.input_text}>微信客服 : </Text>
+          <Text style={styles.input_text}>微信公众号 客服: 昧昧的御花园 </Text>
         </View>
         <Image source={require('../images/renwu.png')} style={{width: 140,height: 100,marginTop: 35, resizeMode: Image.resizeMode.contain}}/>
         <Text style={styles.mid_text}>亲爱的哥哥，妹妹们的高清大图等您带回家</Text>
