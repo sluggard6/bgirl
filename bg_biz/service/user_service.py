@@ -132,6 +132,13 @@ class UserService:
                 log = AdminLog.write(AdminAction.DelayNetEnd, user.id, ip="", key1=user.id,
                                      key2=admin_log_info, key3=day)
         return True
+    
+    @classmethod
+    def build_user_hit(cls, hits):
+        dic = dict()
+        for hit in hits:
+            dic[str(hit.pic_id)] = hit.status
+        return dic
 
 
 def validate_vcode(phone, code, category):
@@ -150,3 +157,5 @@ def validate_vcode(phone, code, category):
         record.update()
         return True
     return False
+
+

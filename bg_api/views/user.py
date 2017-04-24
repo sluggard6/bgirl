@@ -96,7 +96,6 @@ def checkPhone():
 @login_required
 def profile():
     u = current_user
-    print u
     ret = dict()
     ret['id'] = u.id
     ret['phone'] = u.phone
@@ -108,7 +107,12 @@ def profile():
     ret['vipend'] = u.vipend_time
     return g.ret_success_func(user=ret)
     
-    
+@UserView.route('/user_hit')
+@login_required
+def user_hit():
+    u = current_user
+    hits = UserHit.query.filter_by(user_id=u.id).all()
+    return g.ret_success_func(hits=UserService.build_user_hit(hits))
     
     
     
