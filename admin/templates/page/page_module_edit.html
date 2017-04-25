@@ -17,6 +17,12 @@
         </div>
     </div>
     {{ render_hidden_field(form.icon) }}
+    <div class="form-group">
+        <label class="col-lg-2 control-label" >显示介绍</label>
+        <div class="col-lg-10">
+            <input type="checkbox" id="style_select" />
+        </div>
+    </div>
     {{render_textarea(form.style)}}
     {{render_textarea(form.extend)}}
     {{ render_field(form.status) }}
@@ -50,6 +56,20 @@
         $('#title_icon').val(uri);
     });
 
+    window.onload = function () {
+        var style_text = $('#style').val();
+        if(style_text!=''){
+            $('#style_select').attr('checked',true);
+        }
+        $('#style_select').click(function () {
+            if($(this).attr('checked')){
+                $('#style').val('display:block;')
+            }else{
+                $('#style').val('');
+            }
+        })
+
+    }
 
 </script>
 {% endblock %}
