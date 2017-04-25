@@ -13,6 +13,7 @@
 				<th>id</th>
 				<th>供应商</th>
 				<th>描述</th>
+                <th>番号前缀</th>
 				<th>状态</th>
 				<th>操作</th>
 			</tr>
@@ -21,7 +22,8 @@
 			<tr>
 				<td>{{ u.id }}</td>
 				<td>{{ u.name }}</td>
-				<td>{{ u.description or '' }}</td>
+                <td>{{ u.description or '' }}</td>
+				<td>{{ u.designation_prefix or '' }}</td>
 				<td>
 					<div class="btn-group btn-group-xs" role="group">
 						<button type="button"

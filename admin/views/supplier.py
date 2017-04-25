@@ -72,6 +72,7 @@ def edit():
                 try:
                     supplier.status = 1 if form.status.data else 0
                     supplier.description = form.description.data
+                    supplier.designation_prefix = form.designation_prefix.data
                     supplier.update()
                     AdminLog.write("修改频道", g.me.id, ip=request.remote_addr, key1=supplier.id,
                                    key2=supplier.name)

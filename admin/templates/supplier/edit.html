@@ -10,6 +10,8 @@
 			{{ render_hidden_field(form.id) }}
 			{{ render_field(form.name, dict(required=True)) }}
 			{{ render_field(form.description) }}
+            {{ render_field(form.designation_prefix) }}
+
 			{{ render_field(form.status) }}
 			<div class="form-group">
 				<div class="col-lg-10 col-lg-offset-2">

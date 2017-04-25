@@ -69,4 +69,9 @@ class SupplierForm(FlaskForm):
     description = TextField(u'描述', [
         Length(min=0, max=50, message=u'描述不能超过50字符。')]
                             )
+
+    designation_prefix = TextField(u'番号前缀', [
+        Length(min=0, max=10, message=u'描述不能超过10字符。')]
+                            )
+
     status = BooleanField(u'状态')
