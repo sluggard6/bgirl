@@ -11,7 +11,9 @@
                             ~endfor
                         </select>
                     </div>
-
+                    <div class="form-group">
+                        <input type="text" id="designation" class="form-control" placeholder="番号">
+                    </div>
                     <div class="form-group">
                         <input type="text" id="name" class="form-control" placeholder="专辑名">
                     </div>
@@ -27,6 +29,7 @@
 			<thead class="thead-default">
 			<tr>
 				<th>id</th>
+                <th>番号</th>
 				<th>专辑名</th>
 				<th>描述</th>
 				<th>状态</th>
@@ -36,6 +39,7 @@
 			~for u in groups
 			<tr>
 				<td>{{ u.id }}</td>
+                <td>{{ u.designation or '' }}</td>
 				<td>{{ u.name }}</td>
 				<td>{{ u.description or '' }}</td>
 				<td>
@@ -77,8 +81,9 @@
     function search() {
         var supplier_id = $('#supplier_id').val();
         var name = $('#name').val();
+        var designation = $('#designation').val();
 
-        url = "/channel/group_list?supplier_id="+supplier_id+"&name="+name;
+        url = "/channel/group_list?supplier_id="+supplier_id+"&name="+name+"&designation="+designation;
         LuhuAdmin.loadUrl(url);
 
         }

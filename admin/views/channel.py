@@ -7,6 +7,7 @@ from form.channel import ChannelForm, GroupForm
 from form import obj2form, form2obj
 from sharper.flaskapp.orm.base import db
 from bg_biz.orm.admin import AdminLog, AdminAction
+import re
 
 __authors__ = [
     'John Chan'
@@ -110,6 +111,7 @@ def group_list():
     data = request.form or request.args
     supplier_id = data.get('supplier_id',0)
     name = data.get('name', None)
+    designation = data.get('designation', None)
     suppliers = Supplier.query.filter(Supplier.status<>3).all()
     g.suppliers = suppliers
     g.supplier_id = supplier_id
@@ -120,6 +122,8 @@ def group_list():
     if name:
         print '==',name,'--'
         base_query = base_query.filter(Group.name.like("%"+name+"%"))
+    if designation:
+        base_query = base_query.filter(Group.designation.like("%"+designation+"%"))
     groups = base_query.all()
     return render_template('channel/group_list.html', groups=groups)
 
@@ -160,6 +164,16 @@ def group_edit():
                 form2obj(form, group)
                 try:
                     group.id = None
+                    supplier_id = form.supplier_id.data
+                    supplier = Supplier.query.filter_by(id=supplier_id).first()
+                    n_l = re.findall('\d+', form.group_no.data)
+                    if supplier:
+                        n_s = supplier.designation_prefix
+                    if not n_s:
+                        n_s = ''
+                    for n in n_l:
+                        n_s += str(n)
+                    group.designation = n_s
                     group.insert()
                     if form.images.data:
                         images = form.images.data.split(';')
@@ -194,10 +208,22 @@ def group_edit():
                     group.thumb4 = form.thumb4.data
                     group.status = 1 if form.status.data else 0
                     group.description = form.description.data
-                    group.supplier_id = form.supplier_id.data
+
                     group.group_no = form.group_no.data
                     group.shoot_time = form.shoot_time.data
                     group.name = form.name.data
+                    group.supplier_id = form.supplier_id.data
+                    supplier = Supplier.query.filter_by(id=group.supplier_id).first()
+
+                    n_l = re.findall('\d+', form.group_no.data)
+                    if supplier:
+                        n_s = supplier.designation_prefix
+                    if not n_s:
+                        n_s = ''
+                    for n in n_l:
+                        n_s += str(n)
+                    group.designation = n_s
+
                     group.update()
                     img_list = []
                     if form.images.data:
