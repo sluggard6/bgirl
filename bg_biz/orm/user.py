@@ -6,7 +6,7 @@ from sharper.flaskapp.orm.base import BaseModel
 from sharper.flaskapp.orm.display_enum import DisplayEnum
 from sharper.flaskapp.orm.kvdb_mixin import KvdbMixin
 from sharper.flaskapp.login import login_manager
-from sharper.lib.error import ParaValidateFailError
+from sharper.lib.error import ParaValidateFailError, AppError
 from sharper.util.string import md5
 
 from sqlalchemy import Column, INTEGER, VARCHAR, Integer, DATE, DATETIME,TIMESTAMP
@@ -59,6 +59,11 @@ class User(BaseModel, KvdbMixin, UserMixin):
     vipend = Column(u'vipend', DATETIME(), nullable=False, default=datetime.now())
     create_time = Column(u'create_time', DATETIME(), nullable=False, default=datetime.now())
     modify_time = Column(u'modify_time', DATETIME(), nullable=False, default=datetime.now())
+    
+    def _after_update(self):
+        self.clear_primary_kvdb()
+        self.clear_unique_kvdb("phone", self.phone)
+    
 
     @classmethod
     def get(cls, id):

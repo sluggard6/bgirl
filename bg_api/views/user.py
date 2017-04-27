@@ -78,6 +78,35 @@ def register():
     login_user(user)
     return g.ret_success_func(seid=session.sid)
 
+@UserView.route('/forgotPass', methods=['GET', 'POST'])
+@transaction
+def forgotPass():
+    """
+    修改密码
+    """
+    if request.method == 'POST':
+        data = request.form
+    else:
+        data = request.args
+    paras_dict_validate(
+        data, [
+            ('key', 'required', None, u'请输入验证码'),
+            ('uname', 'required', None, u'请输入手机号码'),
+            ('pwd', 'required, length', {'min': 5, 'max': 20}, u'密码至少5-20位字符，支持大小写，数字，下划线'),
+        ]
+    )
+
+    vcode, phone, new_password = dict2vars(data, ('key', 'uname', 'pwd'))
+
+    if not validate_vcode(phone, vcode, UserVcode.Category.FORGET_PASS):
+        return g.ret_error_func(u'验证码无效，请返回上一步')
+
+    user = User.get_by_phone(phone)
+    user.set_password(new_password)
+    user.update()
+
+    return g.ret_success_func()
+
 @UserView.route('/checkPhone', methods=['GET', 'POST'])
 def checkPhone():
     data = request.args or request.form
@@ -86,11 +115,24 @@ def checkPhone():
         return jsonify(success=False, message=u'未指定验证手机号码')
     if not is_mobile(phonenum):
         return jsonify(success=False, message=u"请输入正确的手机号码")
-    user = User.query.filter("phone='18916208830'").first()
     user = User.get_by_phone(phonenum)
     if user:
         return jsonify(success=False, message=u"该手机号码已经被注册",msgcode=1)
     return jsonify(success=True, message=u"可以注册的手机号码")
+
+
+@UserView.route('/hasUser', methods=['GET', 'POST'])
+def hasUser():
+    data = request.args or request.form
+    phonenum = data.get("phone", None)
+    if not phonenum:
+        return jsonify(success=False, message=u'未指定验证手机号码')
+    if not is_mobile(phonenum):
+        return jsonify(success=False, message=u"请输入正确的手机号码")
+    user = User.get_by_phone(phonenum)
+    if not user:
+        return jsonify(success=False, message=u"手机号码不存在",msgcode=1)
+    return jsonify(success=True, message=u"成功")
 
 @UserView.route('/profile')
 @login_required

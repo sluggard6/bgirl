@@ -15,6 +15,7 @@ import FullPicTabBar from '../component/full_pic_bar'
 import UMNative from '../utils/umeng_native'
 
 
+let scrolled = 0
 
 export default class FullViewTab extends Component {
 
@@ -25,6 +26,7 @@ export default class FullViewTab extends Component {
       locked: false,
       alert: false,
       goBack: false,
+      end: false,
       tabNumber: 0
     }
   }
@@ -57,7 +59,8 @@ export default class FullViewTab extends Component {
     this.setState({
       locked: false,
       alert: false,
-      goBack: true
+      goBack: true,
+      end: false
     })
   }
 
@@ -77,7 +80,20 @@ export default class FullViewTab extends Component {
           }
         }}
         onScroll={(e) => {
-          console.log(e)
+          if(!this.state.end){
+            if((e+1) == this.props.pics.length){
+              scrolled += 1
+            }else{
+              scrolled = 0
+            }
+            if(scrolled >= 3) {
+              scrolled = 0
+              this.setState({
+                end: true,
+                alert: true
+              })
+            }
+          }
         }}
         >
         {
@@ -91,6 +107,7 @@ export default class FullViewTab extends Component {
                 alert={this.state.alert} 
                 cannel={this.cannel.bind(this)} 
                 doAlert={this.doAlert.bind(this)}
+                end={this.state.end}
               />);  // 单行箭头函数无需写return
           })
         }

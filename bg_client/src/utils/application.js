@@ -67,11 +67,14 @@ export default class Application {
     });
   }
 
-  static logout(){
+  static logout(callback){
     Http.httpGet(Application.getUrl(Global.urls.logout), (res) => {
       if(res.success === true) {
         Application.clearLoginInfo()
         Application.localLogout()
+        if(typeof callback === 'function'){
+          callback()
+        }
       }else{
         ToastAndroid.show(res.message,ToastAndroid.SHORT)
       }

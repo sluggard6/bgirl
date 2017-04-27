@@ -36,13 +36,13 @@ export default class Download extends Component {
         </View>
         <View style={[styles.inputContainer,{borderBottomWidth: 1}]}>
           <Image source={require('../images/weixin_b.png')} style={styles.inputLogo}/>
-          <Text style={styles.input_text}>微信公众号 客服: 昧昧的御花园 </Text>
+          <Text style={styles.input_text}>微信公众号 客服: i昧昧的御花园 </Text>
         </View>
         <Image source={require('../images/renwu.png')} style={{width: 140,height: 100,marginTop: 35, resizeMode: Image.resizeMode.contain}}/>
         <Text style={styles.mid_text}>亲爱的哥哥，妹妹们的高清大图等您带回家</Text>
         <View style={styles.row_container}>
           <Image source={require('../images/erweima.png')} style={styles.left_image}/>
-          <Text style={styles.right_text}>只需要通过微信关注“昧昧的御花园”公众号-公众号中留言：【下载】将会有小美眉来联系您，3步就能轻松搞定哟！</Text>
+          <Text style={styles.right_text}>只需要通过微信关注“i昧昧的御花园”公众号-公众号中留言：【下载】将会有小美眉来联系您，3步就能轻松搞定哟！</Text>
         </View>
       </View>
     )

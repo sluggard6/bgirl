@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import {
   Image,
+  View,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -32,12 +33,29 @@ export default class Guide extends Component {
         pagingEnabled={true}
         removeClippedSubviews={true}
         horizontal={true}>
-        <Image source={Global.guide.image1} style={styles.backgroundImage}/>
-        <Image source={Global.guide.image2} style={styles.backgroundImage}/>
+        <Image source={Global.guide.image1} style={styles.backgroundImage}>
+          <View style={styles.indexContainer}>
+            <View style={styles.dian2}/>
+            <View style={styles.dian}/>
+            <View style={styles.dian}/>
+          </View>
+        </Image>
+        <Image source={Global.guide.image2} style={styles.backgroundImage}>
+          <View style={styles.indexContainer}>
+            <View style={styles.dian}/>
+            <View style={styles.dian2}/>
+            <View style={styles.dian}/>
+          </View>
+        </Image>
         <Image source={Global.guide.image3} style={styles.backgroundImage}>
           <TouchableOpacity onPress={this._onPressButton.bind(this)}>
-            <Image source={require('../images/start_button.png')} style={{height: 100, width: 100, margin: 150, resizeMode: Image.resizeMode.contain}} />
+            <Image source={require('../images/start_button.png')} style={{height: 100, width: 100, margin: 50, resizeMode: Image.resizeMode.contain}} />
           </TouchableOpacity>
+          <View style={styles.indexContainer}>
+            <View style={styles.dian}/>
+            <View style={styles.dian}/>
+            <View style={styles.dian2}/>
+          </View>
         </Image>
       </ScrollView>
     )
@@ -52,11 +70,35 @@ var styles = StyleSheet.create({
   backgroundImage: {
     width: Global.size.width,
     height: Global.size.height,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "flex-end",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    alignItems: "center",
     // margin: 5,
     resizeMode: Image.resizeMode.cover,
     overflow: "hidden"
+  },
+  indexContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 100,
+    height: 50,
+    backgroundColor: "transparent",
+    margin: 30
+  },
+  dian:{
+    height: 5,
+    width: 5,
+    borderRadius: 5,
+    backgroundColor: "white",
+    margin: 10,
+    opacity:0.5
+  },
+  dian2:{
+    height: 5,
+    width: 5,
+    borderRadius: 5,
+    backgroundColor: "white",
+    margin: 10
   }
 });

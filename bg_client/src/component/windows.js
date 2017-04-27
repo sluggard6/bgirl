@@ -18,6 +18,7 @@ import Alipay from 'react-native-yunpeng-alipay'
 import * as WeChat from 'react-native-wechat'
 import Http from '../utils/http'
 import ChannelPackage from '../utils/channel_info'
+import Download from '../page/download'
 
 export default class AlertWindow extends Component {
 
@@ -43,7 +44,11 @@ export default class AlertWindow extends Component {
 
   getWindows() {
     if(Global.isLogin) {
-      if(this.state.charge){
+      if(this.props.end) {
+        return (
+          <DownloadWindow cannel={this.cannel.bind(this)}/>
+        )
+      }else if(this.state.charge){
         return (
           <ChargeWindow productId={this.state.productId}/>
         )
@@ -72,6 +77,38 @@ export default class AlertWindow extends Component {
     )
   }
 
+}
+
+export class DownloadWindow extends Component {
+
+  goDownload(){
+    this.props.cannel()
+    Global.navigator.push({
+      component: Download
+    })
+  }
+
+  render(){
+    return(
+      <View style={styles.window}>
+        <Image source={require('../images/renwu.png')} style={styles.renwu}/>
+        <View style={[styles.button_container,{height: 200, paddingTop: 10}]}>
+          <Text style={{fontSize: 16, marginTop: 20}}>可以直接把妹妹带回家呦!</Text>
+          <Text style={{fontSize: 10, color: '#FDA25D', margin: 10}}>进入微信,关注"i昧昧的御花园"公众号,留言[下载]</Text>
+          <TouchableOpacity onPress={this.goDownload.bind(this)}>
+            <View style={styles.payButton}>
+              <Text style={styles.text} >联系客服</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.props.cannel}>
+            <View style={styles.cannelButton}>
+              <Text style={styles.text} >再看看</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
+    )
+  }
 }
 
 export class ChargeWindow extends Component {
@@ -335,7 +372,7 @@ var styles = StyleSheet.create({
     height: 35,
     width: 200,
     paddingLeft: 10,
-    fontSize: 14,
+    fontSize: 12,
     borderRadius: 5,
   },
 

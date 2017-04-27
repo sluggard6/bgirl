@@ -148,11 +148,7 @@ def validate_vcode(phone, code, category):
     record = UserVcode.query.filter_by(phone=phone).filter_by(vcode=code).filter_by(category=category).first()
     print record
     limit_time = datetime.now() - timedelta(minutes=60)
-    if record:
-        print limit_time > record.create_time
-        print limit_time
     if record and record.status == UserVcode.Status.INIT and record.create_time > limit_time:
-        print "---------------------------"
         record.status = UserVcode.Status.VERIFIED
         record.update()
         return True

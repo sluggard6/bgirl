@@ -11,7 +11,7 @@ import {
   ToastAndroid
 } from 'react-native';
 
-import RegisterPhone from './register_phone'
+import RegisterPhone,{FindPwdPhone} from './register_phone'
 import TabBarView from './tab_bar_view'
 import Global from '../utils/global'
 import Application from '../utils/application'
@@ -42,6 +42,9 @@ export default class Login extends Component{
   }
 
   forgetPassword(){
+    Global.navigator.push({
+      component: FindPwdPhone
+    })
   }
 
   register(){

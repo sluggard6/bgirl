@@ -43,7 +43,8 @@ export default class RegisterPhone extends Component{
       this.props.navigator.push({
         component: Register,
         params: {
-          phone: this.state.phone
+          phone: this.state.phone,
+          type: 1
         }
       })
     }else{
@@ -88,6 +89,59 @@ export default class RegisterPhone extends Component{
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.goRegister.bind(this)}>
+          <View style={styles.loginButton}>
+            <Text style={{color: '#fff'}} >下一步</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+}
+
+export class FindPwdPhone extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      phone: ""
+    };
+  }
+
+  checkPhone(res) {
+    if(res.success == true) {
+      this.props.navigator.push({
+        component: Register,
+        params: {
+          phone: this.state.phone,
+          type: 2
+        }
+      })
+    }else{
+      ToastAndroid.show(res.message, ToastAndroid.SHORT)
+    }
+  }
+
+  goFindPassword(){
+    url = Application.getUrl(Global.urls.hasUser) + "?phone=" + this.state.phone 
+    Http.httpGet(url,this.checkPhone.bind(this))
+  }
+
+  render(){
+    return (
+      <View style={styles.loginContainer}>
+        <TextTopBar text={"忘记密码"}/>
+        <View style={[styles.inputContainer,{marginBottom: 40}]}>
+          <Image source={require('../images/shouji_w.png')} style={styles.inputLogo}/>
+          <TextInput
+            onChangeText={(phone) => {
+              this.state.phone = phone
+            }}
+            underlineColorAndroid="transparent"
+            style={styles.input}
+            placeholder='手机号码' />
+            <View style={{height:1,backgroundColor:'#f4f4f4'}} />
+        </View>
+        <TouchableOpacity onPress={this.goFindPassword.bind(this)}>
           <View style={styles.loginButton}>
             <Text style={{color: '#fff'}} >下一步</Text>
           </View>

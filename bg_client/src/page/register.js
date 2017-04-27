@@ -12,6 +12,7 @@ import {
 
 import Global from '../utils/global';
 import Application from '../utils/application'
+import TabBarView from './tab_bar_view'
 import Http from '../utils/http'
 import TimerButton from '../component/timer_button'
 import {TextTopBar} from '../component/top_bar'
@@ -26,15 +27,13 @@ export default class Register extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      loading: false,
       seconds: 60,
-      isDisabled: false,
       phone: ""
     };
   }
 
   call() {
-    let url = Application.getUrl(Global.urls.vcode) + "?phone=" + this.props.phone + "&type=1"
+    let url = Application.getUrl(Global.urls.vcode) + "?phone=" + this.props.phone + "&type=" + this.props.type
     Http.httpGet(url,(res) => {
       if(res.success != true) {
         ToastAndroid.show(res.message, ToastAndroid.SHORT)
@@ -48,31 +47,39 @@ export default class Register extends Component{
       pwd: this.state.pwd,
       uname: this.props.phone
     }
+    let urlType = this.props.type==1?Global.urls.register:Global.urls.forgotPass
 
     if(this.state.pwd !== this.state.repwd) {
       ToastAndroid.show("两次密码不一致", ToastAndroid.SHORT)
       return
     }
     
-    Http.httpPost(Application.getUrl(Global.urls.register), params, (res) => {
+    Http.httpPost(Application.getUrl(urlType), params, (res) => {
       if(res.success != true) {
         ToastAndroid.show(res.message, ToastAndroid.SHORT)
       }else{
-        this.props.navigator.push({
-          component: Login,
-          params: {
-            message: res.message
-          }
-        })
+        if(this.props.type == 1){
+          Application.localLogin(res.seid)
+          Global.navigator.resetTo({
+            component: TabBarView
+          })
+        }else{
+          this.props.navigator.push({
+            component: Login,
+            params: {
+              message: res.message
+            }
+          })
+        }
       }
     })
   }
 
   render(){
-    const checked = this.state.checked ? require('../images/xuanzhong.png') : require('../images/weixuan.png');
+    let title = this.props.type==1?"注   册":"找回密码"
     return (
       <View style={styles.loginContainer}>
-        <TextTopBar text={"注   册"}/>
+        <TextTopBar text={title}/>
         <View style={{flexDirection: 'row', alignItems: 'center',}}>
           <View style={styles.shortInputContainer}>
             <Image source={require('../images/shouji_w.png')} style={styles.inputLogo}/>

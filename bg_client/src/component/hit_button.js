@@ -46,6 +46,7 @@ export default class HitButton extends Component {
     }
     this.props.pic.good += 1
     Http.httpGet(Application.getUrl(Global.urls.pic)+this.props.pic.id+"/good",(res) => {
+      console.log(res)
       if(res.success){
         AsyncStorage.setItem("pic:"+this.props.pic.id, JSON.stringify({
           good: true,
@@ -60,14 +61,16 @@ export default class HitButton extends Component {
 
 
   render() {
+    let img = this.state.good?require('../images/yizan.png'):require('../images/zan.png')
+    let color = this.state.good?{color:'#FC4A68'}:{}
     return(
       <View style={styles.bottom}> 
         <Text style={styles.designation}>{this.props.group.id}:{this.props.pic.id}:{this.props.group.designation}</Text>
         <View style={styles.good}>
           <TouchableOpacity onPress={this.good.bind(this)}>
-            <Image source={require('../images/zan.png')} style={styles.image}/>
+            <Image source={img} style={styles.image}/>
           </TouchableOpacity>
-          <Text style={{fontSize: 18, paddingLeft: 20, paddingRight: 20}}>{this.props.pic.good}</Text>
+          <Text style={[{fontSize: 18, paddingLeft: 20, paddingRight: 20}, color]}>{this.props.pic.good}</Text>
         </View>
       </View>
     )

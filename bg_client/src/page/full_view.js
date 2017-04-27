@@ -25,7 +25,7 @@ export default class FullPicView extends Component {
 
   _doAlert() {
     if(this.props.alert) {
-      return (<AlertWinow unLock={this.props.cannel}/>)
+      return (<AlertWinow unLock={this.props.cannel} end={this.props.end}/>)
     }
     return
   }

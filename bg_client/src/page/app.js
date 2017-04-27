@@ -90,7 +90,7 @@ class App extends Component {
         version: storageVersion
       })
       this.timer && clearTimeout(this.timer)
-    },1000)
+    },2000)
     storageVersion = await AsyncStorage.getItem('buildVersion');
     if(!storageVersion) {storageVersion = "None"}
     

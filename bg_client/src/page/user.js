@@ -151,12 +151,13 @@ export default class User extends Component {
   }
 
   logout() {
-    Application.logout()
-    if(this.state.isLogin != Global.isLogin) {
-      this.setState({
-        isLogin: Global.isLogin
-      })
-    }
+    Application.logout(()=>{
+      if(this.state.isLogin != Global.isLogin) {
+        this.setState({
+          isLogin: Global.isLogin
+        })
+      }
+    })
   }
 
   getLogout() {
