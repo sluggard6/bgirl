@@ -112,7 +112,7 @@ class Group(BaseModel, KvdbMixin):
     shoot_time = Column(u'shoot_time',DATETIME(),default=datetime.today())
     group_no = Column(u'group_no',VARCHAR(length=45))
     status = Column(u'status', INTEGER(), nullable=False, default=Status.AVAILABLE)
-    designation = Column(u'designation',VARCHAR(length=45))
+    #designation = Column(u'designation',VARCHAR(length=45))
 
     channels = relation('Channel',
                         primaryjoin='Group.id==group_channel_mapping.c.group_id',
@@ -144,6 +144,19 @@ class Group(BaseModel, KvdbMixin):
             db.engine.execute(group_channel_mapping.insert(), [
                 dict(group_id=self.id, channel_id=rid) for rid in channel_id_list
                 ])
+    @property
+    def designation(self):
+        n_s = ''
+        if self.group_no:
+            import re
+            n_l = re.findall('\d+', self.group_no)
+            for n in n_l:
+                n_s += str(n)
+        if self.supplier_id:
+            supplier = Supplier.query.filter_by(id=self.supplier_id).first()
+            if supplier:
+                return supplier.designation_prefix+n_s
+        return n_s
 
     @property
     def thumb_http(self):

@@ -164,16 +164,16 @@ def group_edit():
                 form2obj(form, group)
                 try:
                     group.id = None
-                    supplier_id = form.supplier_id.data
-                    supplier = Supplier.query.filter_by(id=supplier_id).first()
-                    n_l = re.findall('\d+', form.group_no.data)
-                    if supplier:
-                        n_s = supplier.designation_prefix
-                    if not n_s:
-                        n_s = ''
-                    for n in n_l:
-                        n_s += str(n)
-                    group.designation = n_s
+                    #supplier_id = form.supplier_id.data
+                    # supplier = Supplier.query.filter_by(id=supplier_id).first()
+                    # n_l = re.findall('\d+', form.group_no.data)
+                    # if supplier:
+                    #     n_s = supplier.designation_prefix
+                    # if not n_s:
+                    #     n_s = ''
+                    # for n in n_l:
+                    #     n_s += str(n)
+                    # group.designation = n_s
                     group.insert()
                     if form.images.data:
                         images = form.images.data.split(';')
@@ -213,16 +213,16 @@ def group_edit():
                     group.shoot_time = form.shoot_time.data
                     group.name = form.name.data
                     group.supplier_id = form.supplier_id.data
-                    supplier = Supplier.query.filter_by(id=group.supplier_id).first()
-
-                    n_l = re.findall('\d+', form.group_no.data)
-                    if supplier:
-                        n_s = supplier.designation_prefix
-                    if not n_s:
-                        n_s = ''
-                    for n in n_l:
-                        n_s += str(n)
-                    group.designation = n_s
+                    # supplier = Supplier.query.filter_by(id=group.supplier_id).first()
+                    #
+                    # n_l = re.findall('\d+', form.group_no.data)
+                    # if supplier:
+                    #     n_s = supplier.designation_prefix
+                    # if not n_s:
+                    #     n_s = ''
+                    # for n in n_l:
+                    #     n_s += str(n)
+                    # group.designation = n_s
 
                     group.update()
                     img_list = []
