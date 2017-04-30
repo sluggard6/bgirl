@@ -126,10 +126,13 @@ def group_list():
         base_query = base_query.filter(Group.designation.like("%"+designation+"%"))
     groups = base_query.all()
     gl = []
-    for group in groups:
-        if group.designation:
-            if group.description.find(designation)>=0:
-                gl.append(group)
+    if designation:
+        for group in groups:
+            if group.designation:
+                if group.description.find(designation)>=0:
+                    gl.append(group)
+    else:
+        gl = groups
     return render_template('channel/group_list.html', groups=gl)
 
 
