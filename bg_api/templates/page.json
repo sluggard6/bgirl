@@ -4,15 +4,22 @@
 			~for m in ms
 				{
 					"key": {{m.id}},
-					"category": "{{m.category}}",
+					"category": "{{m.category}}"
 					~if m.text
-					"text": "{{m.text}}",
+					,
+					"text": "{{m.text}}"
 					~endif
 					~if m.des
-					"text": "{{m.des}}",
+					,
+					"text": "{{m.des}}"
 					~endif
 					~if m.rank
+					,
 					"rank": "{{m.rank}}"
+					~endif
+					~if m.style
+					,
+					"style": "{{m.style}}"
 					~endif
 					~if mc[m.id]:
 					,
