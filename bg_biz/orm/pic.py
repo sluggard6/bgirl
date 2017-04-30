@@ -233,7 +233,10 @@ class Pic(BaseModel, KvdbMixin):
 
     @property
     def d_min(self):
-        return get_download_url('image',self.min)
+        if self.min:
+            return get_download_url('image','min/'+self.min)
+        else:
+            return ''
 
     @property
     def d_max(self):
