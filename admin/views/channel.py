@@ -122,8 +122,6 @@ def group_list():
     if name:
         print '==',name,'--'
         base_query = base_query.filter(Group.name.like("%"+name+"%"))
-    if designation:
-        base_query = base_query.filter(Group.designation.like("%"+designation+"%"))
     groups = base_query.all()
     gl = []
     if designation:
