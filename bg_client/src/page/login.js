@@ -104,7 +104,8 @@ export default class Login extends Component{
             }}
             underlineColorAndroid="transparent"
             style={styles.input}
-            placeholder='手机号码' />
+            placeholder='手机号码' 
+            defaultValue={this.state.uname} />
             <View style={{height:1,backgroundColor:'#f4f4f4'}} />
         </View>
         <View style={styles.inputContainer}>
@@ -117,7 +118,8 @@ export default class Login extends Component{
             secureTextEntry={true}
             style={styles.input}
             placeholder='密码'
-            password={true} />
+            password={true} 
+            defaultValue={this.state.pwd} />
         </View>
         <TouchableOpacity onPress={this.doLogin.bind(this)}>
           <View style={styles.loginButton}>
@@ -218,6 +220,7 @@ var styles = StyleSheet.create({
     paddingLeft: 10,
     fontSize: 14,
     borderRadius: 5,
+    padding: 0
   },
 
   loginButton:{

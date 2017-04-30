@@ -19,16 +19,25 @@ export default class Banner extends Component {
     super(props);
   }
 
+  showDes(){
+    let des = this.props.module.text == null?this.props.data[0].component.des:this.props.module.text
+    if(this.props.module.style=="display:block;"){
+      return(
+        <View style={styles.text_container}>
+          <View style={styles.view_opacity}/>
+          <Text style={styles.text_name}>{des}</Text>
+        </View>
+      )
+    }
+  }
+
 
   render(){
     return (
       <View style={styles.list_container}>
       <TouchableOpacity onPress={() => this.props.onPress(this.props.data[0].component.id, this.props.data[0].category)}>
         <Image source={{uri:this.props.data[0].pic.min}} style={styles.container}>
-          <View style={styles.text_container}>
-            <View style={styles.view_opacity}/>
-            <Text style={styles.text_name}>{this.props.data[0].component.des}</Text>
-          </View>
+          {this.showDes()}
         </Image>
       </TouchableOpacity>
       </View>

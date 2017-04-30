@@ -21,7 +21,7 @@ export default class ViewChannel extends Component {
   render(){
     return (
       <TouchableOpacity onPress={() => this.props.onPress(this.props.group.key)}>
-        <Text style={styles.title}>{this.props.group.name}</Text>
+        <Text style={styles.title}>{this.props.group.description}</Text>
         <View style={styles.container}>
           <Image source={{uri:this.props.group.t1}} style={styles.image_banner}>
             <View style={styles.text_container}>

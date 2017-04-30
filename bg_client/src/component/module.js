@@ -52,7 +52,7 @@ export default class Module extends Component {
     switch(module.category) {
       case "banner":{
         return (
-          <Banner data={module.items} onPress={this.onPress.bind(this)}/>
+          <Banner data={module.items} onPress={this.onPress.bind(this)} module={module}/>
         );
       }
 

@@ -50,11 +50,11 @@ export default class AlertWindow extends Component {
         )
       }else if(this.state.charge){
         return (
-          <ChargeWindow productId={this.state.productId}/>
+          <ChargeWindow productId={this.state.productId} cannel={this.cannel.bind(this)}/>
         )
       }else{
         return(
-          <BuyWindow alertPay={this.alertPay.bind(this)}/>
+          <BuyWindow alertPay={this.alertPay.bind(this)} cannel={this.cannel.bind(this)}/>
         )
       }    
     }else{
@@ -190,6 +190,10 @@ export class BuyWindow extends Component {
             </View>
           </TouchableOpacity>
         </View>
+        <View style={{position: 'absolute'}}>
+          <Text style={{color: "#FC4A68", padding: 10, borderTopWidth: 2, borderTopColor: "#FC4A68", marginTop: Global.size.height-270, width: 200, textAlign: 'center'}}>哥哥，快用银子包场吧！</Text>
+          <Text style={{color: "#FC4A68", paddingBottom: 10, borderBottomWidth:2, borderBottomColor: "#FC4A68", width: 200, textAlign: 'center'}}>妹妹们的海量美照在等您</Text>
+        </View>
       </View>
     )
   }
@@ -317,7 +321,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 5,
     width: 250,
-    height: 500, 
+    height: 550,
     backgroundColor: "transparent"
   },
 
