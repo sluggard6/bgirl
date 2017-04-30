@@ -27,7 +27,10 @@ if __name__ == '__main__':
     for pic in Pic.query.all():
         path = "%s%s" % (prefix, pic.normal)
         new_path = "%smin/%s" % (prefix, pic.normal)
-        if os.path.exists(new_path):
+        num = new_path.rfind('/')
+        path_num = new_path[:num]
+        if os.path.exists(path_num):
+            os.makedirs(path_num)
             shutil.copy2(path, new_path)
         if os.path.exists(path):
             try:
