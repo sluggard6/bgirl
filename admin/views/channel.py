@@ -127,8 +127,7 @@ def group_list():
     if designation:
         for gg in groups:
             if gg.designation:
-                print gg.description.find('3')
-                if gg.description.find(designation):
+                if gg.designation.find(designation):
                     gl.append(gg)
     else:
         gl = groups
