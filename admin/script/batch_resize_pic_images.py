@@ -29,9 +29,9 @@ if __name__ == '__main__':
         new_path = "%smin/%s" % (prefix, pic.normal)
         num = new_path.rfind('/')
         path_num = new_path[:num]
-        if not os.path.exists(path_num):
+        if os.path.exists(path) and not os.path.exists(path_num):
             os.makedirs(path_num)
-            shutil.copy2(path, new_path)
+            #shutil.copy2(path, new_path)
         if os.path.exists(path):
             try:
                 w, h = Image.open(path).size
