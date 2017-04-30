@@ -3,6 +3,7 @@
 
 import os
 from PIL import Image
+import shutil
 
 
 
@@ -26,7 +27,8 @@ if __name__ == '__main__':
     for pic in Pic.query.all():
         path = "%s%s" % (prefix, pic.normal)
         new_path = "%smin/%s" % (prefix, pic.normal)
-
+        if os.path.exists(new_path):
+            shutil.copy2(path, new_path)
         if os.path.exists(path):
             try:
                 w, h = Image.open(path).size
