@@ -42,3 +42,4 @@ if __name__ == '__main__':
                 print e
                 print "error", path
                 continue
+        print '图集ID：'+pic.id+'结束'
