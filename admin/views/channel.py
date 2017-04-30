@@ -125,7 +125,11 @@ def group_list():
     if designation:
         base_query = base_query.filter(Group.designation.like("%"+designation+"%"))
     groups = base_query.all()
-    return render_template('channel/group_list.html', groups=groups)
+    gl = []
+    for group in groups:
+        if group.description.find(designation)>=0:
+            gl.append(group)
+    return render_template('channel/group_list.html', groups=gl)
 
 
 @ChannelView.route('/group_edit', methods=['GET', 'POST'])
