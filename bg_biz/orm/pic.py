@@ -164,7 +164,7 @@ class Group(BaseModel, KvdbMixin):
         if self.thumb:
             pic = Pic.get(self.thumb)
             if pic:
-                return pic.d_normal
+                return pic.d_min
         return ''
 
     @property
@@ -172,14 +172,14 @@ class Group(BaseModel, KvdbMixin):
         if self.thumb2:
             pic = Pic.get(self.thumb2)
             if pic:
-                return pic.d_normal
+                return pic.d_min
         return ''
     @property
     def thumb3_http(self):
         if self.thumb3:
             pic = Pic.get(self.thumb3)
             if pic:
-                return pic.d_normal
+                return pic.d_min
         return ''
 
     @property
@@ -187,7 +187,7 @@ class Group(BaseModel, KvdbMixin):
         if self.thumb4:
             pic = Pic.get(self.thumb4)
             if pic:
-                return pic.d_normal
+                return pic.d_min
         return ''
 
     @property
