@@ -234,7 +234,13 @@ class Pic(BaseModel, KvdbMixin):
     @property
     def d_min(self):
         if self.min:
-            return get_download_url('image','min/'+self.min)
+            prefix = "/var/www/upload/image/min/"
+            path = "%s%s" % (prefix, self.min)
+            import os
+            if os.path.exists(path):
+                return get_download_url('image','min/'+self.min)
+            else:
+                return get_download_url('image', self.min)
         else:
             return ''
 
