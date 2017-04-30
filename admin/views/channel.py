@@ -126,9 +126,9 @@ def group_list():
     gl = []
     if designation:
         for group in groups:
-            print group.designation,group.description.find(designation)
+            print group.designation,str(group.description).find(str(designation))
             if group.designation:
-                if group.description.find(designation)>=0:
+                if str(group.description).find(str(designation))>=0:
                     print group
                     gl.append(group)
     else:
