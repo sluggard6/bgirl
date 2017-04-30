@@ -80,10 +80,11 @@ class Channel(BaseModel):
     def thumb_list(self):
         pics = []
         for g in self.group:
-            # print g
-            for pic in g.thumb_list:
-                # print pic
-                pics.append(pic)
+            if g.status==1:
+                # print g
+                for pic in g.thumb_list:
+                    # print pic
+                    pics.append(pic)
         # print pics
         return pics
 
