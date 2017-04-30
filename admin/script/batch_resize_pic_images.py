@@ -21,8 +21,8 @@ if __name__ == '__main__':
 
     from bg_biz.orm.pic import Pic
 
-    #prefix = "/var/www/upload/image/"
-    prefix = "/Users/john/git/upload/image/"
+    prefix = "/var/www/upload/image/"
+    #prefix = "/Users/john/git/upload/image/"
     for pic in Pic.query.all():
         path = "%s%s" % (prefix, pic.normal)
         new_path = "%smin/%s" % (prefix, pic.normal)
