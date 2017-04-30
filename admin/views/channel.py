@@ -135,6 +135,7 @@ def group_list():
                     gl.append(gg)
     else:
         gl = groups
+    print gl
     return render_template('channel/group_list.html', groups=gl)
 
 
