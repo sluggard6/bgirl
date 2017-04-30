@@ -127,8 +127,9 @@ def group_list():
     groups = base_query.all()
     gl = []
     for group in groups:
-        if group.description.find(designation)>=0:
-            gl.append(group)
+        if group.designation:
+            if group.description.find(designation)>=0:
+                gl.append(group)
     return render_template('channel/group_list.html', groups=gl)
 
 
